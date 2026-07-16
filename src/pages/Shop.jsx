@@ -448,7 +448,7 @@ export default function Shop() {
                 <img 
                   src={b.logo_url} 
                   alt={b.name} 
-                  className="max-h-full max-w-full object-contain filter grayscale dark:invert contrast-125 group-hover:grayscale-0 duration-300" 
+                  className="max-h-full max-w-full object-contain filter dark:invert contrast-125 duration-300" 
                 />
               </div>
               <div className="text-center space-y-2">

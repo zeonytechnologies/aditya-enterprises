@@ -8,6 +8,7 @@ import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { useTheme } from '../context/ThemeContext';
 import { api } from '../services/supabase';
+import adityaLogo from '../assets/aditya-logo.png';
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -94,13 +95,8 @@ export default function Navbar() {
           
           {/* Logo Section */}
           <div className="flex-shrink-0 flex items-center">
-            <Link to="/" className="flex flex-col">
-              <span className="text-sm sm:text-xl font-extrabold tracking-wide text-slate-900 dark:text-white font-display">
-                ADITYA <span className="text-blue-600 dark:text-cyan-400">ENTERPRISES</span>
-              </span>
-              <span className="text-[8px] sm:text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold font-sans -mt-1">
-                Industrial Adhesives & Fittings
-              </span>
+            <Link to="/" className="flex items-center py-2">
+              <img src={adityaLogo} alt="Aditya Enterprises" className="h-10 sm:h-14 w-auto object-contain drop-shadow-sm" />
             </Link>
           </div>
 

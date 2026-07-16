@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, ShieldCheck, FileCheck, Truck, Headphones } from 'lucide-react';
+import adityaLogo from '../assets/aditya-logo.png';
 
 export default function Footer() {
   return (
@@ -54,9 +55,7 @@ export default function Footer() {
           
           {/* Col 1: About */}
           <div className="space-y-4">
-            <h3 className="text-lg font-bold text-white tracking-wide">
-              ADITYA <span className="text-blue-500">ENTERPRISES</span>
-            </h3>
+            <img src={adityaLogo} alt="Aditya Enterprises Logo" className="h-14 w-auto drop-shadow-lg mb-4" />
             <p className="text-sm text-slate-500 leading-relaxed">
               Premier industrial adhesive and architectural hardware distributors. Serving structural engineering, manufacturing, packaging, and commercial interior industries since 2012.
             </p>

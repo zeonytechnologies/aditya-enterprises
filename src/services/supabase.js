@@ -213,7 +213,32 @@ export const api = {
         if (error) throw error;
         return data;
       }
-      return categoryData;
+      return await db.createCategory?.(categoryData) || categoryData;
+    },
+    update: async (id, categoryData) => {
+      if (isSupabaseConfigured) {
+        const { data, error } = await supabase
+          .from('categories')
+          .update(categoryData)
+          .eq('id', id)
+          .select()
+          .single();
+        if (error) throw error;
+        return data;
+      }
+      return await db.updateCategory?.(id, categoryData) || categoryData;
+    },
+    delete: async (id) => {
+      if (isSupabaseConfigured) {
+        const { error } = await supabase
+          .from('categories')
+          .delete()
+          .eq('id', id);
+        if (error) throw error;
+        return true;
+      }
+      await db.deleteCategory?.(id);
+      return true;
     }
   },
 
@@ -237,7 +262,32 @@ export const api = {
         if (error) throw error;
         return data;
       }
-      return brandData;
+      return await db.createBrand?.(brandData) || brandData;
+    },
+    update: async (id, brandData) => {
+      if (isSupabaseConfigured) {
+        const { data, error } = await supabase
+          .from('brands')
+          .update(brandData)
+          .eq('id', id)
+          .select()
+          .single();
+        if (error) throw error;
+        return data;
+      }
+      return await db.updateBrand?.(id, brandData) || brandData;
+    },
+    delete: async (id) => {
+      if (isSupabaseConfigured) {
+        const { error } = await supabase
+          .from('brands')
+          .delete()
+          .eq('id', id);
+        if (error) throw error;
+        return true;
+      }
+      await db.deleteBrand?.(id);
+      return true;
     }
   },
 

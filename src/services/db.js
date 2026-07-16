@@ -1395,9 +1395,53 @@ export const db = {
   getCategories: async () => {
     return JSON.parse(localStorage.getItem('aditya_categories'));
   },
+  createCategory: async (data) => {
+    const cats = JSON.parse(localStorage.getItem('aditya_categories'));
+    const newCat = { ...data, id: 'c' + Date.now() };
+    cats.push(newCat);
+    localStorage.setItem('aditya_categories', JSON.stringify(cats));
+    return newCat;
+  },
+  updateCategory: async (id, data) => {
+    const cats = JSON.parse(localStorage.getItem('aditya_categories'));
+    const idx = cats.findIndex(c => c.id === id);
+    if (idx !== -1) {
+      cats[idx] = { ...cats[idx], ...data };
+      localStorage.setItem('aditya_categories', JSON.stringify(cats));
+      return cats[idx];
+    }
+    return null;
+  },
+  deleteCategory: async (id) => {
+    const cats = JSON.parse(localStorage.getItem('aditya_categories'));
+    localStorage.setItem('aditya_categories', JSON.stringify(cats.filter(c => c.id !== id)));
+    return true;
+  },
 
   getBrands: async () => {
     return JSON.parse(localStorage.getItem('aditya_brands'));
+  },
+  createBrand: async (data) => {
+    const brands = JSON.parse(localStorage.getItem('aditya_brands'));
+    const newBrand = { ...data, id: 'b' + Date.now() };
+    brands.push(newBrand);
+    localStorage.setItem('aditya_brands', JSON.stringify(brands));
+    return newBrand;
+  },
+  updateBrand: async (id, data) => {
+    const brands = JSON.parse(localStorage.getItem('aditya_brands'));
+    const idx = brands.findIndex(b => b.id === id);
+    if (idx !== -1) {
+      brands[idx] = { ...brands[idx], ...data };
+      localStorage.setItem('aditya_brands', JSON.stringify(brands));
+      return brands[idx];
+    }
+    return null;
+  },
+  deleteBrand: async (id) => {
+    const brands = JSON.parse(localStorage.getItem('aditya_brands'));
+    localStorage.setItem('aditya_brands', JSON.stringify(brands.filter(b => b.id !== id)));
+    return true;
   },
 
   // Orders

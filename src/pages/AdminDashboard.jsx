@@ -33,8 +33,11 @@ export default function AdminDashboard() {
 
   // Brand Form State
   const [brandForm, setBrandForm] = useState({ name: '', slug: '', description: '', logo_url: '' });
+  const [editingBrandId, setEditingBrandId] = useState(null);
+  
   // Category Form State
   const [categoryForm, setCategoryForm] = useState({ name: '', slug: '', description: '', icon: 'Layers', image_url: '' });
+  const [editingCategoryId, setEditingCategoryId] = useState(null);
 
   // Upload States
   const [productImages, setProductImages] = useState([]);
@@ -110,33 +113,95 @@ export default function AdminDashboard() {
   const handleBrandSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.brands.create({
+      const payload = {
         name: brandForm.name,
         slug: brandForm.slug || brandForm.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
         description: brandForm.description,
         logo_url: brandForm.logo_url || 'https://images.unsplash.com/photo-1599305445671-ac291c95aba9?w=200'
-      });
+      };
+      
+      if (editingBrandId) {
+        await api.brands.update(editingBrandId, payload);
+      } else {
+        await api.brands.create(payload);
+      }
+      
       setBrandForm({ name: '', slug: '', description: '', logo_url: '' });
+      setEditingBrandId(null);
       loadAdminData();
     } catch (err) {
-      console.error('Error creating brand:', err);
+      console.error('Error saving brand:', err);
+      alert('Error saving brand: ' + (err.message || 'Unknown error'));
+    }
+  };
+
+  const handleEditBrand = (brand) => {
+    setBrandForm({
+      name: brand.name,
+      slug: brand.slug,
+      description: brand.description || '',
+      logo_url: brand.logo_url || ''
+    });
+    setEditingBrandId(brand.id);
+    setActiveTab('products'); // Optional, to make sure we are on the right tab if called from somewhere else, but usually we already are.
+  };
+
+  const handleDeleteBrand = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this brand? This might affect products associated with it.')) return;
+    try {
+      await api.brands.delete(id);
+      loadAdminData();
+    } catch (err) {
+      console.error('Error deleting brand:', err);
+      alert('Error deleting brand: ' + (err.message || 'Unknown error'));
     }
   };
 
   const handleCategorySubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.categories.create({
+      const payload = {
         name: categoryForm.name,
         slug: categoryForm.slug || categoryForm.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
         description: categoryForm.description,
         icon: categoryForm.icon,
         image_url: categoryForm.image_url || 'https://images.unsplash.com/photo-1572883454114-1cf0031ed2a5?w=500'
-      });
+      };
+      
+      if (editingCategoryId) {
+        await api.categories.update(editingCategoryId, payload);
+      } else {
+        await api.categories.create(payload);
+      }
+      
       setCategoryForm({ name: '', slug: '', description: '', icon: 'Layers', image_url: '' });
+      setEditingCategoryId(null);
       loadAdminData();
     } catch (err) {
-      console.error('Error creating category:', err);
+      console.error('Error saving category:', err);
+      alert('Error saving category: ' + (err.message || 'Unknown error'));
+    }
+  };
+
+  const handleEditCategory = (category) => {
+    setCategoryForm({
+      name: category.name,
+      slug: category.slug,
+      description: category.description || '',
+      icon: category.icon || 'Layers',
+      image_url: category.image_url || ''
+    });
+    setEditingCategoryId(category.id);
+  };
+
+  const handleDeleteCategory = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this category? This might affect products associated with it.')) return;
+    try {
+      await api.categories.delete(id);
+      loadAdminData();
+    } catch (err) {
+      console.error('Error deleting category:', err);
+      alert('Error deleting category: ' + (err.message || 'Unknown error'));
     }
   };
 
@@ -835,7 +900,7 @@ export default function AdminDashboard() {
             {/* Add Brand Card */}
             <div className="bg-white dark:bg-slate-900 border rounded-3xl p-6 shadow-sm space-y-4">
               <h3 className="text-base font-bold font-display border-b pb-3 flex items-center gap-1.5">
-                <Package className="h-5 w-5 text-blue-600" /> Add New Brand / Manufacturer
+                <Package className="h-5 w-5 text-blue-600" /> {editingBrandId ? 'Edit Brand' : 'Add New Brand / Manufacturer'}
               </h3>
               <form onSubmit={handleBrandSubmit} className="space-y-4 text-xs">
                 <div className="space-y-1">
@@ -890,19 +955,33 @@ export default function AdminDashboard() {
                     </label>
                   </div>
                 </div>
-                <button
-                  type="submit"
-                  className="w-full py-2.5 bg-blue-600 hover:bg-blue-750 text-white font-bold rounded-xl transition"
-                >
-                  Save Brand
-                </button>
+                <div className="flex gap-3">
+                  <button
+                    type="submit"
+                    className="flex-1 py-2.5 bg-blue-600 hover:bg-blue-750 text-white font-bold rounded-xl transition"
+                  >
+                    {editingBrandId ? 'Update Brand' : 'Save Brand'}
+                  </button>
+                  {editingBrandId && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setBrandForm({ name: '', slug: '', description: '', logo_url: '' });
+                        setEditingBrandId(null);
+                      }}
+                      className="px-4 py-2.5 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold rounded-xl transition"
+                    >
+                      Cancel
+                    </button>
+                  )}
+                </div>
               </form>
             </div>
 
             {/* Add Category Card */}
             <div className="bg-white dark:bg-slate-900 border rounded-3xl p-6 shadow-sm space-y-4">
               <h3 className="text-base font-bold font-display border-b pb-3 flex items-center gap-1.5">
-                <Layers className="h-5 w-5 text-indigo-600" /> Add New Product Category
+                <Layers className="h-5 w-5 text-indigo-600" /> {editingCategoryId ? 'Edit Category' : 'Add New Product Category'}
               </h3>
               <form onSubmit={handleCategorySubmit} className="space-y-4 text-xs">
                 <div className="space-y-1">
@@ -969,12 +1048,26 @@ export default function AdminDashboard() {
                     </div>
                   </div>
                 </div>
-                <button
-                  type="submit"
-                  className="w-full py-2.5 bg-indigo-600 hover:bg-indigo-750 text-white font-bold rounded-xl transition"
-                >
-                  Save Category
-                </button>
+                <div className="flex gap-3">
+                  <button
+                    type="submit"
+                    className="flex-1 py-2.5 bg-indigo-600 hover:bg-indigo-750 text-white font-bold rounded-xl transition"
+                  >
+                    {editingCategoryId ? 'Update Category' : 'Save Category'}
+                  </button>
+                  {editingCategoryId && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setCategoryForm({ name: '', slug: '', description: '', icon: 'Layers', image_url: '' });
+                        setEditingCategoryId(null);
+                      }}
+                      className="px-4 py-2.5 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold rounded-xl transition"
+                    >
+                      Cancel
+                    </button>
+                  )}
+                </div>
               </form>
             </div>
 
@@ -988,12 +1081,20 @@ export default function AdminDashboard() {
               <h3 className="text-base font-bold font-display border-b pb-3">Existing Brands ({brands.length})</h3>
               <div className="max-h-[300px] overflow-y-auto space-y-3 pr-2">
                 {brands.map(b => (
-                  <div key={b.id} className="flex gap-4 items-center p-3 bg-slate-50 dark:bg-slate-950 border rounded-2xl">
+                  <div key={b.id} className="flex gap-4 items-center p-3 bg-slate-50 dark:bg-slate-950 border rounded-2xl relative group">
                     <img src={b.logo_url} alt={b.name} className="h-10 w-10 object-contain rounded-lg border bg-white p-1" />
-                    <div>
+                    <div className="flex-1">
                       <strong className="text-slate-950 dark:text-white font-bold text-sm block">{b.name}</strong>
                       <span className="text-slate-400 block font-mono text-[10px]">Slug: {b.slug}</span>
                       <p className="text-slate-500 mt-1">{b.description || 'No description provided.'}</p>
+                    </div>
+                    <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity absolute top-3 right-3">
+                      <button onClick={() => handleEditBrand(b)} className="p-1.5 text-blue-600 bg-blue-50 dark:bg-blue-900/30 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/50" title="Edit Brand">
+                        <Edit className="w-3.5 h-3.5" />
+                      </button>
+                      <button onClick={() => handleDeleteBrand(b.id)} className="p-1.5 text-red-600 bg-red-50 dark:bg-red-900/30 rounded-lg hover:bg-red-100 dark:hover:bg-red-900/50" title="Delete Brand">
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
                     </div>
                   </div>
                 ))}
@@ -1005,14 +1106,22 @@ export default function AdminDashboard() {
               <h3 className="text-base font-bold font-display border-b pb-3">Existing Categories ({categories.length})</h3>
               <div className="max-h-[300px] overflow-y-auto space-y-3 pr-2">
                 {categories.map(c => (
-                  <div key={c.id} className="flex gap-4 items-center p-3 bg-slate-50 dark:bg-slate-950 border rounded-2xl">
-                    <div className="h-10 w-10 rounded-lg bg-indigo-50 dark:bg-indigo-950 flex items-center justify-center text-indigo-650 dark:text-indigo-400 font-bold border">
+                  <div key={c.id} className="flex gap-4 items-center p-3 bg-slate-50 dark:bg-slate-950 border rounded-2xl relative group">
+                    <div className="h-10 w-10 rounded-lg bg-indigo-50 dark:bg-indigo-950 flex items-center justify-center text-indigo-650 dark:text-indigo-400 font-bold border shrink-0">
                       {c.icon ? c.icon.substring(0, 2).toUpperCase() : 'CA'}
                     </div>
-                    <div>
+                    <div className="flex-1">
                       <strong className="text-slate-950 dark:text-white font-bold text-sm block">{c.name}</strong>
                       <span className="text-slate-400 block font-mono text-[10px]">Slug: {c.slug}</span>
                       <p className="text-slate-500 mt-1">{c.description || 'No description provided.'}</p>
+                    </div>
+                    <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity absolute top-3 right-3">
+                      <button onClick={() => handleEditCategory(c)} className="p-1.5 text-indigo-600 bg-indigo-50 dark:bg-indigo-900/30 rounded-lg hover:bg-indigo-100 dark:hover:bg-indigo-900/50" title="Edit Category">
+                        <Edit className="w-3.5 h-3.5" />
+                      </button>
+                      <button onClick={() => handleDeleteCategory(c.id)} className="p-1.5 text-red-600 bg-red-50 dark:bg-red-900/30 rounded-lg hover:bg-red-100 dark:hover:bg-red-900/50" title="Delete Category">
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
                     </div>
                   </div>
                 ))}
