@@ -442,7 +442,7 @@ export default function ProductDetails() {
               <Send className="h-3.5 w-3.5 text-cyan-400" /> Request Bulk Quote
             </button>
             <a
-              href={`https://wa.me/919123456789?text=Hi, I am interested in bulk procurement for ${encodeURIComponent(product.name)} (SKU: ${product.sku}). Please share details.`}
+              href={`https://wa.me/917483552250?text=Hi, I am interested in bulk procurement for ${encodeURIComponent(product.name)} (SKU: ${product.sku}). Please share details.`}
               target="_blank"
               rel="noopener noreferrer"
               className="py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl transition flex items-center justify-center gap-1.5"

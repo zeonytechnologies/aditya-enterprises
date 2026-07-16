@@ -9,18 +9,21 @@ import { api } from '../services/supabase';
 import BrandSlider from '../components/BrandSlider';
 import ProductCard from '../components/ProductCard';
 
+import hero1 from '../assets/hero1.png';
+import hero2 from '../assets/hero2.png';
+
 const HERO_SLIDES = [
   {
     title: "Premium Industrial Adhesives & Technical Sealants",
     subtitle: "Authorized distributor of Pidilite, 3M, Araldite & Ozone. Certified GST billing and custom wholesale pricing for dealers.",
-    bgImage: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1600&auto=format&fit=crop&q=80",
+    bgImage: hero1,
     primaryBtn: "Browse Catalog",
     secondaryBtn: "Request Bulk Quote"
   },
   {
     title: "High-Performance Structural Bonding Solutions",
     subtitle: "Supplying double-sided VHB tapes, epoxy resins, and construction sealants for infrastructure, aerospace, and defense applications.",
-    bgImage: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600&auto=format&fit=crop&q=80",
+    bgImage: hero2,
     primaryBtn: "View Epoxy & Tapes",
     secondaryBtn: "Get Dealer Price"
   }

@@ -156,13 +156,7 @@ export default function Navbar() {
           <div className="flex items-center space-x-1 sm:space-x-4">
             
             {/* Dark Mode Toggle */}
-            <button 
-              onClick={toggleTheme}
-              className="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition"
-              aria-label="Toggle Theme"
-            >
-              {darkMode ? <Sun className="h-5 w-5 text-yellow-400" /> : <Moon className="h-5 w-5" />}
-            </button>
+            
 
             {/* Cart Icon */}
             <Link 

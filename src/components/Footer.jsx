@@ -55,7 +55,7 @@ export default function Footer() {
           
           {/* Col 1: About */}
           <div className="space-y-4">
-            <img src={adityaLogo} alt="Aditya Enterprises Logo" className="h-14 w-auto drop-shadow-lg mb-4" />
+            <img src={adityaLogo} alt="Aditya Enterprises Logo" className="h-14 w-auto drop-shadow-lg mb-4 bg-white" />
             <p className="text-sm text-slate-500 leading-relaxed">
               Premier industrial adhesive and architectural hardware distributors. Serving structural engineering, manufacturing, packaging, and commercial interior industries since 2012.
             </p>
@@ -98,12 +98,12 @@ export default function Footer() {
               <li className="flex items-start">
                 <MapPin className="h-5 w-5 mr-3 text-blue-500 flex-shrink-0" />
                 <span className="text-slate-500">
-                  Aditya Enterprises, Sector 15, Industrial Area, Navi Mumbai, Maharashtra - 400705
+                  3/1, S p road cross, near paan beeda shop HKK Lane, Medarpet, Kumbarpet, Hakkim khallel khan lane, Nagarathpete, Bengaluru, Karnataka 560002
                 </span>
               </li>
               <li className="flex items-center">
                 <Phone className="h-4 w-4 mr-3 text-blue-500" />
-                <a href="tel:+919123456789" className="hover:text-white transition">+91 91234 56789</a>
+                <a href="tel:+917483552250" className="hover:text-white transition">074835 52250</a>
               </li>
               <li className="flex items-center">
                 <Mail className="h-4 w-4 mr-3 text-blue-500" />

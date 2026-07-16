@@ -172,8 +172,9 @@ export default function OrderTracking() {
 
           <div className="text-left sm:text-right space-y-1 text-xs">
             <h3 className="text-base font-extrabold text-slate-950 dark:text-white print:text-black">ADITYA ENTERPRISES</h3>
-            <p className="text-slate-500">Sector 15, Industrial Area, Navi Mumbai</p>
-            <p className="text-slate-500">Maharashtra - 400705</p>
+            <p className="text-slate-500">3/1, S p road cross, near paan beeda shop HKK Lane,</p>
+            <p className="text-slate-500">Medarpet, Kumbarpet, Hakkim khallel khan lane,</p>
+            <p className="text-slate-500">Nagarathpete, Bengaluru, Karnataka 560002</p>
             <p className="font-bold text-slate-700 dark:text-slate-350">GSTIN: 27CCCCC3333C3Z3</p>
           </div>
         </div>
