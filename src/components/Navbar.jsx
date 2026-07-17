@@ -89,7 +89,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 w-full transition-all duration-300 glass-panel shadow-sm border-b dark:border-slate-800">
+    <nav className="sticky top-0 z-50 w-full transition-all duration-300 bg-white dark:bg-slate-950 shadow-sm border-b dark:border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           
@@ -257,7 +257,7 @@ export default function Navbar() {
 
       {/* Mobile Menu Panel */}
       {isOpen && (
-        <div className="lg:hidden border-t border-slate-100 dark:border-slate-800/50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md px-4 py-6 space-y-4">
+        <div className="lg:hidden border-t border-slate-100 dark:border-slate-800/50 bg-white dark:bg-slate-950 px-4 py-6 space-y-4">
           
           {/* Mobile Search */}
           <form onSubmit={handleSearchSubmit} className="relative">
