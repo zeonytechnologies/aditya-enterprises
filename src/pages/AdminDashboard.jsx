@@ -1,11 +1,98 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   BarChart3, ShieldCheck, ShoppingBag, FileSpreadsheet, 
-  Layers, Package, AlertCircle, FileText, CheckCircle2, XCircle, Plus, Edit, Trash2, Printer, Tag 
+  Layers, Package, AlertCircle, FileText, CheckCircle2, XCircle, Plus, Edit, Trash2, Printer, Tag, Search, ChevronLeft, ChevronRight 
 } from 'lucide-react';
 import { api } from '../services/supabase';
 import { useAuth } from '../context/AuthContext';
+
+function useTablePagination(data, searchFields = ['name']) {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Reset to page 1 when search or limit changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, itemsPerPage]);
+
+  const filtered = useMemo(() => {
+    if (!searchTerm) return data;
+    const lowerSearch = searchTerm.toLowerCase();
+    return data.filter(item => 
+      searchFields.some(field => String(item[field] || '').toLowerCase().includes(lowerSearch))
+    );
+  }, [data, searchTerm, searchFields]);
+
+  const totalPages = Math.ceil(filtered.length / (itemsPerPage === 'All' ? filtered.length || 1 : itemsPerPage));
+  
+  // If itemsPerPage is 'All', return everything
+  const currentData = itemsPerPage === 'All' 
+    ? filtered 
+    : filtered.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+  return {
+    searchTerm, setSearchTerm,
+    itemsPerPage, setItemsPerPage,
+    currentPage, setCurrentPage,
+    totalPages,
+    currentData,
+    totalItems: filtered.length
+  };
+}
+
+const TableControls = ({ pagination, placeholder = "Search..." }) => {
+  const { searchTerm, setSearchTerm, itemsPerPage, setItemsPerPage, currentPage, setCurrentPage, totalPages } = pagination;
+  return (
+    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 bg-white dark:bg-slate-900 p-4 border rounded-2xl shadow-sm print:hidden">
+      <div className="relative w-full sm:w-72">
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+        <input 
+          type="text" 
+          placeholder={placeholder}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="w-full pl-9 pr-4 py-2 border rounded-xl text-sm bg-slate-50 dark:bg-slate-950 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+        />
+      </div>
+      <div className="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end">
+        <div className="flex items-center gap-2">
+          <span className="text-xs text-slate-500 font-bold">Show:</span>
+          <select 
+            value={itemsPerPage}
+            onChange={(e) => setItemsPerPage(e.target.value === 'All' ? 'All' : Number(e.target.value))}
+            className="text-sm border rounded-lg px-2 py-1 bg-slate-50 dark:bg-slate-950 outline-none"
+          >
+            <option value={10}>10</option>
+            <option value={25}>25</option>
+            <option value={50}>50</option>
+            <option value="All">All</option>
+          </select>
+        </div>
+        {itemsPerPage !== 'All' && totalPages > 1 && (
+          <div className="flex items-center gap-2">
+            <button 
+              onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+              disabled={currentPage === 1}
+              className="p-1 border rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </button>
+            <span className="text-xs font-bold text-slate-500">Page {currentPage} of {totalPages}</span>
+            <button 
+              onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+              disabled={currentPage === totalPages}
+              className="p-1 border rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <ChevronRight className="h-4 w-4" />
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
 
 export default function AdminDashboard() {
   const { user } = useAuth();
@@ -23,6 +110,17 @@ export default function AdminDashboard() {
   const [orders, setOrders] = useState([]);
   const [usersList, setUsersList] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // --- Pagination Hooks ---
+  const productsPagination = useTablePagination(products, ['name', 'sku', 'hsn_code']);
+  const offersPagination = useTablePagination(products, ['name', 'sku']);
+  const cataloguesPagination = useTablePagination(catalogues, ['title']);
+  const rfqsPagination = useTablePagination(rfqs, ['company_name', 'contact_person', 'status', 'email']);
+  const ordersPagination = useTablePagination(orders, ['id', 'status', 'shipping_name', 'shipping_phone']);
+  const pendingPayments = useMemo(() => payments.filter(p => p.status === 'Pending Verification'), [payments]);
+  const paymentsPagination = useTablePagination(pendingPayments, ['utr_number', 'status', 'order_id']);
+  const b2bUsers = useMemo(() => usersList.filter(u => u.role === 'dealer' || u.role === 'distributor'), [usersList]);
+  const usersPagination = useTablePagination(b2bUsers, ['name', 'email', 'company_name', 'role']);
 
   // Dynamic lists for specifications and features UI
   const [specItems, setSpecItems] = useState([{ key: '', value: '' }]);
@@ -740,10 +838,11 @@ export default function AdminDashboard() {
       {activeTab === 'payments' && (
         <div className="print:hidden space-y-4">
           <h2 className="text-xl font-bold font-display">Pending Manual payment audit desk</h2>
-          
-          {payments.filter(p => p.status === 'Pending Verification').length > 0 ? (
+          <TableControls pagination={paymentsPagination} placeholder="Search by UTR, Order ID..." />
+
+          {pendingPayments.length > 0 ? (
             <div className="space-y-6">
-              {payments.filter(p => p.status === 'Pending Verification').map(pay => (
+              {paymentsPagination.currentData.map(pay => (
                 <div 
                   key={pay.id}
                   className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl p-6 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8"
@@ -851,6 +950,8 @@ export default function AdminDashboard() {
             </button>
           </div>
 
+          <TableControls pagination={productsPagination} placeholder="Search catalog by Name, SKU, HSN..." />
+
           <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl p-6 shadow-sm overflow-x-auto">
             <table className="w-full text-xs text-left border-collapse min-w-[700px]">
               <thead>
@@ -865,7 +966,7 @@ export default function AdminDashboard() {
                 </tr>
               </thead>
               <tbody>
-                {products.map(prod => (
+                {productsPagination.currentData.map(prod => (
                   <tr key={prod.id} className="border-b last:border-b-0 hover:bg-slate-50/50 dark:hover:bg-slate-850/30">
                     <td className="py-4 font-bold text-slate-450">{prod.sku}</td>
                     <td className="py-4 font-bold text-slate-950 dark:text-white max-w-xs truncate">{prod.name}</td>
@@ -907,10 +1008,11 @@ export default function AdminDashboard() {
       {activeTab === 'rfqs' && (
         <div className="print:hidden space-y-4">
           <h2 className="text-xl font-bold font-display">B2B Bulk Quotation desk</h2>
+          <TableControls pagination={rfqsPagination} placeholder="Search by Company, Email, Status..." />
 
           {rfqs.length > 0 ? (
             <div className="space-y-6">
-              {rfqs.map(rfq => (
+              {rfqsPagination.currentData.map(rfq => (
                 <div 
                   key={rfq.id}
                   className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-4"
@@ -1319,12 +1421,12 @@ export default function AdminDashboard() {
             </div>
             
             <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col h-full max-h-[600px]">
-              <h3 className="text-lg font-bold mb-4 font-display flex items-center gap-2">
-                <Layers className="h-5 w-5 text-blue-600 dark:text-cyan-400" />
+              <h3 className="text-sm font-bold text-slate-800 dark:text-white mb-4">
                 Existing Catalogues ({catalogues.length})
               </h3>
+              <TableControls pagination={cataloguesPagination} placeholder="Search catalogues..." />
               <div className="flex-1 overflow-y-auto pr-2 space-y-3">
-                {catalogues.map(c => (
+                {cataloguesPagination.currentData.map(c => (
                   <div key={c.id} className="flex items-center justify-between p-3 border border-slate-100 dark:border-slate-800 rounded-xl bg-slate-50 dark:bg-slate-800/30">
                     <div className="flex items-center gap-3">
                       <div className="h-10 w-10 bg-slate-200 dark:bg-slate-700 rounded-lg flex items-center justify-center">
@@ -1360,6 +1462,9 @@ export default function AdminDashboard() {
               <p className="text-xs text-slate-500 mt-1">Quickly toggle Flash Deals, Featured items, and update Discount percentages.</p>
             </div>
           </div>
+          
+          <TableControls pagination={offersPagination} placeholder="Search by Product Name, SKU..." />
+
           <div className="bg-white dark:bg-slate-900 border rounded-3xl overflow-hidden shadow-sm overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
@@ -1371,12 +1476,12 @@ export default function AdminDashboard() {
                 </tr>
               </thead>
               <tbody className="divide-y dark:divide-slate-800">
-                {products.length === 0 ? (
+                {offersPagination.currentData.length === 0 ? (
                   <tr>
-                    <td colSpan="4" className="p-8 text-center text-slate-400 text-sm italic font-semibold">No products found. Add products first.</td>
+                    <td colSpan="4" className="p-8 text-center text-slate-400 text-sm italic font-semibold">No products found.</td>
                   </tr>
                 ) : (
-                  products.map(product => (
+                  offersPagination.currentData.map(product => (
                     <tr key={product.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
                       <td className="p-4">
                         <div className="flex items-center gap-3">
@@ -1452,6 +1557,8 @@ export default function AdminDashboard() {
           <div className="flex justify-between items-center">
             <h2 className="text-xl font-bold font-display">Order Processing Desk</h2>
           </div>
+          
+          <TableControls pagination={ordersPagination} placeholder="Search by Order ID, Status, Name..." />
 
           <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl p-6 shadow-sm overflow-x-auto">
             <table className="w-full text-xs text-left border-collapse min-w-[800px]">
@@ -1467,7 +1574,7 @@ export default function AdminDashboard() {
                 </tr>
               </thead>
               <tbody>
-                {orders.map(order => (
+                {ordersPagination.currentData.map(order => (
                   <tr key={order.id} className="border-b last:border-b-0 hover:bg-slate-50/50 dark:hover:bg-slate-850/30">
                     <td className="py-4 font-bold text-blue-600 dark:text-cyan-400 font-mono truncate max-w-[120px]">{order.id}</td>
                     <td className="py-4 font-semibold text-slate-550">{new Date(order.created_at).toLocaleDateString()}</td>
@@ -1512,6 +1619,8 @@ export default function AdminDashboard() {
             <h2 className="text-xl font-bold font-display">B2B Accounts & Registration Registry</h2>
           </div>
 
+          <TableControls pagination={usersPagination} placeholder="Search by Name, Company, Email..." />
+
           <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl p-6 shadow-sm overflow-x-auto">
             <table className="w-full text-xs text-left border-collapse min-w-[800px]">
               <thead>
@@ -1526,7 +1635,7 @@ export default function AdminDashboard() {
                 </tr>
               </thead>
               <tbody>
-                {usersList.map(usr => (
+                {usersPagination.currentData.map(usr => (
                   <tr key={usr.id} className="border-b last:border-b-0 hover:bg-slate-50/50 dark:hover:bg-slate-850/30">
                     <td className="py-4 font-bold text-slate-950 dark:text-white">{usr.full_name}</td>
                     <td className="py-4 font-semibold text-slate-500">{usr.email}</td>
