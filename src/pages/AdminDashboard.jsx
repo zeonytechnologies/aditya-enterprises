@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   BarChart3, ShieldCheck, ShoppingBag, FileSpreadsheet, 
-  Layers, Package, AlertCircle, FileText, CheckCircle2, XCircle, Plus, Edit, Trash2, Printer 
+  Layers, Package, AlertCircle, FileText, CheckCircle2, XCircle, Plus, Edit, Trash2, Printer, Tag 
 } from 'lucide-react';
 import { api } from '../services/supabase';
 import { useAuth } from '../context/AuthContext';
@@ -53,12 +53,13 @@ export default function AdminDashboard() {
 
   // Product Edit Form State
   const [showProductModal, setShowProductModal] = useState(false);
+  const [localOffers, setLocalOffers] = useState({}); // Stores temporary offer % inputs
   const [editingProduct, setEditingProduct] = useState(null);
   const [productForm, setProductForm] = useState({
     name: '', price: 0, mrp: 0, dealer_price: 0, moq: 1, stock: 10,
     sku: '', hsn_code: '', gst_percent: 18, pack_size: '', weight: 1,
     shelf_life: '', application: '', brand_id: '', category_id: '',
-    description: ''
+    description: '', is_featured: false, is_flash_sale: false, discount_percent: 0
   });
 
   // RFQ Response Form State
@@ -367,7 +368,7 @@ export default function AdminDashboard() {
       sku: 'SKU-' + Math.floor(1000 + Math.random()*9000), hsn_code: '35069190', gst_percent: 18, 
       pack_size: '1 Kg Tub', weight: 1, shelf_life: '12 Months', application: 'Furniture, Woodworking',
       brand_id: brands[0]?.id || '', category_id: categories[0]?.id || '',
-      description: ''
+      description: '', is_featured: false, is_flash_sale: false, discount_percent: 0
     });
     setSpecItems([{ key: 'Appearance', value: 'White Paste' }, { key: 'Viscosity', value: '300 Poise' }]);
     setFeatureItems(['Water resistant', 'Eco-friendly']);
@@ -384,7 +385,7 @@ export default function AdminDashboard() {
       gst_percent: prod.gst_percent, pack_size: prod.pack_size || '', weight: prod.weight || 1,
       shelf_life: prod.shelf_life || '', application: prod.application || '',
       brand_id: prod.brand_id || '', category_id: prod.category_id || '',
-      description: prod.description
+      description: prod.description, is_featured: !!prod.is_featured, is_flash_sale: !!prod.is_flash_sale, discount_percent: prod.discount_percent || 0
     });
     
     // Convert specifications object to key-value list items
@@ -397,6 +398,50 @@ export default function AdminDashboard() {
     setProductImages(prod.images || []);
     
     setShowProductModal(true);
+  };
+
+  const handleQuickOfferUpdate = async (product, field, value) => {
+    try {
+      let parsedValue = value;
+      if (field === 'discount_percent') {
+        parsedValue = parseFloat(value) || 0;
+      }
+      
+      const payload = {
+        name: product.name,
+        slug: product.slug,
+        price: product.price,
+        mrp: product.mrp,
+        dealer_price: product.dealer_price,
+        moq: product.moq,
+        stock: product.stock,
+        sku: product.sku,
+        hsn_code: product.hsn_code,
+        gst_percent: product.gst_percent,
+        pack_size: product.pack_size,
+        weight: product.weight,
+        shelf_life: product.shelf_life,
+        application: product.application,
+        brand_id: product.brand_id,
+        category_id: product.category_id,
+        description: product.description,
+        is_featured: product.is_featured,
+        is_flash_sale: product.is_flash_sale,
+        discount_percent: product.discount_percent,
+        specifications: product.specifications,
+        features: product.features,
+        images: product.images,
+        // Omit variants so we don't trigger a delete/insert cycle in the DB
+        id: product.id,
+        [field]: parsedValue // Override with new value
+      };
+
+      await api.products.save(payload);
+      setProducts(prev => prev.map(p => p.id === product.id ? { ...p, [field]: parsedValue } : p));
+    } catch (err) {
+      console.error('Error updating offer/featured status:', err);
+      alert('Failed to update: ' + (err.message || JSON.stringify(err)));
+    }
   };
 
   const handleProductSubmit = async (e) => {
@@ -459,6 +504,9 @@ export default function AdminDashboard() {
         brand_id: productForm.brand_id || null, // Map empty strings to null for UUID schema validation
         category_id: productForm.category_id || null, // Map empty strings to null for UUID schema validation
         description: productForm.description,
+        is_featured: productForm.is_featured,
+        is_flash_sale: productForm.is_flash_sale,
+        discount_percent: parseFloat(productForm.discount_percent) || 0,
         specifications,
         features,
         images: productImages,
@@ -635,6 +683,14 @@ export default function AdminDashboard() {
           }`}
         >
           <FileText className="h-4.5 w-4.5" /> Catalogues
+        </button>
+        <button
+          onClick={() => setActiveTab('offers')}
+          className={`pb-4 text-xs font-bold border-b-2 flex items-center gap-1.5 px-3 transition-colors ${
+            activeTab === 'offers' ? 'border-blue-600 text-blue-600 dark:border-cyan-400 dark:text-cyan-400' : 'border-transparent text-slate-400'
+          }`}
+        >
+          <Tag className="h-4.5 w-4.5" /> Offers & Featured
         </button>
       </div>
 
@@ -1295,6 +1351,101 @@ export default function AdminDashboard() {
         </div>
       )}
 
+      {/* TAB: Offers & Featured */}
+      {activeTab === 'offers' && (
+        <div className="space-y-6 print:hidden">
+          <div className="flex justify-between items-center">
+            <div>
+              <h2 className="text-xl font-bold font-display">Offers & Featured Management</h2>
+              <p className="text-xs text-slate-500 mt-1">Quickly toggle Flash Deals, Featured items, and update Discount percentages.</p>
+            </div>
+          </div>
+          <div className="bg-white dark:bg-slate-900 border rounded-3xl overflow-hidden shadow-sm overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="bg-slate-50 dark:bg-slate-950/50 border-b">
+                  <th className="p-4 text-xs font-bold text-slate-400 uppercase">Product</th>
+                  <th className="p-4 text-xs font-bold text-slate-400 uppercase text-center">Feature on Homepage</th>
+                  <th className="p-4 text-xs font-bold text-slate-400 uppercase text-center">Include in Flash Deals</th>
+                  <th className="p-4 text-xs font-bold text-slate-400 uppercase w-32">Offer %</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y dark:divide-slate-800">
+                {products.length === 0 ? (
+                  <tr>
+                    <td colSpan="4" className="p-8 text-center text-slate-400 text-sm italic font-semibold">No products found. Add products first.</td>
+                  </tr>
+                ) : (
+                  products.map(product => (
+                    <tr key={product.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+                      <td className="p-4">
+                        <div className="flex items-center gap-3">
+                          <div className="h-10 w-10 bg-slate-100 dark:bg-slate-800 rounded-lg overflow-hidden shrink-0">
+                            {product.images && product.images.length > 0 ? (
+                              <img src={product.images[0]} alt="" className="h-full w-full object-cover" />
+                            ) : (
+                              <div className="h-full w-full flex items-center justify-center text-[10px] text-slate-400 font-bold">NO IMG</div>
+                            )}
+                          </div>
+                          <div>
+                            <p className="font-bold text-sm text-slate-800 dark:text-slate-200 line-clamp-1">{product.name}</p>
+                            <p className="text-[10px] text-slate-500 font-semibold">{product.sku}</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="p-4 text-center">
+                        <label className="relative inline-flex items-center cursor-pointer">
+                          <input 
+                            type="checkbox" 
+                            className="sr-only peer" 
+                            checked={!!product.is_featured} 
+                            onChange={(e) => handleQuickOfferUpdate(product, 'is_featured', e.target.checked)}
+                          />
+                          <div className="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-slate-600 peer-checked:bg-blue-600"></div>
+                        </label>
+                      </td>
+                      <td className="p-4 text-center">
+                        <label className="relative inline-flex items-center cursor-pointer">
+                          <input 
+                            type="checkbox" 
+                            className="sr-only peer" 
+                            checked={!!product.is_flash_sale} 
+                            onChange={(e) => handleQuickOfferUpdate(product, 'is_flash_sale', e.target.checked)}
+                          />
+                          <div className="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-slate-600 peer-checked:bg-red-500"></div>
+                        </label>
+                      </td>
+                      <td className="p-4">
+                        <div className="flex items-center gap-2">
+                          <div className="relative w-24">
+                            <input 
+                              type="number" 
+                              value={localOffers[product.id] !== undefined ? localOffers[product.id] : (product.discount_percent || 0)} 
+                              onChange={(e) => setLocalOffers(prev => ({ ...prev, [product.id]: e.target.value }))}
+                              className="w-full px-2 py-1.5 border rounded-lg bg-white dark:bg-slate-900 text-sm pr-6"
+                            />
+                            <span className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-slate-400 font-bold">%</span>
+                          </div>
+                          <button
+                            onClick={() => {
+                              const val = localOffers[product.id] !== undefined ? localOffers[product.id] : product.discount_percent;
+                              handleQuickOfferUpdate(product, 'discount_percent', val);
+                            }}
+                            className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg transition-colors shadow-sm shrink-0"
+                          >
+                            Done
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
       {/* TAB F: Order Processing */}
       {activeTab === 'orders' && (
         <div className="space-y-6">
@@ -1455,9 +1606,9 @@ export default function AdminDashboard() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
                 <div className="space-y-1">
-                  <label className="font-bold text-slate-400 uppercase tracking-wider block">Retail Price (₹) *</label>
+                  <label className="font-bold text-slate-400 uppercase tracking-wider block">Net Rate (₹) *</label>
                   <input
                     type="number"
                     required
@@ -1482,6 +1633,15 @@ export default function AdminDashboard() {
                     type="number"
                     value={productForm.dealer_price}
                     onChange={(e) => setProductForm(prev => ({ ...prev, dealer_price: e.target.value }))}
+                    className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label className="font-bold text-slate-400 uppercase tracking-wider block">Offer % (Flash Sale)</label>
+                  <input
+                    type="number"
+                    value={productForm.discount_percent}
+                    onChange={(e) => setProductForm(prev => ({ ...prev, discount_percent: e.target.value }))}
                     className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950"
                   />
                 </div>
@@ -1568,6 +1728,27 @@ export default function AdminDashboard() {
                   onChange={(e) => setProductForm(prev => ({ ...prev, description: e.target.value }))}
                   className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950"
                 />
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4 border-t pt-4">
+                <label className="flex items-center space-x-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={productForm.is_featured}
+                    onChange={(e) => setProductForm(prev => ({ ...prev, is_featured: e.target.checked }))}
+                    className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+                  />
+                  <span className="text-sm font-bold text-slate-700 dark:text-slate-300">Feature on Homepage</span>
+                </label>
+                <label className="flex items-center space-x-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={productForm.is_flash_sale}
+                    onChange={(e) => setProductForm(prev => ({ ...prev, is_flash_sale: e.target.checked }))}
+                    className="w-4 h-4 rounded border-slate-300 text-red-600 focus:ring-red-500"
+                  />
+                  <span className="text-sm font-bold text-slate-700 dark:text-slate-300">Include in Flash Deals</span>
+                </label>
               </div>
 
               {/* Product Images Manager */}

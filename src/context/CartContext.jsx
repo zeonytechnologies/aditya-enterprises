@@ -33,10 +33,19 @@ export const CartProvider = ({ children }) => {
   // Determine actual unit price based on user role and variant
   const getProductUnitPrice = (product, variant = null) => {
     const target = variant || product;
+    let basePrice = parseFloat(target.price) || 0;
+    
     if (user && (user.role === 'dealer' || user.role === 'distributor') && target.dealer_price) {
-      return parseFloat(target.dealer_price);
+      basePrice = parseFloat(target.dealer_price) || 0;
     }
-    return parseFloat(target.price);
+    
+    // Apply flash sale discount if applicable
+    if (product.is_flash_sale && product.discount_percent > 0) {
+      const discount = basePrice * (product.discount_percent / 100);
+      return basePrice - discount;
+    }
+    
+    return basePrice;
   };
 
   const addToCart = (product, quantity = 1, variant = null) => {

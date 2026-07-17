@@ -45,7 +45,22 @@ export default function Home() {
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [flashDeals, setFlashDeals] = useState([]);
   const [blogs, setBlogs] = useState([]);
-  const [countdown, setCountdown] = useState({ hours: 4, minutes: 34, seconds: 12 });
+  
+  // Calculate initial time to midnight
+  const getTimeToMidnight = () => {
+    const now = new Date();
+    const midnight = new Date();
+    midnight.setHours(23, 59, 59, 999);
+    const diff = midnight - now;
+    
+    return {
+      hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+      minutes: Math.floor((diff / 1000 / 60) % 60),
+      seconds: Math.floor((diff / 1000) % 60)
+    };
+  };
+  
+  const [countdown, setCountdown] = useState(getTimeToMidnight());
 
   // Bulk RFQ Form State
   const [rfqForm, setRfqForm] = useState({
@@ -69,8 +84,8 @@ export default function Home() {
         setCategories(cats);
 
         const prods = await api.products.list();
-        setFeaturedProducts(prods.filter(p => p.is_featured).slice(0, 4));
-        setFlashDeals(prods.filter(p => p.is_flash_sale).slice(0, 4));
+        setFeaturedProducts(prods.filter(p => p.is_featured));
+        setFlashDeals(prods.filter(p => p.is_flash_sale));
 
         const articles = await api.blogs.list();
         setBlogs(articles);
@@ -87,12 +102,7 @@ export default function Home() {
 
     // Countdown Timer Interval
     const countdownTimer = setInterval(() => {
-      setCountdown(prev => {
-        if (prev.seconds > 0) return { ...prev, seconds: prev.seconds - 1 };
-        if (prev.minutes > 0) return { ...prev, minutes: prev.minutes - 1, seconds: 59 };
-        if (prev.hours > 0) return { hours: prev.hours - 1, minutes: 59, seconds: 59 };
-        return { hours: 0, minutes: 0, seconds: 0 };
-      });
+      setCountdown(getTimeToMidnight());
     }, 1000);
 
     return () => {
