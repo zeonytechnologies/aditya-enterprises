@@ -297,12 +297,7 @@ export default function Login() {
         )}
 
         {/* Demo instructions */}
-        <div className="border-t border-slate-100 dark:border-slate-800 pt-4 bg-slate-50 dark:bg-slate-950 p-4 rounded-2xl text-[10px] text-slate-400 leading-relaxed">
-          <strong className="text-slate-700 dark:text-slate-350 block mb-1">Testing accounts available:</strong>
-          <div>Admin: <strong className="text-slate-800 dark:text-white">admin@example.com</strong> / password</div>
-          <div>Dealer: <strong className="text-slate-800 dark:text-white">dealer@example.com</strong> / password</div>
-          <div>Customer: <strong className="text-slate-800 dark:text-white">customer@example.com</strong> / password</div>
-        </div>
+       
 
       </div>
 

@@ -14,6 +14,7 @@ import OrderTracking from './pages/OrderTracking';
 import UserDashboard from './pages/UserDashboard';
 import AdminDashboard from './pages/AdminDashboard';
 import Login from './pages/Login';
+import Preloader from './components/Preloader';
 
 // Context Wrappers & Hooks
 import { ThemeProvider } from './context/ThemeContext';
@@ -68,6 +69,8 @@ function ScrollToHash() {
           element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 150);
       }
+    } else {
+      window.scrollTo(0, 0);
     }
   }, [hash, pathname]);
 
@@ -80,6 +83,7 @@ export default function App() {
       <AuthProvider>
         <CartProvider>
           <Router>
+            <Preloader />
             <ScrollToHash />
             <MainLayout>
               <Routes>
