@@ -146,6 +146,8 @@ export default function Navbar() {
             <Link to="/shop" className="hover:text-blue-600 dark:hover:text-cyan-400 transition">Catalog</Link>
             <Link to="/shop?tab=brands" className="hover:text-blue-600 dark:hover:text-cyan-400 transition">Brands</Link>
             <Link to="/#industries" className="hover:text-blue-600 dark:hover:text-cyan-400 transition">Industries</Link>
+            <Link to="/catalogues" className="hover:text-blue-600 dark:hover:text-cyan-400 transition">Catalogues</Link>
+            <Link to="/about" className="hover:text-blue-600 dark:hover:text-cyan-400 transition">About</Link>
             <Link to="/#rfq" className="flex items-center text-blue-600 dark:text-cyan-400 hover:opacity-80">
               <FileText className="h-4 w-4 mr-1" />
               Request RFQ
@@ -273,6 +275,8 @@ export default function Navbar() {
             <Link to="/shop" onClick={() => setIsOpen(false)} className="py-2 hover:text-blue-600 transition">Catalog</Link>
             <Link to="/shop?tab=brands" onClick={() => setIsOpen(false)} className="py-2 hover:text-blue-600 transition">Brands</Link>
             <Link to="/#industries" onClick={() => setIsOpen(false)} className="py-2 hover:text-blue-600 transition">Industries</Link>
+            <Link to="/catalogues" onClick={() => setIsOpen(false)} className="py-2 hover:text-blue-600 transition">Catalogues</Link>
+            <Link to="/about" onClick={() => setIsOpen(false)} className="py-2 hover:text-blue-600 transition">About</Link>
             <Link 
               to="/#rfq" 
               onClick={() => setIsOpen(false)} 

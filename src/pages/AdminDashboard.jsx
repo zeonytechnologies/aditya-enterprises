@@ -19,6 +19,7 @@ export default function AdminDashboard() {
   const [gstReport, setGstReport] = useState([]);
   const [brands, setBrands] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [catalogues, setCatalogues] = useState([]);
   const [orders, setOrders] = useState([]);
   const [usersList, setUsersList] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -39,11 +40,16 @@ export default function AdminDashboard() {
   const [categoryForm, setCategoryForm] = useState({ name: '', slug: '', description: '', icon: 'Layers', image_url: '' });
   const [editingCategoryId, setEditingCategoryId] = useState(null);
 
+  // Catalogue Form State
+  const [catalogueForm, setCatalogueForm] = useState({ title: '', description: '', file_url: '' });
+  const [editingCatalogueId, setEditingCatalogueId] = useState(null);
+
   // Upload States
   const [productImages, setProductImages] = useState([]);
   const [uploadingProductImg, setUploadingProductImg] = useState(false);
   const [uploadingBrandImg, setUploadingBrandImg] = useState(false);
   const [uploadingCategoryImg, setUploadingCategoryImg] = useState(false);
+  const [uploadingCatalogue, setUploadingCatalogue] = useState(false);
 
   // Product Edit Form State
   const [showProductModal, setShowProductModal] = useState(false);
@@ -95,6 +101,9 @@ export default function AdminDashboard() {
 
       const catList = await api.categories.list();
       setCategories(catList);
+
+      const catalogList = await api.catalogues.list();
+      setCatalogues(catalogList);
 
       const ordList = await api.orders.list();
       setOrders(ordList);
@@ -202,6 +211,67 @@ export default function AdminDashboard() {
     } catch (err) {
       console.error('Error deleting category:', err);
       alert('Error deleting category: ' + (err.message || 'Unknown error'));
+    }
+  };
+
+  // Catalogue Actions
+  const handleCatalogueSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      setUploadingCatalogue(true);
+      let finalFileUrl = catalogueForm.file_url || '#';
+
+      if (catalogueForm.fileObj) {
+        finalFileUrl = await api.storage.uploadFile(catalogueForm.fileObj, 'catalogues');
+      }
+
+      const payload = {
+        title: catalogueForm.title,
+        description: catalogueForm.description,
+        file_url: finalFileUrl
+      };
+      
+      if (editingCatalogueId) {
+        await api.catalogues.update(editingCatalogueId, payload);
+      } else {
+        await api.catalogues.create(payload);
+      }
+      
+      setCatalogueForm({ title: '', description: '', file_url: '', fileObj: null });
+      setEditingCatalogueId(null);
+      loadAdminData();
+    } catch (err) {
+      console.error('Error saving catalogue:', err);
+      alert('Error saving catalogue: ' + (err.message || 'Unknown error'));
+    } finally {
+      setUploadingCatalogue(false);
+    }
+  };
+
+  const handleEditCatalogue = (cat) => {
+    setCatalogueForm({
+      title: cat.title,
+      description: cat.description || '',
+      file_url: cat.file_url || ''
+    });
+    setEditingCatalogueId(cat.id);
+    setActiveTab('catalogues');
+  };
+
+  const handleDeleteCatalogue = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this catalogue?')) return;
+    try {
+      await api.catalogues.delete(id);
+      loadAdminData();
+    } catch (err) {
+      console.error('Error deleting catalogue:', err);
+      alert('Error deleting catalogue: ' + (err.message || 'Unknown error'));
+    }
+  };
+
+  const handleCatalogueFileChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      setCatalogueForm(prev => ({ ...prev, fileObj: e.target.files[0] }));
     }
   };
 
@@ -557,6 +627,14 @@ export default function AdminDashboard() {
           }`}
         >
           <Layers className="h-4.5 w-4.5" /> Brands & Categories
+        </button>
+        <button
+          onClick={() => setActiveTab('catalogues')}
+          className={`pb-4 text-xs font-bold border-b-2 flex items-center gap-1.5 px-3 transition-colors ${
+            activeTab === 'catalogues' ? 'border-blue-600 text-blue-600 dark:border-cyan-400 dark:text-cyan-400' : 'border-transparent text-slate-400'
+          }`}
+        >
+          <FileText className="h-4.5 w-4.5" /> Catalogues
         </button>
       </div>
 
@@ -1130,6 +1208,90 @@ export default function AdminDashboard() {
 
           </div>
 
+        </div>
+      )}
+
+      {/* TAB I: Catalogues Manager */}
+      {activeTab === 'catalogues' && (
+        <div className="space-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
+              <h3 className="text-lg font-bold mb-4 font-display flex items-center gap-2">
+                <FileText className="h-5 w-5 text-blue-600 dark:text-cyan-400" />
+                {editingCatalogueId ? 'Edit Catalogue' : 'Add New Catalogue (PDF)'}
+              </h3>
+              <form onSubmit={handleCatalogueSubmit} className="space-y-4 text-xs">
+                <div>
+                  <label className="block text-slate-500 font-bold mb-1">Title *</label>
+                  <input required type="text" value={catalogueForm.title} onChange={e => setCatalogueForm({...catalogueForm, title: e.target.value})} className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl" placeholder="e.g. 2024 Product Catalog" />
+                </div>
+                <div>
+                  <label className="block text-slate-500 font-bold mb-1">Description</label>
+                  <textarea rows="3" value={catalogueForm.description} onChange={e => setCatalogueForm({...catalogueForm, description: e.target.value})} className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl" placeholder="Details about this catalogue" />
+                </div>
+                <div>
+                  <label className="block text-slate-500 font-bold mb-1">PDF File *</label>
+                  <div className="flex items-center gap-3">
+                    <label className="flex-1 px-4 py-2 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-700 transition flex items-center justify-center gap-2">
+                      <span className="text-slate-600 dark:text-slate-300 font-semibold">Choose PDF File</span>
+                      <input type="file" accept=".pdf" className="hidden" onChange={handleCatalogueFileChange} />
+                    </label>
+                  </div>
+                  {catalogueForm.fileObj && !uploadingCatalogue && (
+                    <p className="text-blue-500 mt-2 text-xs font-semibold truncate">
+                      Selected: {catalogueForm.fileObj.name}
+                    </p>
+                  )}
+                  {uploadingCatalogue && <p className="text-blue-500 mt-2 text-xs font-semibold">Uploading to Supabase...</p>}
+                  {catalogueForm.file_url && !catalogueForm.fileObj && !uploadingCatalogue && (
+                    <p className="text-green-500 mt-2 text-xs font-semibold truncate">
+                      Current File: {catalogueForm.file_url}
+                    </p>
+                  )}
+                </div>
+                <div className="flex gap-3 pt-2">
+                  <button disabled={uploadingCatalogue} type="submit" className="flex-1 py-2.5 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed">
+                    {editingCatalogueId ? 'Update Catalogue' : 'Save Catalogue'}
+                  </button>
+                  {editingCatalogueId && (
+                    <button type="button" onClick={() => { setEditingCatalogueId(null); setCatalogueForm({ title: '', description: '', file_url: '', fileObj: null }); }} className="flex-1 py-2.5 bg-slate-200 text-slate-800 font-bold rounded-xl hover:bg-slate-300 transition">
+                      Cancel Edit
+                    </button>
+                  )}
+                </div>
+              </form>
+            </div>
+            
+            <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col h-full max-h-[600px]">
+              <h3 className="text-lg font-bold mb-4 font-display flex items-center gap-2">
+                <Layers className="h-5 w-5 text-blue-600 dark:text-cyan-400" />
+                Existing Catalogues ({catalogues.length})
+              </h3>
+              <div className="flex-1 overflow-y-auto pr-2 space-y-3">
+                {catalogues.map(c => (
+                  <div key={c.id} className="flex items-center justify-between p-3 border border-slate-100 dark:border-slate-800 rounded-xl bg-slate-50 dark:bg-slate-800/30">
+                    <div className="flex items-center gap-3">
+                      <div className="h-10 w-10 bg-slate-200 dark:bg-slate-700 rounded-lg flex items-center justify-center">
+                        <FileText className="h-5 w-5 text-slate-500 dark:text-slate-400" />
+                      </div>
+                      <div>
+                        <p className="font-bold text-slate-800 dark:text-white line-clamp-1">{c.title}</p>
+                        <p className="text-xs text-slate-500 line-clamp-1">{c.description}</p>
+                      </div>
+                    </div>
+                    <div className="flex gap-2">
+                      <button onClick={() => handleEditCatalogue(c)} className="p-1.5 text-blue-600 bg-blue-50 dark:bg-blue-900/30 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/50" title="Edit Catalogue">
+                        <Edit className="w-3.5 h-3.5" />
+                      </button>
+                      <button onClick={() => handleDeleteCatalogue(c.id)} className="p-1.5 text-red-600 bg-red-50 dark:bg-red-900/30 rounded-lg hover:bg-red-100 dark:hover:bg-red-900/50" title="Delete Catalogue">
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       )}
 

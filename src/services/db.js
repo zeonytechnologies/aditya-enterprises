@@ -1263,6 +1263,11 @@ const SEED_COUPONS = [
   { id: 'cp2', code: 'BULK5000', discount_value: 5000, type: 'fixed', min_order_value: 50000, is_active: true }
 ];
 
+const SEED_CATALOGUES = [
+  { id: 'cat1', title: 'Aditya Enterprises Full Catalog 2024', description: 'Complete range of our industrial adhesives and sealants.', file_url: '#' },
+  { id: 'cat2', title: 'Pidilite Industrial Guide', description: 'Technical specifications for Pidilite products.', file_url: '#' }
+];
+
 export const initLocalDb = () => {
   if (!localStorage.getItem('aditya_brands') || !localStorage.getItem('aditya_products_v4')) {
     localStorage.setItem('aditya_brands', JSON.stringify(SEED_BRANDS));
@@ -1279,6 +1284,9 @@ export const initLocalDb = () => {
   }
   if (!localStorage.getItem('aditya_coupons')) {
     localStorage.setItem('aditya_coupons', JSON.stringify(SEED_COUPONS));
+  }
+  if (!localStorage.getItem('aditya_catalogues')) {
+    localStorage.setItem('aditya_catalogues', JSON.stringify(SEED_CATALOGUES));
   }
   if (!localStorage.getItem('aditya_orders')) {
     localStorage.setItem('aditya_orders', JSON.stringify([]));
@@ -1441,6 +1449,33 @@ export const db = {
   deleteBrand: async (id) => {
     const brands = JSON.parse(localStorage.getItem('aditya_brands'));
     localStorage.setItem('aditya_brands', JSON.stringify(brands.filter(b => b.id !== id)));
+    return true;
+  },
+
+  // Catalogues
+  getCatalogues: async () => {
+    return JSON.parse(localStorage.getItem('aditya_catalogues'));
+  },
+  createCatalogue: async (data) => {
+    const catalogues = JSON.parse(localStorage.getItem('aditya_catalogues'));
+    const newCatalogue = { ...data, id: 'cat' + Date.now() };
+    catalogues.push(newCatalogue);
+    localStorage.setItem('aditya_catalogues', JSON.stringify(catalogues));
+    return newCatalogue;
+  },
+  updateCatalogue: async (id, data) => {
+    const catalogues = JSON.parse(localStorage.getItem('aditya_catalogues'));
+    const idx = catalogues.findIndex(c => c.id === id);
+    if (idx !== -1) {
+      catalogues[idx] = { ...catalogues[idx], ...data };
+      localStorage.setItem('aditya_catalogues', JSON.stringify(catalogues));
+      return catalogues[idx];
+    }
+    return null;
+  },
+  deleteCatalogue: async (id) => {
+    const catalogues = JSON.parse(localStorage.getItem('aditya_catalogues'));
+    localStorage.setItem('aditya_catalogues', JSON.stringify(catalogues.filter(c => c.id !== id)));
     return true;
   },
 

@@ -291,6 +291,51 @@ export const api = {
     }
   },
 
+  catalogues: {
+    list: async () => {
+      if (isSupabaseConfigured) {
+        const { data, error } = await supabase.from('catalogues').select('*');
+        if (error) throw error;
+        return data;
+      } else {
+        return await db.getCatalogues();
+      }
+    },
+    create: async (catalogueData) => {
+      if (isSupabaseConfigured) {
+        const { data, error } = await supabase
+          .from('catalogues')
+          .insert(catalogueData)
+          .select()
+          .single();
+        if (error) throw error;
+        return data;
+      }
+      return await db.createCatalogue?.(catalogueData) || catalogueData;
+    },
+    update: async (id, catalogueData) => {
+      if (isSupabaseConfigured) {
+        const { data, error } = await supabase
+          .from('catalogues')
+          .update(catalogueData)
+          .eq('id', id)
+          .select()
+          .single();
+        if (error) throw error;
+        return data;
+      }
+      return await db.updateCatalogue?.(id, catalogueData) || catalogueData;
+    },
+    delete: async (id) => {
+      if (isSupabaseConfigured) {
+        const { error } = await supabase.from('catalogues').delete().eq('id', id);
+        if (error) throw error;
+        return true;
+      }
+      return await db.deleteCatalogue?.(id) || true;
+    }
+  },
+
   orders: {
     list: async (userId = null) => {
       if (isSupabaseConfigured) {
