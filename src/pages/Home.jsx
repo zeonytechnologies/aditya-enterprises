@@ -195,7 +195,7 @@ export default function Home() {
                     transition={{ duration: 0.5 }}
                     className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-cyan-400 bg-cyan-950/50 border border-cyan-800/30 uppercase tracking-widest mb-6"
                   >
-                    <Award className="h-3.5 w-3.5" /> B2B Industrial Marketplace
+                    <Award className="h-3.5 w-3.5" /> B2C Industrial Marketplace
                   </motion.span>
                   
                   <motion.h1 
