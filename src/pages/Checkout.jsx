@@ -60,25 +60,31 @@ export default function Checkout() {
   };
 
   const handleSubmitOrder = async (e) => {
-    e.preventDefault();
+    if (e && e.preventDefault) e.preventDefault();
     setFormError('');
     setGstError('');
 
     // Field checks
     if (!shippingAddress.line1 || !shippingAddress.city || !shippingAddress.postalCode) {
-      setFormError('Please fill in all required shipping address fields.');
+      const msg = 'Please fill in all required shipping address fields.';
+      setFormError(msg);
+      alert(msg);
       return;
     }
     if (!companyDetails.phone || !companyDetails.email) {
-      setFormError('Please enter contact phone and email.');
+      const msg = 'Please enter contact phone and email.';
+      setFormError(msg);
+      alert(msg);
       return;
     }
 
     // GSTIN validation check
-    if (companyDetails.gstNumber) {
-      const isValid = validateGST(companyDetails.gstNumber);
+    if (user?.role === 'dealer' && companyDetails.gstNumber && companyDetails.gstNumber.trim() !== '') {
+      const isValid = validateGST(companyDetails.gstNumber.trim());
       if (!isValid) {
-        setGstError('Invalid GSTIN format. Standard Indian GSTIN is 15 characters (e.g. 27AAAAA1111A1Z1)');
+        const msg = 'Invalid GSTIN format. Standard Indian GSTIN is 15 characters.';
+        setGstError(msg);
+        alert(msg);
         return;
       }
     }
@@ -101,8 +107,8 @@ export default function Checkout() {
         sgst: parseFloat(totals.sgst),
         shipping: parseFloat(totals.shipping),
         grand_total: parseFloat(totals.grandTotal),
-        company_name: companyDetails.companyName,
-        gst_number: (companyDetails.gstNumber || '').toUpperCase(),
+        company_name: user?.role === 'dealer' ? companyDetails.companyName : (user?.company_name || ''),
+        gst_number: user?.role === 'dealer' ? (companyDetails.gstNumber || '').trim().toUpperCase() : '',
         billing_address: finalBilling,
         shipping_address: shippingAddress,
         delivery_notes: companyDetails.deliveryNotes,
@@ -147,7 +153,9 @@ export default function Checkout() {
       navigate(`/order-tracking?orderId=${createdOrder.id}`);
     } catch (err) {
       console.error(err);
-      setFormError('Failed to create order: ' + (err.message || err.toString()));
+      const msg = 'Failed to create order: ' + (err.message || err.toString());
+      setFormError(msg);
+      alert(msg);
     } finally {
       setLoading(false);
     }
@@ -173,7 +181,7 @@ export default function Checkout() {
         
         {/* LEFT: Shipping details forms */}
         <div className="lg:col-span-8 space-y-6">
-          <form onSubmit={handleSubmitOrder} className="space-y-6">
+          <form onSubmit={handleSubmitOrder} className="space-y-6" noValidate>
             
             {/* Box 1: Contact & Corporate Details */}
             <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl p-6 md:p-8 shadow-sm space-y-5">
@@ -372,7 +380,8 @@ export default function Checkout() {
             )}
 
             <button
-              type="submit"
+              type="button"
+              onClick={handleSubmitOrder}
               disabled={loading}
               className="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition duration-300 flex items-center justify-center gap-2 shadow-lg shadow-blue-500/25 text-sm"
             >
