@@ -89,33 +89,57 @@ export default function ProductCard({ product }) {
         </div>
 
         {/* Price Tag & Tax Info */}
-        <div className="mt-auto pt-2.5 sm:pt-3 border-t border-slate-100 dark:border-slate-800 flex flex-col gap-1.5">
+        <div className="mt-auto pt-2.5 sm:pt-3 border-t border-slate-100 dark:border-slate-800 flex flex-col gap-2">
           
-          <div className="flex flex-wrap items-baseline gap-1 sm:gap-2">
-            <span className="text-sm sm:text-base font-extrabold text-slate-950 dark:text-white font-display">
-              ₹{unitPrice.toLocaleString('en-IN', { minimumFractionDigits: 2 })}
-            </span>
-            {showDiscount && (
-              <span className="text-[10px] sm:text-xs text-slate-400 line-through">
-                ₹{parseFloat(product.mrp).toLocaleString('en-IN')}
+          <div className="flex flex-col gap-0.5">
+            <div className="flex justify-between items-center text-[10px] sm:text-xs">
+              <span className="text-slate-500">Base Price</span>
+              <span className="font-semibold text-slate-700 dark:text-slate-300">
+                ₹{unitPrice.toLocaleString('en-IN', { minimumFractionDigits: 2 })}
               </span>
-            )}
+            </div>
+            <div className="flex justify-between items-center text-[10px] sm:text-xs">
+              <span className="text-slate-500">GST ({product.gst_percent}%)</span>
+              <span className="font-semibold text-slate-700 dark:text-slate-300">
+                +₹{(unitPrice * (product.gst_percent / 100)).toLocaleString('en-IN', { minimumFractionDigits: 2 })}
+              </span>
+            </div>
           </div>
           
-          {/* GST Alert */}
-          <div className="flex items-center text-[9px] sm:text-[10px] text-slate-450 leading-none">
-            <ShieldCheck className="h-3 w-3 mr-0.5 text-blue-500 dark:text-cyan-400 flex-shrink-0" />
-            <span className="truncate">Incl. {product.gst_percent}% GST</span>
+          <div className="flex items-end justify-between border-t border-dashed border-slate-200 dark:border-slate-700 pt-1.5">
+            <div className="flex flex-col">
+              <span className="text-[10px] text-slate-500 font-medium">Final Price</span>
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <span className="text-sm sm:text-lg font-extrabold font-display text-slate-900 dark:text-white">
+                  ₹{(unitPrice * (1 + product.gst_percent / 100)).toLocaleString('en-IN', { minimumFractionDigits: 2 })}
+                </span>
+                {showDiscount && isB2B && (
+                  <span className="text-[10px] sm:text-xs text-slate-400 line-through">
+                    ₹{product.mrp.toLocaleString('en-IN')}
+                  </span>
+                )}
+              </div>
+            </div>
+            
+            {/* Quick add mobile */}
+            <button 
+              onClick={handleQuickAdd}
+              className="md:hidden p-1.5 sm:p-2 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg hover:bg-blue-600 hover:text-white transition-colors"
+            >
+              <ShoppingCart className="h-4 w-4 sm:h-5 sm:w-5" />
+            </button>
           </div>
-
-          {/* Quick Add (Mobile only) */}
-          <button
-            onClick={handleQuickAdd}
-            className="md:hidden w-full mt-1 py-2 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white text-[10px] font-bold rounded-lg transition-all flex items-center justify-center gap-1 shadow-sm"
-          >
-            <ShoppingCart className="h-3 w-3" />
-            Add to Cart
-          </button>
+          
+          {showDiscount && isB2B && (
+            <p className="text-[9px] sm:text-[10px] text-emerald-600 dark:text-emerald-400 font-bold">
+              You save ₹{(product.mrp - (unitPrice * (1 + product.gst_percent / 100))).toLocaleString('en-IN', { maximumFractionDigits: 0 })}!
+            </p>
+          )}
+          {!isB2B && (
+            <p className="text-[9px] sm:text-[10px] text-slate-500 font-medium">
+              MRP: ₹{product.mrp.toLocaleString('en-IN')} (Incl. of all taxes)
+            </p>
+          )}
 
         </div>
       </div>

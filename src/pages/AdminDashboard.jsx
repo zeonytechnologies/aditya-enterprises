@@ -2,10 +2,12 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   BarChart3, ShieldCheck, ShoppingBag, FileSpreadsheet, 
-  Layers, Package, AlertCircle, FileText, CheckCircle2, XCircle, Plus, Edit, Trash2, Printer, Tag, Search, ChevronLeft, ChevronRight 
+  Layers, Package, AlertCircle, FileText, CheckCircle2, XCircle, Plus, Edit, Trash2, Printer, Tag, Search, ChevronLeft, ChevronRight, MessageCircle, Users, ShoppingCart, X
 } from 'lucide-react';
 import { api } from '../services/supabase';
 import { useAuth } from '../context/AuthContext';
+import { sendEmail } from '../services/mailer';
+import OfferPosterManager from '../components/OfferPosterManager';
 
 function useTablePagination(data, searchFields = ['name']) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -110,17 +112,45 @@ export default function AdminDashboard() {
   const [orders, setOrders] = useState([]);
   const [usersList, setUsersList] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [orderStatusFilter, setOrderStatusFilter] = useState('All');
+  
+  const [leads, setLeads] = useState([]);
+  const [selectedUserForDetails, setSelectedUserForDetails] = useState(null);
+  
+  const [resetPasswordNew, setResetPasswordNew] = useState('');
+  const [resettingPasswordUserId, setResettingPasswordUserId] = useState(null);
+  
+  const handleResetUserPassword = async (userId) => {
+    if (!resetPasswordNew || resetPasswordNew.length < 6) {
+      alert("Password must be at least 6 characters.");
+      return;
+    }
+    try {
+      await api.admin.updateUserPassword(userId, resetPasswordNew);
+      alert("Password updated successfully.");
+      setResetPasswordNew('');
+      setResettingPasswordUserId(null);
+    } catch (err) {
+      alert("Failed to update password");
+      console.error(err);
+    }
+  };
 
   // --- Pagination Hooks ---
   const productsPagination = useTablePagination(products, ['name', 'sku', 'hsn_code']);
+  const filteredOrders = useMemo(() => {
+    if (orderStatusFilter === 'All') return orders;
+    return orders.filter(o => o.status === orderStatusFilter);
+  }, [orders, orderStatusFilter]);
+
   const offersPagination = useTablePagination(products, ['name', 'sku']);
   const cataloguesPagination = useTablePagination(catalogues, ['title']);
   const rfqsPagination = useTablePagination(rfqs, ['company_name', 'contact_person', 'status', 'email']);
-  const ordersPagination = useTablePagination(orders, ['id', 'status', 'shipping_name', 'shipping_phone']);
+  const ordersPagination = useTablePagination(filteredOrders, ['id', 'status', 'shipping_name', 'shipping_phone']);
   const pendingPayments = useMemo(() => payments.filter(p => p.status === 'Pending Verification'), [payments]);
   const paymentsPagination = useTablePagination(pendingPayments, ['utr_number', 'status', 'order_id']);
-  const b2bUsers = useMemo(() => usersList.filter(u => u.role === 'dealer' || u.role === 'distributor'), [usersList]);
-  const usersPagination = useTablePagination(b2bUsers, ['name', 'email', 'company_name', 'role']);
+  const usersPagination = useTablePagination(usersList, ['name', 'full_name', 'email', 'company_name', 'role']);
+  const leadsPagination = useTablePagination(leads, ['name', 'email', 'mobile']);
 
   // Dynamic lists for specifications and features UI
   const [specItems, setSpecItems] = useState([{ key: '', value: '' }]);
@@ -209,6 +239,9 @@ export default function AdminDashboard() {
 
       const profiles = await api.admin.getUsersList();
       setUsersList(profiles);
+
+      const allLeads = await api.leads.getAll();
+      setLeads(allLeads);
 
     } catch (err) {
       console.error('Failed loading admin database:', err);
@@ -378,6 +411,28 @@ export default function AdminDashboard() {
   const handleOrderStatusChange = async (orderId, newStatus) => {
     try {
       await api.orders.updateStatus(orderId, newStatus);
+      
+      // Find the user for this order and send email
+      const order = orders.find(o => o.id === orderId);
+      if (order) {
+        const user = usersList.find(u => u.id === order.user_id);
+        if (user && user.email) {
+          sendEmail({
+            to: user.email,
+            subject: `Order Update: ${order.display_id || order.id.substring(0,8)} is now ${newStatus}`,
+            html: `
+              <div style="font-family: sans-serif; max-w: 600px; margin: auto; padding: 20px;">
+                <h2 style="color: #0f172a;">Order Status Update</h2>
+                <p>Hi ${user.name},</p>
+                <p>The status of your order <strong>${order.display_id || order.id.substring(0,8)}</strong> has been updated to:</p>
+                <h3 style="color: #2563eb; background: #eff6ff; padding: 10px; display: inline-block; border-radius: 6px;">${newStatus}</h3>
+                <p>Thank you for shopping with Aditya Enterprises.</p>
+              </div>
+            `
+          }).catch(e => console.error("Mail send failed", e));
+        }
+      }
+
       loadAdminData();
     } catch (err) {
       console.error('Error updating order status:', err);
@@ -706,6 +761,10 @@ export default function AdminDashboard() {
           <span className="text-slate-400 font-semibold block uppercase text-[9px]">Low Stock warnings</span>
           <span className={`text-lg font-extrabold font-display ${(stats?.lowStockCount || 0) > 0 ? 'text-red-500 font-black animate-pulse' : 'text-slate-900'}`}>{stats?.lowStockCount || 0} Items</span>
         </div>
+        <div className="bg-white dark:bg-slate-900 border p-4.5 rounded-2xl shadow-sm space-y-1.5">
+          <span className="text-slate-400 font-semibold block uppercase text-[9px]">Total Visitors</span>
+          <span className="text-lg font-extrabold font-display text-blue-600">{stats?.totalVisitors || 0}</span>
+        </div>
       </section>
 
       {/* 2. Menu Navigation Tabs - Hide on print */}
@@ -751,13 +810,13 @@ export default function AdminDashboard() {
           <FileSpreadsheet className="h-4.5 w-4.5" /> Respond RFQs ({stats?.pendingRfqs || 0})
         </button>
         <button
-          onClick={() => setActiveTab('users')}
-          className={`pb-4 text-xs font-bold border-b-2 flex items-center gap-1.5 px-3 transition-colors ${
-            activeTab === 'users' ? 'border-blue-600 text-blue-600 dark:border-cyan-400 dark:text-cyan-400' : 'border-transparent text-slate-400'
-          }`}
-        >
-          <ShieldCheck className="h-4.5 w-4.5" /> B2B Approvals ({usersList.filter(u => (u.role === 'dealer' || u.role === 'distributor') && !u.is_approved).length})
-        </button>
+            onClick={() => setActiveTab('users')}
+            className={`pb-4 text-xs font-bold border-b-2 flex items-center gap-1.5 px-3 transition-colors ${
+              activeTab === 'users' ? 'border-blue-600 text-blue-600 dark:border-cyan-400 dark:text-cyan-400' : 'border-transparent text-slate-400'
+            }`}
+          >
+            <ShieldCheck className="h-4.5 w-4.5" /> Users Registry ({usersList.length})
+          </button>
         <button
           onClick={() => setActiveTab('gst')}
           className={`pb-4 text-xs font-bold border-b-2 flex items-center gap-1.5 px-3 transition-colors ${
@@ -784,11 +843,19 @@ export default function AdminDashboard() {
         </button>
         <button
           onClick={() => setActiveTab('offers')}
-          className={`pb-4 text-xs font-bold border-b-2 flex items-center gap-1.5 px-3 transition-colors ${
+          className={`pb-4 text-xs font-bold border-b-2 flex items-center gap-1.5 px-3 transition-colors whitespace-nowrap ${
             activeTab === 'offers' ? 'border-blue-600 text-blue-600 dark:border-cyan-400 dark:text-cyan-400' : 'border-transparent text-slate-400'
           }`}
         >
           <Tag className="h-4.5 w-4.5" /> Offers & Featured
+        </button>
+        <button
+          onClick={() => setActiveTab('leads')}
+          className={`pb-4 text-xs font-bold border-b-2 flex items-center gap-1.5 px-3 transition-colors whitespace-nowrap ${
+            activeTab === 'leads' ? 'border-blue-600 text-blue-600 dark:border-cyan-400 dark:text-cyan-400' : 'border-transparent text-slate-400'
+          }`}
+        >
+          <Users className="h-4.5 w-4.5" /> Leads Capture
         </button>
       </div>
 
@@ -831,6 +898,166 @@ export default function AdminDashboard() {
             </div>
           </div>
 
+          <div className="bg-white dark:bg-slate-900 border rounded-3xl p-6 shadow-sm space-y-4">
+            <h3 className="text-base font-bold font-display border-b pb-3">Security Settings</h3>
+            <form onSubmit={async (e) => {
+              e.preventDefault();
+              const newPassword = e.target.newPassword.value;
+              if (newPassword.length < 6) return alert('Password too short!');
+              try {
+                await api.admin.updateAdminPassword(user?.id, newPassword);
+                alert('Password updated successfully!');
+                e.target.reset();
+              } catch (err) {
+                alert('Failed to update password');
+              }
+            }} className="space-y-3">
+              <div>
+                <label className="text-xs font-bold text-slate-500 uppercase">New Password</label>
+                <input type="password" name="newPassword" required className="w-full mt-1 px-3 py-2 border rounded-xl text-sm bg-slate-50 dark:bg-slate-950" placeholder="Enter new password" />
+              </div>
+              <button type="submit" className="w-full py-2 bg-slate-900 text-white rounded-xl text-sm font-bold hover:bg-slate-800">Change Password</button>
+            </form>
+          </div>
+
+        </div>
+      )}
+
+      {/* TAB J: Leads */}
+      {activeTab === 'leads' && (
+        <div className="space-y-6">
+          <div className="flex justify-between items-center">
+            <h2 className="text-xl font-bold font-display">Captured Leads</h2>
+          </div>
+          
+          <TableControls pagination={leadsPagination} placeholder="Search by Name, Email, Mobile..." />
+          
+          <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl p-6 shadow-sm overflow-x-auto">
+            <table className="w-full text-xs text-left border-collapse min-w-[600px]">
+              <thead>
+                <tr className="border-b text-slate-400 font-bold uppercase text-[10px] pb-2">
+                  <th className="py-2.5">Date</th>
+                  <th className="py-2.5">Name</th>
+                  <th className="py-2.5">Mobile</th>
+                  <th className="py-2.5">Email</th>
+                </tr>
+              </thead>
+              <tbody>
+                {leadsPagination.currentData.length === 0 ? (
+                  <tr>
+                    <td colSpan="4" className="py-8 text-center text-slate-500">No leads captured yet.</td>
+                  </tr>
+                ) : (
+                  leadsPagination.currentData.map(lead => (
+                    <tr key={lead.id} className="border-b border-slate-50 dark:border-slate-800/50 hover:bg-slate-50 dark:hover:bg-slate-800/20">
+                      <td className="py-2.5 whitespace-nowrap text-slate-500">{new Date(lead.created_at).toLocaleDateString()}</td>
+                      <td className="py-2.5 font-bold text-slate-900 dark:text-white">{lead.name}</td>
+                      <td className="py-2.5 font-mono">{lead.mobile}</td>
+                      <td className="py-2.5">{lead.email || '-'}</td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      {/* --- Modals --- */}
+      {selectedUserForDetails && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm" onClick={() => setSelectedUserForDetails(null)}>
+          <div className="bg-white dark:bg-slate-900 rounded-3xl w-full max-w-4xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col" onClick={e => e.stopPropagation()}>
+            <div className="p-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50 dark:bg-slate-950">
+              <div>
+                <h3 className="text-xl font-bold font-display text-slate-900 dark:text-white">{selectedUserForDetails.name || selectedUserForDetails.full_name}</h3>
+                <p className="text-sm text-slate-500">{selectedUserForDetails.company_name} | {selectedUserForDetails.email} | {selectedUserForDetails.mobile}</p>
+              </div>
+              <button onClick={() => setSelectedUserForDetails(null)} className="p-2 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-full transition-colors">
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            
+            <div className="px-6 py-3 border-b border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center gap-4">
+              <button onClick={() => setResettingPasswordUserId(selectedUserForDetails.id)} className="text-xs bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg font-bold hover:bg-slate-200">
+                Reset Password
+              </button>
+              {resettingPasswordUserId === selectedUserForDetails.id && (
+                <div className="flex items-center gap-2">
+                  <input 
+                    type="text" 
+                    value={resetPasswordNew} 
+                    onChange={e => setResetPasswordNew(e.target.value)} 
+                    placeholder="New Password (min 6)" 
+                    className="text-xs px-2 py-1.5 border dark:border-slate-700 bg-transparent rounded outline-none" 
+                  />
+                  <button onClick={() => handleResetUserPassword(selectedUserForDetails.id)} className="text-xs bg-blue-600 text-white px-3 py-1.5 rounded font-bold hover:bg-blue-700">Save</button>
+                  <button onClick={() => setResettingPasswordUserId(null)} className="text-xs text-slate-500 hover:text-slate-700">Cancel</button>
+                </div>
+              )}
+            </div>
+
+            <div className="p-6 overflow-y-auto space-y-8 flex-1">
+              <div>
+                <h4 className="font-bold text-lg mb-4 flex items-center gap-2"><ShoppingCart className="h-5 w-5 text-blue-500" /> Order History</h4>
+                <div className="bg-slate-50 dark:bg-slate-950 rounded-2xl border dark:border-slate-800 overflow-hidden">
+                  <table className="w-full text-xs text-left">
+                    <thead className="bg-slate-100 dark:bg-slate-800">
+                      <tr>
+                        <th className="p-3 font-bold text-slate-500">Order ID</th>
+                        <th className="p-3 font-bold text-slate-500">Date</th>
+                        <th className="p-3 font-bold text-slate-500">Amount</th>
+                        <th className="p-3 font-bold text-slate-500">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {orders.filter(o => o.user_id === selectedUserForDetails.id).length === 0 ? (
+                        <tr><td colSpan="4" className="p-4 text-center text-slate-500">No orders found.</td></tr>
+                      ) : (
+                        orders.filter(o => o.user_id === selectedUserForDetails.id).map(o => (
+                          <tr key={o.id} className="border-t border-slate-100 dark:border-slate-800">
+                            <td className="p-3 font-mono font-bold">{o.display_id || o.id.substring(0,8)}</td>
+                            <td className="p-3">{new Date(o.created_at).toLocaleDateString()}</td>
+                            <td className="p-3">₹{o.total_amount?.toLocaleString('en-IN')}</td>
+                            <td className="p-3"><span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-[10px] font-bold">{o.status}</span></td>
+                          </tr>
+                        ))
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div>
+                <h4 className="font-bold text-lg mb-4 flex items-center gap-2"><FileSpreadsheet className="h-5 w-5 text-emerald-500" /> Quotation (RFQ) History</h4>
+                <div className="bg-slate-50 dark:bg-slate-950 rounded-2xl border dark:border-slate-800 overflow-hidden">
+                  <table className="w-full text-xs text-left">
+                    <thead className="bg-slate-100 dark:bg-slate-800">
+                      <tr>
+                        <th className="p-3 font-bold text-slate-500">Date</th>
+                        <th className="p-3 font-bold text-slate-500">Products</th>
+                        <th className="p-3 font-bold text-slate-500">Status</th>
+                        <th className="p-3 font-bold text-slate-500">Offered Price</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {rfqs.filter(r => r.user_id === selectedUserForDetails.id).length === 0 ? (
+                        <tr><td colSpan="4" className="p-4 text-center text-slate-500">No RFQs found.</td></tr>
+                      ) : (
+                        rfqs.filter(r => r.user_id === selectedUserForDetails.id).map(r => (
+                          <tr key={r.id} className="border-t border-slate-100 dark:border-slate-800">
+                            <td className="p-3">{new Date(r.created_at).toLocaleDateString()}</td>
+                            <td className="p-3 truncate max-w-[200px]">{r.items?.map(i => i.name).join(', ')}</td>
+                            <td className="p-3"><span className="px-2 py-1 bg-emerald-100 text-emerald-700 rounded-full text-[10px] font-bold">{r.status}</span></td>
+                            <td className="p-3">{r.offered_price ? `₹${r.offered_price.toLocaleString('en-IN')}` : '-'}</td>
+                          </tr>
+                        ))
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       )}
 
@@ -1463,6 +1690,8 @@ export default function AdminDashboard() {
             </div>
           </div>
           
+          <OfferPosterManager />
+          
           <TableControls pagination={offersPagination} placeholder="Search by Product Name, SKU..." />
 
           <div className="bg-white dark:bg-slate-900 border rounded-3xl overflow-hidden shadow-sm overflow-x-auto">
@@ -1554,8 +1783,25 @@ export default function AdminDashboard() {
       {/* TAB F: Order Processing */}
       {activeTab === 'orders' && (
         <div className="space-y-6">
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <h2 className="text-xl font-bold font-display">Order Processing Desk</h2>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-bold text-slate-500">Filter Status:</span>
+              <select 
+                value={orderStatusFilter}
+                onChange={(e) => setOrderStatusFilter(e.target.value)}
+                className="px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-900 text-xs font-bold"
+              >
+                <option value="All">All Orders</option>
+                <option value="Order Placed">Order Placed</option>
+                <option value="Payment Pending">Payment Pending</option>
+                <option value="Payment Verified">Payment Verified</option>
+                <option value="Processing">Processing</option>
+                <option value="Shipped">Shipped</option>
+                <option value="Delivered">Delivered</option>
+                <option value="Cancelled">Cancelled</option>
+              </select>
+            </div>
           </div>
           
           <TableControls pagination={ordersPagination} placeholder="Search by Order ID, Status, Name..." />
@@ -1576,7 +1822,9 @@ export default function AdminDashboard() {
               <tbody>
                 {ordersPagination.currentData.map(order => (
                   <tr key={order.id} className="border-b last:border-b-0 hover:bg-slate-50/50 dark:hover:bg-slate-850/30">
-                    <td className="py-4 font-bold text-blue-600 dark:text-cyan-400 font-mono truncate max-w-[120px]">{order.id}</td>
+                    <td className="py-4 font-bold text-blue-600 dark:text-cyan-400 font-mono truncate max-w-[120px]">
+                      {order.display_id || order.id.substring(0,8)}
+                    </td>
                     <td className="py-4 font-semibold text-slate-550">{new Date(order.created_at).toLocaleDateString()}</td>
                     <td className="py-4 font-bold text-slate-950 dark:text-white">
                       {order.company_name || 'Retail Customer'}
@@ -1593,7 +1841,18 @@ export default function AdminDashboard() {
                         {order.status}
                       </span>
                     </td>
-                    <td className="py-4 text-right">
+                    <td className="py-4 text-right flex items-center justify-end gap-2">
+                      <button
+                        title="Message on WhatsApp"
+                        onClick={() => {
+                          const msg = `Hello ${order.company_name || 'Customer'},%0A%0ARegarding your order ${order.display_id || order.id.substring(0,8)}.%0ACurrent Status: ${order.status}.%0A%0AThank you for shopping with Aditya Enterprises!`;
+                          const phone = '919342248827'; 
+                          window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
+                        }}
+                        className="p-1.5 text-slate-400 hover:text-[#25D366] transition-colors"
+                      >
+                        <MessageCircle className="h-4 w-4" />
+                      </button>
                       <select
                         value={order.status}
                         onChange={(e) => handleOrderStatusChange(order.id, e.target.value)}
@@ -1616,7 +1875,7 @@ export default function AdminDashboard() {
       {activeTab === 'users' && (
         <div className="space-y-6">
           <div className="flex justify-between items-center">
-            <h2 className="text-xl font-bold font-display">B2B Accounts & Registration Registry</h2>
+            <h2 className="text-xl font-bold font-display">User Accounts & B2B Registry</h2>
           </div>
 
           <TableControls pagination={usersPagination} placeholder="Search by Name, Company, Email..." />
@@ -1636,7 +1895,9 @@ export default function AdminDashboard() {
               </thead>
               <tbody>
                 {usersPagination.currentData.map(usr => (
-                  <tr key={usr.id} className="border-b last:border-b-0 hover:bg-slate-50/50 dark:hover:bg-slate-850/30">
+                  <tr key={usr.id} 
+                      onClick={() => setSelectedUserForDetails(usr)}
+                      className="border-b last:border-b-0 hover:bg-slate-50/50 dark:hover:bg-slate-850/30 cursor-pointer">
                     <td className="py-4 font-bold text-slate-950 dark:text-white">{usr.full_name}</td>
                     <td className="py-4 font-semibold text-slate-500">{usr.email}</td>
                     <td className="py-4 font-semibold text-slate-800 dark:text-slate-200">{usr.company_name || 'N/A'}</td>
@@ -1661,7 +1922,7 @@ export default function AdminDashboard() {
                     <td className="py-4 text-right">
                       {(usr.role === 'dealer' || usr.role === 'distributor') && !usr.is_approved && (
                         <button
-                          onClick={() => handleApproveDealer(usr.id)}
+                          onClick={(e) => { e.stopPropagation(); handleApproveDealer(usr.id); }}
                           className="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg text-[10px] transition"
                         >
                           Approve Account

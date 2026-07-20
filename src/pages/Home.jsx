@@ -5,6 +5,7 @@ import {
   ArrowRight, FileSpreadsheet, Building2, HardHat, 
   Armchair, Car, Zap, ShieldAlert, Award, FileCheck, Truck, Headphones, Clock, Send
 } from 'lucide-react';
+import { FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
 import { api } from '../services/supabase';
 import BrandSlider from '../components/BrandSlider';
 import ProductCard from '../components/ProductCard';
@@ -15,7 +16,7 @@ import hero2 from '../assets/hero2.png';
 const HERO_SLIDES = [
   {
     title: "Premium Industrial Adhesives & Technical Sealants",
-    subtitle: "Authorized distributor of Pidilite, 3M, Araldite & Ozone. Certified GST billing and custom wholesale pricing for dealers.",
+    subtitle: "Authorized Channel Partner (Distributor) of Pidilite, 3M, Araldite & Ozone. Certified GST billing and custom wholesale pricing for dealers.",
     bgImage: hero1,
     primaryBtn: "Browse Catalog",
     secondaryBtn: "Request Bulk Quote"
@@ -240,6 +241,22 @@ export default function Home() {
             </div>
           </div>
         ))}
+
+        {/* Floating Social Links */}
+        <div className="absolute right-6 top-1/2 -translate-y-1/2 flex flex-col gap-4 z-10 hidden sm:flex">
+          <a href="https://www.instagram.com/ckp_group?utm_source=qr&igsh=cnN6eXE0eHB4eGQz" target="_blank" rel="noopener noreferrer" className="relative p-3 bg-white text-slate-400 hover:text-pink-600 rounded-full shadow-lg border border-slate-100 transition-colors group">
+            <FaInstagram className="h-5 w-5" />
+            <span className="absolute right-full mr-4 top-1/2 -translate-y-1/2 px-2 py-1 bg-slate-900 text-white text-[10px] font-bold rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Follow on Instagram</span>
+          </a>
+          <a href="https://www.linkedin.com/in/chetan-jain-aa6956342?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" className="relative p-3 bg-white text-slate-400 hover:text-blue-600 rounded-full shadow-lg border border-slate-100 transition-colors group">
+            <FaLinkedin className="h-5 w-5" />
+            <span className="absolute right-full mr-4 top-1/2 -translate-y-1/2 px-2 py-1 bg-slate-900 text-white text-[10px] font-bold rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Connect on LinkedIn</span>
+          </a>
+          <a href="https://youtube.com/@adityaenterprisesckp?si=UDxVEYIHphWdcBhS" target="_blank" rel="noopener noreferrer" className="relative p-3 bg-white text-slate-400 hover:text-red-600 rounded-full shadow-lg border border-slate-100 transition-colors group">
+            <FaYoutube className="h-5 w-5" />
+            <span className="absolute right-full mr-4 top-1/2 -translate-y-1/2 px-2 py-1 bg-slate-900 text-white text-[10px] font-bold rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Subscribe on YouTube</span>
+          </a>
+        </div>
 
         {/* Slide Indicators */}
         <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-3">

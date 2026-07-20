@@ -4,6 +4,7 @@ import { ShieldCheck, ArrowLeft, ArrowRight, Building, Check } from 'lucide-reac
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { api } from '../services/supabase';
+import { sendEmail } from '../services/mailer';
 
 const STATES = [
   'Maharashtra', 'Delhi', 'Gujarat', 'Karnataka', 'Tamil Nadu', 
@@ -108,13 +109,31 @@ export default function Checkout() {
             quantity: item.quantity,
             price: finalPrice,
             gst_percent: item.product.gst_percent,
-            gst_amount: (finalPrice * item.quantity) * (item.product.gst_percent / 100),
-            total: (finalPrice * item.quantity) * (1 + item.product.gst_percent / 100)
+            gst_amount: parseFloat(((finalPrice * item.quantity) * (item.product.gst_percent / 100)).toFixed(2)),
+            total: parseFloat(((finalPrice * item.quantity) * (1 + item.product.gst_percent / 100)).toFixed(2))
           };
         })
       };
 
       const createdOrder = await api.orders.create(orderPayload);
+      
+      // Send order placement email
+      await sendEmail({
+        to: user.email,
+        subject: 'Order Confirmation - Aditya Enterprises',
+        html: `
+          <div style="font-family: sans-serif; max-w: 600px; margin: auto; padding: 20px;">
+            <h2 style="color: #0f172a;">Order Placed Successfully!</h2>
+            <p style="color: #475569; font-size: 16px;">Hi ${user.name},</p>
+            <p style="color: #475569; font-size: 16px;">We've received your order <strong>${createdOrder.display_id || createdOrder.id.substring(0,8)}</strong>.</p>
+            <p style="color: #475569; font-size: 16px;">Total Amount: ₹${parseFloat(totals.grandTotal).toLocaleString('en-IN')}</p>
+            <p style="color: #475569; font-size: 16px;">Please complete the payment in the next step to process your order.</p>
+            <br />
+            <p style="color: #475569; font-size: 14px;"><strong>Aditya Enterprises Team</strong></p>
+          </div>
+        `
+      }).catch(err => console.error("Checkout email failed", err));
+
       clearCart();
       navigate(`/payment?orderId=${createdOrder.id}`);
     } catch (err) {
@@ -147,38 +166,40 @@ export default function Checkout() {
         <div className="lg:col-span-8 space-y-6">
           <form onSubmit={handleSubmitOrder} className="space-y-6">
             
-            {/* Box 1: B2B corporate details */}
+            {/* Box 1: Contact & Corporate Details */}
             <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl p-6 md:p-8 shadow-sm space-y-5">
               <h2 className="text-lg font-bold font-display border-b pb-3 flex items-center gap-2">
-                <Building className="h-5 w-5 text-blue-500" /> B2B Corporate Details (For GST Credit)
+                <Building className="h-5 w-5 text-blue-500" /> Contact {user?.role === 'dealer' && '& Corporate'} Details
               </h2>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div className="space-y-1.5">
-                  <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Company Name</label>
-                  <input
-                    type="text"
-                    placeholder="e.g. Aditya Enterprises"
-                    value={companyDetails.companyName}
-                    onChange={(e) => setCompanyDetails(prev => ({ ...prev, companyName: e.target.value }))}
-                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-xs focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
+              {user?.role === 'dealer' && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-4">
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Company Name</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Aditya Enterprises"
+                      value={companyDetails.companyName}
+                      onChange={(e) => setCompanyDetails(prev => ({ ...prev, companyName: e.target.value }))}
+                      className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-xs focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
 
-                <div className="space-y-1.5">
-                  <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">GSTIN / Tax ID</label>
-                  <input
-                    type="text"
-                    placeholder="e.g. 27AAAAA1111A1Z1"
-                    value={companyDetails.gstNumber}
-                    onChange={(e) => setCompanyDetails(prev => ({ ...prev, gstNumber: e.target.value }))}
-                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-xs focus:ring-2 focus:ring-blue-500"
-                  />
-                  {gstError && <p className="text-[10px] text-red-500 font-bold leading-snug">{gstError}</p>}
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">GSTIN / Tax ID</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. 27AAAAA1111A1Z1"
+                      value={companyDetails.gstNumber}
+                      onChange={(e) => setCompanyDetails(prev => ({ ...prev, gstNumber: e.target.value }))}
+                      className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-xs focus:ring-2 focus:ring-blue-500"
+                    />
+                    {gstError && <p className="text-[10px] text-red-500 font-bold leading-snug">{gstError}</p>}
+                  </div>
                 </div>
-              </div>
+              )}
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 border-t pt-4">
+              <div className={`grid grid-cols-1 sm:grid-cols-2 gap-5 ${user?.role === 'dealer' ? 'border-t pt-4' : ''}`}>
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Contact Phone *</label>
                   <input

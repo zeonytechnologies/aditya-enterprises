@@ -15,6 +15,9 @@ import UserDashboard from './pages/UserDashboard';
 import AdminDashboard from './pages/AdminDashboard';
 import Login from './pages/Login';
 import Preloader from './components/Preloader';
+import PopupsManager from './components/Popups';
+import FloatingWhatsApp from './components/FloatingWhatsApp';
+import { api } from './services/supabase';
 
 // Context Wrappers & Hooks
 import { ThemeProvider } from './context/ThemeContext';
@@ -46,6 +49,13 @@ function ProtectedRoute({ children, allowedRoles }) {
 }
 
 function MainLayout({ children }) {
+  const { pathname } = useLocation();
+  
+  useEffect(() => {
+    // Record visitor
+    api.visitors.record(pathname).catch(() => {});
+  }, [pathname]);
+
   return (
     <div className="flex flex-col min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
       <Navbar />
@@ -53,6 +63,8 @@ function MainLayout({ children }) {
         {children}
       </main>
       <Footer />
+      <PopupsManager />
+      <FloatingWhatsApp />
     </div>
   );
 }

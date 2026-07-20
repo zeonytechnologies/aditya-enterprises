@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, ShieldCheck, FileCheck, Truck, Headphones } from 'lucide-react';
+import { FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
 import adityaLogo from '../assets/aditya-logo.png';
 
 export default function Footer() {
@@ -107,12 +108,32 @@ export default function Footer() {
               </li>
               <li className="flex items-center">
                 <Mail className="h-4 w-4 mr-3 text-blue-500" />
-                <a href="mailto:info@adityaadhesives.com" className="hover:text-white transition">info@adityaadhesives.com</a>
+                <a href="mailto:adityaenterprises.ck@gmail.com" className="hover:text-white transition">adityaenterprises.ck@gmail.com</a>
               </li>
             </ul>
           </div>
 
         </div>
+
+        {/* Social Media Links */}
+        <div className="mt-12 pt-8 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between">
+          <p className="text-sm text-slate-500 mb-4 md:mb-0">Connect with us on social media for updates and offers.</p>
+          <div className="flex space-x-6">
+            <a href="https://www.instagram.com/ckp_group?utm_source=qr&igsh=cnN6eXE0eHB4eGQz" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition">
+              <span className="sr-only">Instagram</span>
+              <FaInstagram className="h-6 w-6" />
+            </a>
+            <a href="https://www.linkedin.com/in/chetan-jain-aa6956342?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition">
+              <span className="sr-only">LinkedIn</span>
+              <FaLinkedin className="h-6 w-6" />
+            </a>
+            <a href="https://youtube.com/@adityaenterprisesckp?si=UDxVEYIHphWdcBhS" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition">
+              <span className="sr-only">YouTube</span>
+              <FaYoutube className="h-6 w-6" />
+            </a>
+          </div>
+        </div>
+
       </div>
 
       {/* Copyright */}

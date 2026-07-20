@@ -612,6 +612,7 @@ export const api = {
           const { data: rfqs } = await supabase.from('rfqs').select('status');
           const { data: payments } = await supabase.from('payments').select('status');
           const { data: profiles } = await supabase.from('profiles').select('role, is_approved');
+          const { data: visitors } = await supabase.from('visitors').select('created_at');
           
           const totalRevenue = orders?.reduce((acc, curr) => acc + parseFloat(curr.grand_total || 0), 0) || 0;
           const gstCollected = orders?.reduce((acc, curr) => acc + parseFloat(curr.gst_amount || 0), 0) || 0;
@@ -619,6 +620,7 @@ export const api = {
           const pendingRfqs = rfqs?.filter(r => r.status === 'Pending').length || 0;
           const dealersCount = profiles?.filter(p => (p.role === 'dealer' || p.role === 'distributor') && p.is_approved).length || 0;
           const lowStockCount = products?.filter(p => p.stock < 15).length || 0;
+          const totalVisitors = visitors?.length || 0;
           
           return {
             revenue: totalRevenue,
@@ -627,6 +629,7 @@ export const api = {
             pendingRfqs,
             dealersCount,
             lowStockCount,
+            totalVisitors,
             totalOrders: orders?.length || 0,
             recentSales: orders?.slice(0, 5).map(o => ({
               id: o.id,
@@ -707,6 +710,65 @@ export const api = {
     }
   },
 
+  leads: {
+    submit: async (data) => {
+      if (isSupabaseConfigured) {
+        const { error } = await supabase.from('leads').insert(data);
+        if (error) throw error;
+        return true;
+      }
+      return true;
+    },
+    getAll: async () => {
+      if (isSupabaseConfigured) {
+        const { data, error } = await supabase
+          .from('leads')
+          .select('*')
+          .order('created_at', { ascending: false });
+        if (error) throw error;
+        return data;
+      }
+      return [];
+    }
+  },
+
+  visitors: {
+    record: async (path) => {
+      if (isSupabaseConfigured) {
+        // Debounce or filter can be done on frontend
+        const { error } = await supabase.from('visitors').insert({ path });
+        if (error) console.error("Visitor track err", error);
+      }
+    },
+    getStats: async () => {
+      if (isSupabaseConfigured) {
+        const { data, error } = await supabase.from('visitors').select('*');
+        if (error) return [];
+        return data;
+      }
+      return [];
+    }
+  },
+
+  siteSettings: {
+    get: async (key) => {
+      if (isSupabaseConfigured) {
+        const { data, error } = await supabase.from('site_settings').select('value').eq('key', key).single();
+        if (error) return null;
+        return data?.value;
+      }
+      return null;
+    },
+    update: async (key, value) => {
+      if (isSupabaseConfigured) {
+        const { error } = await supabase.from('site_settings').upsert({ key, value, updated_at: new Date().toISOString() }, { onConflict: 'key' });
+        if (error) throw error;
+        return true;
+      }
+      return true;
+    }
+  },
+
   storage: {
     uploadFile: async (file, path = '') => {
       if (isSupabaseConfigured) {
@@ -727,6 +789,60 @@ export const api = {
         return publicUrl;
       }
       return URL.createObjectURL(file);
+    }
+  },
+
+  offerPosters: {
+    list: async () => {
+      if (isSupabaseConfigured) {
+        const { data, error } = await supabase.from('offer_posters').select('*').order('created_at', { ascending: false });
+        if (error) throw error;
+        return data;
+      }
+      return [];
+    },
+    getActive: async () => {
+      if (isSupabaseConfigured) {
+        const { data, error } = await supabase.from('offer_posters').select('*').eq('active', true);
+        if (error) throw error;
+        return data;
+      }
+      return [];
+    },
+    save: async (poster) => {
+      if (isSupabaseConfigured) {
+        if (poster.id && poster.id !== 'new') {
+          const { data, error } = await supabase.from('offer_posters').update(poster).eq('id', poster.id).select().single();
+          if (error) throw error;
+          return data;
+        } else {
+          delete poster.id;
+          const { data, error } = await supabase.from('offer_posters').insert(poster).select().single();
+          if (error) throw error;
+          return data;
+        }
+      }
+      return poster;
+    },
+    delete: async (id) => {
+      if (isSupabaseConfigured) {
+        const { error } = await supabase.from('offer_posters').delete().eq('id', id);
+        if (error) throw error;
+        return true;
+      }
+      return true;
+    }
+  },
+
+  visitors: {
+    record: async (pathname) => {
+      if (isSupabaseConfigured) {
+        try {
+          await supabase.from('visitors').insert({ user_agent: navigator.userAgent });
+        } catch (e) {
+          // ignore
+        }
+      }
     }
   }
 };

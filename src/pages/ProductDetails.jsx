@@ -375,23 +375,36 @@ export default function ProductDetails() {
               </div>
             </div>
           )}
-
           {/* Pricing Box */}
-          <div className="bg-slate-100/50 dark:bg-slate-900/50 p-5 rounded-2xl border dark:border-slate-800 space-y-3">
-            <div className="flex items-baseline gap-3">
-              <span className="text-3xl font-extrabold font-display">
-                ₹{unitPrice.toLocaleString('en-IN', { minimumFractionDigits: 2 })}
-              </span>
-              {showDiscount && (
-                <span className="text-sm text-slate-400 line-through">
-                  MRP: ₹{parseFloat(selectedVariant ? selectedVariant.mrp : product.mrp).toLocaleString('en-IN')}
-                </span>
-              )}
+          <div className="bg-slate-100/50 dark:bg-slate-900/50 p-5 rounded-2xl border dark:border-slate-800 space-y-4">
+            <div className="space-y-2">
+              <div className="flex justify-between items-center text-sm font-semibold text-slate-500">
+                <span>Basic Price</span>
+                <span>₹{unitPrice.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
+              </div>
+              <div className="flex justify-between items-center text-sm font-semibold text-slate-500">
+                <span>GST ({product.gst_percent}%)</span>
+                <span>+₹{(unitPrice * (product.gst_percent / 100)).toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
+              </div>
+              
+              <div className="pt-3 border-t border-dashed border-slate-200 dark:border-slate-700 flex justify-between items-end">
+                <span className="text-sm font-bold text-slate-900 dark:text-white">Net Total (Per Unit)</span>
+                <div className="text-right">
+                  {showDiscount && (
+                    <div className="text-xs text-slate-400 line-through mb-1">
+                      MRP: ₹{parseFloat(selectedVariant ? selectedVariant.mrp : product.mrp).toLocaleString('en-IN')}
+                    </div>
+                  )}
+                  <span className="text-3xl font-extrabold font-display text-blue-600 dark:text-cyan-400">
+                    ₹{(unitPrice + (unitPrice * (product.gst_percent / 100))).toLocaleString('en-IN', { minimumFractionDigits: 2 })}
+                  </span>
+                </div>
+              </div>
             </div>
-            
+
             <div className="text-xs text-slate-500 font-semibold flex items-center gap-1.5">
                <ShieldCheck className="h-4 w-4 text-emerald-500" />
-              <span>Prices are inclusive of {product.gst_percent}% GST (claim credit in checkout)</span>
+              <span>Tax invoice provided. B2B buyers can claim GST ITC at checkout.</span>
             </div>
 
             {isB2B && (

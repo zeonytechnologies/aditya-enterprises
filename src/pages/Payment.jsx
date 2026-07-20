@@ -89,10 +89,7 @@ export default function Payment() {
       });
 
       setSubmitSuccess(true);
-      setTimeout(() => {
-        navigate(`/order-tracking?orderId=${orderId}`);
-      }, 3000);
-
+      // Removed automatic redirect to let user see the WhatsApp button
     } catch (err) {
       console.error(err);
       setFormError('This UTR reference number has already been submitted for verification.');
@@ -114,21 +111,48 @@ export default function Payment() {
       <div className="text-center space-y-3 mb-10">
         <h1 className="text-3xl font-extrabold font-display">B2B Offline Payment Portal</h1>
         <p className="text-xs text-slate-500 font-semibold uppercase tracking-wider">
-          Order ID: <span className="text-blue-600 dark:text-cyan-400 font-extrabold">{orderId}</span> · Payable Grand Total: <span className="text-slate-950 dark:text-white font-extrabold">₹{order?.grand_total.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
+          Order ID: <span className="text-blue-600 dark:text-cyan-400 font-extrabold">{order?.display_id || orderId.substring(0,8)}</span> • Payable Grand Total: <span className="text-slate-950 dark:text-white font-extrabold">₹{order?.grand_total.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
         </p>
       </div>
 
       {submitSuccess ? (
-        <div className="bg-white dark:bg-slate-900 border rounded-3xl p-10 text-center space-y-5 shadow-xl max-w-lg mx-auto">
+        <div className="bg-white dark:bg-slate-900 border rounded-3xl p-10 text-center space-y-6 shadow-xl max-w-lg mx-auto">
           <div className="h-16 w-16 bg-green-50 text-green-500 rounded-full flex items-center justify-center mx-auto">
             <CheckCircle2 className="h-8 w-8" />
           </div>
           <h2 className="text-2xl font-bold font-display">Payment Uploaded Successfully!</h2>
-          <p className="text-xs text-slate-450 leading-relaxed max-w-xs mx-auto">
+          
+          <div className="bg-slate-50 dark:bg-slate-950 border border-dashed rounded-xl p-4 space-y-2">
+            <div className="flex justify-between text-xs font-semibold">
+              <span className="text-slate-500">Order ID:</span>
+              <span className="text-slate-900 dark:text-white">CKP/ONLINE/ORDER/{String(order?.display_id || 1).padStart(4, '0')}</span>
+            </div>
+            <div className="flex justify-between text-xs font-semibold">
+              <span className="text-slate-500">Proforma Invoice:</span>
+              <span className="text-slate-900 dark:text-white">CKP/ONLINE/2026-27/{String(order?.display_id || 1).padStart(4, '0')}</span>
+            </div>
+          </div>
+          
+          <p className="text-xs text-slate-450 leading-relaxed mx-auto">
             Your transaction references have been successfully filed. Orders will sit as <strong>Pending Verification</strong> until manual checking completes.
           </p>
-          <div className="text-[10px] text-slate-450 font-bold uppercase animate-pulse">
-            Redirecting to tracking timeline...
+          
+          <div className="pt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <button 
+              onClick={() => {
+                const message = `Hello Aditya Enterprises,%0A%0AI have placed a new order and uploaded the payment details.%0A%0A*Order ID:* CKP/ONLINE/ORDER/${String(order?.display_id || 1).padStart(4, '0')}%0A*Total Amount:* ₹${order?.grand_total.toLocaleString('en-IN')}%0A%0APlease verify and process my order quickly. Thank you!`;
+                window.open(`https://wa.me/919342248827?text=${message}`, '_blank');
+              }}
+              className="py-3 px-4 bg-[#25D366] hover:bg-[#128C7E] text-white text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-2"
+            >
+              Send to WhatsApp
+            </button>
+            <button 
+              onClick={() => navigate(`/order-tracking?orderId=${orderId}`)}
+              className="py-3 px-4 bg-slate-900 dark:bg-white hover:bg-slate-800 dark:hover:bg-slate-200 text-white dark:text-slate-900 text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-2"
+            >
+              Track Order Status <ArrowRight className="h-4 w-4" />
+            </button>
           </div>
         </div>
       ) : (
