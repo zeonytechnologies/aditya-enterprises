@@ -428,7 +428,7 @@ export default function Home() {
               Request a Bulk Custom Quotation
             </h2>
             <p className="text-sm text-slate-500 leading-relaxed">
-              Submit your project specifications or required brand bulk counts (e.g. Pidilite, 3M, Araldite). Our technical sales engineers will construct a formal wholesale pricing quotation proposal contract and attach it to your panel.
+              Submit your project specifications or required brand bulk counts (e.g. Pidilite, Kerakoll, Araldite). Our technical sales engineers will construct a formal wholesale pricing quotation proposal contract and attach it to your panel.
             </p>
             
             <div className="space-y-4 pt-4 text-xs font-semibold text-slate-650 dark:text-slate-400">
