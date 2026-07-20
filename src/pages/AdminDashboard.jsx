@@ -116,7 +116,7 @@ export default function AdminDashboard() {
   
   const [leads, setLeads] = useState([]);
   const [selectedUserForDetails, setSelectedUserForDetails] = useState(null);
-  
+  const [selectedOrderDetails, setSelectedOrderDetails] = useState(null);
   const [resetPasswordNew, setResetPasswordNew] = useState('');
   const [resettingPasswordUserId, setResettingPasswordUserId] = useState(null);
   
@@ -404,6 +404,34 @@ export default function AdminDashboard() {
   const handleCatalogueFileChange = (e) => {
     if (e.target.files && e.target.files[0]) {
       setCatalogueForm(prev => ({ ...prev, fileObj: e.target.files[0] }));
+    }
+  };
+
+  const handleBulkCatalogueUpload = async (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setUploadingCatalogue(true);
+      try {
+        const files = Array.from(e.target.files);
+        let count = 0;
+        for (const file of files) {
+          const title = file.name.replace(/\.[^/.]+$/, ""); // Remove extension
+          const fileUrl = await api.storage.uploadFile(file, 'catalogues');
+          await api.catalogues.create({
+            title: title,
+            description: 'Bulk uploaded catalogue',
+            file_url: fileUrl
+          });
+          count++;
+        }
+        alert(`Successfully uploaded ${count} catalogues.`);
+        loadAdminData();
+      } catch (err) {
+        console.error('Error during bulk upload:', err);
+        alert('Bulk upload failed: ' + (err.message || 'Unknown error'));
+      } finally {
+        setUploadingCatalogue(false);
+        e.target.value = ''; // clear input
+      }
     }
   };
 
@@ -785,14 +813,16 @@ export default function AdminDashboard() {
         >
           <ShoppingBag className="h-4.5 w-4.5" /> Order Processing ({orders.length})
         </button>
-        <button
-          onClick={() => setActiveTab('payments')}
-          className={`pb-4 text-xs font-bold border-b-2 flex items-center gap-1.5 px-3 transition-colors ${
-            activeTab === 'payments' ? 'border-blue-600 text-blue-600 dark:border-cyan-400 dark:text-cyan-400' : 'border-transparent text-slate-400'
-          }`}
-        >
-          <ShieldCheck className="h-4.5 w-4.5" /> Verify Receipts ({stats?.pendingPayments || 0})
-        </button>
+        {false && (
+          <button
+            onClick={() => setActiveTab('payments')}
+            className={`pb-4 text-xs font-bold border-b-2 flex items-center gap-1.5 px-3 transition-colors ${
+              activeTab === 'payments' ? 'border-blue-600 text-blue-600 dark:border-cyan-400 dark:text-cyan-400' : 'border-transparent text-slate-400'
+            }`}
+          >
+            <ShieldCheck className="h-4.5 w-4.5" /> Verify Receipts ({stats?.pendingPayments || 0})
+          </button>
+        )}
         <button
           onClick={() => setActiveTab('products')}
           className={`pb-4 text-xs font-bold border-b-2 flex items-center gap-1.5 px-3 transition-colors ${
@@ -1056,6 +1086,81 @@ export default function AdminDashboard() {
                   </table>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {selectedOrderDetails && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm" onClick={() => setSelectedOrderDetails(null)}>
+          <div className="bg-white dark:bg-slate-900 rounded-3xl w-full max-w-4xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col" onClick={e => e.stopPropagation()}>
+            <div className="p-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50 dark:bg-slate-950">
+              <div>
+                <h3 className="text-xl font-bold font-display text-slate-900 dark:text-white">Order: {selectedOrderDetails.display_id || selectedOrderDetails.id.substring(0,8)}</h3>
+                <p className="text-sm text-slate-500">Date: {new Date(selectedOrderDetails.created_at).toLocaleString()}</p>
+              </div>
+              <button onClick={() => setSelectedOrderDetails(null)} className="p-2 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-full transition-colors">
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            <div className="p-6 overflow-y-auto space-y-6 flex-1 text-sm">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <h4 className="font-bold text-slate-400 uppercase tracking-wider text-[10px] mb-2">Customer Details</h4>
+                  <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-2xl border dark:border-slate-800 space-y-1">
+                    <p><strong>Name:</strong> {selectedOrderDetails.user?.full_name || selectedOrderDetails.user?.name || selectedOrderDetails.shipping_address?.firstName || 'Retail Customer'}</p>
+                    <p><strong>Email:</strong> {selectedOrderDetails.user?.email || '-'}</p>
+                    <p><strong>Phone:</strong> {selectedOrderDetails.user?.phone || selectedOrderDetails.billing_address?.phone || '-'}</p>
+                    <p><strong>Company:</strong> {selectedOrderDetails.company_name || 'N/A'}</p>
+                    <p><strong>GST:</strong> {selectedOrderDetails.gst_number || 'N/A'}</p>
+                  </div>
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-400 uppercase tracking-wider text-[10px] mb-2">Shipping Details</h4>
+                  <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-2xl border dark:border-slate-800 space-y-1">
+                    <p>{selectedOrderDetails.shipping_address?.line1}</p>
+                    <p>{selectedOrderDetails.shipping_address?.line2}</p>
+                    <p>{selectedOrderDetails.shipping_address?.city}, {selectedOrderDetails.shipping_address?.state} {selectedOrderDetails.shipping_address?.postalCode}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h4 className="font-bold text-slate-400 uppercase tracking-wider text-[10px] mb-2">Order Items</h4>
+                <div className="bg-slate-50 dark:bg-slate-950 rounded-2xl border dark:border-slate-800 overflow-hidden">
+                  <table className="w-full text-left">
+                    <thead className="bg-slate-100 dark:bg-slate-800">
+                      <tr>
+                        <th className="p-3 font-bold text-slate-500">Product</th>
+                        <th className="p-3 font-bold text-slate-500 text-center">Qty</th>
+                        <th className="p-3 font-bold text-slate-500 text-right">Price</th>
+                        <th className="p-3 font-bold text-slate-500 text-right">Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {selectedOrderDetails.items?.map((item, idx) => (
+                        <tr key={idx} className="border-t border-slate-100 dark:border-slate-800">
+                          <td className="p-3 font-semibold">{item.product?.name || 'Unknown Product'}</td>
+                          <td className="p-3 text-center">{item.quantity}</td>
+                          <td className="p-3 text-right">₹{item.price?.toLocaleString('en-IN')}</td>
+                          <td className="p-3 text-right font-bold">₹{(item.price * item.quantity).toLocaleString('en-IN')}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div className="flex justify-end pt-4">
+                <div className="w-full md:w-1/2 bg-slate-50 dark:bg-slate-950 p-4 rounded-2xl border dark:border-slate-800 space-y-2">
+                  <div className="flex justify-between"><span>Subtotal:</span> <strong>₹{selectedOrderDetails.subtotal?.toLocaleString('en-IN')}</strong></div>
+                  <div className="flex justify-between"><span>GST:</span> <strong>₹{selectedOrderDetails.total_gst?.toLocaleString('en-IN')}</strong></div>
+                  <div className="flex justify-between border-t border-slate-200 dark:border-slate-700 pt-2 text-lg">
+                    <span>Grand Total:</span> <strong className="text-blue-600 dark:text-cyan-400">₹{selectedOrderDetails.grand_total?.toLocaleString('en-IN')}</strong>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -1633,16 +1738,22 @@ export default function AdminDashboard() {
                       Current File: {catalogueForm.file_url}
                     </p>
                   )}
-                </div>
-                <div className="flex gap-3 pt-2">
-                  <button disabled={uploadingCatalogue} type="submit" className="flex-1 py-2.5 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed">
-                    {editingCatalogueId ? 'Update Catalogue' : 'Save Catalogue'}
-                  </button>
-                  {editingCatalogueId && (
-                    <button type="button" onClick={() => { setEditingCatalogueId(null); setCatalogueForm({ title: '', description: '', file_url: '', fileObj: null }); }} className="flex-1 py-2.5 bg-slate-200 text-slate-800 font-bold rounded-xl hover:bg-slate-300 transition">
-                      Cancel Edit
+                  <div className="flex gap-3 pt-2">
+                    <button disabled={uploadingCatalogue} type="submit" className="flex-1 py-2.5 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed">
+                      {editingCatalogueId ? 'Update Catalogue' : 'Save Catalogue'}
                     </button>
-                  )}
+                    {!editingCatalogueId && (
+                      <label className="flex-1 py-2.5 bg-slate-200 text-slate-800 font-bold rounded-xl hover:bg-slate-300 transition flex items-center justify-center cursor-pointer">
+                        {uploadingCatalogue ? 'Uploading...' : 'Bulk Upload PDFs'}
+                        <input type="file" multiple accept=".pdf" className="hidden" onChange={handleBulkCatalogueUpload} disabled={uploadingCatalogue} />
+                      </label>
+                    )}
+                    {editingCatalogueId && (
+                      <button type="button" onClick={() => { setEditingCatalogueId(null); setCatalogueForm({ title: '', description: '', file_url: '', fileObj: null }); }} className="flex-1 py-2.5 bg-slate-200 text-slate-800 font-bold rounded-xl hover:bg-slate-300 transition">
+                        Cancel Edit
+                      </button>
+                    )}
+                  </div>
                 </div>
               </form>
             </div>
@@ -1807,16 +1918,17 @@ export default function AdminDashboard() {
           <TableControls pagination={ordersPagination} placeholder="Search by Order ID, Status, Name..." />
 
           <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl p-6 shadow-sm overflow-x-auto">
-            <table className="w-full text-xs text-left border-collapse min-w-[800px]">
+            <table className="w-full text-xs text-left border-collapse min-w-[900px]">
               <thead>
                 <tr className="border-b text-slate-400 font-bold uppercase text-[10px] pb-2">
                   <th className="py-2.5">Order ID</th>
                   <th className="py-2.5">Date</th>
                   <th className="py-2.5">Client / Company</th>
+                  <th className="py-2.5">Contact</th>
                   <th className="py-2.5 text-right">Items</th>
                   <th className="py-2.5 text-right">Grand Total (₹)</th>
                   <th className="py-2.5 text-center">Status</th>
-                  <th className="py-2.5 text-right">Update Status</th>
+                  <th className="py-2.5 text-right">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -1827,7 +1939,11 @@ export default function AdminDashboard() {
                     </td>
                     <td className="py-4 font-semibold text-slate-550">{new Date(order.created_at).toLocaleDateString()}</td>
                     <td className="py-4 font-bold text-slate-950 dark:text-white">
-                      {order.company_name || 'Retail Customer'}
+                      {order.company_name || order.user?.full_name || order.user?.name || order.shipping_address?.firstName || 'Retail Customer'}
+                    </td>
+                    <td className="py-4 text-slate-500 text-[10px]">
+                      <div>{order.user?.email || '-'}</div>
+                      <div className="font-mono">{order.user?.phone || order.billing_address?.phone || '-'}</div>
                     </td>
                     <td className="py-4 text-right font-semibold text-slate-650">{order.items?.length || 0}</td>
                     <td className="py-4 text-right font-extrabold text-slate-950 dark:text-white">₹{parseFloat(order.grand_total || 0).toLocaleString('en-IN')}</td>
@@ -1843,11 +1959,24 @@ export default function AdminDashboard() {
                     </td>
                     <td className="py-4 text-right flex items-center justify-end gap-2">
                       <button
-                        title="Message on WhatsApp"
+                        title="View Order Details"
+                        onClick={() => setSelectedOrderDetails(order)}
+                        className="px-2 py-1 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-md font-bold text-[10px]"
+                      >
+                        View
+                      </button>
+                      <button
+                        title="Message Customer on WhatsApp"
                         onClick={() => {
-                          const msg = `Hello ${order.company_name || 'Customer'},%0A%0ARegarding your order ${order.display_id || order.id.substring(0,8)}.%0ACurrent Status: ${order.status}.%0A%0AThank you for shopping with Aditya Enterprises!`;
-                          const phone = '919342248827'; 
-                          window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
+                          const itemsText = order.items?.map(i => `${i.product?.name} x ${i.quantity}`).join('%0A') || '';
+                          const customerName = order.user?.full_name || order.user?.name || order.company_name || 'Customer';
+                          const msg = `Hello ${customerName},%0A%0AHere are the details for your order ${order.display_id || order.id.substring(0,8)}.%0ACurrent Status: ${order.status}.%0A%0AItems:%0A${itemsText}%0A%0AThank you for shopping with Aditya Enterprises!`;
+                          const phone = order.user?.phone || order.billing_address?.phone || '';
+                          if (phone) {
+                            window.open(`https://wa.me/91${phone.replace(/[^0-9]/g, '').slice(-10)}?text=${msg}`, '_blank');
+                          } else {
+                            alert("Customer phone number not available.");
+                          }
                         }}
                         className="p-1.5 text-slate-400 hover:text-[#25D366] transition-colors"
                       >

@@ -94,26 +94,37 @@ export default function UserDashboard() {
     e.preventDefault();
     setLoading(true);
     try {
-      const allUsers = await api.admin.getUsersList();
-      const updatedList = allUsers.map(u => {
-        if (u.id === user.id) {
-          return {
-            ...u,
-            full_name: profileForm.fullName,
-            company_name: profileForm.companyName,
-            gst_number: profileForm.gstNumber,
-            phone: profileForm.phone
-          };
-        }
-        return u;
-      });
-      localStorage.setItem('aditya_users', JSON.stringify(updatedList));
+      if (user?.id) {
+        await api.auth.updateProfile(user.id, {
+          full_name: profileForm.fullName,
+          company_name: profileForm.companyName,
+          gst_number: profileForm.gstNumber,
+          phone: profileForm.phone
+        });
+      } else {
+        // Fallback for local dev testing
+        const allUsers = await api.admin.getUsersList();
+        const updatedList = allUsers.map(u => {
+          if (u.id === user.id) {
+            return {
+              ...u,
+              full_name: profileForm.fullName,
+              company_name: profileForm.companyName,
+              gst_number: profileForm.gstNumber,
+              phone: profileForm.phone
+            };
+          }
+          return u;
+        });
+        localStorage.setItem('aditya_users', JSON.stringify(updatedList));
+      }
+      
       await refreshProfile();
 
       setProfileSaved(true);
       setTimeout(() => setProfileSaved(false), 3000);
     } catch (err) {
-      console.error(err);
+      console.error("Failed to save profile:", err);
     } finally {
       setLoading(false);
     }
@@ -230,7 +241,7 @@ export default function UserDashboard() {
                       <div className="flex flex-wrap items-center justify-between border-b pb-3 gap-3">
                         <div>
                           <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Order ID Reference</p>
-                          <p className="text-sm font-extrabold">{ord.id}</p>
+                          <p className="text-sm font-extrabold">{ord.display_id || ord.id.substring(0,8)}</p>
                         </div>
                         <div>
                           <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider text-left sm:text-right">Order Date</p>

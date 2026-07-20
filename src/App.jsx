@@ -52,9 +52,12 @@ function MainLayout({ children }) {
   const { pathname } = useLocation();
   
   useEffect(() => {
-    // Record visitor
-    api.visitors.record(pathname).catch(() => {});
-  }, [pathname]);
+    // Record visitor only once per device
+    if (!localStorage.getItem('hasVisited')) {
+      api.visitors.record(pathname).catch(() => {});
+      localStorage.setItem('hasVisited', 'true');
+    }
+  }, []); // Run once on mount
 
   return (
     <div className="flex flex-col min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-300">

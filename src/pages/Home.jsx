@@ -243,16 +243,16 @@ export default function Home() {
         ))}
 
         {/* Floating Social Links */}
-        <div className="absolute right-6 top-1/2 -translate-y-1/2 flex flex-col gap-4 z-10 hidden sm:flex">
-          <a href="https://www.instagram.com/ckp_group?utm_source=qr&igsh=cnN6eXE0eHB4eGQz" target="_blank" rel="noopener noreferrer" className="relative p-3 bg-white text-slate-400 hover:text-pink-600 rounded-full shadow-lg border border-slate-100 transition-colors group">
+        <div className="fixed right-6 top-1/2 -translate-y-1/2 flex flex-col gap-4 z-50 hidden sm:flex">
+          <a href="https://www.instagram.com/ckp_group?utm_source=qr&igsh=cnN6eXE0eHB4eGQz" target="_blank" rel="noopener noreferrer" className="relative p-3 bg-white text-pink-600 rounded-full shadow-lg border border-slate-100 transition-all hover:scale-110 group">
             <FaInstagram className="h-5 w-5" />
             <span className="absolute right-full mr-4 top-1/2 -translate-y-1/2 px-2 py-1 bg-slate-900 text-white text-[10px] font-bold rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Follow on Instagram</span>
           </a>
-          <a href="https://www.linkedin.com/in/chetan-jain-aa6956342?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" className="relative p-3 bg-white text-slate-400 hover:text-blue-600 rounded-full shadow-lg border border-slate-100 transition-colors group">
+          <a href="https://www.linkedin.com/in/chetan-jain-aa6956342?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" className="relative p-3 bg-white text-[#0A66C2] rounded-full shadow-lg border border-slate-100 transition-all hover:scale-110 group">
             <FaLinkedin className="h-5 w-5" />
             <span className="absolute right-full mr-4 top-1/2 -translate-y-1/2 px-2 py-1 bg-slate-900 text-white text-[10px] font-bold rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Connect on LinkedIn</span>
           </a>
-          <a href="https://youtube.com/@adityaenterprisesckp?si=UDxVEYIHphWdcBhS" target="_blank" rel="noopener noreferrer" className="relative p-3 bg-white text-slate-400 hover:text-red-600 rounded-full shadow-lg border border-slate-100 transition-colors group">
+          <a href="https://youtube.com/@adityaenterprisesckp?si=UDxVEYIHphWdcBhS" target="_blank" rel="noopener noreferrer" className="relative p-3 bg-white text-[#FF0000] rounded-full shadow-lg border border-slate-100 transition-all hover:scale-110 group">
             <FaYoutube className="h-5 w-5" />
             <span className="absolute right-full mr-4 top-1/2 -translate-y-1/2 px-2 py-1 bg-slate-900 text-white text-[10px] font-bold rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Subscribe on YouTube</span>
           </a>

@@ -15,15 +15,16 @@ export default function Checkout() {
   const { cartItems, getCartTotals, clearCart, getProductUnitPrice } = useCart();
   const { user } = useAuth();
   const navigate = useNavigate();
+  const [orderPlaced, setOrderPlaced] = useState(false);
 
   const totals = getCartTotals();
 
   // Redirect if cart is empty
   useEffect(() => {
-    if (cartItems.length === 0) {
+    if (cartItems.length === 0 && !orderPlaced) {
       navigate('/cart');
     }
-  }, [cartItems, navigate]);
+  }, [cartItems, navigate, orderPlaced]);
 
   // Form States
   const [shippingAddress, setShippingAddress] = useState({
@@ -84,7 +85,12 @@ export default function Checkout() {
 
     setLoading(true);
     try {
-      const finalBilling = useBillingSame ? shippingAddress : billingAddress;
+      const baseBilling = useBillingSame ? shippingAddress : billingAddress;
+      const finalBilling = {
+        ...baseBilling,
+        phone: companyDetails.phone,
+        email: companyDetails.email
+      };
       
       const orderPayload = {
         user_id: user?.id || null,
@@ -117,7 +123,8 @@ export default function Checkout() {
 
       const createdOrder = await api.orders.create(orderPayload);
       
-      // Send order placement email
+      // Temporarily commented out email sending to avoid local 404 errors with Vercel serverless functions
+      /*
       await sendEmail({
         to: user.email,
         subject: 'Order Confirmation - Aditya Enterprises',
@@ -133,9 +140,11 @@ export default function Checkout() {
           </div>
         `
       }).catch(err => console.error("Checkout email failed", err));
+      */
 
+      setOrderPlaced(true);
       clearCart();
-      navigate(`/payment?orderId=${createdOrder.id}`);
+      navigate(`/order-tracking?orderId=${createdOrder.id}`);
     } catch (err) {
       console.error(err);
       setFormError('Failed to create order: ' + (err.message || err.toString()));

@@ -36,11 +36,11 @@ export default function BrandSlider() {
             className="flex-1 flex items-center justify-center px-8 md:px-16"
           >
             <div className="flex flex-col items-center space-y-1.5 hover:scale-105 transition-all duration-300 cursor-pointer">
-              <div className="h-16 w-32 bg-white dark:bg-slate-800 rounded-xl border border-slate-200/60 dark:border-slate-700/50 shadow-sm flex items-center justify-center overflow-hidden">
+              <div className="h-16 w-32 flex items-center justify-center overflow-hidden">
                 <img 
                   src={brand.logo_url} 
                   alt={brand.name} 
-                  className="h-full w-full object-cover" 
+                  className="h-full w-full object-contain" 
                 />
               </div>
               <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 tracking-wider">

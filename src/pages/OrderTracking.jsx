@@ -80,19 +80,29 @@ export default function OrderTracking() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 font-sans bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white print:bg-white print:text-black">
       
       {/* Hide on Print */}
-      <div className="print:hidden mb-8 flex items-center justify-between">
-        <Link to="/dashboard" className="text-slate-450 hover:text-slate-700 flex items-center text-xs font-bold gap-1 transition">
-          <ArrowLeft className="h-4.5 w-4.5" /> Back to Dashboard
-        </Link>
-        <div className="flex gap-2">
-          <button
-            onClick={handlePrintInvoice}
-            className="px-4 py-2 bg-white dark:bg-slate-900 hover:bg-slate-100 border text-xs font-bold rounded-xl flex items-center gap-1.5 transition shadow-sm"
-          >
-            <Printer className="h-4 w-4" /> Print GST Invoice
-          </button>
+        <div className="flex justify-between items-center mb-8 print:hidden">
+          <Link to="/user" className="flex items-center gap-2 text-slate-500 hover:text-slate-900 dark:hover:text-white transition font-bold text-sm">
+            <ArrowLeft className="h-4.5 w-4.5" /> Back to Dashboard
+          </Link>
+          <div className="flex gap-2">
+            <button 
+              onClick={() => {
+                const itemsList = order.items?.map(item => `- ${item.product?.name || 'Item'} x ${item.quantity}`).join('%0A') || '';
+                const message = `Hello Aditya Enterprises,%0A%0AI am reaching out regarding my order.%0A%0A*Order ID:* ${order?.display_id || order?.id.substring(0,8)}%0A*Proforma Invoice:* ${order?.invoice_id || order?.id.substring(0,8)}%0A%0A*Items Purchased:*%0A${itemsList}%0A%0A*Total Amount:* ₹${order?.grand_total.toLocaleString('en-IN')}%0A%0APlease check the status of my order. Thank you!`;
+                window.open(`https://wa.me/919342248827?text=${message}`, '_blank');
+              }}
+              className="px-4 py-2 bg-[#25D366] hover:bg-[#128C7E] text-white text-xs font-bold rounded-xl flex items-center gap-1.5 transition shadow-sm"
+            >
+              Send to WhatsApp
+            </button>
+            <button
+              onClick={handlePrintInvoice}
+              className="px-4 py-2 bg-white dark:bg-slate-900 hover:bg-slate-100 border text-xs font-bold rounded-xl flex items-center gap-1.5 transition shadow-sm"
+            >
+              <Printer className="h-4 w-4" /> Print GST Invoice
+            </button>
+          </div>
         </div>
-      </div>
 
       {/* order cancelled message */}
       {order.status === 'Cancelled' && (
@@ -153,20 +163,19 @@ export default function OrderTracking() {
         </div>
       </div>
 
-      {/* 2. PRINTABLE B2B GST TAX INVOICE */}
+      {/* 2. PRINTABLE B2B GST PROFORMA INVOICE */}
       <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl p-8 md:p-12 shadow-sm font-sans text-slate-800 dark:text-slate-250 print:border-none print:shadow-none print:p-0 print:text-black">
         
         {/* Invoice Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start border-b pb-8 gap-6">
           <div className="space-y-1.5">
             <h2 className="text-xl font-extrabold tracking-wide text-slate-950 dark:text-white font-display uppercase print:text-black">
-              TAX INVOICE
+              PROFORMA INVOICE
             </h2>
             <p className="text-xs text-slate-450 font-semibold uppercase tracking-wider">Original for Recipient</p>
             <div className="text-xs space-y-0.5 pt-2">
-              <div>Invoice No: <strong className="text-slate-850 dark:text-white">{order.id}</strong></div>
+              <div>Invoice No: <strong className="text-slate-850 dark:text-white">{order.invoice_id || order.display_id || order.id.substring(0,8)}</strong></div>
               <div>Date: <strong className="text-slate-850 dark:text-white">{new Date(order.created_at).toLocaleDateString('en-IN')}</strong></div>
-              <div>UTR Code: <strong className="text-slate-850 dark:text-white">{payment?.utr_number || 'PENDING VERIFICATION'}</strong></div>
             </div>
           </div>
 

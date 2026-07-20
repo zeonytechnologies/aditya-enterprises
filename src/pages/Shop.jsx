@@ -444,11 +444,11 @@ export default function Shop() {
               }}
               className="group p-6 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between"
             >
-              <div className="h-16 w-32 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-150/50 dark:border-slate-800 flex items-center justify-center p-2.5 overflow-hidden mx-auto mb-4">
+              <div className="h-24 w-full flex items-center justify-center overflow-hidden mx-auto mb-4">
                 <img 
                   src={b.logo_url} 
                   alt={b.name} 
-                  className="max-h-full max-w-full object-contain filter dark:invert contrast-125 duration-300" 
+                  className="h-full w-full object-contain filter dark:invert contrast-125 duration-300" 
                 />
               </div>
               <div className="text-center space-y-2">

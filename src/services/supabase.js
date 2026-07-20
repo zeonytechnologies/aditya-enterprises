@@ -46,6 +46,18 @@ export const api = {
       }
     },
 
+    updateProfile: async (userId, updateData) => {
+      if (isSupabaseConfigured) {
+        const { error } = await supabase
+          .from('profiles')
+          .update(updateData)
+          .eq('id', userId);
+        if (error) throw error;
+        return true;
+      }
+      return false;
+    },
+
     register: async (email, password, fullName, companyName = '', gstNumber = '', role = 'customer', phone = '') => {
       if (isSupabaseConfigured) {
         const hashedPassword = await hashPassword(password);
@@ -339,7 +351,7 @@ export const api = {
   orders: {
     list: async (userId = null) => {
       if (isSupabaseConfigured) {
-        let query = supabase.from('orders').select('*, items:order_items(*, product:products(*))');
+        let query = supabase.from('orders').select('*, items:order_items(*, product:products(*)), user:profiles(*)');
         if (userId) {
           query = query.eq('user_id', userId);
         }
@@ -403,14 +415,18 @@ export const api = {
             shipping_address: orderData.shipping_address,
             delivery_notes: orderData.delivery_notes
           })
-          .select()
-          .single();
+          .select();
 
         if (error) throw error;
+        
+        if (!order || order.length === 0) {
+          throw new Error("Order was inserted but could not be retrieved. Please check RLS policies.");
+        }
+        const createdOrder = order[0];
 
         // Insert items
         const itemsToInsert = orderData.items.map(item => ({
-          order_id: order.id,
+          order_id: createdOrder.id,
           product_id: item.product_id,
           quantity: item.quantity,
           price: item.price,
@@ -422,7 +438,7 @@ export const api = {
         const { error: itemsError } = await supabase.from('order_items').insert(itemsToInsert);
         if (itemsError) throw itemsError;
 
-        return order;
+        return createdOrder;
       } else {
         return await db.saveOrder(orderData);
       }
@@ -831,18 +847,6 @@ export const api = {
         return true;
       }
       return true;
-    }
-  },
-
-  visitors: {
-    record: async (pathname) => {
-      if (isSupabaseConfigured) {
-        try {
-          await supabase.from('visitors').insert({ user_agent: navigator.userAgent });
-        } catch (e) {
-          // ignore
-        }
-      }
     }
   }
 };

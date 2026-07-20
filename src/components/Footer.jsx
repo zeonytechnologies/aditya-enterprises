@@ -86,7 +86,6 @@ export default function Footer() {
               <li><Link to="/shop" className="hover:text-white transition">Product Catalog</Link></li>
               <li><Link to="/#rfq" className="hover:text-white transition">Request B2B Quotation</Link></li>
               <li><Link to="/dashboard" className="hover:text-white transition">User Panel</Link></li>
-              <li><Link to="/admin" className="hover:text-white transition">Admin Portal</Link></li>
               <li><a href="#" className="hover:text-white transition">Dealer Registration</a></li>
               <li><a href="#" className="hover:text-white transition">Download Catalog PDFs</a></li>
             </ul>
