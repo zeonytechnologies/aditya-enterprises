@@ -5,7 +5,8 @@ import {
   ArrowRight, FileSpreadsheet, Building2, HardHat, 
   Armchair, Car, Zap, ShieldAlert, Award, FileCheck, Truck, Headphones, Clock, Send
 } from 'lucide-react';
-import { FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
+import { FaInstagram, FaLinkedin, FaYoutube, FaWhatsapp } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
 import { api } from '../services/supabase';
 import BrandSlider from '../components/BrandSlider';
 import ProductCard from '../components/ProductCard';
@@ -243,7 +244,11 @@ export default function Home() {
         ))}
 
         {/* Floating Social Links */}
-        <div className="fixed right-6 top-1/2 -translate-y-1/2 flex flex-col gap-4 z-50 hidden sm:flex">
+        <div className="fixed right-6 top-1/2 -translate-y-1/2 flex flex-col gap-4 z-50">
+          <a href="https://wa.me/917483552250" target="_blank" rel="noopener noreferrer" className="relative p-3 bg-white text-[#25D366] rounded-full shadow-lg border border-slate-100 transition-all hover:scale-110 group">
+            <FaWhatsapp className="h-5 w-5" />
+            <span className="absolute right-full mr-4 top-1/2 -translate-y-1/2 px-2 py-1 bg-slate-900 text-white text-[10px] font-bold rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Chat on WhatsApp</span>
+          </a>
           <a href="https://www.instagram.com/ckp_group?utm_source=qr&igsh=cnN6eXE0eHB4eGQz" target="_blank" rel="noopener noreferrer" className="relative p-3 bg-white text-pink-600 rounded-full shadow-lg border border-slate-100 transition-all hover:scale-110 group">
             <FaInstagram className="h-5 w-5" />
             <span className="absolute right-full mr-4 top-1/2 -translate-y-1/2 px-2 py-1 bg-slate-900 text-white text-[10px] font-bold rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Follow on Instagram</span>
@@ -255,6 +260,10 @@ export default function Home() {
           <a href="https://youtube.com/@adityaenterprisesckp?si=UDxVEYIHphWdcBhS" target="_blank" rel="noopener noreferrer" className="relative p-3 bg-white text-[#FF0000] rounded-full shadow-lg border border-slate-100 transition-all hover:scale-110 group">
             <FaYoutube className="h-5 w-5" />
             <span className="absolute right-full mr-4 top-1/2 -translate-y-1/2 px-2 py-1 bg-slate-900 text-white text-[10px] font-bold rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Subscribe on YouTube</span>
+          </a>
+          <a href="https://x.com/CKPBengaluru" target="_blank" rel="noopener noreferrer" className="relative p-3 bg-white text-black dark:text-slate-900 rounded-full shadow-lg border border-slate-100 transition-all hover:scale-110 group">
+            <FaXTwitter className="h-5 w-5" />
+            <span className="absolute right-full mr-4 top-1/2 -translate-y-1/2 px-2 py-1 bg-slate-900 text-white text-[10px] font-bold rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Follow on X</span>
           </a>
         </div>
 

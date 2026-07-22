@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import { db } from './db';
+import CryptoJS from 'crypto-js';
 
 // Supabase environment variables (can be added to a .env file later)
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
@@ -18,31 +19,29 @@ if (!isSupabaseConfigured) {
   );
 }
 
-// Native browser-based SHA-256 password hashing helper (secure & zero-dependency)
+// Fallback-friendly SHA-256 password hashing helper
 export async function hashPassword(password) {
-  const msgBuffer = new TextEncoder().encode(password);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  return CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
 }
 
 // Unified API Service Layer (Repository Pattern)
 export const api = {
   auth: {
-    login: async (email, password) => {
+    login: async (identifier, password) => {
       if (isSupabaseConfigured) {
         const hashedPassword = await hashPassword(password);
+        
         const { data, error } = await supabase
           .from('profiles')
           .select('*')
-          .eq('email', email)
+          .or(`email.eq.${identifier},username.eq.${identifier}`)
           .eq('password', hashedPassword)
           .single();
           
-        if (error || !data) throw new Error('Invalid email or password');
+        if (error || !data) throw new Error('Invalid credentials');
         return data;
       } else {
-        return await db.login(email, password);
+        return await db.login(identifier, password);
       }
     },
 

@@ -59,13 +59,13 @@ export default function About() {
           <div className="grid grid-cols-2 gap-4">
             <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-800 text-center hover:border-blue-500 transition-colors">
               <Building2 className="h-10 w-10 text-blue-600 dark:text-cyan-400 mx-auto mb-3" />
-              <h3 className="font-bold text-slate-900 dark:text-white text-xl">10+</h3>
+              <h3 className="font-bold text-slate-900 dark:text-white text-xl">26+</h3>
               <p className="text-xs text-slate-500 uppercase tracking-wider mt-1">Years Experience</p>
             </div>
             <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-800 text-center hover:border-blue-500 transition-colors">
               <Award className="h-10 w-10 text-blue-600 dark:text-cyan-400 mx-auto mb-3" />
               <h3 className="font-bold text-slate-900 dark:text-white text-xl">Top Brands</h3>
-              <p className="text-xs text-slate-500 uppercase tracking-wider mt-1">Authorized Partners</p>
+              <p className="text-xs text-slate-500 uppercase tracking-wider mt-1">Authorized Channel Partners</p>
             </div>
             <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-800 text-center hover:border-blue-500 transition-colors">
               <Users className="h-10 w-10 text-blue-600 dark:text-cyan-400 mx-auto mb-3" />
@@ -152,7 +152,7 @@ export default function About() {
                 </div>
                 <div>
                   <h4 className="font-bold text-slate-900 dark:text-white">Email Support</h4>
-                  <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">info@adityaadhesives.com</p>
+                  <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">adityaenterprises.ck@gmail.com</p>
                 </div>
               </div>
 
@@ -185,7 +185,7 @@ export default function About() {
               <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); alert('Callback requested successfully!'); }}>
                 <div>
                   <label className="block text-xs font-bold text-slate-400 mb-1.5 uppercase">Full Name</label>
-                  <input type="text" required className="w-full bg-slate-800 dark:bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:ring-2 focus:ring-blue-500 outline-none" placeholder="John Doe" />
+                  <input type="text" required className="w-full bg-slate-800 dark:bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Name" />
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-slate-400 mb-1.5 uppercase">Mobile Number</label>

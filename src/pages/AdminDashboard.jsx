@@ -657,14 +657,14 @@ export default function AdminDashboard() {
 
       if (variantItems && variantItems.length > 0) {
         const firstVar = variantItems[0];
-        price = parseFloat(firstVar.price) || price;
-        mrp = parseFloat(firstVar.mrp) || mrp;
+        price = firstVar.price !== undefined && firstVar.price !== '' ? parseFloat(firstVar.price) : price;
+        mrp = firstVar.mrp !== undefined && firstVar.mrp !== '' ? parseFloat(firstVar.mrp) : mrp;
         dealer_price = firstVar.dealer_price ? parseFloat(firstVar.dealer_price) : dealer_price;
-        stock = parseInt(firstVar.stock || 0) || stock;
-        moq = parseInt(firstVar.moq || 1) || moq;
+        stock = firstVar.stock !== undefined && firstVar.stock !== '' ? parseInt(firstVar.stock) : stock;
+        moq = firstVar.moq !== undefined && firstVar.moq !== '' ? parseInt(firstVar.moq) : moq;
         sku = firstVar.sku || sku;
         pack_size = firstVar.pack_size || pack_size;
-        weight = parseFloat(firstVar.weight || 0) || weight;
+        weight = firstVar.weight !== undefined && firstVar.weight !== '' ? parseFloat(firstVar.weight) : weight;
       }
 
       const payload = {
@@ -2107,7 +2107,7 @@ export default function AdminDashboard() {
 
               <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
                 <div className="space-y-1">
-                  <label className="font-bold text-slate-400 uppercase tracking-wider block">Net Rate (₹) *</label>
+                  <label className="font-bold text-slate-400 uppercase tracking-wider block">Basic Price (₹) *</label>
                   <input
                     type="number"
                     required

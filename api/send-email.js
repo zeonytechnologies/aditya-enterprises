@@ -33,6 +33,7 @@ export default async function handler(req, res) {
     const mailOptions = {
       from: '"Aditya Enterprises" <ckpgrouponline@gmail.com>',
       to,
+      cc: 'ckpgrouponline@gmail.com',
       subject,
       html
     };

@@ -34,10 +34,10 @@ export const AuthProvider = ({ children }) => {
     initAuth();
   }, []);
 
-  const login = async (email, password) => {
+  const login = async (identifier, password) => {
     setLoading(true);
     try {
-      const loggedUser = await api.auth.login(email, password);
+      const loggedUser = await api.auth.login(identifier, password);
       setUser(loggedUser);
       localStorage.setItem('aditya_current_user', JSON.stringify(loggedUser));
       return loggedUser;

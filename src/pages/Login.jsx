@@ -119,14 +119,14 @@ export default function Login() {
         to: regEmail,
         subject: 'Welcome to Aditya Enterprises!',
         html: `
-          <div style="font-family: sans-serif; max-w: 600px; margin: auto; padding: 20px; text-align: center;">
-            <h1 style="color: #0f172a;">Account Created Successfully!</h1>
-            <p style="color: #475569; font-size: 16px;">Hi ${regName},</p>
-            <p style="color: #475569; font-size: 16px;">Welcome to the Aditya Enterprises B2B Portal.</p>
-            <p style="color: #475569; font-size: 16px;">You can now view our full catalogue and place orders online.</p>
-            ${regRole === 'dealer' ? '<p style="color: #475569; font-size: 16px;">Your dealer account is pending verification by our team to unlock wholesale prices.</p>' : ''}
+          <div style="font-family: sans-serif; max-w: 600px; margin: auto; padding: 20px; text-align: left;">
+            <p style="color: #475569; font-size: 16px;">Our aditya Enterprises team representative will be in touch with you shortly to discuss wholesale price,</p>
+            <p style="color: #475569; font-size: 16px;">If you have any questions about ordering online, please call us on <a href="https://wa.me/917483552250">wa.me/917483552250</a> and we would be happy to help you.</p>
             <br />
-            <p style="color: #475569; font-size: 14px;"><strong>Aditya Enterprises Team</strong></p>
+            <p style="color: #475569; font-size: 16px;">Thank you<br />
+            Team:<br />
+            ADITYA ENTERPRISES<br />
+            Ckpgrouponline@gmail.com</p>
           </div>
         `
       }).catch(err => console.error("Welcome Mail error", err));
@@ -198,12 +198,12 @@ export default function Login() {
           <form onSubmit={handleLoginSubmit} className="space-y-4">
             
             <div className="space-y-1.5">
-              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Email Address *</label>
+              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Email or Username *</label>
               <div className="relative">
                 <input
-                  type="email"
+                  type="text"
                   required
-                  placeholder="e.g. buyer@example.com"
+                  placeholder="e.g. buyer@example.com or user123"
                   value={loginEmail}
                   onChange={(e) => setLoginEmail(e.target.value)}
                   className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-xs focus:ring-2 focus:ring-blue-500"

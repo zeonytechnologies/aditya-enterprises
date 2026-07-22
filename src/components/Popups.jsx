@@ -78,15 +78,16 @@ export default function PopupsManager() {
           to: leadData.email,
           subject: 'Welcome to Aditya Enterprises!',
           html: `
-            <div style="font-family: sans-serif; max-w: 600px; margin: auto; padding: 20px; text-align: center;">
-              <h1 style="color: #0f172a;">Welcome to Aditya Enterprises</h1>
-              <p style="color: #475569; font-size: 16px;">Hi ${leadData.name},</p>
-              <p style="color: #475569; font-size: 16px;">Thank you for connecting with us! We have received your details.</p>
-              <p style="color: #475569; font-size: 16px;">Our B2B sales representative will be in touch with you shortly to discuss wholesale pricing and bulk orders.</p>
-              <br />
-              <p style="color: #475569; font-size: 14px;"><strong>Aditya Enterprises Team</strong></p>
-            </div>
-          `
+              <div style="font-family: sans-serif; max-w: 600px; margin: auto; padding: 20px; text-align: left;">
+                <p style="color: #475569; font-size: 16px;">Our aditya Enterprises team representative will be in touch with you shortly to discuss wholesale price,</p>
+                <p style="color: #475569; font-size: 16px;">If you have any questions about ordering online, please call us on <a href="https://wa.me/917483552250">wa.me/917483552250</a> and we would be happy to help you.</p>
+                <br />
+                <p style="color: #475569; font-size: 16px;">Thank you<br />
+                Team:<br />
+                ADITYA ENTERPRISES<br />
+                Ckpgrouponline@gmail.com</p>
+              </div>
+            `
         }).catch(err => console.error("Mail send failed", err));
       }
 
