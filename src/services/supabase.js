@@ -810,6 +810,47 @@ export const api = {
     }
   },
 
+  homeBanners: {
+    list: async () => {
+      if (isSupabaseConfigured) {
+        const { data, error } = await supabase.from('home_banners').select('*').order('created_at', { ascending: false });
+        if (error) throw error;
+        return data;
+      }
+      return [];
+    },
+    getActive: async () => {
+      if (isSupabaseConfigured) {
+        const { data, error } = await supabase.from('home_banners').select('*').eq('active', true);
+        if (error) throw error;
+        return data;
+      }
+      return [];
+    },
+    save: async (banner) => {
+      if (isSupabaseConfigured) {
+        if (banner.id && banner.id !== 'new') {
+          const { data, error } = await supabase.from('home_banners').update(banner).eq('id', banner.id).select().single();
+          if (error) throw error;
+          return data;
+        } else {
+          delete banner.id;
+          const { data, error } = await supabase.from('home_banners').insert(banner).select().single();
+          if (error) throw error;
+          return data;
+        }
+      }
+      return banner;
+    },
+    delete: async (id) => {
+      if (isSupabaseConfigured) {
+        const { error } = await supabase.from('home_banners').delete().eq('id', id);
+        if (error) throw error;
+        return true;
+      }
+      return true;
+    }
+  },
   offerPosters: {
     list: async () => {
       if (isSupabaseConfigured) {
@@ -852,3 +893,4 @@ export const api = {
     }
   }
 };
+

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { api } from '../services/supabase';
 import { ImageIcon, Clock, Save, Upload, CheckCircle2, Plus, Trash2, Edit2 } from 'lucide-react';
 
-export default function OfferPosterManager() {
+export default function BannerCarouselManager() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -14,9 +14,7 @@ export default function OfferPosterManager() {
   const [currentPoster, setCurrentPoster] = useState({
     id: null,
     is_active: false,
-    image_url: '',
-    start_time: '',
-    end_time: ''
+    image_url: ''
   });
   
   const [uploadingImage, setUploadingImage] = useState(false);
@@ -29,14 +27,12 @@ export default function OfferPosterManager() {
   const fetchSettings = async () => {
     try {
       setLoading(true);
-      const data = await api.offerPosters.list();
+      const data = await api.homeBanners.list();
       
-      // Normalize dates for the input fields
+      // Normalize data for the input fields
       const normalizedData = data.map(p => ({
         ...p,
-        is_active: p.active, // map active to is_active for frontend UI
-        start_time: p.start_date ? p.start_date.substring(0, 16) : '',
-        end_time: p.end_date ? p.end_date.substring(0, 16) : ''
+        is_active: p.active // map active to is_active for frontend UI
       }));
       
       setPosters(normalizedData);
@@ -74,17 +70,15 @@ export default function OfferPosterManager() {
       const payload = {
         id: editingPosterId === 'new' ? undefined : editingPosterId,
         image_url: currentPoster.image_url,
-        active: currentPoster.is_active,
-        start_date: currentPoster.start_time ? new Date(currentPoster.start_time).toISOString() : null,
-        end_date: currentPoster.end_time ? new Date(currentPoster.end_time).toISOString() : null
+        active: currentPoster.is_active
       };
 
-      await api.offerPosters.save(payload);
+      await api.homeBanners.save(payload);
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
       
       setEditingPosterId(null);
-      setCurrentPoster({ id: null, is_active: false, image_url: '', start_time: '', end_time: '' });
+      setCurrentPoster({ id: null, is_active: false, image_url: '' });
       fetchSettings();
     } catch (err) {
       console.error(err);
@@ -97,7 +91,7 @@ export default function OfferPosterManager() {
   const deletePoster = async (id) => {
     if (confirm("Are you sure you want to delete this poster?")) {
       try {
-        await api.offerPosters.delete(id);
+        await api.homeBanners.delete(id);
         fetchSettings();
       } catch (err) {
         alert("Failed to delete poster.");
@@ -109,7 +103,7 @@ export default function OfferPosterManager() {
     try {
       const poster = posters.find(p => p.id === id);
       if (!poster) return;
-      await api.offerPosters.save({
+      await api.homeBanners.save({
         id: id,
         active: !currentStatus
       });
@@ -134,7 +128,7 @@ export default function OfferPosterManager() {
         <div>
           <h3 className="text-lg font-bold font-display flex items-center gap-2">
             <ImageIcon className="h-5 w-5 text-blue-500" />
-            Homepage Offer Posters (Popups)
+            Top Banner Carousel Images
           </h3>
           <p className="text-xs text-slate-500 mt-1">Manage multiple promotional posters. Active posters will be shown in a slider on the homepage.</p>
         </div>
@@ -169,38 +163,12 @@ export default function OfferPosterManager() {
                 </label>
               </div>
 
-              <div className="space-y-4">
-                <h4 className="text-xs font-bold uppercase text-slate-400 flex items-center gap-1">
-                  <Clock className="h-3.5 w-3.5" /> Timeframe Settings (Optional)
-                </h4>
-                
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-semibold mb-1.5 text-slate-600 dark:text-slate-400">Start Time</label>
-                    <input 
-                      type="datetime-local" 
-                      value={currentPoster.start_time}
-                      onChange={e => setCurrentPoster({...currentPoster, start_time: e.target.value})}
-                      className="w-full px-3 py-2 text-sm rounded-lg border dark:border-slate-700 bg-transparent focus:ring-2 focus:ring-blue-500 outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold mb-1.5 text-slate-600 dark:text-slate-400">End Time</label>
-                    <input 
-                      type="datetime-local" 
-                      value={currentPoster.end_time}
-                      onChange={e => setCurrentPoster({...currentPoster, end_time: e.target.value})}
-                      className="w-full px-3 py-2 text-sm rounded-lg border dark:border-slate-700 bg-transparent focus:ring-2 focus:ring-blue-500 outline-none"
-                    />
-                  </div>
-                </div>
-              </div>
-              
+
               <div className="flex gap-3">
                 <button
                   onClick={() => {
                     setEditingPosterId(null);
-                    setCurrentPoster({ id: null, is_active: false, image_url: '', start_time: '', end_time: '' });
+                    setCurrentPoster({ id: null, is_active: false, image_url: '' });
                   }}
                   className="flex-1 py-3 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-900 dark:text-white text-sm font-bold rounded-xl transition-all"
                 >
@@ -296,12 +264,7 @@ export default function OfferPosterManager() {
                   </label>
                 </div>
                 <div className="text-xs text-slate-500">
-                  {poster.start_time && poster.end_time 
-                    ? `${new Date(poster.start_time).toLocaleDateString()} - ${new Date(poster.end_time).toLocaleDateString()}`
-                    : poster.start_time ? `From ${new Date(poster.start_time).toLocaleDateString()}` 
-                    : poster.end_time ? `Until ${new Date(poster.end_time).toLocaleDateString()}`
-                    : 'Always On'
-                  }
+                  {poster.is_active ? 'Currently active' : 'Inactive'}
                 </div>
               </div>
             </div>
@@ -316,4 +279,5 @@ export default function OfferPosterManager() {
     </div>
   );
 }
+
 

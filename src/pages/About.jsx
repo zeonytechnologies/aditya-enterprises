@@ -184,7 +184,7 @@ export default function About() {
                 </div>
                 <div>
                   <h4 className="font-bold text-slate-900 dark:text-white">Head Office</h4>
-                  <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">123 Industrial Estate, Phase II<br/>Bangalore, Karnataka 560001</p>
+                  <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">3/1, S p road cross, near paan beeda shop HKK Lane, Medarpet, Kumbarpet, Hakkim khallel khan lane, Nagarathpete, Bengaluru, Karnataka 560002</p>
                 </div>
               </div>
               

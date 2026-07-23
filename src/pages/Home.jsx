@@ -43,6 +43,8 @@ const INDUSTRIES = [
 export default function Home() {
   const navigate = useNavigate();
   const [activeSlide, setActiveSlide] = useState(0);
+  const [activeBannerSlide, setActiveBannerSlide] = useState(0);
+  const [banners, setBanners] = useState([]);
   const [categories, setCategories] = useState([]);
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [flashDeals, setFlashDeals] = useState([]);
@@ -91,6 +93,9 @@ export default function Home() {
 
         const articles = await api.blogs.list();
         setBlogs(articles);
+
+        const fetchedBanners = await api.homeBanners.getActive();
+        setBanners(fetchedBanners);
       } catch (err) {
         console.error('Error fetching home data:', err);
       }
@@ -112,6 +117,14 @@ export default function Home() {
       clearInterval(countdownTimer);
     };
   }, []);
+
+  useEffect(() => {
+    if (banners.length <= 1) return;
+    const bannerTimer = setInterval(() => {
+      setActiveBannerSlide(prev => (prev + 1) % banners.length);
+    }, 4000);
+    return () => clearInterval(bannerTimer);
+  }, [banners]);
 
   const handleRfqSubmit = async (e) => {
     e.preventDefault();
@@ -171,6 +184,33 @@ export default function Home() {
   return (
     <div className="w-full pb-10 bg-slate-50 dark:bg-slate-950 font-sans">
       
+      {/* 0. Top Banner Carousel */}
+      {banners.length > 0 && (
+        <div className="relative w-full overflow-hidden h-[250px] sm:h-[400px] md:h-[500px] bg-slate-100 dark:bg-slate-950 mb-1">
+          {banners.map((slide, idx) => (
+            <div
+              key={idx}
+              className={`absolute inset-0 w-full h-full transition-all duration-700 ease-in-out ${idx === activeBannerSlide ? 'opacity-100 scale-100 z-10' : 'opacity-0 scale-105 z-0'}`}
+            >
+              <div 
+                className="absolute inset-0 bg-contain sm:bg-cover bg-center bg-no-repeat cursor-pointer"
+                style={{ backgroundImage: `url(${slide.image_url})` }}
+                onClick={() => slide.link_url ? window.open(slide.link_url, '_blank') : null}
+              />
+            </div>
+          ))}
+          <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
+            {banners.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setActiveBannerSlide(idx)}
+                className={`h-2.5 rounded-full transition-all duration-300 ${idx === activeBannerSlide ? 'w-8 bg-blue-500' : 'w-2.5 bg-slate-400'}`}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* 1. Large Hero Banner Slider */}
       <div className="relative h-[650px] w-full overflow-hidden bg-slate-900">
         {HERO_SLIDES.map((slide, idx) => (

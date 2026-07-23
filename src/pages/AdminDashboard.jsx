@@ -8,6 +8,7 @@ import { api } from '../services/supabase';
 import { useAuth } from '../context/AuthContext';
 import { sendEmail } from '../services/mailer';
 import OfferPosterManager from '../components/OfferPosterManager';
+import BannerCarouselManager from '../components/BannerCarouselManager';
 
 function useTablePagination(data, searchFields = ['name']) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -1800,6 +1801,7 @@ export default function AdminDashboard() {
             </div>
           </div>
           
+          <BannerCarouselManager />
           <OfferPosterManager />
           
           <TableControls pagination={offersPagination} placeholder="Search by Product Name, SKU..." />
