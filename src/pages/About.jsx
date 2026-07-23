@@ -1,9 +1,48 @@
 import React from 'react';
-import { Building2, Users, Award, ShieldCheck, Truck, Headphones, CheckCircle, Mail, Phone, MapPin } from 'lucide-react';
+import { Building2, Users, Award, ShieldCheck, Truck, Headphones, CheckCircle, Mail, Phone, MapPin, Star } from 'lucide-react';
 import { FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
 export default function About() {
+  const googleReviews = [
+    {
+      name: "MALAY NIRAV",
+      meta: "Local Guide · 13 reviews · 1 photo",
+      time: "2 months ago",
+      text: "Genuine supplier, Simple and smooth purchase experience. Just called them for quotation, They sent quotation, agreed on deal, paid through UPI and they sent product through rapido parcel."
+    },
+    {
+      name: "Yash Thakur",
+      meta: "Local Guide · 18 reviews · 42 photos",
+      time: "11 months ago",
+      text: "Aditya Enterprises is very good in terms of goods and recommendations that they give. Mr Aditya, personally interact with the clients and assist to their needs. Helps on Sundays to get the goods delivered and he is there till the goods are delivered. Process is complet"
+    },
+    {
+      name: "Ankit Mangal",
+      meta: "1 review",
+      time: "5 months ago",
+      text: "Quick response and very supportive team. Aditya Enterprise handled everything efficiently and made the process smooth. Highly recommended!"
+    },
+    {
+      name: "Samriddhi Srikanth",
+      meta: "3 reviews",
+      time: "6 months ago",
+      text: "Helped me with my urgent requirement so very promptly. Even helping with the delivery of the items.\nDefinitely recommend their services.\nThank you!"
+    },
+    {
+      name: "Rajashekar Babaleshwar",
+      meta: "8 reviews · 1 photo",
+      time: "3 months ago",
+      text: "Very good response and best price avaliable in Falcofix Products Like D3 WR Gold,WR, UM & Ebs WP1 PVC Glue Very good customer service on pricing🙏🙏🎉🎉"
+    },
+    {
+      name: "Angel Sebastian",
+      meta: "3 reviews",
+      time: "a year ago",
+      text: "Amazing service Aditya Enterprise. I got to know about Aditya Enterprise through google, they were really too quick in terms of package and transportation services. Such a good service, clear communication, high quality products at reasonable price. We are glad that we found such a great enterprise in Bengaluru."
+    }
+  ];
+
   return (
     <div className="bg-slate-50 dark:bg-slate-950 font-sans pb-20">
       {/* Hero Section */}
@@ -44,16 +83,30 @@ export default function About() {
             <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white font-display mb-6">
               Our Journey & Vision
             </h2>
-            <div className="space-y-4 text-slate-600 dark:text-slate-400 leading-relaxed">
+            <div className="space-y-4 text-slate-600 dark:text-slate-400 leading-relaxed text-sm">
               <p>
-                Established with a vision to provide world-class industrial chemical and hardware solutions, <strong>Aditya Enterprises</strong> has grown into a leading Channel Partner (Distributor) in the region. We cater to a diverse array of sectors including construction, automotive, aerospace, and furniture manufacturing.
+                <strong>Aditya Enterprises</strong> is a leading manufacturer and channel partner of Pidilite Industries Ltd, Atul Ltd, Benson Polymer Ltd and Ozone hardware fitting and many more Adhesive related brands. We specialize in industrial adhesive tapes and surface protection solutions, serving diverse industries across India and global markets.
               </p>
               <p>
-                We are proud authorized channel partners for industry giants like <strong>Pidilite, 3M, Araldite, Kerakoll, and Ozone</strong>. Our commitment is not just to supply products, but to provide engineering solutions that guarantee structural integrity, efficiency, and longevity.
+                With a strong commitment to quality, innovation, and customer satisfaction, we provide reliable tape solutions designed to improve productivity, enhance packaging performance, and protect valuable surfaces during manufacturing, storage, transportation, and installation. Our extensive product portfolio includes Surface Protection Films, Cross Filament Tapes, Double Sided Tissue Tapes, Double Sided Polyester Tapes, Green Polyester Masking Tapes, HDPE Tapes, Duct Tapes, Floor Marking Tapes, and other specialty adhesive products.
               </p>
               <p>
-                With a state-of-the-art warehousing facility and a dedicated logistics network, we ensure timely deliveries for bulk and wholesale orders. Our team of technical experts is always ready to assist you with product selection, GST billing, and customized procurement plans.
+                Manufactured using premium-grade raw materials and advanced production processes, our tapes offer excellent adhesion, durability, temperature resistance, and consistent performance. Trusted by customers in packaging, automotive, construction, HVAC, electronics, metal fabrication, refrigeration, and engineering industries, we continue to deliver cost-effective and customized adhesive solutions that meet evolving industrial requirements.
               </p>
+              <p>
+                Our dedication to excellence, timely delivery, and continuous product development has established us as a preferred partner for businesses seeking high-performance industrial tapes and protective film solutions.
+              </p>
+              <div className="pt-4">
+                <a 
+                  href="https://share.google/fhMAACIVAMLSR57Rc" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-white font-bold rounded-xl shadow-sm hover:border-blue-500 hover:text-blue-600 dark:hover:border-cyan-400 dark:hover:text-cyan-400 transition-all group"
+                >
+                  <MapPin className="h-5 w-5 text-blue-600 dark:text-cyan-400 group-hover:scale-110 transition-transform" />
+                  Click to visit my Google Profile
+                </a>
+              </div>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4">
@@ -200,6 +253,56 @@ export default function About() {
                 </button>
               </form>
             </div>
+          </div>
+        </section>
+
+        {/* Google Reviews Section */}
+        <section className="mt-20">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white font-display flex items-center justify-center gap-1">
+              <span className="text-blue-600">G</span>
+              <span className="text-red-500">o</span>
+              <span className="text-yellow-500">o</span>
+              <span className="text-blue-600">g</span>
+              <span className="text-green-500">l</span>
+              <span className="text-red-500">e</span>
+              <span className="text-slate-900 dark:text-white ml-2">Reviews</span>
+            </h2>
+            <div className="flex items-center justify-center gap-1 mt-4">
+              <span className="text-xl font-bold text-slate-800 dark:text-white mr-2">4.9 (551 reviews)</span>
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="h-5 w-5 text-yellow-400 fill-yellow-400" />
+              ))}
+            </div>
+            <p className="text-slate-500 mt-2 text-sm">Based on customer feedback</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {googleReviews.map((review, idx) => (
+              <div key={idx} className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 flex flex-col h-full hover:shadow-md transition-shadow">
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold text-lg flex-shrink-0">
+                    {review.name.charAt(0)}
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-slate-900 dark:text-white text-sm">{review.name}</h4>
+                    <p className="text-xs text-slate-500">{review.meta}</p>
+                  </div>
+                  <div className="ml-auto flex items-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" className="h-4 w-4" />
+                  </div>
+                </div>
+                <div className="flex items-center gap-1 mb-2">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="h-3 w-3 text-yellow-400 fill-yellow-400" />
+                  ))}
+                  <span className="text-xs text-slate-500 ml-2">{review.time}</span>
+                </div>
+                <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed flex-grow whitespace-pre-line">
+                  {review.text}
+                </p>
+              </div>
+            ))}
           </div>
         </section>
 

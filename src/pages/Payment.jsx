@@ -290,7 +290,7 @@ export default function Payment() {
                 <div className="border border-dashed border-slate-250 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 rounded-2xl p-4 text-center cursor-pointer hover:bg-slate-100 transition relative">
                   <input
                     type="file"
-                    accept="image/*"
+                    accept="image/jpeg, image/png, image/webp"
                     onChange={handleFileChange}
                     className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                   />

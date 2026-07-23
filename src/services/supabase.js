@@ -787,13 +787,16 @@ export const api = {
   storage: {
     uploadFile: async (file, path = '') => {
       if (isSupabaseConfigured) {
-        const fileExt = file.name.split('.').pop();
+        const fileExt = file.name ? file.name.split('.').pop() : 'jpg';
         const fileName = `${Math.random().toString(36).substring(2, 15)}_${Date.now()}.${fileExt}`;
         const filePath = path ? `${path}/${fileName}` : fileName;
 
         const { data, error } = await supabase.storage
           .from('aditya-assets')
-          .upload(filePath, file);
+          .upload(filePath, file, {
+            contentType: file.type || 'application/octet-stream',
+            upsert: false
+          });
 
         if (error) throw error;
 

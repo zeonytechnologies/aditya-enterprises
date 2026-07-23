@@ -244,7 +244,7 @@ export default function OfferPosterManager() {
                 type="file" 
                 ref={fileInputRef} 
                 onChange={handleImageUpload} 
-                accept="image/*" 
+                accept="image/jpeg, image/png, image/webp" 
                 className="hidden" 
               />
               

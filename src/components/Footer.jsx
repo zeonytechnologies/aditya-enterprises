@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, ShieldCheck, FileCheck, Truck, Headphones } from 'lucide-react';
 import { FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
 import adityaLogo from '../assets/aditya-logo.png';
+import zeonyLogo from '../assets/zeony-logo.jpg';
 
 export default function Footer() {
   return (
@@ -139,10 +140,16 @@ export default function Footer() {
       <div className="bg-slate-950 py-6 text-center text-xs text-slate-600 border-t border-slate-900">
         <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
           <p>© {new Date().getFullYear()} Aditya Enterprises. All rights reserved.</p>
-          <div className="space-x-4">
+          <div className="space-x-4 flex items-center justify-center">
             <a href="#" className="hover:underline">Privacy Policy</a>
             <a href="#" className="hover:underline">Terms of Service</a>
             <a href="#" className="hover:underline">GST Terms & Conditions</a>
+          </div>
+          <div className="flex items-center gap-2 justify-center mt-4 md:mt-0">
+            <span>Powered by</span>
+            <a href="https://www.zeonytechnologies.com" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+              <img src={zeonyLogo} alt="Zeony Technologies" className="h-6 rounded bg-white p-0.5" />
+            </a>
           </div>
         </div>
       </div>

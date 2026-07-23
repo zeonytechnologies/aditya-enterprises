@@ -135,11 +135,11 @@ body.dark ::-webkit-scrollbar-track {
 /* Infinite Brand Marquee */
 @keyframes marquee {
   0% { transform: translateX(0%); }
-  100% { transform: translateX(-50%); }
+  100% { transform: translateX(-33.333333%); }
 }
 
 .animate-marquee {
-  animation: marquee 25s linear infinite;
+  animation: marquee 40s linear infinite;
 }
 
 .animate-marquee:hover {

@@ -284,7 +284,6 @@ export default function AdminDashboard() {
       logo_url: brand.logo_url || ''
     });
     setEditingBrandId(brand.id);
-    setActiveTab('products'); // Optional, to make sure we are on the right tab if called from somewhere else, but usually we already are.
   };
 
   const handleDeleteBrand = async (id) => {
@@ -1516,7 +1515,7 @@ export default function AdminDashboard() {
                       {uploadingBrandImg ? '...' : 'Upload'}
                       <input 
                         type="file" 
-                        accept="image/*"
+                        accept="image/jpeg, image/png, image/webp"
                         onChange={handleBrandLogoUpload}
                         className="hidden" 
                       />
@@ -1608,7 +1607,7 @@ export default function AdminDashboard() {
                         {uploadingCategoryImg ? '...' : 'Upload'}
                         <input 
                           type="file" 
-                          accept="image/*"
+                          accept="image/jpeg, image/png, image/webp"
                           onChange={handleCategoryBannerUpload}
                           className="hidden" 
                         />
@@ -2258,7 +2257,7 @@ export default function AdminDashboard() {
                     + Upload Image
                     <input 
                       type="file" 
-                      accept="image/*"
+                      accept="image/jpeg, image/png, image/webp"
                       multiple
                       onChange={handleProductImageUpload}
                       className="hidden" 

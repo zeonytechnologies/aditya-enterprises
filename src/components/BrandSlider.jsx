@@ -29,11 +29,11 @@ export default function BrandSlider() {
         </p>
       </div>
 
-      <div className="flex w-[300%] md:w-[200%] animate-marquee">
+      <div className="flex w-max animate-marquee">
         {brandsList.map((brand, index) => (
           <div 
             key={`${brand.id || brand.name}-${index}`} 
-            className="flex-1 flex items-center justify-center px-8 md:px-16"
+            className="w-40 md:w-56 flex-shrink-0 flex items-center justify-center px-4 md:px-8"
           >
             <div className="flex flex-col items-center space-y-1.5 hover:scale-105 transition-all duration-300 cursor-pointer">
               <div className="h-16 w-32 flex items-center justify-center overflow-hidden">
