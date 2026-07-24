@@ -186,25 +186,29 @@ export default function Home() {
       
       {/* 0. Top Banner Carousel */}
       {banners.length > 0 && (
-        <div className="relative w-full overflow-hidden h-[250px] sm:h-[400px] md:h-[500px] bg-slate-100 dark:bg-slate-950 mb-1">
+        <div className="relative w-full overflow-hidden bg-slate-100 dark:bg-slate-950 mb-1 group">
+          {/* Invisible spacer image to dynamically set container height based on the first banner */}
+          <img src={banners[0].image_url} className="w-full h-auto opacity-0 pointer-events-none" alt="spacer" />
+          
           {banners.map((slide, idx) => (
             <div
               key={idx}
               className={`absolute inset-0 w-full h-full transition-all duration-700 ease-in-out ${idx === activeBannerSlide ? 'opacity-100 scale-100 z-10' : 'opacity-0 scale-105 z-0'}`}
             >
-              <div 
-                className="absolute inset-0 bg-contain sm:bg-cover bg-center bg-no-repeat cursor-pointer"
-                style={{ backgroundImage: `url(${slide.image_url})` }}
+              <img 
+                src={slide.image_url} 
+                alt="Banner"
+                className="w-full h-full object-contain cursor-pointer"
                 onClick={() => slide.link_url ? window.open(slide.link_url, '_blank') : null}
               />
             </div>
           ))}
-          <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
+          <div className="absolute bottom-4 sm:bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2 sm:space-x-3 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             {banners.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => setActiveBannerSlide(idx)}
-                className={`h-2.5 rounded-full transition-all duration-300 ${idx === activeBannerSlide ? 'w-8 bg-blue-500' : 'w-2.5 bg-slate-400'}`}
+                className={`h-2 sm:h-2.5 rounded-full transition-all duration-300 ${idx === activeBannerSlide ? 'w-6 sm:w-8 bg-blue-500' : 'w-2 sm:w-2.5 bg-slate-400/70 hover:bg-slate-300'}`}
               />
             ))}
           </div>
