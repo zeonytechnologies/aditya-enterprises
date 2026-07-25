@@ -722,6 +722,36 @@ export const api = {
         return data;
       }
       return await db.approveDealer(userId);
+    },
+
+    updateUserPassword: async (userId, newPassword) => {
+      if (isSupabaseConfigured) {
+        const hashedPassword = await hashPassword(newPassword);
+        const { data, error } = await supabase
+          .from('profiles')
+          .update({ password: hashedPassword })
+          .eq('id', userId)
+          .select()
+          .single();
+        if (error) throw error;
+        return data;
+      }
+      return await db.updateUserPassword(userId, newPassword);
+    },
+
+    updateAdminPassword: async (userId, newPassword) => {
+      if (isSupabaseConfigured) {
+        const hashedPassword = await hashPassword(newPassword);
+        const { data, error } = await supabase
+          .from('profiles')
+          .update({ password: hashedPassword })
+          .eq('id', userId)
+          .select()
+          .single();
+        if (error) throw error;
+        return data;
+      }
+      return await db.updateAdminPassword(userId, newPassword);
     }
   },
 
