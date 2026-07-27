@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { 
   FileText, ShieldCheck, Download, ShoppingCart, 
-  Send, Phone, HelpCircle, Star, Heart, Check, Plus, Share2
+  Send, Phone, HelpCircle, Star, Heart, Check, Plus, Share2, MessageCircle
 } from 'lucide-react';
 import { api } from '../services/supabase';
+import { shareProductWithImage } from '../services/shareUtils';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import canvasConfetti from 'canvas-confetti';
@@ -319,8 +320,15 @@ export default function ProductDetails() {
           <div className="border-b pb-4 space-y-2">
             <div className="flex items-center justify-between text-xs font-semibold text-slate-400">
               <span className="text-blue-600 dark:text-cyan-400 tracking-wide uppercase">{product.brand?.name}</span>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2">
                 <span>SKU: {selectedVariant?.sku || product.sku}</span>
+                <button 
+                  onClick={() => shareProductWithImage(product, unitPrice)}
+                  className="p-1.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full transition-colors flex items-center justify-center shadow-sm"
+                  title="Share on WhatsApp with Price & Image"
+                >
+                  <MessageCircle className="h-3.5 w-3.5 fill-current" />
+                </button>
                 <button 
                   onClick={() => {
                     if (navigator.share) {
@@ -506,6 +514,14 @@ export default function ProductDetails() {
             </a>
           </div>
 
+          <button
+            onClick={() => shareProductWithImage(product, unitPrice)}
+            className="w-full py-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 dark:bg-emerald-950/40 dark:hover:bg-emerald-900/60 dark:text-emerald-300 font-bold rounded-xl transition flex items-center justify-center gap-2 border border-emerald-200 dark:border-emerald-800/60 text-xs shadow-sm"
+          >
+            <MessageCircle className="h-4 w-4 fill-current text-emerald-600 dark:text-emerald-400" />
+            Share Product Details & Image via WhatsApp
+          </button>
+
         </div>
       </div>
 
@@ -606,26 +622,24 @@ export default function ProductDetails() {
         <div className="bg-white dark:bg-slate-900 border p-6 rounded-3xl space-y-6 h-fit">
           <h3 className="text-lg font-bold font-display border-b pb-3">Technical Documents</h3>
           <div className="space-y-3">
-            <a
-              href="#"
-              onClick={(e) => { e.preventDefault(); alert("Downloading Technical Datasheet (TDS) PDF"); }}
-              className="flex items-center justify-between p-3.5 bg-slate-50 dark:bg-slate-950 rounded-xl hover:bg-slate-100 transition border text-xs font-bold"
+            <Link
+              to="/catalogues"
+              className="flex items-center justify-between p-3.5 bg-slate-50 dark:bg-slate-950 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition border text-xs font-bold group"
             >
               <span className="flex items-center gap-2">
                 <FileText className="h-4.5 w-4.5 text-blue-500" /> Technical Datasheet (TDS)
               </span>
-              <Download className="h-4 w-4 text-slate-400" />
-            </a>
-            <a
-              href="#"
-              onClick={(e) => { e.preventDefault(); alert("Downloading Material Safety Datasheet (MSDS) PDF"); }}
-              className="flex items-center justify-between p-3.5 bg-slate-50 dark:bg-slate-950 rounded-xl hover:bg-slate-100 transition border text-xs font-bold"
+              <span className="text-blue-600 dark:text-cyan-400 group-hover:underline">View in Catalogues &rarr;</span>
+            </Link>
+            <Link
+              to="/catalogues"
+              className="flex items-center justify-between p-3.5 bg-slate-50 dark:bg-slate-950 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition border text-xs font-bold group"
             >
               <span className="flex items-center gap-2">
                 <FileText className="h-4.5 w-4.5 text-red-500" /> Safety Datasheet (MSDS)
               </span>
-              <Download className="h-4 w-4 text-slate-400" />
-            </a>
+              <span className="text-blue-600 dark:text-cyan-400 group-hover:underline">View in Catalogues &rarr;</span>
+            </Link>
           </div>
         </div>
 

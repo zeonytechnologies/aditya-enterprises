@@ -271,8 +271,8 @@ export default function OfferPosterManager() {
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-slate-400">No Image</div>
                 )}
-                <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <button onClick={() => editPoster(poster)} className="p-1.5 bg-white text-blue-600 rounded-lg shadow hover:bg-blue-50">
+                <div className="absolute top-2 right-2 flex gap-1.5 shadow-sm">
+                  <button onClick={() => editPoster(poster)} className="p-1.5 bg-white/95 text-blue-600 rounded-lg shadow hover:bg-blue-50 transition-colors" title="Edit Offer Poster">
                     <Edit2 className="h-4 w-4" />
                   </button>
                   <button onClick={() => deletePoster(poster.id)} className="p-1.5 bg-white text-red-600 rounded-lg shadow hover:bg-red-50">

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Download, FileText, Loader2 } from 'lucide-react';
+import { Download, FileText, Loader2, Search } from 'lucide-react';
 import { api } from '../services/supabase';
 
 export default function Catalogues() {
   const [catalogues, setCatalogues] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     const fetchCatalogues = async () => {
@@ -22,16 +23,35 @@ export default function Catalogues() {
     fetchCatalogues();
   }, []);
 
+  const filteredCatalogues = catalogues.filter(cat => 
+    (cat.title || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+    (cat.description || '').toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-10 text-center">
+        <div className="mb-8 text-center">
           <h1 className="text-4xl font-extrabold text-slate-900 dark:text-white font-display mb-4">
             Industrial Catalogues & PDF Guides
           </h1>
           <p className="text-lg text-slate-500 max-w-2xl mx-auto">
             Browse and download our latest technical catalogues, brochures, and specifications.
           </p>
+        </div>
+
+        {/* Search Bar */}
+        <div className="max-w-md mx-auto mb-10">
+          <div className="relative">
+            <Search className="absolute left-4 top-3.5 h-5 w-5 text-slate-400" />
+            <input
+              type="text"
+              placeholder="Search catalogues by title or keyword..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-12 pr-4 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl text-slate-800 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm transition"
+            />
+          </div>
         </div>
 
         {loading ? (
@@ -43,17 +63,17 @@ export default function Catalogues() {
           <div className="bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 p-6 rounded-2xl text-center border border-red-100 dark:border-red-900/50">
             {error}
           </div>
-        ) : catalogues.length === 0 ? (
+        ) : filteredCatalogues.length === 0 ? (
           <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-12 text-center shadow-sm">
             <FileText className="h-16 w-16 text-slate-300 dark:text-slate-700 mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-slate-800 dark:text-white mb-2">No Catalogues Available</h3>
+            <h3 className="text-xl font-bold text-slate-800 dark:text-white mb-2">No Catalogues Found</h3>
             <p className="text-slate-500 max-w-sm mx-auto">
-              We are currently updating our documentation. Check back soon for new catalogues.
+              {searchQuery ? `No catalogues matching "${searchQuery}". Try a different keyword.` : 'We are currently updating our documentation. Check back soon for new catalogues.'}
             </p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {catalogues.map((cat) => (
+            {filteredCatalogues.map((cat) => (
               <div 
                 key={cat.id} 
                 className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col h-full"

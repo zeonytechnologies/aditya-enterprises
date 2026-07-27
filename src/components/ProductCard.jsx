@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Star, ShoppingCart, Percent, ShieldCheck } from 'lucide-react';
+import { Star, ShoppingCart, Percent, ShieldCheck, MessageCircle } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
+import { shareProductWithImage } from '../services/shareUtils';
 
 export default function ProductCard({ product }) {
   const { addToCart, getProductUnitPrice } = useCart();
@@ -121,13 +122,26 @@ export default function ProductCard({ product }) {
               </div>
             </div>
             
-            {/* Quick add mobile */}
-            <button 
-              onClick={handleQuickAdd}
-              className="md:hidden p-1.5 sm:p-2 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg hover:bg-blue-600 hover:text-white transition-colors"
-            >
-              <ShoppingCart className="h-4 w-4 sm:h-5 sm:w-5" />
-            </button>
+            <div className="flex items-center gap-1.5">
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  shareProductWithImage(product, unitPrice);
+                }}
+                className="p-1.5 sm:p-2 bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400 rounded-lg hover:bg-emerald-600 hover:text-white transition-colors shadow-sm"
+                title="Share on WhatsApp with Price & Image"
+              >
+                <MessageCircle className="h-4 w-4 sm:h-5 sm:w-5 fill-current" />
+              </button>
+              {/* Quick add mobile */}
+              <button 
+                onClick={handleQuickAdd}
+                className="md:hidden p-1.5 sm:p-2 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg hover:bg-blue-600 hover:text-white transition-colors"
+              >
+                <ShoppingCart className="h-4 w-4 sm:h-5 sm:w-5" />
+              </button>
+            </div>
           </div>
           
           {showDiscount && isB2B && (
