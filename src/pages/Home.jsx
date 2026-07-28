@@ -102,6 +102,12 @@ export default function Home() {
     };
     loadHomeData();
 
+    const handleLiveUpdate = () => {
+      loadHomeData();
+    };
+    window.addEventListener('aditya_db_updated', handleLiveUpdate);
+    window.addEventListener('storage', handleLiveUpdate);
+
     // Hero Slider Interval
     const slideTimer = setInterval(() => {
       setActiveSlide(prev => (prev + 1) % HERO_SLIDES.length);
@@ -115,6 +121,8 @@ export default function Home() {
     return () => {
       clearInterval(slideTimer);
       clearInterval(countdownTimer);
+      window.removeEventListener('aditya_db_updated', handleLiveUpdate);
+      window.removeEventListener('storage', handleLiveUpdate);
     };
   }, []);
 

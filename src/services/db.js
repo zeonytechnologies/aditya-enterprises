@@ -1268,6 +1268,25 @@ const SEED_CATALOGUES = [
   { id: 'cat2', title: 'Pidilite Industrial Guide', description: 'Technical specifications for Pidilite products.', file_url: '#' }
 ];
 
+const SEED_HOME_BANNERS = [
+  { id: 'hb1', title: 'Premium Industrial Adhesives & Technical Sealants', image_url: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=1200&auto=format&fit=crop&q=80', active: true, link_url: '/shop', created_at: new Date().toISOString() },
+  { id: 'hb2', title: 'High-Performance Structural Bonding Solutions', image_url: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&auto=format&fit=crop&q=80', active: true, link_url: '/shop?category=epoxy', created_at: new Date().toISOString() }
+];
+
+const SEED_OFFER_POSTERS = [
+  { id: 'op1', title: 'Wholesale Festival Offer', image_url: 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=600&auto=format&fit=crop&q=80', active: true, start_date: null, end_date: null, created_at: new Date().toISOString() }
+];
+
+const SEED_LEADS = [
+  { id: 'lead1', name: 'Alok Kumar', company_name: 'Kumar Engineering Works', email: 'alok@kumarengg.com', phone: '+91 9811112222', product_interest: 'Epoxy Resins', message: 'Looking for 500Kg monthly supply of Lapox Epoxy.', created_at: new Date(Date.now() - 3600000 * 24).toISOString() }
+];
+
+const SEED_SITE_SETTINGS = [
+  { key: 'contact_phone', value: '+91 98765 43210' },
+  { key: 'contact_email', value: 'sales@adityaenterprises.com' },
+  { key: 'whatsapp_number', value: '919876543210' }
+];
+
 export const initLocalDb = () => {
   if (!localStorage.getItem('aditya_brands') || !localStorage.getItem('aditya_products_v4')) {
     localStorage.setItem('aditya_brands', JSON.stringify(SEED_BRANDS));
@@ -1287,6 +1306,21 @@ export const initLocalDb = () => {
   }
   if (!localStorage.getItem('aditya_catalogues')) {
     localStorage.setItem('aditya_catalogues', JSON.stringify(SEED_CATALOGUES));
+  }
+  if (!localStorage.getItem('aditya_home_banners')) {
+    localStorage.setItem('aditya_home_banners', JSON.stringify(SEED_HOME_BANNERS));
+  }
+  if (!localStorage.getItem('aditya_offer_posters')) {
+    localStorage.setItem('aditya_offer_posters', JSON.stringify(SEED_OFFER_POSTERS));
+  }
+  if (!localStorage.getItem('aditya_leads')) {
+    localStorage.setItem('aditya_leads', JSON.stringify(SEED_LEADS));
+  }
+  if (!localStorage.getItem('aditya_site_settings')) {
+    localStorage.setItem('aditya_site_settings', JSON.stringify(SEED_SITE_SETTINGS));
+  }
+  if (!localStorage.getItem('aditya_visitors')) {
+    localStorage.setItem('aditya_visitors', JSON.stringify([]));
   }
   if (!localStorage.getItem('aditya_orders')) {
     localStorage.setItem('aditya_orders', JSON.stringify([]));
@@ -1316,6 +1350,18 @@ export const initLocalDb = () => {
 
 // Initialize right away
 initLocalDb();
+
+// Wrap localStorage.setItem to dispatch live sync events across components when data changes
+if (typeof window !== 'undefined' && !window._adityaStorageWrapped) {
+  window._adityaStorageWrapped = true;
+  const origSetItem = localStorage.setItem.bind(localStorage);
+  localStorage.setItem = (key, value) => {
+    origSetItem(key, value);
+    if (key.startsWith('aditya_')) {
+      window.dispatchEvent(new CustomEvent('aditya_db_updated', { detail: { key } }));
+    }
+  };
+}
 
 // Database Query APIs
 export const db = {
@@ -1370,26 +1416,31 @@ export const db = {
 
   saveProduct: async (productData) => {
     const products = JSON.parse(localStorage.getItem('aditya_products'));
-    if (productData.id) {
+    if (productData.id && productData.id !== 'new') {
       const idx = products.findIndex(p => p.id === productData.id);
       if (idx !== -1) {
-        products[idx] = { ...products[idx], ...productData, updated_at: new Date().toISOString() };
+        const updated = { ...products[idx], ...productData, updated_at: new Date().toISOString() };
+        products[idx] = updated;
+        localStorage.setItem('aditya_products', JSON.stringify(products));
+        return updated;
       }
-    } else {
-      const newProduct = {
-        id: 'p_' + Math.random().toString(36).substr(2, 9),
-        slug: productData.name.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
-        images: productData.images || ['https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=600&auto=format&fit=crop&q=80'],
-        specifications: productData.specifications || {},
-        features: productData.features || [],
-        ...productData,
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString()
-      };
-      products.push(newProduct);
     }
+    const newId = 'p_' + Math.random().toString(36).substr(2, 9);
+    const cleaned = { ...productData };
+    delete cleaned.id;
+    const newProduct = {
+      slug: productData.name?.toLowerCase().replace(/[^a-z0-9]+/g, '-') || 'prod-' + newId,
+      specifications: productData.specifications || {},
+      features: productData.features || [],
+      ...cleaned,
+      id: newId,
+      images: (productData.images && productData.images.length > 0) ? productData.images : ['https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=600&auto=format&fit=crop&q=80'],
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    };
+    products.unshift(newProduct);
     localStorage.setItem('aditya_products', JSON.stringify(products));
-    return true;
+    return newProduct;
   },
 
   deleteProduct: async (id) => {
@@ -1652,6 +1703,7 @@ export const db = {
       .reduce((sum, o) => sum + parseFloat(o.gst_amount), 0);
 
     const lowStockCount = products.filter(p => p.stock < 15).length;
+    const visitors = JSON.parse(localStorage.getItem('aditya_visitors') || '[]');
 
     return {
       revenue: totalRevenue,
@@ -1660,7 +1712,16 @@ export const db = {
       pendingPayments: payments.filter(p => p.status === 'Pending Verification').length,
       pendingRfqs: rfqs.filter(r => r.status === 'Pending').length,
       dealersCount: users.filter(u => u.role === 'dealer' || u.role === 'distributor').length,
-      lowStockCount
+      lowStockCount,
+      totalVisitors: visitors.length,
+      totalOrders: orders.length,
+      recentSales: orders.slice(0, 5).map(o => ({
+        id: o.id,
+        date: new Date(o.created_at || Date.now()).toLocaleDateString('en-IN'),
+        customer: o.company_name || 'Retail Client',
+        amount: parseFloat(o.grand_total || 0),
+        status: o.status
+      }))
     };
   },
 
@@ -1687,5 +1748,143 @@ export const db = {
     });
 
     return Object.values(hsnSummary);
+  },
+
+  // Home Banners CRUD
+  getHomeBanners: async () => {
+    return JSON.parse(localStorage.getItem('aditya_home_banners') || '[]');
+  },
+  getActiveHomeBanners: async () => {
+    const banners = JSON.parse(localStorage.getItem('aditya_home_banners') || '[]');
+    return banners.filter(b => b.active);
+  },
+  saveHomeBanner: async (banner) => {
+    const banners = JSON.parse(localStorage.getItem('aditya_home_banners') || '[]');
+    let saved = null;
+    if (banner.id && banner.id !== 'new') {
+      const idx = banners.findIndex(b => b.id === banner.id);
+      if (idx !== -1) {
+        saved = { ...banners[idx], ...banner, updated_at: new Date().toISOString() };
+        banners[idx] = saved;
+      }
+    }
+    if (!saved) {
+      const newId = 'hb_' + Math.random().toString(36).substr(2, 9);
+      const cleaned = { ...banner };
+      delete cleaned.id;
+      saved = {
+        active: true,
+        ...cleaned,
+        id: newId,
+        created_at: new Date().toISOString()
+      };
+      banners.unshift(saved);
+    }
+    localStorage.setItem('aditya_home_banners', JSON.stringify(banners));
+    return saved;
+  },
+  deleteHomeBanner: async (id) => {
+    let banners = JSON.parse(localStorage.getItem('aditya_home_banners') || '[]');
+    banners = banners.filter(b => b.id !== id);
+    localStorage.setItem('aditya_home_banners', JSON.stringify(banners));
+    return true;
+  },
+
+  // Offer Posters CRUD
+  getOfferPosters: async () => {
+    return JSON.parse(localStorage.getItem('aditya_offer_posters') || '[]');
+  },
+  getActiveOfferPosters: async () => {
+    const posters = JSON.parse(localStorage.getItem('aditya_offer_posters') || '[]');
+    return posters.filter(p => p.active);
+  },
+  saveOfferPoster: async (poster) => {
+    const posters = JSON.parse(localStorage.getItem('aditya_offer_posters') || '[]');
+    let saved = null;
+    if (poster.id && poster.id !== 'new') {
+      const idx = posters.findIndex(p => p.id === poster.id);
+      if (idx !== -1) {
+        saved = { ...posters[idx], ...poster, updated_at: new Date().toISOString() };
+        posters[idx] = saved;
+      }
+    }
+    if (!saved) {
+      const newId = 'op_' + Math.random().toString(36).substr(2, 9);
+      const cleaned = { ...poster };
+      delete cleaned.id;
+      saved = {
+        active: true,
+        ...cleaned,
+        id: newId,
+        created_at: new Date().toISOString()
+      };
+      posters.unshift(saved);
+    }
+    localStorage.setItem('aditya_offer_posters', JSON.stringify(posters));
+    return saved;
+  },
+  deleteOfferPoster: async (id) => {
+    let posters = JSON.parse(localStorage.getItem('aditya_offer_posters') || '[]');
+    posters = posters.filter(p => p.id !== id);
+    localStorage.setItem('aditya_offer_posters', JSON.stringify(posters));
+    return true;
+  },
+
+  // Leads CRUD
+  submitLead: async (data) => {
+    const leads = JSON.parse(localStorage.getItem('aditya_leads') || '[]');
+    const newLead = {
+      id: 'lead_' + Math.random().toString(36).substr(2, 9),
+      created_at: new Date().toISOString(),
+      ...data
+    };
+    leads.unshift(newLead);
+    localStorage.setItem('aditya_leads', JSON.stringify(leads));
+    return true;
+  },
+  getLeads: async () => {
+    return JSON.parse(localStorage.getItem('aditya_leads') || '[]');
+  },
+
+  // Visitors
+  recordVisitor: async (path) => {
+    const visitors = JSON.parse(localStorage.getItem('aditya_visitors') || '[]');
+    visitors.push({ path, created_at: new Date().toISOString() });
+    localStorage.setItem('aditya_visitors', JSON.stringify(visitors));
+    return true;
+  },
+  getVisitorsStats: async () => {
+    return JSON.parse(localStorage.getItem('aditya_visitors') || '[]');
+  },
+
+  // Site Settings
+  getSiteSetting: async (key) => {
+    const settings = JSON.parse(localStorage.getItem('aditya_site_settings') || '[]');
+    const found = settings.find(s => s.key === key);
+    return found ? found.value : null;
+  },
+  updateSiteSetting: async (key, value) => {
+    const settings = JSON.parse(localStorage.getItem('aditya_site_settings') || '[]');
+    const idx = settings.findIndex(s => s.key === key);
+    if (idx !== -1) {
+      settings[idx].value = value;
+    } else {
+      settings.push({ key, value });
+    }
+    localStorage.setItem('aditya_site_settings', JSON.stringify(settings));
+    return true;
+  },
+
+  // Profile Update
+  updateProfile: async (userId, data) => {
+    const users = JSON.parse(localStorage.getItem('aditya_users') || '[]');
+    const idx = users.findIndex(u => u.id === userId);
+    if (idx !== -1) {
+      users[idx] = { ...users[idx], ...data };
+      localStorage.setItem('aditya_users', JSON.stringify(users));
+      const { password: _, ...userWithoutPassword } = users[idx];
+      return userWithoutPassword;
+    }
+    return null;
   }
 };

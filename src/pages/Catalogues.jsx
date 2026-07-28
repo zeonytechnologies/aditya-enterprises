@@ -21,6 +21,16 @@ export default function Catalogues() {
       }
     };
     fetchCatalogues();
+
+    const handleLiveUpdate = () => {
+      fetchCatalogues();
+    };
+    window.addEventListener('aditya_db_updated', handleLiveUpdate);
+    window.addEventListener('storage', handleLiveUpdate);
+    return () => {
+      window.removeEventListener('aditya_db_updated', handleLiveUpdate);
+      window.removeEventListener('storage', handleLiveUpdate);
+    };
   }, []);
 
   const filteredCatalogues = catalogues.filter(cat => 

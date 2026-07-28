@@ -762,7 +762,7 @@ export const api = {
         if (error) throw error;
         return true;
       }
-      return true;
+      return await db.submitLead(data);
     },
     getAll: async () => {
       if (isSupabaseConfigured) {
@@ -773,7 +773,7 @@ export const api = {
         if (error) throw error;
         return data;
       }
-      return [];
+      return await db.getLeads();
     }
   },
 
@@ -783,6 +783,8 @@ export const api = {
         // Debounce or filter can be done on frontend
         const { error } = await supabase.from('visitors').insert({ path });
         if (error) console.error("Visitor track err", error);
+      } else {
+        await db.recordVisitor(path);
       }
     },
     getStats: async () => {
@@ -791,7 +793,7 @@ export const api = {
         if (error) return [];
         return data;
       }
-      return [];
+      return await db.getVisitorsStats();
     }
   },
 
@@ -802,7 +804,7 @@ export const api = {
         if (error) return null;
         return data?.value;
       }
-      return null;
+      return await db.getSiteSetting(key);
     },
     update: async (key, value) => {
       if (isSupabaseConfigured) {
@@ -810,7 +812,7 @@ export const api = {
         if (error) throw error;
         return true;
       }
-      return true;
+      return await db.updateSiteSetting(key, value);
     }
   },
 
@@ -836,7 +838,36 @@ export const api = {
 
         return publicUrl;
       }
-      return URL.createObjectURL(file);
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          let res = reader.result;
+          if (file.type && file.type.startsWith('image/') && res.length > 500000) {
+            const img = new Image();
+            img.onload = () => {
+              const canvas = document.createElement('canvas');
+              let w = img.width;
+              let h = img.height;
+              const maxDim = 800;
+              if (w > maxDim || h > maxDim) {
+                if (w > h) { h = Math.round((h * maxDim) / w); w = maxDim; }
+                else { w = Math.round((w * maxDim) / h); h = maxDim; }
+              }
+              canvas.width = w;
+              canvas.height = h;
+              const ctx = canvas.getContext('2d');
+              ctx.drawImage(img, 0, 0, w, h);
+              resolve(canvas.toDataURL('image/jpeg', 0.75));
+            };
+            img.onerror = () => resolve(res);
+            img.src = res;
+          } else {
+            resolve(res);
+          }
+        };
+        reader.onerror = () => reject(new Error('Failed to read file'));
+        reader.readAsDataURL(file);
+      });
     }
   },
 
@@ -847,7 +878,7 @@ export const api = {
         if (error) throw error;
         return data;
       }
-      return [];
+      return await db.getHomeBanners();
     },
     getActive: async () => {
       if (isSupabaseConfigured) {
@@ -855,7 +886,7 @@ export const api = {
         if (error) throw error;
         return data;
       }
-      return [];
+      return await db.getActiveHomeBanners();
     },
     save: async (banner) => {
       if (isSupabaseConfigured) {
@@ -870,7 +901,7 @@ export const api = {
           return data;
         }
       }
-      return banner;
+      return await db.saveHomeBanner(banner);
     },
     delete: async (id) => {
       if (isSupabaseConfigured) {
@@ -878,7 +909,7 @@ export const api = {
         if (error) throw error;
         return true;
       }
-      return true;
+      return await db.deleteHomeBanner(id);
     }
   },
   offerPosters: {
@@ -888,7 +919,7 @@ export const api = {
         if (error) throw error;
         return data;
       }
-      return [];
+      return await db.getOfferPosters();
     },
     getActive: async () => {
       if (isSupabaseConfigured) {
@@ -896,7 +927,7 @@ export const api = {
         if (error) throw error;
         return data;
       }
-      return [];
+      return await db.getActiveOfferPosters();
     },
     save: async (poster) => {
       if (isSupabaseConfigured) {
@@ -911,7 +942,7 @@ export const api = {
           return data;
         }
       }
-      return poster;
+      return await db.saveOfferPoster(poster);
     },
     delete: async (id) => {
       if (isSupabaseConfigured) {
@@ -919,7 +950,7 @@ export const api = {
         if (error) throw error;
         return true;
       }
-      return true;
+      return await db.deleteOfferPoster(id);
     }
   }
 };

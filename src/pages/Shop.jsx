@@ -61,6 +61,16 @@ export default function Shop() {
       }
     };
     loadCatalogData();
+
+    const handleLiveUpdate = () => {
+      loadCatalogData();
+    };
+    window.addEventListener('aditya_db_updated', handleLiveUpdate);
+    window.addEventListener('storage', handleLiveUpdate);
+    return () => {
+      window.removeEventListener('aditya_db_updated', handleLiveUpdate);
+      window.removeEventListener('storage', handleLiveUpdate);
+    };
   }, []);
 
   // Sync state from query parameters on load

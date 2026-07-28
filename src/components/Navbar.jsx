@@ -39,6 +39,12 @@ export default function Navbar() {
     };
     loadProducts();
 
+    const handleLiveUpdate = () => {
+      loadProducts();
+    };
+    window.addEventListener('aditya_db_updated', handleLiveUpdate);
+    window.addEventListener('storage', handleLiveUpdate);
+
     // Click outside handlers
     const handleClickOutside = (event) => {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
@@ -49,7 +55,11 @@ export default function Navbar() {
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      window.removeEventListener('aditya_db_updated', handleLiveUpdate);
+      window.removeEventListener('storage', handleLiveUpdate);
+    };
   }, []);
 
   // Filter suggestions
