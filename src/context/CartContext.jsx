@@ -39,8 +39,8 @@ export const CartProvider = ({ children }) => {
       basePrice = parseFloat(target.dealer_price) || 0;
     }
     
-    // Apply flash sale discount if applicable
-    if (product.is_flash_sale && product.discount_percent > 0) {
+    // Apply discount if applicable
+    if (product.discount_percent > 0) {
       const discount = basePrice * (product.discount_percent / 100);
       return basePrice - discount;
     }

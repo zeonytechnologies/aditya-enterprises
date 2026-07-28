@@ -89,7 +89,7 @@ export default function Home() {
 
         const prods = await api.products.list();
         setFeaturedProducts(prods.filter(p => p.is_featured));
-        setFlashDeals(prods.filter(p => p.is_flash_sale));
+        setFlashDeals(prods.filter(p => p.discount_percent > 0));
 
         const articles = await api.blogs.list();
         setBlogs(articles);
@@ -425,7 +425,7 @@ export default function Home() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="mb-10 text-center">
           <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white font-display">
-            Featured B2B Catalog
+            Featured B2C Catalog
           </h2>
           <p className="text-sm text-slate-500 mt-1">
             Top performance industrial formulations in stock and available for GST credit claims

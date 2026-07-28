@@ -3,7 +3,16 @@
  * ensuring details and image are combined in one image for WhatsApp sharing / downloading.
  */
 
+import { api } from './supabase';
+
 async function createProductPriceCardImage(product, unitPrice, imageUrl) {
+  let settings = null;
+  try {
+    settings = await api.settings.get();
+  } catch (err) {
+    console.error('Error fetching settings for shareUtils:', err);
+  }
+
   return new Promise((resolve, reject) => {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
@@ -81,11 +90,31 @@ async function createProductPriceCardImage(product, unitPrice, imageUrl) {
       ctx.fillText(`(Basic Rate: ₹${unitPrice.toLocaleString('en-IN', { minimumFractionDigits: 2 })} + ${product.gst_percent || 0}% GST)`, width / 2, boxY + 95);
 
       // Footer
-      ctx.fillStyle = '#f1f5f9';
-      ctx.fillRect(0, height - 60, width, 60);
-      ctx.fillStyle = '#475569';
-      ctx.font = 'bold 18px sans-serif';
-      ctx.fillText('adityaent.online   •   Inquiries: +91 74835 52250', width / 2, height - 24);
+      ctx.fillStyle = '#0f172a'; // Dark slate for better contrast
+      ctx.fillRect(0, height - 70, width, 70);
+      
+      const part1 = 'adityaent.online';
+      const part2 = '   •   Call/WhatsApp: ';
+      const part3 = settings?.mobile || '+91 74835 52250';
+      
+      ctx.font = 'bold 24px sans-serif';
+      const w1 = ctx.measureText(part1).width;
+      const w2 = ctx.measureText(part2).width;
+      const w3 = ctx.measureText(part3).width;
+      const totalW = w1 + w2 + w3;
+      let startX = (width - totalW) / 2;
+      
+      ctx.textAlign = 'left';
+      ctx.fillStyle = '#38bdf8'; // Cyan
+      ctx.fillText(part1, startX, height - 26);
+      
+      startX += w1;
+      ctx.fillStyle = '#94a3b8'; // Slate 400
+      ctx.fillText(part2, startX, height - 26);
+      
+      startX += w2;
+      ctx.fillStyle = '#34d399'; // Emerald 400
+      ctx.fillText(part3, startX, height - 26);
 
       canvas.toBlob((blob) => {
         if (blob) resolve(blob);

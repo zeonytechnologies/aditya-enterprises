@@ -424,3 +424,59 @@ GRANT ALL ON ALL ROUTINES IN SCHEMA public TO anon, authenticated;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO anon, authenticated;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO anon, authenticated;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON ROUTINES TO anon, authenticated;
+
+-- ==========================================
+-- WEBSITE SETTINGS
+-- ==========================================
+CREATE TABLE public.website_settings (
+    id integer PRIMARY KEY DEFAULT 1,
+    about_hero_subtitle text,
+    about_overview text,
+    google_reviews_link text,
+    email text,
+    mobile text,
+    address text,
+    instagram_link text,
+    linkedin_link text,
+    youtube_link text,
+    facebook_link text,
+    updated_at timestamp with time zone DEFAULT timezone('utc'::text, now()),
+    CONSTRAINT website_settings_id_check CHECK (id = 1)
+);
+
+INSERT INTO public.website_settings (
+    id,
+    about_hero_subtitle,
+    about_overview,
+    google_reviews_link,
+    email,
+    mobile,
+    address,
+    instagram_link,
+    linkedin_link,
+    youtube_link,
+    facebook_link
+) VALUES (
+    1,
+    'Your trusted B2B partner and Channel Partner (Distributor) for premium industrial adhesives, sealants, and hardware solutions since 2000.',
+    '<strong>Aditya Enterprises</strong> is a leading manufacturer and channel partner of Pidilite Industries Ltd, Atul Ltd, Benson Polymer Ltd and Ozone hardware fitting and many more Adhesive related brands. We specialize in industrial adhesive tapes and surface protection solutions, serving diverse industries across India and global markets.
+
+With a strong commitment to quality, innovation, and customer satisfaction, we provide reliable tape solutions designed to improve productivity, enhance packaging performance, and protect valuable surfaces during manufacturing, storage, transportation, and installation. Our extensive product portfolio includes Surface Protection Films, Cross Filament Tapes, Double Sided Tissue Tapes, Double Sided Polyester Tapes, Green Polyester Masking Tapes, HDPE Tapes, Duct Tapes, Floor Marking Tapes, and other specialty adhesive products.
+
+Manufactured using premium-grade raw materials and advanced production processes, our tapes offer excellent adhesion, durability, temperature resistance, and consistent performance. Trusted by customers in packaging, automotive, construction, HVAC, electronics, metal fabrication, refrigeration, and engineering industries, we continue to deliver cost-effective and customized adhesive solutions that meet evolving industrial requirements.
+
+Our dedication to excellence, timely delivery, and continuous product development has established us as a preferred partner for businesses seeking high-performance industrial tapes and protective film solutions.',
+    'https://share.google/fhMAACIVAMLSR57Rc',
+    'adityaenterprises.ck@gmail.com',
+    '+91 74835 52250',
+    'Aditya Enterprises, India',
+    'https://instagram.com/adityaenterprises',
+    'https://linkedin.com/company/adityaenterprises',
+    'https://youtube.com/@adityaenterprisesckp?si=UDxVEYIHphWdcBhS',
+    ''
+) ON CONFLICT (id) DO NOTHING;
+
+ALTER TABLE public.website_settings DISABLE ROW LEVEL SECURITY;
+
+ALTER TABLE public.website_settings ADD COLUMN google_reviews_data JSONB DEFAULT '[]'::jsonb;
+

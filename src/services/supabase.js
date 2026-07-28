@@ -26,6 +26,30 @@ export async function hashPassword(password) {
 
 // Unified API Service Layer (Repository Pattern)
 export const api = {
+  settings: {
+    get: async () => {
+      if (isSupabaseConfigured) {
+        const { data, error } = await supabase.from('website_settings').select('*').eq('id', 1).maybeSingle();
+        if (error) {
+          console.error('Error fetching settings:', error);
+          return await db.getSettings(); // fallback
+        }
+        return data || await db.getSettings();
+      } else {
+        return await db.getSettings();
+      }
+    },
+    update: async (settingsData) => {
+      if (isSupabaseConfigured) {
+        const { data, error } = await supabase.from('website_settings').upsert({ id: 1, ...settingsData }).select().single();
+        if (error) throw error;
+        return data;
+      } else {
+        return await db.saveSettings(settingsData);
+      }
+    }
+  },
+  
   auth: {
     login: async (identifier, password) => {
       if (isSupabaseConfigured) {

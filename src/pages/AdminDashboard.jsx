@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   BarChart3, ShieldCheck, ShoppingBag, FileSpreadsheet, 
-  Layers, Package, AlertCircle, FileText, CheckCircle2, XCircle, Plus, Edit, Trash2, Printer, Tag, Search, ChevronLeft, ChevronRight, MessageCircle, Users, ShoppingCart, X
+  Layers, Package, AlertCircle, FileText, CheckCircle2, XCircle, Plus, Edit, Trash2, Printer, Tag, Search, ChevronLeft, ChevronRight, MessageCircle, Users, ShoppingCart, X, Settings
 } from 'lucide-react';
 import { api } from '../services/supabase';
 import { useAuth } from '../context/AuthContext';
@@ -112,6 +112,8 @@ export default function AdminDashboard() {
   const [catalogues, setCatalogues] = useState([]);
   const [orders, setOrders] = useState([]);
   const [usersList, setUsersList] = useState([]);
+  const [siteSettings, setSiteSettings] = useState(null);
+  const [isSavingSettings, setIsSavingSettings] = useState(false);
   const [loading, setLoading] = useState(true);
   const [orderStatusFilter, setOrderStatusFilter] = useState('All');
   
@@ -134,6 +136,20 @@ export default function AdminDashboard() {
     } catch (err) {
       alert("Failed to update password");
       console.error(err);
+    }
+  };
+
+  const handleSaveSettings = async (e) => {
+    e.preventDefault();
+    setIsSavingSettings(true);
+    try {
+      await api.settings.update(siteSettings);
+      alert('Website Settings updated successfully!');
+    } catch (err) {
+      console.error('Error saving settings:', err);
+      alert('Failed to save settings.');
+    } finally {
+      setIsSavingSettings(false);
     }
   };
 
@@ -243,6 +259,10 @@ export default function AdminDashboard() {
 
       const allLeads = await api.leads.getAll();
       setLeads(allLeads);
+
+      const stts = await api.settings.get();
+      setSiteSettings(stts);
+
 
     } catch (err) {
       console.error('Failed loading admin database:', err);
@@ -885,7 +905,15 @@ export default function AdminDashboard() {
             activeTab === 'leads' ? 'border-blue-600 text-blue-600 dark:border-cyan-400 dark:text-cyan-400' : 'border-transparent text-slate-400'
           }`}
         >
-          <Users className="h-4.5 w-4.5" /> Leads Capture
+          <Users className="h-4.5 w-4.5" /> Leads ({leads.length})
+        </button>
+        <button
+          onClick={() => setActiveTab('settings')}
+          className={`pb-4 text-xs font-bold border-b-2 flex items-center gap-1.5 px-3 transition-colors whitespace-nowrap ${
+            activeTab === 'settings' ? 'border-blue-600 text-blue-600 dark:border-cyan-400 dark:text-cyan-400' : 'border-transparent text-slate-400'
+          }`}
+        >
+          <Settings className="h-4.5 w-4.5" /> Settings
         </button>
       </div>
 
@@ -989,6 +1017,208 @@ export default function AdminDashboard() {
                 )}
               </tbody>
             </table>
+          </div>
+        </div>
+      )}
+
+      {/* TAB: Website Settings */}
+      {activeTab === 'settings' && siteSettings && (
+        <div className="space-y-6">
+          <div className="flex justify-between items-center">
+            <h2 className="text-xl font-bold font-display">Website Settings</h2>
+            <button
+              onClick={handleSaveSettings}
+              disabled={isSavingSettings}
+              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-colors flex items-center gap-2"
+            >
+              {isSavingSettings ? 'Saving...' : 'Save Settings'}
+            </button>
+          </div>
+
+          <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 p-6 space-y-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-4 md:col-span-2">
+                <h3 className="font-bold text-lg border-b pb-2">About Page</h3>
+                <div>
+                  <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1 block">Hero Subtitle</label>
+                  <input
+                    type="text"
+                    value={siteSettings.about_hero_subtitle || ''}
+                    onChange={(e) => setSiteSettings(prev => ({...prev, about_hero_subtitle: e.target.value}))}
+                    className="w-full px-4 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1 block">Overview Content (Supports basic HTML)</label>
+                  <textarea
+                    rows={8}
+                    value={siteSettings.about_overview || ''}
+                    onChange={(e) => setSiteSettings(prev => ({...prev, about_overview: e.target.value}))}
+                    className="w-full px-4 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1 block">Google Reviews URL</label>
+                  <input
+                    type="url"
+                    value={siteSettings.google_reviews_link || ''}
+                    onChange={(e) => setSiteSettings(prev => ({...prev, google_reviews_link: e.target.value}))}
+                    className="w-full px-4 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white"
+                  />
+                </div>
+                
+                <div className="mt-8">
+                  <div className="flex justify-between items-center mb-4">
+                    <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 block">Displayed Google Reviews</label>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const newReviews = [...(siteSettings.google_reviews_data || [])];
+                        newReviews.push({ name: '', meta: '', time: '', text: '' });
+                        setSiteSettings(prev => ({ ...prev, google_reviews_data: newReviews }));
+                      }}
+                      className="text-xs px-3 py-1.5 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200"
+                    >
+                      + Add Review
+                    </button>
+                  </div>
+                  <div className="space-y-4">
+                    {(siteSettings.google_reviews_data || []).map((review, idx) => (
+                      <div key={idx} className="p-4 border border-slate-200 dark:border-slate-800 rounded-xl bg-white dark:bg-slate-900 relative">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const newReviews = [...siteSettings.google_reviews_data];
+                            newReviews.splice(idx, 1);
+                            setSiteSettings(prev => ({ ...prev, google_reviews_data: newReviews }));
+                          }}
+                          className="absolute top-2 right-2 text-red-500 hover:text-red-700"
+                        >
+                          ✕
+                        </button>
+                        <div className="grid grid-cols-2 gap-4 mb-2">
+                          <input
+                            type="text"
+                            placeholder="Name"
+                            value={review.name || ''}
+                            onChange={(e) => {
+                              const newReviews = [...siteSettings.google_reviews_data];
+                              newReviews[idx].name = e.target.value;
+                              setSiteSettings(prev => ({ ...prev, google_reviews_data: newReviews }));
+                            }}
+                            className="w-full px-3 py-1.5 border rounded-lg bg-slate-50 dark:bg-slate-950 text-sm"
+                          />
+                          <input
+                            type="text"
+                            placeholder="Meta (e.g. Local Guide)"
+                            value={review.meta || ''}
+                            onChange={(e) => {
+                              const newReviews = [...siteSettings.google_reviews_data];
+                              newReviews[idx].meta = e.target.value;
+                              setSiteSettings(prev => ({ ...prev, google_reviews_data: newReviews }));
+                            }}
+                            className="w-full px-3 py-1.5 border rounded-lg bg-slate-50 dark:bg-slate-950 text-sm"
+                          />
+                          <input
+                            type="text"
+                            placeholder="Time (e.g. 2 months ago)"
+                            value={review.time || ''}
+                            onChange={(e) => {
+                              const newReviews = [...siteSettings.google_reviews_data];
+                              newReviews[idx].time = e.target.value;
+                              setSiteSettings(prev => ({ ...prev, google_reviews_data: newReviews }));
+                            }}
+                            className="w-full px-3 py-1.5 border rounded-lg bg-slate-50 dark:bg-slate-950 text-sm col-span-2"
+                          />
+                        </div>
+                        <textarea
+                          placeholder="Review text"
+                          rows={3}
+                          value={review.text || ''}
+                          onChange={(e) => {
+                            const newReviews = [...siteSettings.google_reviews_data];
+                            newReviews[idx].text = e.target.value;
+                            setSiteSettings(prev => ({ ...prev, google_reviews_data: newReviews }));
+                          }}
+                          className="w-full px-3 py-1.5 border rounded-lg bg-slate-50 dark:bg-slate-950 text-sm"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="font-bold text-lg border-b pb-2">Contact Details</h3>
+                <div>
+                  <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1 block">Email Address</label>
+                  <input
+                    type="email"
+                    value={siteSettings.email || ''}
+                    onChange={(e) => setSiteSettings(prev => ({...prev, email: e.target.value}))}
+                    className="w-full px-4 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1 block">Mobile / WhatsApp Number</label>
+                  <input
+                    type="text"
+                    value={siteSettings.mobile || ''}
+                    onChange={(e) => setSiteSettings(prev => ({...prev, mobile: e.target.value}))}
+                    className="w-full px-4 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1 block">Physical Address</label>
+                  <textarea
+                    rows={3}
+                    value={siteSettings.address || ''}
+                    onChange={(e) => setSiteSettings(prev => ({...prev, address: e.target.value}))}
+                    className="w-full px-4 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="font-bold text-lg border-b pb-2">Social Media Links</h3>
+                <div>
+                  <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1 block">Instagram URL</label>
+                  <input
+                    type="url"
+                    value={siteSettings.instagram_link || ''}
+                    onChange={(e) => setSiteSettings(prev => ({...prev, instagram_link: e.target.value}))}
+                    className="w-full px-4 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1 block">LinkedIn URL</label>
+                  <input
+                    type="url"
+                    value={siteSettings.linkedin_link || ''}
+                    onChange={(e) => setSiteSettings(prev => ({...prev, linkedin_link: e.target.value}))}
+                    className="w-full px-4 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1 block">YouTube URL</label>
+                  <input
+                    type="url"
+                    value={siteSettings.youtube_link || ''}
+                    onChange={(e) => setSiteSettings(prev => ({...prev, youtube_link: e.target.value}))}
+                    className="w-full px-4 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1 block">Facebook URL</label>
+                  <input
+                    type="url"
+                    value={siteSettings.facebook_link || ''}
+                    onChange={(e) => setSiteSettings(prev => ({...prev, facebook_link: e.target.value}))}
+                    className="w-full px-4 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}

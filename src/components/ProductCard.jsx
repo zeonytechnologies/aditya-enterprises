@@ -32,9 +32,9 @@ export default function ProductCard({ product }) {
             Featured
           </span>
         )}
-        {product.is_flash_sale && (
+        {product.discount_percent > 0 && (
           <span className="px-1.5 py-0.5 sm:px-2.5 sm:py-1 text-[8px] sm:text-[9px] font-bold text-white uppercase tracking-wider bg-red-500 rounded shadow-sm flex items-center">
-            <Percent className="h-2.5 w-2.5 sm:h-3 sm:w-3 mr-0.5" /> {product.discount_percent > 0 ? `${product.discount_percent}% OFF` : 'DEAL'}
+            <Percent className="h-2.5 w-2.5 sm:h-3 sm:w-3 mr-0.5" /> {product.discount_percent}% OFF
           </span>
         )}
         {isB2B && (

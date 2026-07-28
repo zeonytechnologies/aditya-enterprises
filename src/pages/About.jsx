@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Building2, Users, Award, ShieldCheck, Truck, Headphones, CheckCircle, Mail, Phone, MapPin, Star } from 'lucide-react';
 import { FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import { api } from '../services/supabase';
 
 export default function About() {
+  const [settings, setSettings] = useState(null);
+
+  useEffect(() => {
+    api.settings.get().then(setSettings).catch(console.error);
+  }, []);
   const googleReviews = [
     {
       name: "MALAY NIRAV",
@@ -70,7 +76,7 @@ export default function About() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-lg text-slate-300 max-w-2xl mx-auto"
           >
-            Your trusted B2B partner and Channel Partner (Distributor) for premium industrial adhesives, sealants, and hardware solutions since 2012.
+            {settings?.about_hero_subtitle || 'Your trusted B2B partner and Channel Partner (Distributor) for premium industrial adhesives, sealants, and hardware solutions since 2000.'}
           </motion.p>
         </div>
       </div>
@@ -84,21 +90,14 @@ export default function About() {
               Our Journey & Vision
             </h2>
             <div className="space-y-4 text-slate-600 dark:text-slate-400 leading-relaxed text-sm">
-              <p>
-                <strong>Aditya Enterprises</strong> is a leading manufacturer and channel partner of Pidilite Industries Ltd, Atul Ltd, Benson Polymer Ltd and Ozone hardware fitting and many more Adhesive related brands. We specialize in industrial adhesive tapes and surface protection solutions, serving diverse industries across India and global markets.
-              </p>
-              <p>
-                With a strong commitment to quality, innovation, and customer satisfaction, we provide reliable tape solutions designed to improve productivity, enhance packaging performance, and protect valuable surfaces during manufacturing, storage, transportation, and installation. Our extensive product portfolio includes Surface Protection Films, Cross Filament Tapes, Double Sided Tissue Tapes, Double Sided Polyester Tapes, Green Polyester Masking Tapes, HDPE Tapes, Duct Tapes, Floor Marking Tapes, and other specialty adhesive products.
-              </p>
-              <p>
-                Manufactured using premium-grade raw materials and advanced production processes, our tapes offer excellent adhesion, durability, temperature resistance, and consistent performance. Trusted by customers in packaging, automotive, construction, HVAC, electronics, metal fabrication, refrigeration, and engineering industries, we continue to deliver cost-effective and customized adhesive solutions that meet evolving industrial requirements.
-              </p>
-              <p>
-                Our dedication to excellence, timely delivery, and continuous product development has established us as a preferred partner for businesses seeking high-performance industrial tapes and protective film solutions.
-              </p>
+              {settings?.about_overview ? (
+                <div dangerouslySetInnerHTML={{ __html: settings.about_overview.replace(/\n/g, '<br/>') }} />
+              ) : (
+                <p>Loading overview...</p>
+              )}
               <div className="pt-4">
                 <a 
-                  href="https://share.google/fhMAACIVAMLSR57Rc" 
+                  href={settings?.google_reviews_link || "https://share.google/fhMAACIVAMLSR57Rc"} 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-white font-bold rounded-xl shadow-sm hover:border-blue-500 hover:text-blue-600 dark:hover:border-cyan-400 dark:hover:text-cyan-400 transition-all group"
@@ -194,8 +193,8 @@ export default function About() {
                 </div>
                 <div>
                   <h4 className="font-bold text-slate-900 dark:text-white">Phone & WhatsApp</h4>
-                  <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">+91 93422 48827</p>
-                  <a href="https://wa.me/919342248827" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 font-bold mt-2 inline-block hover:underline">Chat on WhatsApp &rarr;</a>
+                  <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">{settings?.mobile || '+91 93422 48827'}</p>
+                  <a href={`https://wa.me/${(settings?.mobile || '919342248827').replace(/\D/g, '')}`} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 font-bold mt-2 inline-block hover:underline">Chat on WhatsApp &rarr;</a>
                 </div>
               </div>
               
@@ -205,7 +204,7 @@ export default function About() {
                 </div>
                 <div>
                   <h4 className="font-bold text-slate-900 dark:text-white">Email Support</h4>
-                  <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">adityaenterprises.ck@gmail.com</p>
+                  <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">{settings?.email || 'adityaenterprises.ck@gmail.com'}</p>
                 </div>
               </div>
 
@@ -213,13 +212,13 @@ export default function About() {
               <div className="pt-6 mt-6 border-t border-slate-200 dark:border-slate-800">
                 <h4 className="font-bold text-slate-900 dark:text-white mb-4">Follow Us</h4>
                 <div className="flex gap-4">
-                  <a href="https://www.instagram.com/ckp_group?utm_source=qr&igsh=cnN6eXE0eHB4eGQz" target="_blank" rel="noopener noreferrer" className="p-3 bg-white text-slate-400 hover:text-pink-600 rounded-full shadow-lg border border-slate-100 transition-colors">
+                  <a href={settings?.instagram_link || "https://www.instagram.com/ckp_group"} target="_blank" rel="noopener noreferrer" className="p-3 bg-white text-slate-400 hover:text-pink-600 rounded-full shadow-lg border border-slate-100 transition-colors">
                     <FaInstagram className="h-6 w-6" />
                   </a>
-                  <a href="https://www.linkedin.com/in/chetan-jain-aa6956342?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" className="p-3 bg-white text-slate-400 hover:text-blue-600 rounded-full shadow-lg border border-slate-100 transition-colors">
+                  <a href={settings?.linkedin_link || "https://www.linkedin.com/in/chetan-jain-aa6956342"} target="_blank" rel="noopener noreferrer" className="p-3 bg-white text-slate-400 hover:text-blue-600 rounded-full shadow-lg border border-slate-100 transition-colors">
                     <FaLinkedin className="h-6 w-6" />
                   </a>
-                  <a href="https://youtube.com/@adityaenterprisesckp?si=UDxVEYIHphWdcBhS" target="_blank" rel="noopener noreferrer" className="p-3 bg-white text-slate-400 hover:text-red-600 rounded-full shadow-lg border border-slate-100 transition-colors">
+                  <a href={settings?.youtube_link || "https://youtube.com/@adityaenterprisesckp"} target="_blank" rel="noopener noreferrer" className="p-3 bg-white text-slate-400 hover:text-red-600 rounded-full shadow-lg border border-slate-100 transition-colors">
                     <FaYoutube className="h-6 w-6" />
                   </a>
                 </div>
@@ -278,7 +277,7 @@ export default function About() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {googleReviews.map((review, idx) => (
+            {(settings?.google_reviews_data || googleReviews).map((review, idx) => (
               <div key={idx} className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 flex flex-col h-full hover:shadow-md transition-shadow">
                 <div className="flex items-start gap-4 mb-4">
                   <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold text-lg flex-shrink-0">

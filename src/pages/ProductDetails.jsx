@@ -348,13 +348,20 @@ export default function ProductDetails() {
             
             <div className="flex items-start justify-between gap-4">
               <h1 className="text-2xl sm:text-3xl font-extrabold font-display leading-tight">{product.name}</h1>
-              {/* Stock Badge */}
-              {(() => {
-                const stock = selectedVariant ? selectedVariant.stock : product.stock;
-                if (stock <= 0) return <span className="shrink-0 px-2.5 py-1 bg-red-100 text-red-700 border border-red-200 rounded-md text-[10px] font-extrabold uppercase tracking-widest whitespace-nowrap">Out of Stock</span>;
-                if (stock <= 50) return <span className="shrink-0 px-2.5 py-1 bg-orange-100 text-orange-700 border border-orange-200 rounded-md text-[10px] font-extrabold uppercase tracking-widest whitespace-nowrap">Low Stock</span>;
-                return <span className="shrink-0 px-2.5 py-1 bg-green-100 text-green-700 border border-green-200 rounded-md text-[10px] font-extrabold uppercase tracking-widest whitespace-nowrap">In Stock</span>;
-              })()}
+              <div className="flex flex-col items-end gap-2 shrink-0">
+                {product.discount_percent > 0 && (
+                  <span className="px-2.5 py-1 bg-red-500 text-white rounded-md text-[10px] font-extrabold uppercase tracking-widest whitespace-nowrap shadow-sm">
+                    {product.discount_percent}% OFF
+                  </span>
+                )}
+                {/* Stock Badge */}
+                {(() => {
+                  const stock = selectedVariant ? selectedVariant.stock : product.stock;
+                  if (stock <= 0) return <span className="px-2.5 py-1 bg-red-100 text-red-700 border border-red-200 rounded-md text-[10px] font-extrabold uppercase tracking-widest whitespace-nowrap">Out of Stock</span>;
+                  if (stock <= 50) return <span className="px-2.5 py-1 bg-orange-100 text-orange-700 border border-orange-200 rounded-md text-[10px] font-extrabold uppercase tracking-widest whitespace-nowrap">Low Stock</span>;
+                  return <span className="px-2.5 py-1 bg-green-100 text-green-700 border border-green-200 rounded-md text-[10px] font-extrabold uppercase tracking-widest whitespace-nowrap">In Stock</span>;
+                })()}
+              </div>
             </div>
             
             {/* Rating summary */}

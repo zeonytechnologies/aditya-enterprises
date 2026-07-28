@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, ShieldCheck, FileCheck, Truck, Headphones } from 'lucide-react';
 import { FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
 import adityaLogo from '../assets/aditya-logo.png';
 import zeonyLogo from '../assets/zeony-logo.jpg';
+import { api } from '../services/supabase';
 
 export default function Footer() {
+  const [settings, setSettings] = useState(null);
+
+  useEffect(() => {
+    api.settings.get().then(setSettings).catch(console.error);
+  }, []);
+
   return (
     <footer className="bg-slate-900 text-slate-400 border-t border-slate-800 font-sans">
       
@@ -99,16 +106,16 @@ export default function Footer() {
               <li className="flex items-start">
                 <MapPin className="h-5 w-5 mr-3 text-blue-500 flex-shrink-0" />
                 <span className="text-slate-500">
-                  3/1, S p road cross, near paan beeda shop HKK Lane, Medarpet, Kumbarpet, Hakkim khallel khan lane, Nagarathpete, Bengaluru, Karnataka 560002
+                  {settings?.address || '3/1, S p road cross, near paan beeda shop HKK Lane, Medarpet, Kumbarpet, Hakkim khallel khan lane, Nagarathpete, Bengaluru, Karnataka 560002'}
                 </span>
               </li>
               <li className="flex items-center">
                 <Phone className="h-4 w-4 mr-3 text-blue-500" />
-                <a href="tel:+917483552250" className="hover:text-white transition">074835 52250</a>
+                <a href={`tel:${(settings?.mobile || '07483552250').replace(/\D/g, '')}`} className="hover:text-white transition">{settings?.mobile || '074835 52250'}</a>
               </li>
               <li className="flex items-center">
                 <Mail className="h-4 w-4 mr-3 text-blue-500" />
-                <a href="mailto:adityaenterprises.ck@gmail.com" className="hover:text-white transition">adityaenterprises.ck@gmail.com</a>
+                <a href={`mailto:${settings?.email || 'adityaenterprises.ck@gmail.com'}`} className="hover:text-white transition">{settings?.email || 'adityaenterprises.ck@gmail.com'}</a>
               </li>
             </ul>
           </div>
@@ -119,15 +126,15 @@ export default function Footer() {
         <div className="mt-12 pt-8 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between">
           <p className="text-sm text-slate-500 mb-4 md:mb-0">Connect with us on social media for updates and offers.</p>
           <div className="flex space-x-6">
-            <a href="https://www.instagram.com/ckp_group?utm_source=qr&igsh=cnN6eXE0eHB4eGQz" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition">
+            <a href={settings?.instagram_link || "https://www.instagram.com/ckp_group"} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition">
               <span className="sr-only">Instagram</span>
               <FaInstagram className="h-6 w-6" />
             </a>
-            <a href="https://www.linkedin.com/in/chetan-jain-aa6956342?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition">
+            <a href={settings?.linkedin_link || "https://www.linkedin.com/in/chetan-jain-aa6956342"} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition">
               <span className="sr-only">LinkedIn</span>
               <FaLinkedin className="h-6 w-6" />
             </a>
-            <a href="https://youtube.com/@adityaenterprisesckp?si=UDxVEYIHphWdcBhS" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition">
+            <a href={settings?.youtube_link || "https://youtube.com/@adityaenterprisesckp"} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition">
               <span className="sr-only">YouTube</span>
               <FaYoutube className="h-6 w-6" />
             </a>

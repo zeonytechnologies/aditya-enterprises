@@ -1281,11 +1281,57 @@ const SEED_LEADS = [
   { id: 'lead1', name: 'Alok Kumar', company_name: 'Kumar Engineering Works', email: 'alok@kumarengg.com', phone: '+91 9811112222', product_interest: 'Epoxy Resins', message: 'Looking for 500Kg monthly supply of Lapox Epoxy.', created_at: new Date(Date.now() - 3600000 * 24).toISOString() }
 ];
 
-const SEED_SITE_SETTINGS = [
-  { key: 'contact_phone', value: '+91 98765 43210' },
-  { key: 'contact_email', value: 'sales@adityaenterprises.com' },
-  { key: 'whatsapp_number', value: '919876543210' }
-];
+const SEED_SITE_SETTINGS = {
+  id: 1,
+  about_hero_subtitle: 'Your trusted B2B partner and Channel Partner (Distributor) for premium industrial adhesives, sealants, and hardware solutions since 2000.',
+  about_overview: '<strong>Aditya Enterprises</strong> is a leading manufacturer and channel partner of Pidilite Industries Ltd, Atul Ltd, Benson Polymer Ltd and Ozone hardware fitting and many more Adhesive related brands. We specialize in industrial adhesive tapes and surface protection solutions, serving diverse industries across India and global markets.\n\nWith a strong commitment to quality, innovation, and customer satisfaction, we provide reliable tape solutions designed to improve productivity, enhance packaging performance, and protect valuable surfaces during manufacturing, storage, transportation, and installation. Our extensive product portfolio includes Surface Protection Films, Cross Filament Tapes, Double Sided Tissue Tapes, Double Sided Polyester Tapes, Green Polyester Masking Tapes, HDPE Tapes, Duct Tapes, Floor Marking Tapes, and other specialty adhesive products.\n\nManufactured using premium-grade raw materials and advanced production processes, our tapes offer excellent adhesion, durability, temperature resistance, and consistent performance. Trusted by customers in packaging, automotive, construction, HVAC, electronics, metal fabrication, refrigeration, and engineering industries, we continue to deliver cost-effective and customized adhesive solutions that meet evolving industrial requirements.\n\nOur dedication to excellence, timely delivery, and continuous product development has established us as a preferred partner for businesses seeking high-performance industrial tapes and protective film solutions.',
+  google_reviews_link: 'https://share.google/fhMAACIVAMLSR57Rc',
+  email: 'adityaenterprises.ck@gmail.com',
+  mobile: '+91 74835 52250',
+  address: 'Aditya Enterprises, India',
+  instagram_link: 'https://instagram.com/adityaenterprises',
+  linkedin_link: 'https://linkedin.com/company/adityaenterprises',
+  youtube_link: 'https://youtube.com/@adityaenterprisesckp?si=UDxVEYIHphWdcBhS',
+  facebook_link: '',
+  google_reviews_data: [
+    {
+      name: "MALAY NIRAV",
+      meta: "Local Guide · 13 reviews · 1 photo",
+      time: "2 months ago",
+      text: "Genuine supplier, Simple and smooth purchase experience. Just called them for quotation, They sent quotation, agreed on deal, paid through UPI and they sent product through rapido parcel."
+    },
+    {
+      name: "Yash Thakur",
+      meta: "Local Guide · 18 reviews · 42 photos",
+      time: "11 months ago",
+      text: "Aditya Enterprises is very good in terms of goods and recommendations that they give. Mr Aditya, personally interact with the clients and assist to their needs. Helps on Sundays to get the goods delivered and he is there till the goods are delivered. Process is complet"
+    },
+    {
+      name: "Ankit Mangal",
+      meta: "1 review",
+      time: "5 months ago",
+      text: "Quick response and very supportive team. Aditya Enterprise handled everything efficiently and made the process smooth. Highly recommended!"
+    },
+    {
+      name: "Samriddhi Srikanth",
+      meta: "3 reviews",
+      time: "6 months ago",
+      text: "Helped me with my urgent requirement so very promptly. Even helping with the delivery of the items.\nDefinitely recommend their services.\nThank you!"
+    },
+    {
+      name: "Rajashekar Babaleshwar",
+      meta: "8 reviews · 1 photo",
+      time: "3 months ago",
+      text: "Very good response and best price avaliable in Falcofix Products Like D3 WR Gold,WR, UM & Ebs WP1 PVC Glue Very good customer service on pricing🙏🙏🎉🎉"
+    },
+    {
+      name: "Angel Sebastian",
+      meta: "3 reviews",
+      time: "a year ago",
+      text: "Amazing service Aditya Enterprise. I got to know about Aditya Enterprise through google, they were really too quick in terms of package and transportation services. Such a good service, clear communication, high quality products at reasonable price. We are glad that we found such a great enterprise in Bengaluru."
+    }
+  ]
+};
 
 export const initLocalDb = () => {
   if (!localStorage.getItem('aditya_brands') || !localStorage.getItem('aditya_products_v4')) {
@@ -1886,5 +1932,15 @@ export const db = {
       return userWithoutPassword;
     }
     return null;
+  },
+
+  getSettings: async () => {
+    let settings = JSON.parse(localStorage.getItem('aditya_site_settings')) || SEED_SITE_SETTINGS;
+    if (Array.isArray(settings)) settings = SEED_SITE_SETTINGS; // migrate old
+    return settings;
+  },
+  saveSettings: async (settings) => {
+    localStorage.setItem('aditya_site_settings', JSON.stringify(settings));
+    return settings;
   }
 };
