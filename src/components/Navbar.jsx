@@ -24,7 +24,8 @@ export default function Navbar() {
   const [showUserDropdown, setShowUserDropdown] = useState(false);
   const [allProducts, setAllProducts] = useState([]);
 
-  const searchRef = useRef(null);
+  const desktopSearchRef = useRef(null);
+  const mobileSearchRef = useRef(null);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -47,7 +48,10 @@ export default function Navbar() {
 
     // Click outside handlers
     const handleClickOutside = (event) => {
-      if (searchRef.current && !searchRef.current.contains(event.target)) {
+      const clickedOutsideDesktop = desktopSearchRef.current && !desktopSearchRef.current.contains(event.target);
+      const clickedOutsideMobile = mobileSearchRef.current && !mobileSearchRef.current.contains(event.target);
+      
+      if (clickedOutsideDesktop && clickedOutsideMobile) {
         setShowSuggestions(false);
       }
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -111,7 +115,7 @@ export default function Navbar() {
           </div>
 
           {/* Search Bar - Desktop */}
-          <div className="hidden md:flex flex-1 max-w-md mx-8 relative" ref={searchRef}>
+          <div className="hidden md:flex flex-1 max-w-md mx-8 relative" ref={desktopSearchRef}>
             <form onSubmit={handleSearchSubmit} className="w-full relative">
               <input
                 type="text"
@@ -263,23 +267,53 @@ export default function Navbar() {
 
           </div>
         </div>
+
+        {/* Search Bar - Mobile */}
+        <div className="md:hidden pb-4 px-2 relative" ref={mobileSearchRef}>
+          <form onSubmit={handleSearchSubmit} className="w-full relative">
+            <input
+              type="text"
+              placeholder="Search Adhesives, Brands..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onFocus={() => searchQuery.trim().length > 1 && setShowSuggestions(true)}
+              className="w-full py-2.5 pl-10 pr-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-900/70 text-[16px] focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-cyan-400 transition-all text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500"
+            />
+            <Search className="absolute left-3 top-3.5 h-4 w-4 text-slate-400" />
+          </form>
+
+          {/* Suggestions Dropdown */}
+          {showSuggestions && suggestions.length > 0 && (
+            <div className="absolute top-full left-0 w-full mt-1 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl z-50 overflow-hidden">
+              <div className="p-2 border-b border-slate-100 dark:border-slate-800 text-xs font-semibold text-slate-400">
+                SUGGESTED PRODUCTS
+              </div>
+              {suggestions.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => handleSuggestionClick(item.slug)}
+                  className="w-full flex items-center px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 text-left border-b border-slate-100 dark:border-slate-800/30 last:border-b-0"
+                >
+                  <img 
+                    src={item.images[0]} 
+                    alt={item.name} 
+                    className="w-8 h-8 rounded object-cover mr-3 bg-slate-100 dark:bg-slate-850" 
+                  />
+                  <div>
+                    <div className="text-sm font-medium text-slate-950 dark:text-white truncate max-w-[250px]">{item.name}</div>
+                    <div className="text-xs text-slate-400">{item.brand?.name} · {item.category?.name}</div>
+                  </div>
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Mobile Menu Panel */}
       {isOpen && (
         <div className="lg:hidden border-t border-slate-100 dark:border-slate-800/50 bg-white dark:bg-slate-950 px-4 py-6 space-y-4">
           
-          {/* Mobile Search */}
-          <form onSubmit={handleSearchSubmit} className="relative">
-            <input
-              type="text"
-              placeholder="Search products..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full py-2 pl-9 pr-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm"
-            />
-            <Search className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-          </form>
 
           <div className="flex flex-col space-y-3 font-semibold text-slate-700 dark:text-slate-200">
             <Link to="/shop" onClick={() => setIsOpen(false)} className="py-2 hover:text-blue-600 transition">Catalog</Link>

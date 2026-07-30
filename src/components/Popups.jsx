@@ -94,7 +94,7 @@ export default function PopupsManager() {
                 <p style="color: #475569; font-size: 16px;">Thank you<br />
                 Team:<br />
                 ADITYA ENTERPRISES<br />
-                Ckpgrouponline@gmail.com</p>
+                <a href="mailto:ckpgrouponline@gmail.com" style="color: #2563eb; text-decoration: none;">Ckpgrouponline@gmail.com</a></p>
               </div>
             `
         }).catch(err => console.error("Mail send failed", err));

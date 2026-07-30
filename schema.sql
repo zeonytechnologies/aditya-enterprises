@@ -16,6 +16,7 @@ DROP TABLE IF EXISTS public.rfqs CASCADE;
 DROP TABLE IF EXISTS public.payments CASCADE;
 DROP TABLE IF EXISTS public.order_items CASCADE;
 DROP TABLE IF EXISTS public.orders CASCADE;
+DROP TABLE IF EXISTS public.product_variants CASCADE;
 DROP TABLE IF EXISTS public.products CASCADE;
 DROP TABLE IF EXISTS public.brands CASCADE;
 DROP TABLE IF EXISTS public.categories CASCADE;
@@ -94,6 +95,22 @@ CREATE TABLE public.products (
     discount_percent NUMERIC(5, 2) DEFAULT 0.00 NOT NULL,
     tds_url TEXT,
     msds_url TEXT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
+);
+
+-- 4a. Product Variants
+CREATE TABLE public.product_variants (
+    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    product_id UUID REFERENCES public.products(id) ON DELETE CASCADE NOT NULL,
+    pack_size TEXT NOT NULL,
+    sku TEXT UNIQUE NOT NULL,
+    price NUMERIC(12, 2) NOT NULL,
+    mrp NUMERIC(12, 2) NOT NULL,
+    dealer_price NUMERIC(12, 2),
+    stock INTEGER NOT NULL DEFAULT 0,
+    moq INTEGER DEFAULT 1,
+    weight NUMERIC(10, 2),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
 );

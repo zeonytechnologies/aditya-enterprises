@@ -688,30 +688,33 @@ export const api = {
     getGSTReport: async () => {
       if (isSupabaseConfigured) {
         try {
-          const { data: items, error } = await supabase
-            .from('order_items')
-            .select('*, product:products(hsn_code)');
+          const { data: orders, error } = await supabase
+            .from('orders')
+            .select('*, items:order_items(*, product:products(hsn_code))')
+            .eq('status', 'Delivered');
             
-          if (!error && items) {
+          if (!error && orders) {
             const hsnGroups = {};
-            items.forEach(item => {
-              const hsn = item.product?.hsn_code || '35069190';
-              const price = parseFloat(item.price);
-              const qty = parseInt(item.quantity);
-              const gstPercent = parseFloat(item.gst_percent);
-              
-              const taxable = price * qty;
-              const gstAmt = taxable * (gstPercent / 100);
-              const totalVal = taxable + gstAmt;
-              
-              if (!hsnGroups[hsn]) {
-                hsnGroups[hsn] = { hsn, taxableValue: 0, cgst: 0, sgst: 0, totalGst: 0, totalSales: 0 };
-              }
-              hsnGroups[hsn].taxableValue += taxable;
-              hsnGroups[hsn].cgst += (gstAmt / 2);
-              hsnGroups[hsn].sgst += (gstAmt / 2);
-              hsnGroups[hsn].totalGst += gstAmt;
-              hsnGroups[hsn].totalSales += totalVal;
+            orders.forEach(order => {
+              (order.items || []).forEach(item => {
+                const hsn = item.product?.hsn_code || '35069190';
+                const price = parseFloat(item.price);
+                const qty = parseInt(item.quantity);
+                const gstPercent = parseFloat(item.gst_percent);
+                
+                const taxable = price * qty;
+                const gstAmt = taxable * (gstPercent / 100);
+                const totalVal = taxable + gstAmt;
+                
+                if (!hsnGroups[hsn]) {
+                  hsnGroups[hsn] = { hsn, taxableValue: 0, cgst: 0, sgst: 0, totalGst: 0, totalSales: 0 };
+                }
+                hsnGroups[hsn].taxableValue += taxable;
+                hsnGroups[hsn].cgst += (gstAmt / 2);
+                hsnGroups[hsn].sgst += (gstAmt / 2);
+                hsnGroups[hsn].totalGst += gstAmt;
+                hsnGroups[hsn].totalSales += totalVal;
+              });
             });
             return Object.values(hsnGroups);
           }
@@ -802,13 +805,21 @@ export const api = {
   },
 
   visitors: {
-    record: async (path) => {
+    record: async (path, deviceId = 'unknown') => {
       if (isSupabaseConfigured) {
         // Debounce or filter can be done on frontend
-        const { error } = await supabase.from('visitors').insert({ path });
-        if (error) console.error("Visitor track err", error);
+        // We catch errors in case device_id column doesn't exist on the Supabase side yet
+        try {
+          const { error } = await supabase.from('visitors').insert({ path, device_id: deviceId });
+          if (error && error.code === 'PGRST116') {
+             // Fallback if device_id is not in schema
+             await supabase.from('visitors').insert({ path });
+          }
+        } catch(e) {
+          await supabase.from('visitors').insert({ path });
+        }
       } else {
-        await db.recordVisitor(path);
+        await db.recordVisitor(path, deviceId);
       }
     },
     getStats: async () => {

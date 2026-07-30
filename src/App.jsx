@@ -52,9 +52,15 @@ function MainLayout({ children }) {
   const { pathname } = useLocation();
   
   useEffect(() => {
-    // Record visitor only once per device
+    // Record visitor only once per device using a persistent Device ID
+    let deviceId = localStorage.getItem('aditya_device_id');
+    if (!deviceId) {
+      deviceId = 'dev_' + Math.random().toString(36).substr(2, 10);
+      localStorage.setItem('aditya_device_id', deviceId);
+    }
+    
     if (!localStorage.getItem('hasVisited')) {
-      api.visitors.record(pathname).catch(() => {});
+      api.visitors.record(pathname, deviceId).catch(() => {});
       localStorage.setItem('hasVisited', 'true');
     }
   }, []); // Run once on mount

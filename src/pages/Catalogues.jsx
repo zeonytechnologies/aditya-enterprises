@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Download, FileText, Loader2, Search } from 'lucide-react';
+import { Download, FileText, Loader2, Search, Eye } from 'lucide-react';
 import { api } from '../services/supabase';
 
 export default function Catalogues() {
@@ -102,14 +102,25 @@ export default function Catalogues() {
                   {cat.description}
                 </p>
 
-                <a
-                  href={cat.file_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-3 bg-blue-50 hover:bg-blue-100 dark:bg-slate-800 dark:hover:bg-slate-700 text-blue-700 dark:text-cyan-400 font-bold rounded-xl flex items-center justify-center gap-2 transition"
-                >
-                  <Download className="h-4 w-4" /> Download PDF
-                </a>
+                <div className="flex gap-3 mt-auto">
+                  <a
+                    href={cat.file_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl flex items-center justify-center gap-2 transition shadow-sm"
+                  >
+                    <Eye className="h-4 w-4" /> View
+                  </a>
+                  <a
+                    href={cat.file_url}
+                    download
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 py-3 bg-blue-50 hover:bg-blue-100 dark:bg-slate-800 dark:hover:bg-slate-700 text-blue-700 dark:text-cyan-400 font-bold rounded-xl flex items-center justify-center gap-2 transition"
+                  >
+                    <Download className="h-4 w-4" /> Download
+                  </a>
+                </div>
               </div>
             ))}
           </div>

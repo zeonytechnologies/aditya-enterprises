@@ -180,3 +180,17 @@ body.dark ::-webkit-scrollbar-track {
 .img-zoom-container:hover img {
   transform: scale(1.08);
 }
+
+/* iOS Safari Input Zoom Fix & Dark Mode Text Color Fixes */
+@media screen and (max-width: 768px) {
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+}
+
+.dark input, .dark select, .dark textarea {
+  color: #f8fafc !important; /* text-slate-50 */
+}
+.dark input::placeholder, .dark textarea::placeholder {
+  color: #94a3b8 !important; /* text-slate-400 */
+}

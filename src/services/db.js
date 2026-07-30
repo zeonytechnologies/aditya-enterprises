@@ -37,7 +37,7 @@ const SEED_PRODUCTS = [
     dealer_price: 246.69,
     moq: 5,
     stock: 150,
-    sku: 'PID-FSH-BASE',
+    sku: 'CKP-PID-FSH-BASE',
     hsn_code: '35069190',
     gst_percent: 18.00,
     pack_size: '1 Kg Tub',
@@ -59,15 +59,140 @@ const SEED_PRODUCTS = [
     tds_url: '#',
     msds_url: '#',
     variants: [
-      { id: 'v1_1', pack_size: '1 Kg Tub', sku: 'PID-FSH-1KG', price: 334.75, mrp: 395.00, dealer_price: 246.69, stock: 150, moq: 5, weight: 1.00 },
-      { id: 'v1_2', pack_size: '2 Kg Tub', sku: 'PID-FSH-2KG', price: 614.41, mrp: 725.00, dealer_price: 471.26, stock: 80, moq: 5, weight: 2.00 },
-      { id: 'v1_3', pack_size: '5 Kg Tub', sku: 'PID-FSH-5KG', price: 1444.92, mrp: 1705.00, dealer_price: 1132.30, stock: 80, moq: 2, weight: 5.00 },
-      { id: 'v1_4', pack_size: '10 Kg Tub', sku: 'PID-FSH-10KG', price: 2779.66, mrp: 3280.00, dealer_price: 2173.60, stock: 45, moq: 1, weight: 10.00 },
-      { id: 'v1_5', pack_size: '20 Kg Tub', sku: 'PID-FSH-20KG', price: 5288.14, mrp: 6240.00, dealer_price: 4131.00, stock: 30, moq: 1, weight: 20.00 },
-      { id: 'v1_6', pack_size: '30 Kg Tub', sku: 'PID-FSH-30KG', price: 7703.39, mrp: 9090.00, dealer_price: 5998.20, stock: 25, moq: 1, weight: 30.00 },
-      { id: 'v1_7', pack_size: '50 Kg Drum', sku: 'PID-FSH-50KG', price: 12525.42, mrp: 14780.00, dealer_price: 9756.00, stock: 20, moq: 1, weight: 50.00 },
-      { id: 'v1_8', pack_size: '60 Kg Drum', sku: 'PID-FSH-60KG', price: 14148.31, mrp: 16695.00, dealer_price: 11287.80, stock: 15, moq: 1, weight: 60.00 }
+        {
+          id: 'v0_0',
+          pack_size: '60 KG',
+          sku: 'CKP-PID-FSH-60KG',
+          price: 11287.8,
+          mrp: 16695,
+          dealer_price: 13319.6,
+          stock: 100,
+          moq: 1,
+          weight: 60
+        },
+        {
+          id: 'v0_1',
+          pack_size: '50 KG',
+          sku: 'CKP-PID-FSH-50KG',
+          price: 9756,
+          mrp: 14780,
+          dealer_price: 11512.08,
+          stock: 100,
+          moq: 1,
+          weight: 50
+        },
+        {
+          id: 'v0_2',
+          pack_size: '30 KG',
+          sku: 'CKP-PID-FSH-30KG',
+          price: 5998.2,
+          mrp: 9090,
+          dealer_price: 7077.88,
+          stock: 100,
+          moq: 1,
+          weight: 30
+        },
+        {
+          id: 'v0_3',
+          pack_size: '20 KG',
+          sku: 'CKP-PID-FSH-20KG',
+          price: 4131,
+          mrp: 6240,
+          dealer_price: 4874.58,
+          stock: 100,
+          moq: 1,
+          weight: 20
+        },
+        {
+          id: 'v0_4',
+          pack_size: '10 KG',
+          sku: 'CKP-PID-FSH-10KG',
+          price: 2173.6,
+          mrp: 3280,
+          dealer_price: 2564.85,
+          stock: 100,
+          moq: 5,
+          weight: 10
+        },
+        {
+          id: 'v0_5',
+          pack_size: '5 KG',
+          sku: 'CKP-PID-FSH-5KG',
+          price: 1132.3,
+          mrp: 1705,
+          dealer_price: 1336.11,
+          stock: 100,
+          moq: 5,
+          weight: 5
+        },
+        {
+          id: 'v0_6',
+          pack_size: '2 KG',
+          sku: 'CKP-PID-FSH-2KG',
+          price: 471.26,
+          mrp: 725,
+          dealer_price: 556.09,
+          stock: 100,
+          moq: 5,
+          weight: 2
+        },
+        {
+          id: 'v0_7',
+          pack_size: '1 KG',
+          sku: 'CKP-PID-FSH-1KG',
+          price: 246.69,
+          mrp: 395,
+          dealer_price: 291.09,
+          stock: 100,
+          moq: 5,
+          weight: 1
+        },
+        {
+          id: 'v0_8',
+          pack_size: '500 GM',
+          sku: 'CKP-PID-FSH-500GM',
+          price: 132.61,
+          mrp: 215,
+          dealer_price: 156.48,
+          stock: 100,
+          moq: 5,
+          weight: 0.5
+        },
+        {
+          id: 'v0_9',
+          pack_size: '250 GM',
+          sku: 'CKP-PID-FSH-250GM',
+          price: 74.09,
+          mrp: 120,
+          dealer_price: 87.43,
+          stock: 100,
+          moq: 5,
+          weight: 0.25
+        },
+        {
+          id: 'v0_10',
+          pack_size: '125 GM',
+          sku: 'CKP-PID-FSH-125GM',
+          price: 39.53,
+          mrp: 70,
+          dealer_price: 46.65,
+          stock: 100,
+          moq: 5,
+          weight: 0.13
+        },
+        {
+          id: 'v0_11',
+          pack_size: '50 GM',
+          sku: 'CKP-PID-FSH-50GM',
+          price: 20.74,
+          mrp: 40,
+          dealer_price: 24.47,
+          stock: 100,
+          moq: 5,
+          weight: 0.05
+        }
     ]
+
   },
   {
     id: 'p2',
@@ -80,7 +205,7 @@ const SEED_PRODUCTS = [
     dealer_price: 1300.00,
     moq: 2,
     stock: 75,
-    sku: '3M-VHB-4910',
+    sku: 'CKP-3M-VHB-4910',
     hsn_code: '39191000',
     gst_percent: 18.00,
     pack_size: '25mm x 33m Roll',
@@ -102,7 +227,7 @@ const SEED_PRODUCTS = [
     tds_url: '#',
     msds_url: '#',
     variants: [
-      { id: 'v2_1', pack_size: '25mm x 33m Roll', sku: '3M-VHB-4910', price: 1540.00, mrp: 1800.00, dealer_price: 1300.00, stock: 75, moq: 2, weight: 0.45 }
+      { id: 'v2_1', pack_size: '25mm x 33m Roll', sku: 'CKP-3M-VHB-4910', price: 1540.00, mrp: 1800.00, dealer_price: 1300.00, stock: 75, moq: 2, weight: 0.45 }
     ]
   },
   {
@@ -116,7 +241,7 @@ const SEED_PRODUCTS = [
     dealer_price: 240.00,
     moq: 10,
     stock: 250,
-    sku: 'AR-STD-320',
+    sku: 'CKP-AR-STD-320',
     hsn_code: '35069110',
     gst_percent: 18.00,
     pack_size: '180g Combined Pack',
@@ -138,7 +263,7 @@ const SEED_PRODUCTS = [
     tds_url: '#',
     msds_url: '#',
     variants: [
-      { id: 'v3_1', pack_size: '180g Combined Pack', sku: 'AR-STD-320', price: 290.00, mrp: 320.00, dealer_price: 240.00, stock: 250, moq: 10, weight: 0.22 }
+      { id: 'v3_1', pack_size: '180g Combined Pack', sku: 'CKP-AR-STD-320', price: 290.00, mrp: 320.00, dealer_price: 240.00, stock: 250, moq: 10, weight: 0.22 }
     ]
   },
   {
@@ -152,7 +277,7 @@ const SEED_PRODUCTS = [
     dealer_price: 145.00,
     moq: 6,
     stock: 250,
-    sku: 'DF-LW-BASE',
+    sku: 'CKP-DF-LW-BASE',
     hsn_code: '38244090',
     gst_percent: 18.00,
     pack_size: '1 Litre Can',
@@ -173,13 +298,13 @@ const SEED_PRODUCTS = [
     tds_url: '#',
     msds_url: '#',
     variants: [
-      { id: 'v4_1', pack_size: '200 ml Can', sku: 'DF-LW-200ML', price: 55.08, mrp: 65.00, dealer_price: 38.00, stock: 300, moq: 10, weight: 0.22 },
-      { id: 'v4_2', pack_size: '1 Litre Can', sku: 'DF-LW-1L', price: 177.97, mrp: 210.00, dealer_price: 145.00, stock: 250, moq: 6, weight: 1.10 },
-      { id: 'v4_3', pack_size: '5 Litre Can', sku: 'DF-LW-5L', price: 805.08, mrp: 950.00, dealer_price: 650.00, stock: 120, moq: 2, weight: 5.30 },
-      { id: 'v4_4', pack_size: '10 Litre Can', sku: 'DF-LW-10L', price: 1525.42, mrp: 1800.00, dealer_price: 1250.00, stock: 80, moq: 1, weight: 10.50 },
-      { id: 'v4_5', pack_size: '20 Litre Can', sku: 'DF-LW-20L', price: 2881.36, mrp: 3400.00, dealer_price: 2350.00, stock: 50, moq: 1, weight: 21.00 },
-      { id: 'v4_6', pack_size: '50 Litre Carboy', sku: 'DF-LW-50L', price: 6949.15, mrp: 8200.00, dealer_price: 5800.00, stock: 20, moq: 1, weight: 52.00 },
-      { id: 'v4_7', pack_size: '100 Litre Carboy', sku: 'DF-LW-100L', price: 13389.83, mrp: 15800.00, dealer_price: 11200.00, stock: 15, moq: 1, weight: 104.00 }
+      { id: 'v4_1', pack_size: '200 ml Can', sku: 'CKP-DF-LW-200ML', price: 55.08, mrp: 65.00, dealer_price: 38.00, stock: 300, moq: 10, weight: 0.22 },
+      { id: 'v4_2', pack_size: '1 Litre Can', sku: 'CKP-DF-LW-1L', price: 177.97, mrp: 210.00, dealer_price: 145.00, stock: 250, moq: 6, weight: 1.10 },
+      { id: 'v4_3', pack_size: '5 Litre Can', sku: 'CKP-DF-LW-5L', price: 805.08, mrp: 950.00, dealer_price: 650.00, stock: 120, moq: 2, weight: 5.30 },
+      { id: 'v4_4', pack_size: '10 Litre Can', sku: 'CKP-DF-LW-10L', price: 1525.42, mrp: 1800.00, dealer_price: 1250.00, stock: 80, moq: 1, weight: 10.50 },
+      { id: 'v4_5', pack_size: '20 Litre Can', sku: 'CKP-DF-LW-20L', price: 2881.36, mrp: 3400.00, dealer_price: 2350.00, stock: 50, moq: 1, weight: 21.00 },
+      { id: 'v4_6', pack_size: '50 Litre Carboy', sku: 'CKP-DF-LW-50L', price: 6949.15, mrp: 8200.00, dealer_price: 5800.00, stock: 20, moq: 1, weight: 52.00 },
+      { id: 'v4_7', pack_size: '100 Litre Carboy', sku: 'CKP-DF-LW-100L', price: 13389.83, mrp: 15800.00, dealer_price: 11200.00, stock: 15, moq: 1, weight: 104.00 }
     ]
   },
   {
@@ -193,7 +318,7 @@ const SEED_PRODUCTS = [
     dealer_price: 2100.00,
     moq: 1,
     stock: 40,
-    sku: 'OZ-OFS-84',
+    sku: 'CKP-OZ-OFS-84',
     hsn_code: '83024110',
     gst_percent: 18.00,
     pack_size: 'Single Unit Box',
@@ -215,7 +340,7 @@ const SEED_PRODUCTS = [
     tds_url: '#',
     msds_url: '#',
     variants: [
-      { id: 'v5_1', pack_size: 'Single Unit Box', sku: 'OZ-OFS-84', price: 2450.00, mrp: 2900.00, dealer_price: 2100.00, stock: 40, moq: 1, weight: 5.20 }
+      { id: 'v5_1', pack_size: 'Single Unit Box', sku: 'CKP-OZ-OFS-84', price: 2450.00, mrp: 2900.00, dealer_price: 2100.00, stock: 40, moq: 1, weight: 5.20 }
     ]
   },
   {
@@ -229,7 +354,7 @@ const SEED_PRODUCTS = [
     dealer_price: 275.00,
     moq: 12,
     stock: 144,
-    sku: 'BOS-PU91-GR',
+    sku: 'CKP-BOS-PU91-GR',
     hsn_code: '32141000',
     gst_percent: 18.00,
     pack_size: '600ml Sausage Roll',
@@ -251,7 +376,7 @@ const SEED_PRODUCTS = [
     tds_url: '#',
     msds_url: '#',
     variants: [
-      { id: 'v6_1', pack_size: '600ml Sausage Roll', sku: 'BOS-PU91-GR', price: 330.50, mrp: 390.00, dealer_price: 275.00, stock: 144, moq: 12, weight: 0.85 }
+      { id: 'v6_1', pack_size: '600ml Sausage Roll', sku: 'CKP-BOS-PU91-GR', price: 330.50, mrp: 390.00, dealer_price: 275.00, stock: 144, moq: 12, weight: 0.85 }
     ]
   },
   {
@@ -265,7 +390,7 @@ const SEED_PRODUCTS = [
     dealer_price: 276.81,
     moq: 5,
     stock: 120,
-    sku: 'PID-SPX-BASE',
+    sku: 'CKP-PID-SPX-BASE',
     hsn_code: '35069190',
     gst_percent: 18.00,
     pack_size: '1 Kg Tub',
@@ -286,13 +411,13 @@ const SEED_PRODUCTS = [
     tds_url: '#',
     msds_url: '#',
     variants: [
-      { id: 'v7_1', pack_size: '1 Kg Tub', sku: 'PID-SPX-1KG', price: 368.64, mrp: 435.00, dealer_price: 276.81, stock: 120, moq: 5, weight: 1.00 },
-      { id: 'v7_2', pack_size: '2 Kg Tub', sku: 'PID-SPX-2KG', price: 673.73, mrp: 795.00, dealer_price: 533.36, stock: 60, moq: 5, weight: 2.00 },
-      { id: 'v7_3', pack_size: '5 Kg Tub', sku: 'PID-SPX-5KG', price: 1601.69, mrp: 1890.00, dealer_price: 1282.95, stock: 60, moq: 2, weight: 5.00 },
-      { id: 'v7_4', pack_size: '10 Kg Tub', sku: 'PID-SPX-10KG', price: 3063.56, mrp: 3615.00, dealer_price: 2467.00, stock: 40, moq: 1, weight: 10.00 },
-      { id: 'v7_5', pack_size: '20 Kg Tub', sku: 'PID-SPX-20KG', price: 5868.64, mrp: 6925.00, dealer_price: 4726.20, stock: 25, moq: 1, weight: 20.00 },
-      { id: 'v7_6', pack_size: '30 Kg Tub', sku: 'PID-SPX-30KG', price: 8622.88, mrp: 10175.00, dealer_price: 6976.80, stock: 20, moq: 1, weight: 30.00 },
-      { id: 'v7_7', pack_size: '50 Kg Drum', sku: 'PID-SPX-50KG', price: 14050.85, mrp: 16580.00, dealer_price: 11377.50, stock: 10, moq: 1, weight: 50.00 }
+      { id: 'v7_1', pack_size: '1 Kg Tub', sku: 'CKP-PID-SPX-1KG', price: 368.64, mrp: 435.00, dealer_price: 276.81, stock: 120, moq: 5, weight: 1.00 },
+      { id: 'v7_2', pack_size: '2 Kg Tub', sku: 'CKP-PID-SPX-2KG', price: 673.73, mrp: 795.00, dealer_price: 533.36, stock: 60, moq: 5, weight: 2.00 },
+      { id: 'v7_3', pack_size: '5 Kg Tub', sku: 'CKP-PID-SPX-5KG', price: 1601.69, mrp: 1890.00, dealer_price: 1282.95, stock: 60, moq: 2, weight: 5.00 },
+      { id: 'v7_4', pack_size: '10 Kg Tub', sku: 'CKP-PID-SPX-10KG', price: 3063.56, mrp: 3615.00, dealer_price: 2467.00, stock: 40, moq: 1, weight: 10.00 },
+      { id: 'v7_5', pack_size: '20 Kg Tub', sku: 'CKP-PID-SPX-20KG', price: 5868.64, mrp: 6925.00, dealer_price: 4726.20, stock: 25, moq: 1, weight: 20.00 },
+      { id: 'v7_6', pack_size: '30 Kg Tub', sku: 'CKP-PID-SPX-30KG', price: 8622.88, mrp: 10175.00, dealer_price: 6976.80, stock: 20, moq: 1, weight: 30.00 },
+      { id: 'v7_7', pack_size: '50 Kg Drum', sku: 'CKP-PID-SPX-50KG', price: 14050.85, mrp: 16580.00, dealer_price: 11377.50, stock: 10, moq: 1, weight: 50.00 }
     ]
   },
   {
@@ -306,7 +431,7 @@ const SEED_PRODUCTS = [
     dealer_price: 306.08,
     moq: 5,
     stock: 110,
-    sku: 'PID-MAR-BASE',
+    sku: 'CKP-PID-MAR-BASE',
     hsn_code: '35069190',
     gst_percent: 18.00,
     pack_size: '1 Kg Tub',
@@ -327,15 +452,107 @@ const SEED_PRODUCTS = [
     tds_url: '#',
     msds_url: '#',
     variants: [
-      { id: 'v8_1', pack_size: '1 Kg Tub', sku: 'PID-MAR-1KG', price: 394.07, mrp: 465.00, dealer_price: 306.08, stock: 110, moq: 5, weight: 1.00 },
-      { id: 'v8_2', pack_size: '2 Kg Tub', sku: 'PID-MAR-2KG', price: 733.05, mrp: 865.00, dealer_price: 588.02, stock: 60, moq: 5, weight: 2.00 },
-      { id: 'v8_3', pack_size: '5 Kg Tub', sku: 'PID-MAR-5KG', price: 1745.76, mrp: 2060.00, dealer_price: 1403.95, stock: 55, moq: 2, weight: 5.00 },
-      { id: 'v8_4', pack_size: '10 Kg Tub', sku: 'PID-MAR-10KG', price: 3347.46, mrp: 3950.00, dealer_price: 2716.30, stock: 35, moq: 1, weight: 10.00 },
-      { id: 'v8_5', pack_size: '20 Kg Tub', sku: 'PID-MAR-20KG', price: 6453.39, mrp: 7615.00, dealer_price: 5222.40, stock: 20, moq: 1, weight: 20.00 },
-      { id: 'v8_6', pack_size: '30 Kg Tub', sku: 'PID-MAR-30KG', price: 9483.05, mrp: 11190.00, dealer_price: 7702.50, stock: 15, moq: 1, weight: 30.00 },
-      { id: 'v8_7', pack_size: '50 Kg Drum', sku: 'PID-MAR-50KG', price: 15478.81, mrp: 18265.00, dealer_price: 12553.50, stock: 10, moq: 1, weight: 50.00 },
-      { id: 'v8_8', pack_size: '60 Kg Drum', sku: 'PID-MAR-60KG', price: 18262.71, mrp: 21550.00, dealer_price: 14883.60, stock: 8, moq: 1, weight: 60.00 }
+        {
+          id: 'v1_0',
+          pack_size: '60 KG',
+          sku: 'CKP-PID-MAR-60KG',
+          price: 14883.6,
+          mrp: 21550,
+          dealer_price: 17562.65,
+          stock: 100,
+          moq: 1,
+          weight: 60
+        },
+        {
+          id: 'v1_1',
+          pack_size: '50 KG',
+          sku: 'CKP-PID-MAR-50KG',
+          price: 12553.5,
+          mrp: 18265,
+          dealer_price: 14813.13,
+          stock: 100,
+          moq: 1,
+          weight: 50
+        },
+        {
+          id: 'v1_2',
+          pack_size: '30 KG',
+          sku: 'CKP-PID-MAR-30KG',
+          price: 7697.4,
+          mrp: 11190,
+          dealer_price: 9082.93,
+          stock: 100,
+          moq: 1,
+          weight: 30
+        },
+        {
+          id: 'v1_3',
+          pack_size: '20 KG',
+          sku: 'CKP-PID-MAR-20KG',
+          price: 5222.4,
+          mrp: 7615,
+          dealer_price: 6162.43,
+          stock: 100,
+          moq: 1,
+          weight: 20
+        },
+        {
+          id: 'v1_4',
+          pack_size: '10 KG',
+          sku: 'CKP-PID-MAR-10KG',
+          price: 2716.3,
+          mrp: 3950,
+          dealer_price: 3205.23,
+          stock: 100,
+          moq: 5,
+          weight: 10
+        },
+        {
+          id: 'v1_5',
+          pack_size: '5 KG',
+          sku: 'CKP-PID-MAR-5KG',
+          price: 1404,
+          mrp: 2060,
+          dealer_price: 1656.66,
+          stock: 100,
+          moq: 5,
+          weight: 5
+        },
+        {
+          id: 'v1_6',
+          pack_size: '2 KG',
+          sku: 'CKP-PID-MAR-2KG',
+          price: 588.02,
+          mrp: 865,
+          dealer_price: 693.86,
+          stock: 100,
+          moq: 5,
+          weight: 2
+        },
+        {
+          id: 'v1_7',
+          pack_size: '1 KG',
+          sku: 'CKP-PID-MAR-1KG',
+          price: 306.08,
+          mrp: 465,
+          dealer_price: 361.17,
+          stock: 100,
+          moq: 5,
+          weight: 1
+        },
+        {
+          id: 'v1_8',
+          pack_size: '500 GM',
+          sku: 'CKP-PID-MAR-500GM',
+          price: 163.63,
+          mrp: 255,
+          dealer_price: 193.08,
+          stock: 100,
+          moq: 5,
+          weight: 0.5
+        }
     ]
+
   },
   {
     id: 'p9',
@@ -348,7 +565,7 @@ const SEED_PRODUCTS = [
     dealer_price: 303.00,
     moq: 5,
     stock: 100,
-    sku: 'PID-WGM-BASE',
+    sku: 'CKP-PID-WGM-BASE',
     hsn_code: '35069190',
     gst_percent: 18.00,
     pack_size: '1 Kg Tub',
@@ -369,12 +586,12 @@ const SEED_PRODUCTS = [
     tds_url: '#',
     msds_url: '#',
     variants: [
-      { id: 'v9_1', pack_size: '1 Kg Tub', sku: 'PID-WGM-1KG', price: 394.07, mrp: 465.00, dealer_price: 303.00, stock: 100, moq: 5, weight: 1.00 },
-      { id: 'v9_2', pack_size: '2 Kg Tub', sku: 'PID-WGM-2KG', price: 771.19, mrp: 910.00, dealer_price: 584.00, stock: 50, moq: 5, weight: 2.00 },
-      { id: 'v9_3', pack_size: '5 Kg Tub', sku: 'PID-WGM-5KG', price: 1792.37, mrp: 2115.00, dealer_price: 1405.00, stock: 50, moq: 2, weight: 5.00 },
-      { id: 'v9_4', pack_size: '10 Kg Tub', sku: 'PID-WGM-10KG', price: 3415.25, mrp: 4030.00, dealer_price: 2720.00, stock: 30, moq: 1, weight: 10.00 },
-      { id: 'v9_5', pack_size: '20 Kg Tub', sku: 'PID-WGM-20KG', price: 6716.10, mrp: 7925.00, dealer_price: 5260.00, stock: 20, moq: 1, weight: 20.00 },
-      { id: 'v9_6', pack_size: '50 Kg Drum', sku: 'PID-WGM-50KG', price: 16008.47, mrp: 18890.00, dealer_price: 12750.00, stock: 10, moq: 1, weight: 50.00 }
+      { id: 'v9_1', pack_size: '1 Kg Tub', sku: 'CKP-PID-WGM-1KG', price: 394.07, mrp: 465.00, dealer_price: 303.00, stock: 100, moq: 5, weight: 1.00 },
+      { id: 'v9_2', pack_size: '2 Kg Tub', sku: 'CKP-PID-WGM-2KG', price: 771.19, mrp: 910.00, dealer_price: 584.00, stock: 50, moq: 5, weight: 2.00 },
+      { id: 'v9_3', pack_size: '5 Kg Tub', sku: 'CKP-PID-WGM-5KG', price: 1792.37, mrp: 2115.00, dealer_price: 1405.00, stock: 50, moq: 2, weight: 5.00 },
+      { id: 'v9_4', pack_size: '10 Kg Tub', sku: 'CKP-PID-WGM-10KG', price: 3415.25, mrp: 4030.00, dealer_price: 2720.00, stock: 30, moq: 1, weight: 10.00 },
+      { id: 'v9_5', pack_size: '20 Kg Tub', sku: 'CKP-PID-WGM-20KG', price: 6716.10, mrp: 7925.00, dealer_price: 5260.00, stock: 20, moq: 1, weight: 20.00 },
+      { id: 'v9_6', pack_size: '50 Kg Drum', sku: 'CKP-PID-WGM-50KG', price: 16008.47, mrp: 18890.00, dealer_price: 12750.00, stock: 10, moq: 1, weight: 50.00 }
     ]
   },
   {
@@ -388,7 +605,7 @@ const SEED_PRODUCTS = [
     dealer_price: 282.79,
     moq: 6,
     stock: 120,
-    sku: 'PID-TMW-BASE',
+    sku: 'CKP-PID-TMW-BASE',
     hsn_code: '38089190',
     gst_percent: 18.00,
     pack_size: '1 Litre Can',
@@ -409,8 +626,8 @@ const SEED_PRODUCTS = [
     tds_url: '#',
     msds_url: '#',
     variants: [
-      { id: 'v10_1', pack_size: '1 Litre Can', sku: 'PID-TMW-1L', price: 368.64, mrp: 435.00, dealer_price: 282.79, stock: 120, moq: 6, weight: 0.90 },
-      { id: 'v10_2', pack_size: '5 Litre Can', sku: 'PID-TMW-5L', price: 1720.34, mrp: 2030.00, dealer_price: 1357.15, stock: 50, moq: 2, weight: 4.50 }
+      { id: 'v10_1', pack_size: '1 Litre Can', sku: 'CKP-PID-TMW-1L', price: 368.64, mrp: 435.00, dealer_price: 282.79, stock: 120, moq: 6, weight: 0.90 },
+      { id: 'v10_2', pack_size: '5 Litre Can', sku: 'CKP-PID-TMW-5L', price: 1720.34, mrp: 2030.00, dealer_price: 1357.15, stock: 50, moq: 2, weight: 4.50 }
     ]
   },
   {
@@ -424,7 +641,7 @@ const SEED_PRODUCTS = [
     dealer_price: 200.40,
     moq: 6,
     stock: 140,
-    sku: 'PID-TMSP-BASE',
+    sku: 'CKP-PID-TMSP-BASE',
     hsn_code: '38089190',
     gst_percent: 18.00,
     pack_size: '500 ml Spray Can',
@@ -445,9 +662,9 @@ const SEED_PRODUCTS = [
     tds_url: '#',
     msds_url: '#',
     variants: [
-      { id: 'v11_1', pack_size: '320 ml Spray', sku: 'PID-TMSP-320ML', price: 211.86, mrp: 250.00, dealer_price: 157.00, stock: 200, moq: 6, weight: 0.28 },
-      { id: 'v11_2', pack_size: '500 ml Spray', sku: 'PID-TMSP-500ML', price: 271.19, mrp: 320.00, dealer_price: 200.40, stock: 140, moq: 6, weight: 0.42 },
-      { id: 'v11_3', pack_size: '1 Litre Spray', sku: 'PID-TMSP-1L', price: 449.15, mrp: 530.00, dealer_price: 335.30, stock: 80, moq: 4, weight: 0.90 }
+      { id: 'v11_1', pack_size: '320 ml Spray', sku: 'CKP-PID-TMSP-320ML', price: 211.86, mrp: 250.00, dealer_price: 157.00, stock: 200, moq: 6, weight: 0.28 },
+      { id: 'v11_2', pack_size: '500 ml Spray', sku: 'CKP-PID-TMSP-500ML', price: 271.19, mrp: 320.00, dealer_price: 200.40, stock: 140, moq: 6, weight: 0.42 },
+      { id: 'v11_3', pack_size: '1 Litre Spray', sku: 'CKP-PID-TMSP-1L', price: 449.15, mrp: 530.00, dealer_price: 335.30, stock: 80, moq: 4, weight: 0.90 }
     ]
   },
   {
@@ -461,7 +678,7 @@ const SEED_PRODUCTS = [
     dealer_price: 246.40,
     moq: 5,
     stock: 200,
-    sku: 'FALCO-WR-BASE',
+    sku: 'CKP-FALCO-WR-BASE',
     hsn_code: '35069190',
     gst_percent: 18.00,
     pack_size: '800 gm PP',
@@ -482,16 +699,16 @@ const SEED_PRODUCTS = [
     tds_url: '#',
     msds_url: '#',
     variants: [
-      { id: 'vf1_1', pack_size: '800 gm PP', sku: 'FALCO-WR-800G', price: 305.08, mrp: 360.00, dealer_price: 246.40, stock: 200, moq: 5, weight: 0.80 },
-      { id: 'vf1_2', pack_size: '1 Kg Jar', sku: 'FALCO-WR-1KG', price: 381.36, mrp: 450.00, dealer_price: 296.00, stock: 150, moq: 5, weight: 1.00 },
-      { id: 'vf1_3', pack_size: '2 Kg Jar', sku: 'FALCO-WR-2KG', price: 686.44, mrp: 810.00, dealer_price: 580.00, stock: 100, moq: 5, weight: 2.00 },
-      { id: 'vf1_4', pack_size: '5 Kg Bucket', sku: 'FALCO-WR-5KG', price: 1728.81, mrp: 2040.00, dealer_price: 1440.00, stock: 80, moq: 2, weight: 5.00 },
-      { id: 'vf1_5', pack_size: '10 Kg Bucket', sku: 'FALCO-WR-10KG', price: 3271.19, mrp: 3860.00, dealer_price: 2830.00, stock: 50, moq: 1, weight: 10.00 },
-      { id: 'vf1_6', pack_size: '20 Kg Bucket', sku: 'FALCO-WR-20KG', price: 6533.90, mrp: 7710.00, dealer_price: 5600.00, stock: 30, moq: 1, weight: 20.00 },
-      { id: 'vf1_7', pack_size: '25 Kg Bucket', sku: 'FALCO-WR-25KG', price: 8474.58, mrp: 10000.00, dealer_price: 7000.00, stock: 20, moq: 1, weight: 25.00 },
-      { id: 'vf1_8', pack_size: '50 Kg Carboy', sku: 'FALCO-WR-50KG', price: 16194.92, mrp: 19110.00, dealer_price: 13950.00, stock: 15, moq: 1, weight: 50.00 },
-      { id: 'vf1_9', pack_size: '55 Kg Carboy', sku: 'FALCO-WR-55KG', price: 18898.31, mrp: 22300.00, dealer_price: 15290.00, stock: 10, moq: 1, weight: 55.00 },
-      { id: 'vf1_10', pack_size: '60 Kg Carboy', sku: 'FALCO-WR-60KG', price: 18983.05, mrp: 22400.00, dealer_price: 16380.00, stock: 8, moq: 1, weight: 60.00 }
+      { id: 'vf1_1', pack_size: '800 gm PP', sku: 'CKP-FALCO-WR-800G', price: 305.08, mrp: 360.00, dealer_price: 246.40, stock: 200, moq: 5, weight: 0.80 },
+      { id: 'vf1_2', pack_size: '1 Kg Jar', sku: 'CKP-FALCO-WR-1KG', price: 381.36, mrp: 450.00, dealer_price: 296.00, stock: 150, moq: 5, weight: 1.00 },
+      { id: 'vf1_3', pack_size: '2 Kg Jar', sku: 'CKP-FALCO-WR-2KG', price: 686.44, mrp: 810.00, dealer_price: 580.00, stock: 100, moq: 5, weight: 2.00 },
+      { id: 'vf1_4', pack_size: '5 Kg Bucket', sku: 'CKP-FALCO-WR-5KG', price: 1728.81, mrp: 2040.00, dealer_price: 1440.00, stock: 80, moq: 2, weight: 5.00 },
+      { id: 'vf1_5', pack_size: '10 Kg Bucket', sku: 'CKP-FALCO-WR-10KG', price: 3271.19, mrp: 3860.00, dealer_price: 2830.00, stock: 50, moq: 1, weight: 10.00 },
+      { id: 'vf1_6', pack_size: '20 Kg Bucket', sku: 'CKP-FALCO-WR-20KG', price: 6533.90, mrp: 7710.00, dealer_price: 5600.00, stock: 30, moq: 1, weight: 20.00 },
+      { id: 'vf1_7', pack_size: '25 Kg Bucket', sku: 'CKP-FALCO-WR-25KG', price: 8474.58, mrp: 10000.00, dealer_price: 7000.00, stock: 20, moq: 1, weight: 25.00 },
+      { id: 'vf1_8', pack_size: '50 Kg Carboy', sku: 'CKP-FALCO-WR-50KG', price: 16194.92, mrp: 19110.00, dealer_price: 13950.00, stock: 15, moq: 1, weight: 50.00 },
+      { id: 'vf1_9', pack_size: '55 Kg Carboy', sku: 'CKP-FALCO-WR-55KG', price: 18898.31, mrp: 22300.00, dealer_price: 15290.00, stock: 10, moq: 1, weight: 55.00 },
+      { id: 'vf1_10', pack_size: '60 Kg Carboy', sku: 'CKP-FALCO-WR-60KG', price: 18983.05, mrp: 22400.00, dealer_price: 16380.00, stock: 8, moq: 1, weight: 60.00 }
     ]
   },
   {
@@ -505,7 +722,7 @@ const SEED_PRODUCTS = [
     dealer_price: 198.00,
     moq: 5,
     stock: 180,
-    sku: 'FALCO-ULTRA-BASE',
+    sku: 'CKP-FALCO-ULTRA-BASE',
     hsn_code: '35069190',
     gst_percent: 18.00,
     pack_size: '800 gm PP',
@@ -526,16 +743,16 @@ const SEED_PRODUCTS = [
     tds_url: '#',
     msds_url: '#',
     variants: [
-      { id: 'vf2_1', pack_size: '800 gm PP', sku: 'FALCO-ULTRA-800G', price: 254.24, mrp: 300.00, dealer_price: 198.00, stock: 180, moq: 5, weight: 0.80 },
-      { id: 'vf2_2', pack_size: '1 Kg Jar', sku: 'FALCO-ULTRA-1KG', price: 345.76, mrp: 408.00, dealer_price: 271.50, stock: 140, moq: 5, weight: 1.00 },
-      { id: 'vf2_3', pack_size: '2 Kg Jar', sku: 'FALCO-ULTRA-2KG', price: 627.12, mrp: 740.00, dealer_price: 517.00, stock: 90, moq: 5, weight: 2.00 },
-      { id: 'vf2_4', pack_size: '5 Kg Jar', sku: 'FALCO-ULTRA-5KG', price: 1508.47, mrp: 1780.00, dealer_price: 1242.50, stock: 70, moq: 2, weight: 5.00 },
-      { id: 'vf2_5', pack_size: '10 Kg Bucket', sku: 'FALCO-ULTRA-10KG', price: 2881.36, mrp: 3400.00, dealer_price: 2395.00, stock: 45, moq: 1, weight: 10.00 },
-      { id: 'vf2_6', pack_size: '20 Kg Bucket', sku: 'FALCO-ULTRA-20KG', price: 5525.42, mrp: 6520.00, dealer_price: 4610.00, stock: 30, moq: 1, weight: 20.00 },
-      { id: 'vf2_7', pack_size: '25 Kg Bucket', sku: 'FALCO-ULTRA-25KG', price: 7203.39, mrp: 8500.00, dealer_price: 5687.50, stock: 25, moq: 1, weight: 25.00 },
-      { id: 'vf2_8', pack_size: '50 Kg Carboy', sku: 'FALCO-ULTRA-50KG', price: 13474.58, mrp: 15900.00, dealer_price: 11075.00, stock: 10, moq: 1, weight: 50.00 },
-      { id: 'vf2_9', pack_size: '55 Kg Carboy', sku: 'FALCO-ULTRA-55KG', price: 15084.75, mrp: 17800.00, dealer_price: 12292.50, stock: 10, moq: 1, weight: 55.00 },
-      { id: 'vf2_10', pack_size: '60 Kg Carboy', sku: 'FALCO-ULTRA-60KG', price: 15203.39, mrp: 17940.00, dealer_price: 12990.00, stock: 8, moq: 1, weight: 60.00 }
+      { id: 'vf2_1', pack_size: '800 gm PP', sku: 'CKP-FALCO-ULTRA-800G', price: 254.24, mrp: 300.00, dealer_price: 198.00, stock: 180, moq: 5, weight: 0.80 },
+      { id: 'vf2_2', pack_size: '1 Kg Jar', sku: 'CKP-FALCO-ULTRA-1KG', price: 345.76, mrp: 408.00, dealer_price: 271.50, stock: 140, moq: 5, weight: 1.00 },
+      { id: 'vf2_3', pack_size: '2 Kg Jar', sku: 'CKP-FALCO-ULTRA-2KG', price: 627.12, mrp: 740.00, dealer_price: 517.00, stock: 90, moq: 5, weight: 2.00 },
+      { id: 'vf2_4', pack_size: '5 Kg Jar', sku: 'CKP-FALCO-ULTRA-5KG', price: 1508.47, mrp: 1780.00, dealer_price: 1242.50, stock: 70, moq: 2, weight: 5.00 },
+      { id: 'vf2_5', pack_size: '10 Kg Bucket', sku: 'CKP-FALCO-ULTRA-10KG', price: 2881.36, mrp: 3400.00, dealer_price: 2395.00, stock: 45, moq: 1, weight: 10.00 },
+      { id: 'vf2_6', pack_size: '20 Kg Bucket', sku: 'CKP-FALCO-ULTRA-20KG', price: 5525.42, mrp: 6520.00, dealer_price: 4610.00, stock: 30, moq: 1, weight: 20.00 },
+      { id: 'vf2_7', pack_size: '25 Kg Bucket', sku: 'CKP-FALCO-ULTRA-25KG', price: 7203.39, mrp: 8500.00, dealer_price: 5687.50, stock: 25, moq: 1, weight: 25.00 },
+      { id: 'vf2_8', pack_size: '50 Kg Carboy', sku: 'CKP-FALCO-ULTRA-50KG', price: 13474.58, mrp: 15900.00, dealer_price: 11075.00, stock: 10, moq: 1, weight: 50.00 },
+      { id: 'vf2_9', pack_size: '55 Kg Carboy', sku: 'CKP-FALCO-ULTRA-55KG', price: 15084.75, mrp: 17800.00, dealer_price: 12292.50, stock: 10, moq: 1, weight: 55.00 },
+      { id: 'vf2_10', pack_size: '60 Kg Carboy', sku: 'CKP-FALCO-ULTRA-60KG', price: 15203.39, mrp: 17940.00, dealer_price: 12990.00, stock: 8, moq: 1, weight: 60.00 }
     ]
   },
   {
@@ -549,7 +766,7 @@ const SEED_PRODUCTS = [
     dealer_price: 168.00,
     moq: 5,
     stock: 150,
-    sku: 'FALCO-EBS-BASE',
+    sku: 'CKP-FALCO-EBS-BASE',
     hsn_code: '35069190',
     gst_percent: 18.00,
     pack_size: '800 gm PP',
@@ -570,14 +787,14 @@ const SEED_PRODUCTS = [
     tds_url: '#',
     msds_url: '#',
     variants: [
-      { id: 'vf3_1', pack_size: '800 gm PP', sku: 'FALCO-EBS-800G', price: 220.34, mrp: 260.00, dealer_price: 168.00, stock: 150, moq: 5, weight: 0.80 },
-      { id: 'vf3_2', pack_size: '1 Kg Jar', sku: 'FALCO-EBS-1KG', price: 296.61, mrp: 350.00, dealer_price: 219.00, stock: 120, moq: 5, weight: 1.00 },
-      { id: 'vf3_3', pack_size: '2 Kg Jar', sku: 'FALCO-EBS-2KG', price: 533.90, mrp: 630.00, dealer_price: 416.00, stock: 80, moq: 5, weight: 2.00 },
-      { id: 'vf3_4', pack_size: '5 Kg Jar', sku: 'FALCO-EBS-5KG', price: 1254.24, mrp: 1480.00, dealer_price: 995.00, stock: 60, moq: 2, weight: 5.00 },
-      { id: 'vf3_5', pack_size: '10 Kg Bucket', sku: 'FALCO-EBS-10KG', price: 2423.73, mrp: 2860.00, dealer_price: 1920.00, stock: 40, moq: 1, weight: 10.00 },
-      { id: 'vf3_6', pack_size: '20 Kg Bucket', sku: 'FALCO-EBS-20KG', price: 4567.80, mrp: 5390.00, dealer_price: 3640.00, stock: 25, moq: 1, weight: 20.00 },
-      { id: 'vf3_7', pack_size: '50 Kg Carboy', sku: 'FALCO-EBS-50KG', price: 10627.12, mrp: 12540.00, dealer_price: 8750.00, stock: 15, moq: 1, weight: 50.00 },
-      { id: 'vf3_8', pack_size: '60 Kg Carboy', sku: 'FALCO-EBS-60KG', price: 12728.81, mrp: 15020.00, dealer_price: 10260.00, stock: 10, moq: 1, weight: 60.00 }
+      { id: 'vf3_1', pack_size: '800 gm PP', sku: 'CKP-FALCO-EBS-800G', price: 220.34, mrp: 260.00, dealer_price: 168.00, stock: 150, moq: 5, weight: 0.80 },
+      { id: 'vf3_2', pack_size: '1 Kg Jar', sku: 'CKP-FALCO-EBS-1KG', price: 296.61, mrp: 350.00, dealer_price: 219.00, stock: 120, moq: 5, weight: 1.00 },
+      { id: 'vf3_3', pack_size: '2 Kg Jar', sku: 'CKP-FALCO-EBS-2KG', price: 533.90, mrp: 630.00, dealer_price: 416.00, stock: 80, moq: 5, weight: 2.00 },
+      { id: 'vf3_4', pack_size: '5 Kg Jar', sku: 'CKP-FALCO-EBS-5KG', price: 1254.24, mrp: 1480.00, dealer_price: 995.00, stock: 60, moq: 2, weight: 5.00 },
+      { id: 'vf3_5', pack_size: '10 Kg Bucket', sku: 'CKP-FALCO-EBS-10KG', price: 2423.73, mrp: 2860.00, dealer_price: 1920.00, stock: 40, moq: 1, weight: 10.00 },
+      { id: 'vf3_6', pack_size: '20 Kg Bucket', sku: 'CKP-FALCO-EBS-20KG', price: 4567.80, mrp: 5390.00, dealer_price: 3640.00, stock: 25, moq: 1, weight: 20.00 },
+      { id: 'vf3_7', pack_size: '50 Kg Carboy', sku: 'CKP-FALCO-EBS-50KG', price: 10627.12, mrp: 12540.00, dealer_price: 8750.00, stock: 15, moq: 1, weight: 50.00 },
+      { id: 'vf3_8', pack_size: '60 Kg Carboy', sku: 'CKP-FALCO-EBS-60KG', price: 12728.81, mrp: 15020.00, dealer_price: 10260.00, stock: 10, moq: 1, weight: 60.00 }
     ]
   },
   {
@@ -591,7 +808,7 @@ const SEED_PRODUCTS = [
     dealer_price: 121.00,
     moq: 5,
     stock: 140,
-    sku: 'FALCO-IG88-BASE',
+    sku: 'CKP-FALCO-IG88-BASE',
     hsn_code: '35069190',
     gst_percent: 18.00,
     pack_size: '1 kg PP',
@@ -612,8 +829,8 @@ const SEED_PRODUCTS = [
     tds_url: '#',
     msds_url: '#',
     variants: [
-      { id: 'vf4_1', pack_size: '1 kg PP', sku: 'FALCO-IG88-1KG', price: 194.92, mrp: 230.00, dealer_price: 121.00, stock: 140, moq: 5, weight: 1.00 },
-      { id: 'vf4_2', pack_size: '50 kg Carboy', sku: 'FALCO-IG88-50KG', price: 9525.42, mrp: 11240.00, dealer_price: 5850.00, stock: 20, moq: 1, weight: 50.00 }
+      { id: 'vf4_1', pack_size: '1 kg PP', sku: 'CKP-FALCO-IG88-1KG', price: 194.92, mrp: 230.00, dealer_price: 121.00, stock: 140, moq: 5, weight: 1.00 },
+      { id: 'vf4_2', pack_size: '50 kg Carboy', sku: 'CKP-FALCO-IG88-50KG', price: 9525.42, mrp: 11240.00, dealer_price: 5850.00, stock: 20, moq: 1, weight: 50.00 }
     ]
   },
   {
@@ -627,7 +844,7 @@ const SEED_PRODUCTS = [
     dealer_price: 110.00,
     moq: 5,
     stock: 130,
-    sku: 'FALCO-IG77-BASE',
+    sku: 'CKP-FALCO-IG77-BASE',
     hsn_code: '35069190',
     gst_percent: 18.00,
     pack_size: '1 kg PP',
@@ -648,8 +865,8 @@ const SEED_PRODUCTS = [
     tds_url: '#',
     msds_url: '#',
     variants: [
-      { id: 'vf5_1', pack_size: '1 kg PP', sku: 'FALCO-IG77-1KG', price: 186.44, mrp: 220.00, dealer_price: 110.00, stock: 130, moq: 5, weight: 1.00 },
-      { id: 'vf5_2', pack_size: '50 kg Carboy', sku: 'FALCO-IG77-50KG', price: 8949.15, mrp: 10560.00, dealer_price: 5350.00, stock: 15, moq: 1, weight: 50.00 }
+      { id: 'vf5_1', pack_size: '1 kg PP', sku: 'CKP-FALCO-IG77-1KG', price: 186.44, mrp: 220.00, dealer_price: 110.00, stock: 130, moq: 5, weight: 1.00 },
+      { id: 'vf5_2', pack_size: '50 kg Carboy', sku: 'CKP-FALCO-IG77-50KG', price: 8949.15, mrp: 10560.00, dealer_price: 5350.00, stock: 15, moq: 1, weight: 50.00 }
     ]
   },
   {
@@ -663,7 +880,7 @@ const SEED_PRODUCTS = [
     dealer_price: 102.00,
     moq: 5,
     stock: 120,
-    sku: 'FALCO-IG66-BASE',
+    sku: 'CKP-FALCO-IG66-BASE',
     hsn_code: '35069190',
     gst_percent: 18.00,
     pack_size: '1 kg PP',
@@ -684,8 +901,8 @@ const SEED_PRODUCTS = [
     tds_url: '#',
     msds_url: '#',
     variants: [
-      { id: 'vf6_1', pack_size: '1 kg PP', sku: 'FALCO-IG66-1KG', price: 169.49, mrp: 200.00, dealer_price: 102.00, stock: 120, moq: 5, weight: 1.00 },
-      { id: 'vf6_2', pack_size: '50 kg Carboy', sku: 'FALCO-IG66-50KG', price: 7694.92, mrp: 9080.00, dealer_price: 4800.00, stock: 20, moq: 1, weight: 50.00 }
+      { id: 'vf6_1', pack_size: '1 kg PP', sku: 'CKP-FALCO-IG66-1KG', price: 169.49, mrp: 200.00, dealer_price: 102.00, stock: 120, moq: 5, weight: 1.00 },
+      { id: 'vf6_2', pack_size: '50 kg Carboy', sku: 'CKP-FALCO-IG66-50KG', price: 7694.92, mrp: 9080.00, dealer_price: 4800.00, stock: 20, moq: 1, weight: 50.00 }
     ]
   },
   {
@@ -699,7 +916,7 @@ const SEED_PRODUCTS = [
     dealer_price: 3475.00,
     moq: 2,
     stock: 80,
-    sku: 'FALCO-HWR-BASE',
+    sku: 'CKP-FALCO-HWR-BASE',
     hsn_code: '35069190',
     gst_percent: 18.00,
     pack_size: '25 kg CARBOY',
@@ -720,8 +937,8 @@ const SEED_PRODUCTS = [
     tds_url: '#',
     msds_url: '#',
     variants: [
-      { id: 'vf7_1', pack_size: '25 kg Carboy', sku: 'FALCO-HWR-25KG', price: 6186.44, mrp: 7300.00, dealer_price: 3475.00, stock: 80, moq: 2, weight: 25.00 },
-      { id: 'vf7_2', pack_size: '50 kg Carboy', sku: 'FALCO-HWR-50KG', price: 11694.92, mrp: 13800.00, dealer_price: 6750.00, stock: 40, moq: 1, weight: 50.00 }
+      { id: 'vf7_1', pack_size: '25 kg Carboy', sku: 'CKP-FALCO-HWR-25KG', price: 6186.44, mrp: 7300.00, dealer_price: 3475.00, stock: 80, moq: 2, weight: 25.00 },
+      { id: 'vf7_2', pack_size: '50 kg Carboy', sku: 'CKP-FALCO-HWR-50KG', price: 11694.92, mrp: 13800.00, dealer_price: 6750.00, stock: 40, moq: 1, weight: 50.00 }
     ]
   },
   {
@@ -735,7 +952,7 @@ const SEED_PRODUCTS = [
     dealer_price: 80.00,
     moq: 5,
     stock: 100,
-    sku: 'FALCO-BOND-BASE',
+    sku: 'CKP-FALCO-BOND-BASE',
     hsn_code: '35069190',
     gst_percent: 18.00,
     pack_size: '1 kg PP',
@@ -756,8 +973,8 @@ const SEED_PRODUCTS = [
     tds_url: '#',
     msds_url: '#',
     variants: [
-      { id: 'vf8_1', pack_size: '1 kg PP', sku: 'FALCO-BOND-1KG', price: 169.49, mrp: 200.00, dealer_price: 80.00, stock: 100, moq: 5, weight: 1.00 },
-      { id: 'vf8_2', pack_size: '50 kg Carboy', sku: 'FALCO-BOND-50KG', price: 6855.93, mrp: 8090.00, dealer_price: 3475.00, stock: 30, moq: 1, weight: 50.00 }
+      { id: 'vf8_1', pack_size: '1 kg PP', sku: 'CKP-FALCO-BOND-1KG', price: 169.49, mrp: 200.00, dealer_price: 80.00, stock: 100, moq: 5, weight: 1.00 },
+      { id: 'vf8_2', pack_size: '50 kg Carboy', sku: 'CKP-FALCO-BOND-50KG', price: 6855.93, mrp: 8090.00, dealer_price: 3475.00, stock: 30, moq: 1, weight: 50.00 }
     ]
   },
   {
@@ -771,7 +988,7 @@ const SEED_PRODUCTS = [
     dealer_price: 170.00,
     moq: 6,
     stock: 180,
-    sku: 'DF-PM-BASE',
+    sku: 'CKP-DF-PM-BASE',
     hsn_code: '38244090',
     gst_percent: 18.00,
     pack_size: '1 Litre Can',
@@ -792,10 +1009,10 @@ const SEED_PRODUCTS = [
     tds_url: '#',
     msds_url: '#',
     variants: [
-      { id: 'v20_1', pack_size: '1 Litre Can', sku: 'DF-PM-1L', price: 211.86, mrp: 250.00, dealer_price: 170.00, stock: 180, moq: 6, weight: 1.10 },
-      { id: 'v20_2', pack_size: '5 Litre Can', sku: 'DF-PM-5L', price: 974.58, mrp: 1150.00, dealer_price: 780.00, stock: 100, moq: 2, weight: 5.30 },
-      { id: 'v20_3', pack_size: '10 Litre Can', sku: 'DF-PM-10L', price: 1864.41, mrp: 2200.00, dealer_price: 1500.00, stock: 60, moq: 1, weight: 10.50 },
-      { id: 'v20_4', pack_size: '20 Litre Can', sku: 'DF-PM-20L', price: 3474.58, mrp: 4100.00, dealer_price: 2850.00, stock: 30, moq: 1, weight: 21.00 }
+      { id: 'v20_1', pack_size: '1 Litre Can', sku: 'CKP-DF-PM-1L', price: 211.86, mrp: 250.00, dealer_price: 170.00, stock: 180, moq: 6, weight: 1.10 },
+      { id: 'v20_2', pack_size: '5 Litre Can', sku: 'CKP-DF-PM-5L', price: 974.58, mrp: 1150.00, dealer_price: 780.00, stock: 100, moq: 2, weight: 5.30 },
+      { id: 'v20_3', pack_size: '10 Litre Can', sku: 'CKP-DF-PM-10L', price: 1864.41, mrp: 2200.00, dealer_price: 1500.00, stock: 60, moq: 1, weight: 10.50 },
+      { id: 'v20_4', pack_size: '20 Litre Can', sku: 'CKP-DF-PM-20L', price: 3474.58, mrp: 4100.00, dealer_price: 2850.00, stock: 30, moq: 1, weight: 21.00 }
     ]
   },
   {
@@ -809,7 +1026,7 @@ const SEED_PRODUCTS = [
     dealer_price: 580.00,
     moq: 2,
     stock: 100,
-    sku: 'DF-BF-BASE',
+    sku: 'CKP-DF-BF-BASE',
     hsn_code: '27150090',
     gst_percent: 18.00,
     pack_size: '5 Litre Can',
@@ -830,8 +1047,8 @@ const SEED_PRODUCTS = [
     tds_url: '#',
     msds_url: '#',
     variants: [
-      { id: 'v21_1', pack_size: '5 Litre Can', sku: 'DF-BF-5L', price: 720.34, mrp: 850.00, dealer_price: 580.00, stock: 100, moq: 2, weight: 5.20 },
-      { id: 'v21_2', pack_size: '20 Litre Can', sku: 'DF-BF-20L', price: 2627.12, mrp: 3100.00, dealer_price: 2100.00, stock: 40, moq: 1, weight: 20.80 }
+      { id: 'v21_1', pack_size: '5 Litre Can', sku: 'CKP-DF-BF-5L', price: 720.34, mrp: 850.00, dealer_price: 580.00, stock: 100, moq: 2, weight: 5.20 },
+      { id: 'v21_2', pack_size: '20 Litre Can', sku: 'CKP-DF-BF-20L', price: 2627.12, mrp: 3100.00, dealer_price: 2100.00, stock: 40, moq: 1, weight: 20.80 }
     ]
   },
   {
@@ -845,7 +1062,7 @@ const SEED_PRODUCTS = [
     dealer_price: 255.00,
     moq: 10,
     stock: 300,
-    sku: 'DF-URP-BASE',
+    sku: 'CKP-DF-URP-BASE',
     hsn_code: '39039090',
     gst_percent: 18.00,
     pack_size: '1 Kg Pack',
@@ -866,13 +1083,13 @@ const SEED_PRODUCTS = [
     tds_url: '#',
     msds_url: '#',
     variants: [
-      { id: 'v22_1', pack_size: '200 g Tub', sku: 'DF-URP-200G', price: 80.51, mrp: 95.00, dealer_price: 62.00, stock: 300, moq: 10, weight: 0.22 },
-      { id: 'v22_2', pack_size: '500 g Tub', sku: 'DF-URP-500G', price: 177.97, mrp: 210.00, dealer_price: 140.00, stock: 200, moq: 10, weight: 0.53 },
-      { id: 'v22_3', pack_size: '1 Kg Tub', sku: 'DF-URP-1KG', price: 322.03, mrp: 380.00, dealer_price: 255.00, stock: 300, moq: 5, weight: 1.05 },
-      { id: 'v22_4', pack_size: '5 Kg Tub', sku: 'DF-URP-5KG', price: 1483.05, mrp: 1750.00, dealer_price: 1180.00, stock: 120, moq: 2, weight: 5.25 },
-      { id: 'v22_5', pack_size: '10 Kg Bucket', sku: 'DF-URP-10KG', price: 2796.61, mrp: 3300.00, dealer_price: 2250.00, stock: 80, moq: 1, weight: 10.50 },
-      { id: 'v22_6', pack_size: '20 Kg Bucket', sku: 'DF-URP-20KG', price: 5254.24, mrp: 6200.00, dealer_price: 4200.00, stock: 50, moq: 1, weight: 21.00 },
-      { id: 'v22_7', pack_size: '50 Kg Drum', sku: 'DF-URP-50KG', price: 12542.37, mrp: 14800.00, dealer_price: 10200.00, stock: 15, moq: 1, weight: 52.00 }
+      { id: 'v22_1', pack_size: '200 g Tub', sku: 'CKP-DF-URP-200G', price: 80.51, mrp: 95.00, dealer_price: 62.00, stock: 300, moq: 10, weight: 0.22 },
+      { id: 'v22_2', pack_size: '500 g Tub', sku: 'CKP-DF-URP-500G', price: 177.97, mrp: 210.00, dealer_price: 140.00, stock: 200, moq: 10, weight: 0.53 },
+      { id: 'v22_3', pack_size: '1 Kg Tub', sku: 'CKP-DF-URP-1KG', price: 322.03, mrp: 380.00, dealer_price: 255.00, stock: 300, moq: 5, weight: 1.05 },
+      { id: 'v22_4', pack_size: '5 Kg Tub', sku: 'CKP-DF-URP-5KG', price: 1483.05, mrp: 1750.00, dealer_price: 1180.00, stock: 120, moq: 2, weight: 5.25 },
+      { id: 'v22_5', pack_size: '10 Kg Bucket', sku: 'CKP-DF-URP-10KG', price: 2796.61, mrp: 3300.00, dealer_price: 2250.00, stock: 80, moq: 1, weight: 10.50 },
+      { id: 'v22_6', pack_size: '20 Kg Bucket', sku: 'CKP-DF-URP-20KG', price: 5254.24, mrp: 6200.00, dealer_price: 4200.00, stock: 50, moq: 1, weight: 21.00 },
+      { id: 'v22_7', pack_size: '50 Kg Drum', sku: 'CKP-DF-URP-50KG', price: 12542.37, mrp: 14800.00, dealer_price: 10200.00, stock: 15, moq: 1, weight: 52.00 }
     ]
   },
   {
@@ -886,7 +1103,7 @@ const SEED_PRODUCTS = [
     dealer_price: 285.00,
     moq: 4,
     stock: 150,
-    sku: 'DF-AS-BASE',
+    sku: 'CKP-DF-AS-BASE',
     hsn_code: '32141000',
     gst_percent: 18.00,
     pack_size: '1 Kg Pack',
@@ -907,11 +1124,11 @@ const SEED_PRODUCTS = [
     tds_url: '#',
     msds_url: '#',
     variants: [
-      { id: 'v23_1', pack_size: '1 Kg Tub', sku: 'DF-AS-1KG', price: 355.93, mrp: 420.00, dealer_price: 285.00, stock: 150, moq: 4, weight: 1.05 },
-      { id: 'v23_2', pack_size: '5 Kg Tub', sku: 'DF-AS-5KG', price: 1677.97, mrp: 1980.00, dealer_price: 1350.00, stock: 90, moq: 2, weight: 5.25 },
-      { id: 'v23_3', pack_size: '10 Kg Bucket', sku: 'DF-AS-10KG', price: 3177.97, mrp: 3750.00, dealer_price: 2580.00, stock: 60, moq: 1, weight: 10.50 },
-      { id: 'v23_4', pack_size: '20 Kg Bucket', sku: 'DF-AS-20KG', price: 6016.95, mrp: 7100.00, dealer_price: 4900.00, stock: 30, moq: 1, weight: 21.00 },
-      { id: 'v23_5', pack_size: '50 Kg Drum', sku: 'DF-AS-50KG', price: 14237.29, mrp: 16800.00, dealer_price: 11800.00, stock: 15, moq: 1, weight: 52.00 }
+      { id: 'v23_1', pack_size: '1 Kg Tub', sku: 'CKP-DF-AS-1KG', price: 355.93, mrp: 420.00, dealer_price: 285.00, stock: 150, moq: 4, weight: 1.05 },
+      { id: 'v23_2', pack_size: '5 Kg Tub', sku: 'CKP-DF-AS-5KG', price: 1677.97, mrp: 1980.00, dealer_price: 1350.00, stock: 90, moq: 2, weight: 5.25 },
+      { id: 'v23_3', pack_size: '10 Kg Bucket', sku: 'CKP-DF-AS-10KG', price: 3177.97, mrp: 3750.00, dealer_price: 2580.00, stock: 60, moq: 1, weight: 10.50 },
+      { id: 'v23_4', pack_size: '20 Kg Bucket', sku: 'CKP-DF-AS-20KG', price: 6016.95, mrp: 7100.00, dealer_price: 4900.00, stock: 30, moq: 1, weight: 21.00 },
+      { id: 'v23_5', pack_size: '50 Kg Drum', sku: 'CKP-DF-AS-50KG', price: 14237.29, mrp: 16800.00, dealer_price: 11800.00, stock: 15, moq: 1, weight: 52.00 }
     ]
   },
   {
@@ -925,7 +1142,7 @@ const SEED_PRODUCTS = [
     dealer_price: 205.00,
     moq: 10,
     stock: 240,
-    sku: 'DF-SL-BASE',
+    sku: 'CKP-DF-SL-BASE',
     hsn_code: '39039090',
     gst_percent: 18.00,
     pack_size: '1 Kg Pack',
@@ -946,12 +1163,12 @@ const SEED_PRODUCTS = [
     tds_url: '#',
     msds_url: '#',
     variants: [
-      { id: 'v24_1', pack_size: '200 g Tub', sku: 'DF-SL-200G', price: 67.80, mrp: 80.00, dealer_price: 50.00, stock: 300, moq: 10, weight: 0.22 },
-      { id: 'v24_2', pack_size: '500 g Tub', sku: 'DF-SL-500G', price: 144.07, mrp: 170.00, dealer_price: 110.00, stock: 240, moq: 10, weight: 0.53 },
-      { id: 'v24_3', pack_size: '1 Kg Tub', sku: 'DF-SL-1KG', price: 262.71, mrp: 310.00, dealer_price: 205.00, stock: 240, moq: 5, weight: 1.05 },
-      { id: 'v24_4', pack_size: '5 Kg Tub', sku: 'DF-SL-5KG', price: 1203.39, mrp: 1420.00, dealer_price: 950.00, stock: 100, moq: 2, weight: 5.25 },
-      { id: 'v24_5', pack_size: '10 Kg Bucket', sku: 'DF-SL-10KG', price: 2288.14, mrp: 2700.00, dealer_price: 1820.00, stock: 60, moq: 1, weight: 10.50 },
-      { id: 'v24_6', pack_size: '20 Kg Bucket', sku: 'DF-SL-20KG', price: 4322.03, mrp: 5100.00, dealer_price: 3450.00, stock: 40, moq: 1, weight: 21.00 }
+      { id: 'v24_1', pack_size: '200 g Tub', sku: 'CKP-DF-SL-200G', price: 67.80, mrp: 80.00, dealer_price: 50.00, stock: 300, moq: 10, weight: 0.22 },
+      { id: 'v24_2', pack_size: '500 g Tub', sku: 'CKP-DF-SL-500G', price: 144.07, mrp: 170.00, dealer_price: 110.00, stock: 240, moq: 10, weight: 0.53 },
+      { id: 'v24_3', pack_size: '1 Kg Tub', sku: 'CKP-DF-SL-1KG', price: 262.71, mrp: 310.00, dealer_price: 205.00, stock: 240, moq: 5, weight: 1.05 },
+      { id: 'v24_4', pack_size: '5 Kg Tub', sku: 'CKP-DF-SL-5KG', price: 1203.39, mrp: 1420.00, dealer_price: 950.00, stock: 100, moq: 2, weight: 5.25 },
+      { id: 'v24_5', pack_size: '10 Kg Bucket', sku: 'CKP-DF-SL-10KG', price: 2288.14, mrp: 2700.00, dealer_price: 1820.00, stock: 60, moq: 1, weight: 10.50 },
+      { id: 'v24_6', pack_size: '20 Kg Bucket', sku: 'CKP-DF-SL-20KG', price: 4322.03, mrp: 5100.00, dealer_price: 3450.00, stock: 40, moq: 1, weight: 21.00 }
     ]
   },
   {
@@ -965,7 +1182,7 @@ const SEED_PRODUCTS = [
     dealer_price: 920.00,
     moq: 2,
     stock: 80,
-    sku: 'DF-BSS-BASE',
+    sku: 'CKP-DF-BSS-BASE',
     hsn_code: '32149000',
     gst_percent: 18.00,
     pack_size: '4 Ltr Pack',
@@ -986,9 +1203,9 @@ const SEED_PRODUCTS = [
     tds_url: '#',
     msds_url: '#',
     variants: [
-      { id: 'v25_1', pack_size: '4 Ltr Pack', sku: 'DF-BSS-4L', price: 1144.07, mrp: 1350.00, dealer_price: 920.00, stock: 80, moq: 2, weight: 4.30 },
-      { id: 'v25_2', pack_size: '10 Ltr Pack', sku: 'DF-BSS-10L', price: 2627.12, mrp: 3100.00, dealer_price: 2100.00, stock: 50, moq: 1, weight: 10.60 },
-      { id: 'v25_3', pack_size: '20 Ltr Pack', sku: 'DF-BSS-20L', price: 5000.00, mrp: 5900.00, dealer_price: 4100.00, stock: 30, moq: 1, weight: 21.20 }
+      { id: 'v25_1', pack_size: '4 Ltr Pack', sku: 'CKP-DF-BSS-4L', price: 1144.07, mrp: 1350.00, dealer_price: 920.00, stock: 80, moq: 2, weight: 4.30 },
+      { id: 'v25_2', pack_size: '10 Ltr Pack', sku: 'CKP-DF-BSS-10L', price: 2627.12, mrp: 3100.00, dealer_price: 2100.00, stock: 50, moq: 1, weight: 10.60 },
+      { id: 'v25_3', pack_size: '20 Ltr Pack', sku: 'CKP-DF-BSS-20L', price: 5000.00, mrp: 5900.00, dealer_price: 4100.00, stock: 30, moq: 1, weight: 21.20 }
     ]
   },
   {
@@ -1002,7 +1219,7 @@ const SEED_PRODUCTS = [
     dealer_price: 1950.00,
     moq: 1,
     stock: 90,
-    sku: 'DF-FF-BASE',
+    sku: 'CKP-DF-FF-BASE',
     hsn_code: '32149000',
     gst_percent: 18.00,
     pack_size: '12 kg Pack',
@@ -1023,8 +1240,8 @@ const SEED_PRODUCTS = [
     tds_url: '#',
     msds_url: '#',
     variants: [
-      { id: 'v26_1', pack_size: '12 Kg Pack', sku: 'DF-FF-12KG', price: 2415.25, mrp: 2850.00, dealer_price: 1950.00, stock: 90, moq: 1, weight: 12.00 },
-      { id: 'v26_2', pack_size: '48 Kg Pack', sku: 'DF-FF-48KG', price: 8898.31, mrp: 10500.00, dealer_price: 7200.00, stock: 30, moq: 1, weight: 48.00 }
+      { id: 'v26_1', pack_size: '12 Kg Pack', sku: 'CKP-DF-FF-12KG', price: 2415.25, mrp: 2850.00, dealer_price: 1950.00, stock: 90, moq: 1, weight: 12.00 },
+      { id: 'v26_2', pack_size: '48 Kg Pack', sku: 'CKP-DF-FF-48KG', price: 8898.31, mrp: 10500.00, dealer_price: 7200.00, stock: 30, moq: 1, weight: 48.00 }
     ]
   },
   {
@@ -1038,7 +1255,7 @@ const SEED_PRODUCTS = [
     dealer_price: 450.00,
     moq: 2,
     stock: 120,
-    sku: 'DF-PF-BASE',
+    sku: 'CKP-DF-PF-BASE',
     hsn_code: '32149000',
     gst_percent: 18.00,
     pack_size: '3 kg Pack',
@@ -1059,10 +1276,10 @@ const SEED_PRODUCTS = [
     tds_url: '#',
     msds_url: '#',
     variants: [
-      { id: 'v27_1', pack_size: '3 Kg Pack', sku: 'DF-PF-3KG', price: 550.85, mrp: 650.00, dealer_price: 450.00, stock: 120, moq: 2, weight: 3.20 },
-      { id: 'v27_2', pack_size: '15 Kg Pack', sku: 'DF-PF-15KG', price: 2372.88, mrp: 2800.00, dealer_price: 1900.00, stock: 80, moq: 1, weight: 15.60 },
-      { id: 'v27_3', pack_size: '30 Kg Pack', sku: 'DF-PF-30KG', price: 4406.78, mrp: 5200.00, dealer_price: 3600.00, stock: 50, moq: 1, weight: 31.00 },
-      { id: 'v27_4', pack_size: '90 Kg Pack', sku: 'DF-PF-90KG', price: 12542.37, mrp: 14800.00, dealer_price: 10200.00, stock: 15, moq: 1, weight: 92.50 }
+      { id: 'v27_1', pack_size: '3 Kg Pack', sku: 'CKP-DF-PF-3KG', price: 550.85, mrp: 650.00, dealer_price: 450.00, stock: 120, moq: 2, weight: 3.20 },
+      { id: 'v27_2', pack_size: '15 Kg Pack', sku: 'CKP-DF-PF-15KG', price: 2372.88, mrp: 2800.00, dealer_price: 1900.00, stock: 80, moq: 1, weight: 15.60 },
+      { id: 'v27_3', pack_size: '30 Kg Pack', sku: 'CKP-DF-PF-30KG', price: 4406.78, mrp: 5200.00, dealer_price: 3600.00, stock: 50, moq: 1, weight: 31.00 },
+      { id: 'v27_4', pack_size: '90 Kg Pack', sku: 'CKP-DF-PF-90KG', price: 12542.37, mrp: 14800.00, dealer_price: 10200.00, stock: 15, moq: 1, weight: 92.50 }
     ]
   },
   {
@@ -1076,7 +1293,7 @@ const SEED_PRODUCTS = [
     dealer_price: 350.00,
     moq: 4,
     stock: 150,
-    sku: 'DF-RCN-BASE',
+    sku: 'CKP-DF-RCN-BASE',
     hsn_code: '32091090',
     gst_percent: 18.00,
     pack_size: '1 Ltr Can',
@@ -1097,10 +1314,10 @@ const SEED_PRODUCTS = [
     tds_url: '#',
     msds_url: '#',
     variants: [
-      { id: 'v28_1', pack_size: '1 Ltr Can', sku: 'DF-RCN-1L', price: 440.68, mrp: 520.00, dealer_price: 350.00, stock: 150, moq: 4, weight: 1.20 },
-      { id: 'v28_2', pack_size: '4 Ltr Can', sku: 'DF-RCN-4L', price: 1677.97, mrp: 1980.00, dealer_price: 1350.00, stock: 100, moq: 2, weight: 4.80 },
-      { id: 'v28_3', pack_size: '10 Ltr Can', sku: 'DF-RCN-10L', price: 3940.68, mrp: 4650.00, dealer_price: 3180.00, stock: 50, moq: 1, weight: 11.80 },
-      { id: 'v28_4', pack_size: '20 Ltr Can', sku: 'DF-RCN-20L', price: 7542.37, mrp: 8900.00, dealer_price: 6100.00, stock: 30, moq: 1, weight: 23.40 }
+      { id: 'v28_1', pack_size: '1 Ltr Can', sku: 'CKP-DF-RCN-1L', price: 440.68, mrp: 520.00, dealer_price: 350.00, stock: 150, moq: 4, weight: 1.20 },
+      { id: 'v28_2', pack_size: '4 Ltr Can', sku: 'CKP-DF-RCN-4L', price: 1677.97, mrp: 1980.00, dealer_price: 1350.00, stock: 100, moq: 2, weight: 4.80 },
+      { id: 'v28_3', pack_size: '10 Ltr Can', sku: 'CKP-DF-RCN-10L', price: 3940.68, mrp: 4650.00, dealer_price: 3180.00, stock: 50, moq: 1, weight: 11.80 },
+      { id: 'v28_4', pack_size: '20 Ltr Can', sku: 'CKP-DF-RCN-20L', price: 7542.37, mrp: 8900.00, dealer_price: 6100.00, stock: 30, moq: 1, weight: 23.40 }
     ]
   },
   {
@@ -1114,7 +1331,7 @@ const SEED_PRODUCTS = [
     dealer_price: 440.00,
     moq: 4,
     stock: 110,
-    sku: 'DF-RCS-BASE',
+    sku: 'CKP-DF-RCS-BASE',
     hsn_code: '32091090',
     gst_percent: 18.00,
     pack_size: '1 Ltr Can',
@@ -1135,10 +1352,10 @@ const SEED_PRODUCTS = [
     tds_url: '#',
     msds_url: '#',
     variants: [
-      { id: 'v29_1', pack_size: '1 Ltr Can', sku: 'DF-RCS-1L', price: 550.85, mrp: 650.00, dealer_price: 440.00, stock: 110, moq: 4, weight: 1.20 },
-      { id: 'v29_2', pack_size: '4 Ltr Can', sku: 'DF-RCS-4L', price: 2076.27, mrp: 2450.00, dealer_price: 168.00, stock: 80, moq: 2, weight: 4.80 },
-      { id: 'v29_3', pack_size: '10 Ltr Can', sku: 'DF-RCS-10L', price: 4915.25, mrp: 5800.00, dealer_price: 3980.00, stock: 40, moq: 1, weight: 11.80 },
-      { id: 'v29_4', pack_size: '20 Ltr Can', sku: 'DF-RCS-20L', price: 9491.53, mrp: 11200.00, dealer_price: 7800.00, stock: 20, moq: 1, weight: 23.40 }
+      { id: 'v29_1', pack_size: '1 Ltr Can', sku: 'CKP-DF-RCS-1L', price: 550.85, mrp: 650.00, dealer_price: 440.00, stock: 110, moq: 4, weight: 1.20 },
+      { id: 'v29_2', pack_size: '4 Ltr Can', sku: 'CKP-DF-RCS-4L', price: 2076.27, mrp: 2450.00, dealer_price: 168.00, stock: 80, moq: 2, weight: 4.80 },
+      { id: 'v29_3', pack_size: '10 Ltr Can', sku: 'CKP-DF-RCS-10L', price: 4915.25, mrp: 5800.00, dealer_price: 3980.00, stock: 40, moq: 1, weight: 11.80 },
+      { id: 'v29_4', pack_size: '20 Ltr Can', sku: 'CKP-DF-RCS-20L', price: 9491.53, mrp: 11200.00, dealer_price: 7800.00, stock: 20, moq: 1, weight: 23.40 }
     ]
   },
   {
@@ -1152,7 +1369,7 @@ const SEED_PRODUCTS = [
     dealer_price: 390.00,
     moq: 2,
     stock: 90,
-    sku: 'DF-RS-BASE',
+    sku: 'CKP-DF-RS-BASE',
     hsn_code: '32141000',
     gst_percent: 18.00,
     pack_size: '1 Ltr Can',
@@ -1173,11 +1390,11 @@ const SEED_PRODUCTS = [
     tds_url: '#',
     msds_url: '#',
     variants: [
-      { id: 'v30_1', pack_size: '1 Ltr Can', sku: 'DF-RS-1L', price: 491.53, mrp: 580.00, dealer_price: 390.00, stock: 90, moq: 4, weight: 1.20 },
-      { id: 'v30_2', pack_size: '4 Ltr Can', sku: 'DF-RS-4L', price: 1864.41, mrp: 2200.00, dealer_price: 1500.00, stock: 60, moq: 2, weight: 4.80 },
-      { id: 'v30_3', pack_size: '10 Ltr Can', sku: 'DF-RS-10L', price: 4322.03, mrp: 5100.00, dealer_price: 3500.00, stock: 40, moq: 1, weight: 11.80 },
-      { id: 'v30_4', pack_size: '16 Ltr Can', sku: 'DF-RS-16L', price: 5762.71, mrp: 6800.00, dealer_price: 4650.00, stock: 20, moq: 1, weight: 18.80 },
-      { id: 'v30_5', pack_size: '20 Ltr Can', sku: 'DF-RS-20L', price: 6233.05, mrp: 7355.00, dealer_price: 5150.00, stock: 15, moq: 1, weight: 23.40 }
+      { id: 'v30_1', pack_size: '1 Ltr Can', sku: 'CKP-DF-RS-1L', price: 491.53, mrp: 580.00, dealer_price: 390.00, stock: 90, moq: 4, weight: 1.20 },
+      { id: 'v30_2', pack_size: '4 Ltr Can', sku: 'CKP-DF-RS-4L', price: 1864.41, mrp: 2200.00, dealer_price: 1500.00, stock: 60, moq: 2, weight: 4.80 },
+      { id: 'v30_3', pack_size: '10 Ltr Can', sku: 'CKP-DF-RS-10L', price: 4322.03, mrp: 5100.00, dealer_price: 3500.00, stock: 40, moq: 1, weight: 11.80 },
+      { id: 'v30_4', pack_size: '16 Ltr Can', sku: 'CKP-DF-RS-16L', price: 5762.71, mrp: 6800.00, dealer_price: 4650.00, stock: 20, moq: 1, weight: 18.80 },
+      { id: 'v30_5', pack_size: '20 Ltr Can', sku: 'CKP-DF-RS-20L', price: 6233.05, mrp: 7355.00, dealer_price: 5150.00, stock: 15, moq: 1, weight: 23.40 }
     ]
   },
   {
@@ -1191,7 +1408,7 @@ const SEED_PRODUCTS = [
     dealer_price: 1900.00,
     moq: 2,
     stock: 70,
-    sku: 'DF-RSS-BASE',
+    sku: 'CKP-DF-RSS-BASE',
     hsn_code: '32141000',
     gst_percent: 18.00,
     pack_size: '4 Ltr Can',
@@ -1212,8 +1429,8 @@ const SEED_PRODUCTS = [
     tds_url: '#',
     msds_url: '#',
     variants: [
-      { id: 'v31_1', pack_size: '4 Ltr Can', sku: 'DF-RSS-4L', price: 2372.88, mrp: 2800.00, dealer_price: 1900.00, stock: 70, moq: 2, weight: 4.80 },
-      { id: 'v31_2', pack_size: '20 Ltr Can', sku: 'DF-RSS-20L', price: 7457.63, mrp: 8800.00, dealer_price: 6150.00, stock: 30, moq: 1, weight: 23.40 }
+      { id: 'v31_1', pack_size: '4 Ltr Can', sku: 'CKP-DF-RSS-4L', price: 2372.88, mrp: 2800.00, dealer_price: 1900.00, stock: 70, moq: 2, weight: 4.80 },
+      { id: 'v31_2', pack_size: '20 Ltr Can', sku: 'CKP-DF-RSS-20L', price: 7457.63, mrp: 8800.00, dealer_price: 6150.00, stock: 30, moq: 1, weight: 23.40 }
     ]
   },
   {
@@ -1227,7 +1444,7 @@ const SEED_PRODUCTS = [
     dealer_price: 7950.00,
     moq: 1,
     stock: 50,
-    sku: 'DF-RSU-20L',
+    sku: 'CKP-DF-RSU-20L',
     hsn_code: '32141000',
     gst_percent: 18.00,
     pack_size: '20 Ltr Can',
@@ -1248,7 +1465,7 @@ const SEED_PRODUCTS = [
     tds_url: '#',
     msds_url: '#',
     variants: [
-      { id: 'v32_1', pack_size: '20 Ltr Can', sku: 'DF-RSU-20L', price: 9601.69, mrp: 11330.00, dealer_price: 7950.00, stock: 50, moq: 1, weight: 23.40 }
+      { id: 'v32_1', pack_size: '20 Ltr Can', sku: 'CKP-DF-RSU-20L', price: 9601.69, mrp: 11330.00, dealer_price: 7950.00, stock: 50, moq: 1, weight: 23.40 }
     ]
   }
 ];

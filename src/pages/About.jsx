@@ -3,12 +3,21 @@ import { Building2, Users, Award, ShieldCheck, Truck, Headphones, CheckCircle, M
 import { FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { api } from '../services/supabase';
+import { useAuth } from '../context/AuthContext';
 
 export default function About() {
   const [settings, setSettings] = useState(null);
+  const { user } = useAuth();
+  const [isEditingReviews, setIsEditingReviews] = useState(false);
+  const [reviewsSummary, setReviewsSummary] = useState("4.9 (551 reviews)");
 
   useEffect(() => {
-    api.settings.get().then(setSettings).catch(console.error);
+    api.settings.get().then(s => {
+      setSettings(s);
+      if (s?.google_reviews_summary) {
+        setReviewsSummary(s.google_reviews_summary);
+      }
+    }).catch(console.error);
   }, []);
   const googleReviews = [
     {
@@ -111,7 +120,7 @@ export default function About() {
           <div className="grid grid-cols-2 gap-4">
             <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-800 text-center hover:border-blue-500 transition-colors">
               <Building2 className="h-10 w-10 text-blue-600 dark:text-cyan-400 mx-auto mb-3" />
-              <h3 className="font-bold text-slate-900 dark:text-white text-xl">26+</h3>
+              <h3 className="font-bold text-slate-900 dark:text-white text-xl">{new Date().getFullYear() - 2007}+</h3>
               <p className="text-xs text-slate-500 uppercase tracking-wider mt-1">Years Experience</p>
             </div>
             <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-800 text-center hover:border-blue-500 transition-colors">
@@ -267,11 +276,54 @@ export default function About() {
               <span className="text-red-500">e</span>
               <span className="text-slate-900 dark:text-white ml-2">Reviews</span>
             </h2>
-            <div className="flex items-center justify-center gap-1 mt-4">
-              <span className="text-xl font-bold text-slate-800 dark:text-white mr-2">4.9 (551 reviews)</span>
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="h-5 w-5 text-yellow-400 fill-yellow-400" />
-              ))}
+            <div className="flex items-center justify-center gap-1 mt-4 group">
+              {isEditingReviews ? (
+                <div className="flex items-center gap-2 relative z-10">
+                  <input 
+                    type="text" 
+                    value={reviewsSummary}
+                    onChange={(e) => setReviewsSummary(e.target.value)}
+                    className="border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded px-2 py-1 text-slate-800 dark:text-white text-sm focus:outline-none"
+                    autoFocus
+                  />
+                  <button 
+                    onClick={async () => {
+                      const updatedSettings = { ...settings, google_reviews_summary: reviewsSummary };
+                      await api.settings.update(updatedSettings);
+                      setSettings(updatedSettings);
+                      setIsEditingReviews(false);
+                    }}
+                    className="text-green-600 dark:text-green-400 font-bold text-sm bg-green-50 dark:bg-green-900/30 px-3 py-1 rounded hover:bg-green-100 transition"
+                  >
+                    Save
+                  </button>
+                  <button 
+                    onClick={() => {
+                      setReviewsSummary(settings?.google_reviews_summary || "4.9 (551 reviews)");
+                      setIsEditingReviews(false);
+                    }}
+                    className="text-slate-500 dark:text-slate-400 font-bold text-sm bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded hover:bg-slate-200 transition"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <span className="text-xl font-bold text-slate-800 dark:text-white mr-2">{reviewsSummary}</span>
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="h-5 w-5 text-yellow-400 fill-yellow-400" />
+                  ))}
+                  {user?.role === 'admin' && (
+                    <button 
+                      onClick={() => setIsEditingReviews(true)}
+                      className="ml-2 text-xs text-blue-600 dark:text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded font-semibold"
+                      title="Edit Review Count"
+                    >
+                      Edit
+                    </button>
+                  )}
+                </>
+              )}
             </div>
             <p className="text-slate-500 mt-2 text-sm">Based on customer feedback</p>
           </div>

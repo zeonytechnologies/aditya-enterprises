@@ -2,8 +2,9 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   BarChart3, ShieldCheck, ShoppingBag, FileSpreadsheet, 
-  Layers, Package, AlertCircle, FileText, CheckCircle2, XCircle, Plus, Edit, Trash2, Printer, Tag, Search, ChevronLeft, ChevronRight, MessageCircle, Users, ShoppingCart, X, Settings
+  Layers, Package, AlertCircle, FileText, CheckCircle2, XCircle, Plus, Edit, Trash2, Printer, Tag, Search, ChevronLeft, ChevronRight, MessageCircle, Users, ShoppingCart, X, Settings, Eye, EyeOff
 } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 import { api } from '../services/supabase';
 import { useAuth } from '../context/AuthContext';
 import { sendEmail } from '../services/mailer';
@@ -102,6 +103,8 @@ export default function AdminDashboard() {
   const navigate = useNavigate();
 
   const [activeTab, setActiveTab] = useState('overview'); // 'overview', 'payments', 'products', 'rfqs', 'gst', 'orders', 'users'
+  const [showAdminPassword, setShowAdminPassword] = useState(false);
+  const [showAdminConfirmPassword, setShowAdminConfirmPassword] = useState(false);
   const [stats, setStats] = useState(null);
   const [payments, setPayments] = useState([]);
   const [products, setProducts] = useState([]);
@@ -118,10 +121,12 @@ export default function AdminDashboard() {
   const [orderStatusFilter, setOrderStatusFilter] = useState('All');
   
   const [leads, setLeads] = useState([]);
+  const [mobileActionLeadId, setMobileActionLeadId] = useState(null);
   const [selectedUserForDetails, setSelectedUserForDetails] = useState(null);
   const [selectedOrderDetails, setSelectedOrderDetails] = useState(null);
   const [resetPasswordNew, setResetPasswordNew] = useState('');
   const [resettingPasswordUserId, setResettingPasswordUserId] = useState(null);
+  const [selectedOrderForGST, setSelectedOrderForGST] = useState(null);
   
   const handleResetUserPassword = async (userId) => {
     if (!resetPasswordNew || resetPasswordNew.length < 6) {
@@ -793,10 +798,7 @@ export default function AdminDashboard() {
           <span className="text-slate-400 font-semibold block uppercase text-[9px]">GST Tax Pool</span>
           <span className="text-lg font-extrabold font-display text-slate-900 dark:text-white">₹{(stats?.gstCollected || 0).toLocaleString('en-IN', { maximumFractionDigits: 0 })}</span>
         </div>
-        <div className="bg-white dark:bg-slate-900 border p-4.5 rounded-2xl shadow-sm space-y-1.5">
-          <span className="text-slate-400 font-semibold block uppercase text-[9px]">Unverified payments</span>
-          <span className="text-lg font-extrabold font-display text-amber-600">{stats?.pendingPayments || 0} Orders</span>
-        </div>
+
         <div className="bg-white dark:bg-slate-900 border p-4.5 rounded-2xl shadow-sm space-y-1.5">
           <span className="text-slate-400 font-semibold block uppercase text-[9px]">Pending RFQs</span>
           <span className="text-lg font-extrabold font-display text-blue-600 dark:text-cyan-400">{stats?.pendingRfqs || 0} Quotes</span>
@@ -831,18 +833,8 @@ export default function AdminDashboard() {
             activeTab === 'orders' ? 'border-blue-600 text-blue-600 dark:border-cyan-400 dark:text-cyan-400' : 'border-transparent text-slate-400'
           }`}
         >
-          <ShoppingBag className="h-4.5 w-4.5" /> Order Processing ({orders.length})
+          <ShoppingBag className="h-4.5 w-4.5" /> Orders
         </button>
-        {false && (
-          <button
-            onClick={() => setActiveTab('payments')}
-            className={`pb-4 text-xs font-bold border-b-2 flex items-center gap-1.5 px-3 transition-colors ${
-              activeTab === 'payments' ? 'border-blue-600 text-blue-600 dark:border-cyan-400 dark:text-cyan-400' : 'border-transparent text-slate-400'
-            }`}
-          >
-            <ShieldCheck className="h-4.5 w-4.5" /> Verify Receipts ({stats?.pendingPayments || 0})
-          </button>
-        )}
         <button
           onClick={() => setActiveTab('products')}
           className={`pb-4 text-xs font-bold border-b-2 flex items-center gap-1.5 px-3 transition-colors ${
@@ -933,13 +925,6 @@ export default function AdminDashboard() {
                   Currently, we have {stats?.lowStockCount || 0} items below safety thresholds. Check catalogs and place refill orders soon.
                 </div>
               </div>
-              <div className="flex items-start gap-3 text-xs leading-normal">
-                <CheckCircle2 className="h-5 w-5 text-blue-500 flex-shrink-0" />
-                <div>
-                  <strong className="text-slate-800 dark:text-white font-bold block">Pending Manual Audits</strong>
-                  There are {stats?.pendingPayments || 0} offline payment transfers awaiting screenshot validation. Verify bank records soon.
-                </div>
-              </div>
             </div>
           </div>
 
@@ -961,7 +946,11 @@ export default function AdminDashboard() {
             <form onSubmit={async (e) => {
               e.preventDefault();
               const newPassword = e.target.newPassword.value;
-              if (newPassword.length < 6) return alert('Password too short!');
+              const confirmPassword = e.target.confirmPassword.value;
+              
+              if (newPassword.length < 6) return alert('Password too short! Must be at least 6 characters.');
+              if (newPassword !== confirmPassword) return alert('Passwords do not match!');
+              
               try {
                 await api.admin.updateAdminPassword(user?.id, newPassword);
                 alert('Password updated successfully!');
@@ -970,9 +959,23 @@ export default function AdminDashboard() {
                 alert('Failed to update password');
               }
             }} className="space-y-3">
-              <div>
+              <div className="relative">
                 <label className="text-xs font-bold text-slate-500 uppercase">New Password</label>
-                <input type="password" name="newPassword" required className="w-full mt-1 px-3 py-2 border rounded-xl text-sm bg-slate-50 dark:bg-slate-950" placeholder="Enter new password" />
+                <div className="relative mt-1">
+                  <input type={showAdminPassword ? "text" : "password"} name="newPassword" required className="w-full px-3 py-2 border rounded-xl text-sm bg-slate-50 dark:bg-slate-950 pr-10" placeholder="Enter new password" />
+                  <button type="button" onClick={() => setShowAdminPassword(!showAdminPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
+                    {showAdminPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  </button>
+                </div>
+              </div>
+              <div className="relative">
+                <label className="text-xs font-bold text-slate-500 uppercase">Confirm Password</label>
+                <div className="relative mt-1">
+                  <input type={showAdminConfirmPassword ? "text" : "password"} name="confirmPassword" required className="w-full px-3 py-2 border rounded-xl text-sm bg-slate-50 dark:bg-slate-950 pr-10" placeholder="Confirm new password" />
+                  <button type="button" onClick={() => setShowAdminConfirmPassword(!showAdminConfirmPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
+                    {showAdminConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  </button>
+                </div>
               </div>
               <button type="submit" className="w-full py-2 bg-slate-900 text-white rounded-xl text-sm font-bold hover:bg-slate-800">Change Password</button>
             </form>
@@ -1010,8 +1013,42 @@ export default function AdminDashboard() {
                     <tr key={lead.id} className="border-b border-slate-50 dark:border-slate-800/50 hover:bg-slate-50 dark:hover:bg-slate-800/20">
                       <td className="py-2.5 whitespace-nowrap text-slate-500">{new Date(lead.created_at).toLocaleDateString()}</td>
                       <td className="py-2.5 font-bold text-slate-900 dark:text-white">{lead.name}</td>
-                      <td className="py-2.5 font-mono">{lead.mobile}</td>
-                      <td className="py-2.5">{lead.email || '-'}</td>
+                      <td className="py-2.5 font-mono relative">
+                        <button
+                          onClick={() => setMobileActionLeadId(mobileActionLeadId === lead.id ? null : lead.id)}
+                          className="hover:text-blue-600 transition-colors text-left"
+                          title="Click for contact options"
+                        >
+                          {lead.mobile}
+                        </button>
+                        {mobileActionLeadId === lead.id && (
+                          <div className="absolute z-10 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-lg p-2 mt-1 flex flex-col gap-1 min-w-[120px] left-0">
+                            <a 
+                              href={`https://wa.me/${(lead.mobile || '').replace(/\\D/g, '')}`} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="px-3 py-1.5 text-xs text-left hover:bg-green-50 dark:hover:bg-green-900/30 text-green-600 dark:text-green-400 rounded-md font-bold transition-colors"
+                              onClick={() => setMobileActionLeadId(null)}
+                            >
+                              WhatsApp
+                            </a>
+                            <a 
+                              href={`tel:${(lead.mobile || '').replace(/\\D/g, '')}`} 
+                              className="px-3 py-1.5 text-xs text-left hover:bg-blue-50 dark:hover:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-md font-bold transition-colors"
+                              onClick={() => setMobileActionLeadId(null)}
+                            >
+                              Phone Call
+                            </a>
+                          </div>
+                        )}
+                      </td>
+                      <td className="py-2.5">
+                        {lead.email ? (
+                          <a href={`mailto:${lead.email}`} className="text-blue-600 dark:text-cyan-400 hover:underline">
+                            {lead.email}
+                          </a>
+                        ) : '-'}
+                      </td>
                     </tr>
                   ))
                 )}
@@ -2215,8 +2252,31 @@ export default function AdminDashboard() {
                       {order.company_name || order.user?.full_name || order.user?.name || order.shipping_address?.firstName || 'Retail Customer'}
                     </td>
                     <td className="py-4 text-slate-500 text-[10px]">
-                      <div>{order.user?.email || '-'}</div>
-                      <div className="font-mono">{order.user?.phone || order.billing_address?.phone || '-'}</div>
+                      {order.user?.email ? (
+                        <div>
+                          <a href={`mailto:${order.user.email}`} onClick={(e) => e.stopPropagation()} className="text-blue-600 hover:underline">
+                            {order.user.email}
+                          </a>
+                        </div>
+                      ) : <div>-</div>}
+                      {(() => {
+                        const phone = order.user?.phone || order.billing_address?.phone;
+                        return phone ? (
+                          <div 
+                            className="font-mono text-blue-600 hover:underline cursor-pointer"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              if (window.confirm('Click OK to contact via WhatsApp, or Cancel to make a Phone Call.')) {
+                                window.open(`https://wa.me/91${phone.replace(/[^0-9]/g, '').slice(-10)}`, '_blank');
+                              } else {
+                                window.open(`tel:${phone}`, '_self');
+                              }
+                            }}
+                          >
+                            {phone}
+                          </div>
+                        ) : <div className="font-mono">-</div>;
+                      })()}
                     </td>
                     <td className="py-4 text-right font-semibold text-slate-650">{order.items?.length || 0}</td>
                     <td className="py-4 text-right font-extrabold text-slate-950 dark:text-white">₹{parseFloat(order.grand_total || 0).toLocaleString('en-IN')}</td>
@@ -2251,10 +2311,19 @@ export default function AdminDashboard() {
                             alert("Customer phone number not available.");
                           }
                         }}
-                        className="p-1.5 text-slate-400 hover:text-[#25D366] transition-colors"
+                        className="p-1.5 text-[#25D366] hover:text-[#128C7E] transition-colors"
                       >
-                        <MessageCircle className="h-4 w-4" />
+                        <FaWhatsapp className="h-4 w-4" />
                       </button>
+                      {order.status === 'Delivered' && (
+                        <button
+                          title="Print GST/HSN Report"
+                          onClick={() => setSelectedOrderForGST(order)}
+                          className="p-1.5 text-indigo-600 hover:text-indigo-800 transition-colors"
+                        >
+                          <Printer className="h-4 w-4" />
+                        </button>
+                      )}
                       <select
                         value={order.status}
                         onChange={(e) => handleOrderStatusChange(order.id, e.target.value)}
@@ -2301,7 +2370,11 @@ export default function AdminDashboard() {
                       onClick={() => setSelectedUserForDetails(usr)}
                       className="border-b last:border-b-0 hover:bg-slate-50/50 dark:hover:bg-slate-850/30 cursor-pointer">
                     <td className="py-4 font-bold text-slate-950 dark:text-white">{usr.full_name}</td>
-                    <td className="py-4 font-semibold text-slate-500">{usr.email}</td>
+                    <td className="py-4 font-semibold text-slate-500">
+                      <a href={`mailto:${usr.email}`} onClick={(e) => e.stopPropagation()} className="text-blue-600 hover:underline">
+                        {usr.email}
+                      </a>
+                    </td>
                     <td className="py-4 font-semibold text-slate-800 dark:text-slate-200">{usr.company_name || 'N/A'}</td>
                     <td className="py-4 font-mono text-slate-450 uppercase">{usr.gst_number || 'N/A'}</td>
                     <td className="py-4 font-bold">
@@ -2367,7 +2440,27 @@ export default function AdminDashboard() {
                   />
                 </div>
                 <div className="space-y-1">
-                  <label className="font-bold text-slate-400 uppercase tracking-wider block">SKU Code *</label>
+                  <div className="flex justify-between items-center">
+                    <label className="font-bold text-slate-400 uppercase tracking-wider block">SKU Code *</label>
+                    <button 
+                      type="button"
+                      onClick={() => {
+                        // find brand name
+                        const bName = brands.find(b => b.id === productForm.brand_id)?.name || 'BRAND';
+                        const skuBrand = bName.replace(/\s+/g, '-').toUpperCase();
+                        const skuName = productForm.name.replace(/\s+/g, '-').toUpperCase();
+                        const skuSize = (productForm.pack_size || '').replace(/\s+/g, '').toUpperCase();
+                        
+                        // User specifically requested format: CKP-Brand-Type. 
+                        // To uniquely identify the product, we include the product name as well, or just use product name as Brand if no brand selected
+                        const generatedSku = `CKP-${skuBrand}-${skuName}${skuSize ? '-' + skuSize : ''}`;
+                        setProductForm(prev => ({ ...prev, sku: generatedSku }));
+                      }}
+                      className="text-xs font-bold text-blue-500 hover:text-blue-700 underline"
+                    >
+                      Generate Auto SKU
+                    </button>
+                  </div>
                   <input
                     type="text"
                     required
@@ -2873,6 +2966,201 @@ export default function AdminDashboard() {
 
               <div className="space-y-1">
                 <label className="font-bold text-slate-400 uppercase tracking-wider block">Technical Remarks / Special terms</label>
+                {variantItems.length === 0 ? (
+                  <p className="text-[10px] text-slate-400 font-semibold italic">No package size variants defined. Default product specifications and pricing will be used.</p>
+                ) : (
+                  <div className="space-y-3 max-h-60 overflow-y-auto pr-1">
+                    {variantItems.map((variant, idx) => (
+                      <div key={idx} className="p-3 border rounded-2xl bg-slate-50 dark:bg-slate-950 space-y-2 relative">
+                        <button
+                          type="button"
+                          onClick={() => setVariantItems(prev => prev.filter((_, i) => i !== idx))}
+                          className="absolute top-2 right-2 text-red-650 hover:bg-red-50 dark:hover:bg-red-950/30 p-1.5 rounded-lg text-xs font-bold"
+                          title="Remove Variant"
+                        >
+                          ✕ Remove
+                        </button>
+                        
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+                          <div>
+                            <label className="block text-[9px] font-bold text-slate-400 uppercase">Pack Size *</label>
+                            <input
+                              type="text"
+                              required
+                              placeholder="e.g. 5 Kg Tub"
+                              value={variant.pack_size}
+                              onChange={(e) => {
+                                const updated = [...variantItems];
+                                updated[idx].pack_size = e.target.value;
+                                setVariantItems(updated);
+                              }}
+                              className="w-full px-2 py-1.5 border rounded-lg bg-white dark:bg-slate-900"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-[9px] font-bold text-slate-400 uppercase">SKU *</label>
+                            <input
+                              type="text"
+                              required
+                              placeholder="SKU"
+                              value={variant.sku}
+                              onChange={(e) => {
+                                const updated = [...variantItems];
+                                updated[idx].sku = e.target.value;
+                                setVariantItems(updated);
+                              }}
+                              className="w-full px-2 py-1.5 border rounded-lg bg-white dark:bg-slate-900"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-[9px] font-bold text-slate-400 uppercase">Weight (Kg) *</label>
+                            <input
+                              type="number"
+                              step="any"
+                              required
+                              value={variant.weight}
+                              onChange={(e) => {
+                                const updated = [...variantItems];
+                                updated[idx].weight = parseFloat(e.target.value) || 0;
+                                setVariantItems(updated);
+                              }}
+                              className="w-full px-2 py-1.5 border rounded-lg bg-white dark:bg-slate-900"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-[9px] font-bold text-slate-400 uppercase">Stock *</label>
+                            <input
+                              type="number"
+                              required
+                              value={variant.stock}
+                              onChange={(e) => {
+                                const updated = [...variantItems];
+                                updated[idx].stock = parseInt(e.target.value) || 0;
+                                setVariantItems(updated);
+                              }}
+                              className="w-full px-2 py-1.5 border rounded-lg bg-white dark:bg-slate-900"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+                          <div>
+                            <label className="block text-[9px] font-bold text-slate-400 uppercase">MRP (INR) *</label>
+                            <input
+                              type="number"
+                              required
+                              value={variant.mrp}
+                              onChange={(e) => {
+                                const updated = [...variantItems];
+                                updated[idx].mrp = parseFloat(e.target.value) || 0;
+                                setVariantItems(updated);
+                              }}
+                              className="w-full px-2 py-1.5 border rounded-lg bg-white dark:bg-slate-900"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-[9px] font-bold text-slate-400 uppercase">Retail Price *</label>
+                            <input
+                              type="number"
+                              required
+                              value={variant.price}
+                              onChange={(e) => {
+                                const updated = [...variantItems];
+                                updated[idx].price = parseFloat(e.target.value) || 0;
+                                setVariantItems(updated);
+                              }}
+                              className="w-full px-2 py-1.5 border rounded-lg bg-white dark:bg-slate-900"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-[9px] font-bold text-slate-400 uppercase">Dealer Price *</label>
+                            <input
+                              type="number"
+                              required
+                              value={variant.dealer_price}
+                              onChange={(e) => {
+                                const updated = [...variantItems];
+                                updated[idx].dealer_price = parseFloat(e.target.value) || 0;
+                                setVariantItems(updated);
+                              }}
+                              className="w-full px-2 py-1.5 border rounded-lg bg-white dark:bg-slate-900"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-[9px] font-bold text-slate-400 uppercase">MOQ (Units) *</label>
+                            <input
+                              type="number"
+                              required
+                              value={variant.moq}
+                              onChange={(e) => {
+                                const updated = [...variantItems];
+                                updated[idx].moq = parseInt(e.target.value) || 0;
+                                setVariantItems(updated);
+                              }}
+                              className="w-full px-2 py-1.5 border rounded-lg bg-white dark:bg-slate-900"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <button
+                type="submit"
+                className="w-full py-3 bg-blue-600 hover:bg-blue-750 text-white font-bold rounded-xl text-xs transition"
+              >
+                Commit Product formulation
+              </button>
+
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* RFQ QUOTE MODAL FORM */}
+      {showRfqModal && activeRfq && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/65 backdrop-blur-sm p-4">
+          <div className="w-full max-w-md bg-white dark:bg-slate-900 rounded-3xl p-6 md:p-8 space-y-5 border relative">
+            <button 
+              onClick={() => setShowRfqModal(false)}
+              className="absolute top-4 right-4 text-slate-400 hover:text-slate-800 font-bold"
+            >
+              ✕
+            </button>
+            <h3 className="text-xl font-extrabold font-display border-b pb-3">Construct Price Contract</h3>
+            
+            <form onSubmit={handleRfqResponseSubmit} className="space-y-4 text-xs">
+              <div>
+                <span className="text-slate-400 block font-bold text-[9px] uppercase">Client Inquired detail</span>
+                <p className="font-bold text-slate-800 dark:text-white leading-relaxed">{activeRfq.company_name} requests {activeRfq.quantity} units of {activeRfq.product?.name || 'custom formulation'}</p>
+              </div>
+
+              <div className="space-y-1">
+                <label className="font-bold text-slate-400 uppercase tracking-wider block">Total Offered Quote Price (₹) *</label>
+                <input
+                  type="number"
+                  required
+                  value={rfqResponse.offeredPrice}
+                  onChange={(e) => setRfqResponse(prev => ({ ...prev, offeredPrice: e.target.value }))}
+                  className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="font-bold text-slate-400 uppercase tracking-wider block">Quote Contract Validity Period</label>
+                <input
+                  type="text"
+                  required
+                  value={rfqResponse.validTill}
+                  onChange={(e) => setRfqResponse(prev => ({ ...prev, validTill: e.target.value }))}
+                  className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="font-bold text-slate-400 uppercase tracking-wider block">Technical Remarks / Special terms</label>
                 <textarea
                   rows="3"
                   value={rfqResponse.remarks}
@@ -2887,8 +3175,68 @@ export default function AdminDashboard() {
               >
                 Send Wholesale Price Quote
               </button>
-
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* GST / HSN Modal for Specific Order */}
+      {selectedOrderForGST && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/65 backdrop-blur-sm p-4 overflow-y-auto print:p-0 print:bg-white print:fixed print:inset-0 print:z-[9999]">
+          <div className="w-full max-w-4xl bg-white dark:bg-slate-900 rounded-3xl p-6 md:p-8 space-y-6 relative my-8 border print:my-0 print:border-none print:shadow-none print:p-4">
+            <button 
+              onClick={() => setSelectedOrderForGST(null)}
+              className="absolute top-4 right-4 text-slate-400 hover:text-slate-800 font-bold print:hidden"
+            >
+              <X className="h-6 w-6" />
+            </button>
+            <div className="flex justify-between items-center print:hidden">
+              <h2 className="text-xl font-bold font-display">Sales Tax & HSN Summaries</h2>
+              <button
+                onClick={() => window.print()}
+                className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl flex items-center gap-1.5"
+              >
+                <Printer className="h-4 w-4" /> Print Tax Report
+              </button>
+            </div>
+            
+            <div className="border-b pb-4 space-y-1 mt-4">
+              <h3 className="text-lg font-bold font-display text-slate-950 dark:text-white print:text-black">GST/HSN Sales Reconciliation Report</h3>
+              <p className="text-xs text-slate-500 font-semibold">Order ID: {selectedOrderForGST.display_id || selectedOrderForGST.id.substring(0,8)} | Date: {new Date(selectedOrderForGST.created_at).toLocaleDateString()}</p>
+              <p className="text-xs text-slate-500 font-semibold">Customer: {selectedOrderForGST.company_name || selectedOrderForGST.user?.full_name || 'Retail'}</p>
+            </div>
+
+            <table className="w-full text-xs text-left border-collapse">
+              <thead>
+                <tr className="border-b text-slate-400 font-bold uppercase text-[10px] pb-2">
+                  <th className="py-2.5">HSN Code</th>
+                  <th className="py-2.5">Product Name</th>
+                  <th className="py-2.5 text-right">Taxable Value (₹)</th>
+                  <th className="py-2.5 text-right">CGST (₹)</th>
+                  <th className="py-2.5 text-right">SGST (₹)</th>
+                  <th className="py-2.5 text-right">Combined GST (₹)</th>
+                  <th className="py-2.5 text-right">Total (₹)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {selectedOrderForGST.items?.map((item, idx) => {
+                  const hsn = item.hsn_code || item.product?.hsn_code || '35069190';
+                  const taxable = item.price * item.quantity;
+                  const gst = item.gst_amount || 0;
+                  return (
+                    <tr key={idx} className="border-b last:border-b-0 hover:bg-slate-50/50">
+                      <td className="py-3 font-bold text-slate-850 dark:text-white print:text-black">{hsn}</td>
+                      <td className="py-3 text-slate-700 dark:text-slate-300 font-semibold">{item.product?.name || 'Product'}</td>
+                      <td className="py-3 text-right font-semibold">₹{taxable.toFixed(2)}</td>
+                      <td className="py-3 text-right font-semibold text-slate-500">₹{(gst/2).toFixed(2)}</td>
+                      <td className="py-3 text-right font-semibold text-slate-500">₹{(gst/2).toFixed(2)}</td>
+                      <td className="py-3 text-right font-bold text-slate-700 dark:text-slate-350">₹{gst.toFixed(2)}</td>
+                      <td className="py-3 text-right font-extrabold text-slate-950 dark:text-white print:text-black">₹{item.total.toFixed(2)}</td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
           </div>
         </div>
       )}

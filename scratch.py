@@ -1,0 +1,241 @@
+data = """
+FEVICOL SH
+60 KG	11287.80	13319.60	16695
+50 KG	9756	11512.08	14780
+30 KG	5998.20	7077.88	9090
+20 KG	4131	4874.58	6240
+10 KG	2173.60	2564.85	3280
+5 KG	1132.30	1336.11	1705
+2 KG	471.26	556.09	725
+1 KG	246.69	291.09	395
+500 GM	132.61	156.48	215
+250 GM	74.09	87.43	120
+125 GM	39.53	46.65	70
+50 GM	20.74	24.47	40
+FEVICOL MARINE
+60 KG	14883.60	17562.65	21550
+50 KG	12553.50	14813.13	18265
+30 KG	7697.40	9082.93	11190
+20 KG	5222.40	6162.43	7615
+10 KG	2716.30	3205.23	3950
+5 KG	1404.00	1656.66	2060
+2 KG	588.02	693.86	865
+1 KG	306.08	361.17	465
+500 GM	163.63	193.08	255
+FEVICOL HI-PER
+60 KG	17454	20595.72	25350
+50 KG	14545	17163.10	21130
+30 KG	8817	10404.06	12810
+20 KG	5988	7065.84	8690
+10 KG	3094	3650.92	4495
+5 KG	1609.5	1899.21	2365
+2 KG	688.80	789.18	1010
+1 KG	347.9	410.52	525
+500 GM	188.2	222.08	295
+FEVICOL HI-PER STAR
+50 KG	16105	19003.90	23390
+20 KG	6632	7825.76	9630
+10 KG	3426	4042.68	4980
+5 KG	1783	2103.94	2605
+2 KG	740.2	873.44	1105
+1 KG	385.10	454.42	580
+FEVICOL PROBOND
+20 KG	6650.00	7847.00	9625
+10 KG	3351.00	3954.18	4890
+5 KG	1745.00	2059.10	2600
+1 KG	362.00	427.16	565
+500 GM	201.00	237.18	320
+FEVICOL HEATX
+5 LT	2130.00	2513.99	3095
+2 LT	880.20	1038.64	1305
+1 LT	453.60	535.25	680
+500 ML	233.30	275.29	365
+200 ML	108.82	128.41	185
+100 ML	59.76	70.52	105
+FEVICOL SR 998
+25 LT	8667.50	10227.65	12270
+5 LT	1799.10	2122.94	2560
+2 LT	749.44	884.34	1070
+1 LT	384.10	453.24	585
+500 ML	206.93	244.18	315
+200 ML	95.00	112.07	165
+100 ML	53.31	62.93	100
+MASTERLOK
+50 KG	5200	6136.00	9910
+20 KG	2410	2843.00	4050
+10 KG	1090	1286.20	2090
+5 KG	555	654.90	1070
+2 KG	226	266.68	500
+1 KGPP	105	123.90	230
+1 KG	115	135.70	245
+500 GM	62	73.16	130
+250 GM	34.50	40.71	80
+125 GM	18.50	21.83	60
+BULBOND
+50 KG	5807	6852.26	10945
+20 KG	2381.6	2810.29	4455
+5 KG	609.6	719.33	1150
+1 KGPP	116.51	137.48	255
+1 KG	134.59	158.82	270
+500 PP	65	76.53	140
+500 GM	78.16	92.41	160
+GRIPPO
+50 KG	4250	5015.00	7690
+20 KG	1864.6	2200.23	3295
+10 KG	933	1100.11	1690
+5 KG	475	560.50	870
+1 KGPP	88	103.84	170
+1 KG	97	114.46	180
+MARINEKOAT
+5 LT	2733.75	3225.83	4205
+1 LT	562.06	663.23	865
+500 ML	299	353	465
+250ML	147	173.46	288
+TERMINATOR STRUCTURE PRESERVATIVE
+5 LTR	1533.55	1809.59	2295
+1 LTR	325.58	384.18	490
+500 ML	174.62	206.05	265
+TERMINATOR WOOD PRESERVATIVE
+1 LTR	282.79	333.69	435
+5 LTR	1357.15	1601.44	2030
+100 ML	41.44	48.90	70
+250 ML	81.54	96.22	130
+3 LTR	746.76	994.46	1270
+500 ML	154.12	181.86	235
+1 LTR	335.30	395.65	530
+500 ML	200.40	236.47	320
+320 ML	157.00	185.26	250
+FEVISEAL GP
+W-B-C	102	120.00	315
+FEVISEAL GP-PRO
+W-B-C	117	138.00	325
+FEVISEAL NEUTRAL PRO
+W-B-C	132	156	400
+GREY	134	158.0	400
+BROWN	144	170.0	400
+FEVISEAL WEATHER PROOF
+W-B-C	179	211.00	425
+GREY	189	223.0	450
+BROWN	204	241	450
+FEVISEAL MULTI PURPOSE
+W-B-C	80.00	95	250
+FEVISEAL B&K
+WHITE	85	100.30	140
+FEVICOL WUDFILL
+50 GM	84.80	101.52	160
+20 GM	42.40	51	80
+FEVIKWIK 463
+250 GM	332.80	392.70	800
+125 GM	172.88	206	420
+20 GM	43.91	52.41	85
+FEVIKWIK 203
+50 GM	88.87	106.00	170
+20 GM	43.91	53.00	85
+FEVICOL SR 505
+25 LT	7018.75	8282	10835
+5 LT	1682	1681.5	2215
+2 LT	707	706.82	945
+1 LT	355	355.48	490
+500 ML	190.00	189.98	265
+EZEESPRAY
+500 ML	440.6	520	870
+EDEGLOK
+140 GM	75	88	125
+1K PUR
+500 GM	336	397	595
+PU FOAM
+720 GM	290	342.2	1000
+POWERLOK
+430 GM	125	147	330
+NAIL FREE ULTRA
+435 GM	280	330.4	549
+RELAM
+430 GM	295	348	470
+PLAATILOK
+430 GM	295	348	470
+XPRESS
+500 GM	476.46	562.22	850
+FEVICOL X-PER
+800 GM	444.8	524.8	670
+FEVICOL MULTILOCK
+800 ML	521.6	615.4	785
+FEVICOL FASTRAK
+25 LT	5050	5959	8655
+FEVICOL BEJOD
+4.5 LT	1050.8	1239	2110
+25 LT	5744.00	6777.00	10695
+FEVICOL FLOORFIX VT
+5 KG	1186.25	1399.78	2195
+20 KG	4575	5398.5	8100
+FEVICOL FLOORFIX CP
+5 KG	1241.25	1464.68	2315
+10 KG	2407.5	2840.85	4570
+20 KG	4660	5498.8	8890
+WOODLOK PRO
+60 KG	7680	9062.4	10160
+FEVICOL 707 FW
+25 LT	6375	7523	10810
+5 LT	1290	1522.00	2395
+2 LT	533	629.00	950
+1 LT	271.00	320	505
+500 ML	140	165.00	265
+FEVICOL FOAMFIX
+25 LTR	6368.75	7515.13	10950
+5 LTR	1292.5	1525.15	2230
+2 LTR	535	631.3	925
+1 LTR	271.75	320.67	485
+"""
+
+lines = data.strip().split('\n')
+current_product = ''
+with open('pidilite_price_list_and_sku_logic.sql', 'w') as f:
+    f.write('-- =====================================================================\n')
+    f.write('-- SQL Script to Bulk Update PIDILITE Products SKUs and Prices\n')
+    f.write('-- SKU Format: CKP-<Brand>-<Identity>-<Size> (e.g. CKP-FEVICOL-SH-60KG)\n')
+    f.write('-- =====================================================================\n\n')
+    f.write('-- Note: The table name is assumed to be `products` or `variants`.\n')
+    f.write('-- Replace `products` with your actual variants table name if needed.\n\n')
+
+    for line in lines:
+        line = line.strip()
+        if not line: continue
+        parts = line.split('\t')
+        if len(parts) == 1:
+            current_product = line
+            f.write(f'\n-- {current_product}\n')
+        else:
+            pack = parts[0]
+            basic = parts[1]
+            dlp = parts[2]
+            mrp = parts[3]
+            # Replace spaces with hyphens for SKU
+            sku_identity = current_product.replace(' ', '-').upper()
+            sku_pack = pack.replace(' ', '').upper()
+            sku = f'CKP-{sku_identity}-{sku_pack}'
+            f.write(f"UPDATE products SET sku = '{sku}', price = {basic}, dealer_price = {dlp}, mrp = {mrp} WHERE product_name = '{current_product}' AND (pack_size = '{pack}' OR title = '{pack}');\n")
+            
+    f.write('\n\n')
+    f.write('-- =====================================================================\n')
+    f.write('-- TRIGGER to automatically format future inserted SKUs to this format\n')
+    f.write('-- =====================================================================\n')
+    f.write('''
+CREATE OR REPLACE FUNCTION generate_ckp_sku()
+RETURNS TRIGGER AS $$
+BEGIN
+  -- Assuming columns: product_name, and pack_size
+  -- This will set SKU to CKP-FEVICOL-SH-60KG format
+  NEW.sku := 'CKP-' || 
+             UPPER(REPLACE(NEW.product_name, ' ', '-')) || '-' || 
+             UPPER(REPLACE(NEW.pack_size, ' ', ''));
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Uncomment the below to activate the trigger on your actual table
+/*
+CREATE TRIGGER trg_generate_ckp_sku
+BEFORE INSERT OR UPDATE ON products
+FOR EACH ROW
+EXECUTE FUNCTION generate_ckp_sku();
+*/
+''')
