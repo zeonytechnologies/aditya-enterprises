@@ -1962,7 +1962,7 @@ export const db = {
       .reduce((sum, o) => sum + parseFloat(o.grand_total), 0);
 
     const totalGst = orders
-      .filter(o => o.status !== 'Cancelled' && o.status !== 'Order Placed')
+      .filter(o => o.status === 'Delivered')
       .reduce((sum, o) => sum + parseFloat(o.gst_amount), 0);
 
     const lowStockCount = products.filter(p => p.stock < 15).length;

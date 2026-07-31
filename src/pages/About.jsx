@@ -288,8 +288,13 @@ export default function About() {
                   />
                   <button 
                     onClick={async () => {
-                      const updatedSettings = { ...settings, google_reviews_summary: reviewsSummary };
-                      await api.settings.update(updatedSettings);
+                      const updatedSettings = { ...(settings || {}), google_reviews_summary: reviewsSummary };
+                      try {
+                        await api.settings.update(updatedSettings);
+                      } catch (err) {
+                        console.error('Failed to save to DB:', err);
+                      }
+                      // Always update local UI state
                       setSettings(updatedSettings);
                       setIsEditingReviews(false);
                     }}

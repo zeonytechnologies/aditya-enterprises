@@ -142,8 +142,13 @@ export default function Cart() {
 
                   {/* Tax breakdowns and totals */}
                   <div className="text-right sm:w-36 space-y-1">
-                    <div className="text-xs font-semibold text-slate-400">
-                      ₹{unitPrice.toFixed(2)}/unit
+                    <div className="text-xs font-semibold text-slate-400 flex flex-col items-end gap-0.5">
+                      {product.mrp && (
+                        <span className="text-[10px] line-through text-slate-300 dark:text-slate-500">
+                          MRP: ₹{parseFloat(product.mrp).toFixed(2)}
+                        </span>
+                      )}
+                      <span className="text-emerald-600 dark:text-emerald-400 font-bold">₹{unitPrice.toFixed(2)}/unit</span>
                     </div>
                     <div className="text-sm font-extrabold font-display">
                       ₹{(totalTaxable + gstAmount).toLocaleString('en-IN', { minimumFractionDigits: 2 })}

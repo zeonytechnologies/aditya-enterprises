@@ -33,15 +33,13 @@ export const CartProvider = ({ children }) => {
   // Determine actual unit price based on user role and variant
   const getProductUnitPrice = (product, variant = null) => {
     const target = variant || product;
-    const gstMultiplier = 1 + (product.gst_percent || 18) / 100;
     
-    // Default to Retail Price (MRP excluding GST)
-    let basePrice = (parseFloat(target.mrp) || 0) / gstMultiplier;
+    // Basic Price from DB
+    let basePrice = parseFloat(target.price) || 0;
     
-    // If dealer/distributor, use the dealer price (excluding GST)
-    if (user && (user.role === 'dealer' || user.role === 'distributor')) {
-      // In db.js, price is the base dealer price without GST
-      basePrice = parseFloat(target.price) || 0;
+    // Retail customers pay Basic Price + 2%
+    if (!user || (user.role !== 'dealer' && user.role !== 'distributor')) {
+      basePrice = basePrice * 1.02;
     }
     
     // Apply discount if applicable

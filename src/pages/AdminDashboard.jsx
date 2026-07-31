@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   BarChart3, ShieldCheck, ShoppingBag, FileSpreadsheet, 
-  Layers, Package, AlertCircle, FileText, CheckCircle2, XCircle, Plus, Edit, Trash2, Printer, Tag, Search, ChevronLeft, ChevronRight, MessageCircle, Users, ShoppingCart, X, Settings, Eye, EyeOff
+  Layers, Package, AlertCircle, FileText, CheckCircle2, XCircle, Plus, Edit, Trash2, Printer, Tag, Search, ChevronLeft, ChevronRight, MessageCircle, Users, ShoppingCart, X, Settings, Eye, EyeOff, TrendingUp
 } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
 import { api } from '../services/supabase';
@@ -10,6 +10,7 @@ import { useAuth } from '../context/AuthContext';
 import { sendEmail } from '../services/mailer';
 import OfferPosterManager from '../components/OfferPosterManager';
 import BannerCarouselManager from '../components/BannerCarouselManager';
+import AdminReports from '../components/AdminReports';
 
 function useTablePagination(data, searchFields = ['name']) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -868,6 +869,14 @@ export default function AdminDashboard() {
           <FileText className="h-4.5 w-4.5" /> HSN/GST Reports
         </button>
         <button
+          onClick={() => setActiveTab('reports')}
+          className={`pb-4 text-xs font-bold border-b-2 flex items-center gap-1.5 px-3 transition-colors ${
+            activeTab === 'reports' ? 'border-blue-600 text-blue-600 dark:border-cyan-400 dark:text-cyan-400' : 'border-transparent text-slate-400'
+          }`}
+        >
+          <TrendingUp className="h-4.5 w-4.5" /> Analytics
+        </button>
+        <button
           onClick={() => setActiveTab('brands')}
           className={`pb-4 text-xs font-bold border-b-2 flex items-center gap-1.5 px-3 transition-colors ${
             activeTab === 'brands' ? 'border-blue-600 text-blue-600 dark:border-cyan-400 dark:text-cyan-400' : 'border-transparent text-slate-400'
@@ -982,6 +991,11 @@ export default function AdminDashboard() {
           </div>
 
         </div>
+      )}
+
+      {/* TAB: Analytics & Reports */}
+      {activeTab === 'reports' && (
+        <AdminReports orders={orders} products={products} />
       )}
 
       {/* TAB J: Leads */}
