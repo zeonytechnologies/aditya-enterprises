@@ -428,10 +428,7 @@ export default function Checkout() {
                   <span>-₹{parseFloat(totals.discount).toLocaleString('en-IN')}</span>
                 </div>
               )}
-              <div className="flex justify-between">
-                <span>Shipping:</span>
-                <span>{parseFloat(totals.shipping) === 0 ? "Free" : `₹${totals.shipping}`}</span>
-              </div>
+
               <div className="flex justify-between text-base font-extrabold text-slate-900 dark:text-white pt-3 border-t">
                 <span>Grand Total:</span>
                 <span>₹{parseFloat(totals.grandTotal).toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>

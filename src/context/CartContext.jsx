@@ -37,11 +37,6 @@ export const CartProvider = ({ children }) => {
     // Basic Price from DB
     let basePrice = parseFloat(target.price) || 0;
     
-    // Retail customers pay Basic Price + 2%
-    if (!user || (user.role !== 'dealer' && user.role !== 'distributor')) {
-      basePrice = basePrice * 1.02;
-    }
-    
     // Apply discount if applicable
     if (product.discount_percent > 0) {
       const discount = basePrice * (product.discount_percent / 100);
@@ -149,8 +144,7 @@ export const CartProvider = ({ children }) => {
     const gstTotal = getGstAmount();
     const discount = getDiscount();
     
-    // Free shipping above ₹5000, otherwise ₹250 flat B2B delivery charge
-    const shipping = (subtotal > 5000 || subtotal === 0) ? 0 : 250; 
+    const shipping = 0;
     
     const grandTotal = Math.max(0, subtotal + gstTotal - discount + shipping);
     

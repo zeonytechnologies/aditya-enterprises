@@ -108,15 +108,13 @@ export default function ProductDetails() {
       }
     });
 
-    // Apply a 10% Bundle Discount
-    const rawGrand = sub + gst;
-    const discount = rawGrand * 0.10;
-    const grand = rawGrand - discount;
+    const grand = sub + gst;
+
 
     setBundleTotal({
       taxable: sub.toFixed(2),
       gst: gst.toFixed(2),
-      discount: discount.toFixed(2),
+      discount: '0.00',
       grand: grand.toFixed(2)
     });
   }, [checkedBundleItems, bundleProducts, product, quantity]);
@@ -532,73 +530,7 @@ export default function ProductDetails() {
         </div>
       </div>
 
-      {/* Frequently Bought Together Bundle */}
-      {bundleProducts.length > 0 && (
-        <section className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl p-6 md:p-8 shadow-sm mb-16">
-          <h3 className="text-lg font-extrabold font-display mb-6">Frequently Bought Together (Save 10% Bundle)</h3>
-          
-          <div className="flex flex-col lg:flex-row items-center gap-8 justify-between">
-            <div className="flex flex-wrap items-center gap-4 md:gap-8 flex-1">
-              
-              {/* Product 1 */}
-              <div className="flex items-center gap-4 bg-slate-50 dark:bg-slate-950 p-4 rounded-2xl border flex-grow min-w-[240px] max-w-full sm:max-w-xs">
-                <img src={product.images[0]} alt="" className="w-14 h-14 object-contain" />
-                <div>
-                  <h4 className="text-xs font-bold line-clamp-1">{product.name}</h4>
-                  <span className="text-xs font-extrabold">₹{unitPrice.toFixed(2)}</span>
-                </div>
-              </div>
 
-              <Plus className="text-slate-350" />
-
-              {/* Related Products list */}
-              {bundleProducts.map(p => (
-                <div key={p.id} className="flex items-center gap-4 bg-slate-50 dark:bg-slate-950 p-4 rounded-2xl border flex-grow min-w-[240px] max-w-full sm:max-w-xs relative">
-                  <input
-                    type="checkbox"
-                    checked={checkedBundleItems[p.id] || false}
-                    onChange={(e) => setCheckedBundleItems(prev => ({ ...prev, [p.id]: e.target.checked }))}
-                    className="absolute top-2 left-2 rounded text-blue-600"
-                  />
-                  <img src={p.images[0]} alt="" className="w-14 h-14 object-contain ml-2" />
-                  <div>
-                    <h4 className="text-xs font-bold line-clamp-1">{p.name}</h4>
-                    <span className="text-xs font-extrabold">₹{getProductUnitPrice(p).toFixed(2)}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Calculations and bundle submission */}
-            <div className="border-t lg:border-t-0 lg:border-l border-slate-100 dark:border-slate-800 pt-6 lg:pt-0 lg:pl-8 space-y-4 w-full lg:w-72">
-              <div className="space-y-1.5 text-xs">
-                <div className="flex justify-between text-slate-500 font-semibold">
-                  <span>Items Subtotal:</span>
-                  <span>₹{bundleTotal.taxable}</span>
-                </div>
-                <div className="flex justify-between text-slate-500 font-semibold">
-                  <span>GST Taxes:</span>
-                  <span>₹{bundleTotal.gst}</span>
-                </div>
-                <div className="flex justify-between text-cyan-600 font-bold">
-                  <span>Bundle Discount (10%):</span>
-                  <span>-₹{bundleTotal.discount}</span>
-                </div>
-                <div className="flex justify-between text-base font-extrabold pt-2 border-t">
-                  <span>Bundle Total:</span>
-                  <span>₹{bundleTotal.grand}</span>
-                </div>
-              </div>
-              <button
-                onClick={handleAddBundleToCart}
-                className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs transition shadow"
-              >
-                Add Checked Bundle to Cart
-              </button>
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* Details Sheets / Downloads / Specs Tab block */}
       <section className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">

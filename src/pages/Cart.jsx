@@ -235,16 +235,7 @@ export default function Cart() {
                 </div>
               </div>
 
-              <div className="flex justify-between text-slate-500 font-semibold">
-                <span>Shipping Charges:</span>
-                <span className="font-bold text-slate-800 dark:text-white">
-                  {parseFloat(totals.shipping) === 0 ? (
-                    <span className="text-green-500 font-bold uppercase text-[10px]">Free Delivery</span>
-                  ) : (
-                    `₹${parseFloat(totals.shipping).toFixed(2)}`
-                  )}
-                </span>
-              </div>
+
 
               <div className="flex justify-between text-base font-extrabold pt-4 border-t text-slate-950 dark:text-white">
                 <span>Grand Total:</span>
