@@ -40,11 +40,9 @@ export default function AdminReports({ orders = [], products = [] }) {
     let totalOrders = filteredOrders.length;
 
     filteredOrders.forEach(o => {
-      if (o.status !== 'Cancelled') {
-        const amt = parseFloat(o.total_amount || o.grandTotal || o.total || 0);
-        totalRevenue += amt;
-      }
       if (o.status === 'Delivered') {
+        const amt = parseFloat(o.total_amount || o.grand_total || o.grandTotal || o.total || 0);
+        totalRevenue += amt;
         const gst = parseFloat(o.gst_amount || o.gst || 0);
         totalGST += gst;
       }
@@ -62,9 +60,9 @@ export default function AdminReports({ orders = [], products = [] }) {
   const revenueByDate = useMemo(() => {
     const map = {};
     filteredOrders.forEach(o => {
-      if (o.status === 'Cancelled') return;
+      if (o.status !== 'Delivered') return;
       const date = o.created_at.slice(0, 10);
-      const amt = parseFloat(o.total_amount || o.grandTotal || o.total || 0);
+      const amt = parseFloat(o.total_amount || o.grand_total || o.grandTotal || o.total || 0);
       map[date] = (map[date] || 0) + amt;
     });
     return Object.keys(map).sort().map(date => ({
@@ -88,7 +86,7 @@ export default function AdminReports({ orders = [], products = [] }) {
   const topProductsData = useMemo(() => {
     const map = {};
     filteredOrders.forEach(o => {
-      if (o.status === 'Cancelled' || !o.items) return;
+      if (o.status !== 'Delivered' || !o.items) return;
       
       // Handle items whether parsed or stringified
       let items = o.items;
@@ -111,7 +109,7 @@ export default function AdminReports({ orders = [], products = [] }) {
   const productSalesDetails = useMemo(() => {
     const map = {};
     filteredOrders.forEach(o => {
-      if (o.status === 'Cancelled' || !o.items) return;
+      if (o.status !== 'Delivered' || !o.items) return;
       let items = o.items;
       if (typeof items === 'string') {
         try { items = JSON.parse(items); } catch (e) { items = []; }
@@ -132,11 +130,11 @@ export default function AdminReports({ orders = [], products = [] }) {
   const topCustomersData = useMemo(() => {
     const map = {};
     filteredOrders.forEach(o => {
-      if (o.status === 'Cancelled') return;
+      if (o.status !== 'Delivered') return;
       const customer = o.user?.full_name || o.user?.name || o.shipping_address?.firstName || 'Retail Customer';
       const role = o.user?.role === 'dealer' || o.user?.role === 'distributor' ? 'Dealer' : 'Retail';
       const key = `${customer}||${role}`;
-      const amt = parseFloat(o.total_amount || o.grandTotal || o.total || 0);
+      const amt = parseFloat(o.total_amount || o.grand_total || o.grandTotal || o.total || 0);
       
       if (!map[key]) map[key] = { name: customer, role, totalSpent: 0, orderCount: 0 };
       map[key].totalSpent += amt;
@@ -179,7 +177,7 @@ export default function AdminReports({ orders = [], products = [] }) {
         customer,
         o.status,
         itemsCount.toString(),
-        `Rs. ${parseFloat(o.total_amount || o.grandTotal || o.total || 0).toLocaleString('en-IN')}`,
+        `Rs. ${parseFloat(o.total_amount || o.grand_total || o.grandTotal || o.total || 0).toLocaleString('en-IN')}`,
         `Rs. ${parseFloat(o.gst_amount || o.gst || 0).toLocaleString('en-IN')}`
       ];
     });

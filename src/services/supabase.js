@@ -653,7 +653,7 @@ export const api = {
           const { data: profiles } = await supabase.from('profiles').select('role, is_approved');
           const { data: visitors } = await supabase.from('visitors').select('created_at');
           
-          const totalRevenue = orders?.reduce((acc, curr) => acc + parseFloat(curr.grand_total || 0), 0) || 0;
+          const totalRevenue = orders?.filter(o => o.status === 'Delivered').reduce((acc, curr) => acc + parseFloat(curr.grand_total || 0), 0) || 0;
           const gstCollected = orders?.filter(o => o.status === 'Delivered').reduce((acc, curr) => acc + parseFloat(curr.gst_amount || 0), 0) || 0;
           const pendingPayments = payments?.filter(p => p.status === 'Pending Verification').length || 0;
           const pendingRfqs = rfqs?.filter(r => r.status === 'Pending').length || 0;
