@@ -48,7 +48,9 @@ export default function PopupsManager() {
         setActiveOffers(validOffers);
         
         setTimeout(() => {
-          if (!hasCaptured && !hasSkipped) {
+          const currentCaptured = localStorage.getItem('aditya_lead_captured');
+          const currentSkipped = sessionStorage.getItem('aditya_lead_skipped');
+          if (!currentCaptured && !currentSkipped) {
             setShowLeadForm(true);
           } else if (validOffers.length > 0) {
             setShowOffer(true);
@@ -102,6 +104,8 @@ export default function PopupsManager() {
 
       setTimeout(() => {
         setShowLeadForm(false);
+        setIsSuccess(false); // Reset success state so it doesn't get stuck if reopened
+        sessionStorage.setItem('aditya_lead_skipped', 'true');
         if (activeOffers.length > 0) {
           setShowOffer(true);
         }
