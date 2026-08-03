@@ -811,7 +811,7 @@ export const api = {
         // We catch errors in case device_id column doesn't exist on the Supabase side yet
         try {
           const { error } = await supabase.from('visitors').insert({ path, device_id: deviceId });
-          if (error && error.code === 'PGRST116') {
+          if (error) {
              // Fallback if device_id is not in schema
              await supabase.from('visitors').insert({ path });
           }

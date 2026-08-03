@@ -195,6 +195,11 @@ export default function AdminDashboard() {
   const [catalogueForm, setCatalogueForm] = useState({ title: '', description: '', file_url: '' });
   const [editingCatalogueId, setEditingCatalogueId] = useState(null);
 
+  // Modal States for Brands & Catalogues
+  const [showBrandModal, setShowBrandModal] = useState(false);
+  const [showCategoryModal, setShowCategoryModal] = useState(false);
+  const [showCatalogueModal, setShowCatalogueModal] = useState(false);
+
   // Upload States
   const [productImages, setProductImages] = useState([]);
   const [uploadingProductImg, setUploadingProductImg] = useState(false);
@@ -296,6 +301,7 @@ export default function AdminDashboard() {
       
       setBrandForm({ name: '', slug: '', description: '', logo_url: '' });
       setEditingBrandId(null);
+      setShowBrandModal(false);
       loadAdminData();
     } catch (err) {
       console.error('Error saving brand:', err);
@@ -311,6 +317,7 @@ export default function AdminDashboard() {
       logo_url: brand.logo_url || ''
     });
     setEditingBrandId(brand.id);
+    setShowBrandModal(true);
   };
 
   const handleDeleteBrand = async (id) => {
@@ -343,6 +350,7 @@ export default function AdminDashboard() {
       
       setCategoryForm({ name: '', slug: '', description: '', icon: 'Layers', image_url: '' });
       setEditingCategoryId(null);
+      setShowCategoryModal(false);
       loadAdminData();
     } catch (err) {
       console.error('Error saving category:', err);
@@ -359,6 +367,7 @@ export default function AdminDashboard() {
       image_url: category.image_url || ''
     });
     setEditingCategoryId(category.id);
+    setShowCategoryModal(true);
   };
 
   const handleDeleteCategory = async (id) => {
@@ -397,6 +406,7 @@ export default function AdminDashboard() {
       
       setCatalogueForm({ title: '', description: '', file_url: '', fileObj: null });
       setEditingCatalogueId(null);
+      setShowCatalogueModal(false);
       loadAdminData();
     } catch (err) {
       console.error('Error saving catalogue:', err);
@@ -413,6 +423,7 @@ export default function AdminDashboard() {
       file_url: cat.file_url || ''
     });
     setEditingCatalogueId(cat.id);
+    setShowCatalogueModal(true);
     setActiveTab('catalogues');
   };
 
@@ -1784,185 +1795,203 @@ export default function AdminDashboard() {
       {/* TAB H: Brands & Categories Manager */}
       {activeTab === 'brands' && (
         <div className="space-y-8">
-          
-          {/* Section 1: Add Forms */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            
-            {/* Add Brand Card */}
-            <div className="bg-white dark:bg-slate-900 border rounded-3xl p-6 shadow-sm space-y-4">
-              <h3 className="text-base font-bold font-display border-b pb-3 flex items-center gap-1.5">
-                <Package className="h-5 w-5 text-blue-600" /> {editingBrandId ? 'Edit Brand' : 'Add New Brand / Manufacturer'}
-              </h3>
-              <form onSubmit={handleBrandSubmit} className="space-y-4 text-xs">
-                <div className="space-y-1">
-                  <label className="font-bold text-slate-400 uppercase tracking-wider block">Brand Name *</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="e.g. Fevicol, 3M"
-                    value={brandForm.name}
-                    onChange={(e) => setBrandForm(prev => ({ ...prev, name: e.target.value }))}
-                    className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
-                  />
-                </div>
-                <div className="space-y-1">
-                  <label className="font-bold text-slate-400 uppercase tracking-wider block">URL Slug (Optional)</label>
-                  <input
-                    type="text"
-                    placeholder="e.g. fevicol, 3m"
-                    value={brandForm.slug}
-                    onChange={(e) => setBrandForm(prev => ({ ...prev, slug: e.target.value }))}
-                    className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
-                  />
-                </div>
-                <div className="space-y-1">
-                  <label className="font-bold text-slate-400 uppercase tracking-wider block">Description</label>
-                  <textarea
-                    rows="2"
-                    placeholder="Brief description of the manufacturer..."
-                    value={brandForm.description}
-                    onChange={(e) => setBrandForm(prev => ({ ...prev, description: e.target.value }))}
-                    className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
-                  />
-                </div>
-                <div className="space-y-1">
-                  <label className="font-bold text-slate-400 uppercase tracking-wider block">Logo Image URL</label>
-                  <div className="flex gap-2">
-                    <input
-                      type="text"
-                      placeholder="https://..."
-                      value={brandForm.logo_url}
-                      onChange={(e) => setBrandForm(prev => ({ ...prev, logo_url: e.target.value }))}
-                      className="flex-1 px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
-                    />
-                    <label className="px-3 py-2 bg-slate-100 dark:bg-slate-850 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-xl cursor-pointer font-bold border border-slate-200 dark:border-slate-700 flex items-center justify-center shrink-0">
-                      {uploadingBrandImg ? '...' : 'Upload'}
-                      <input 
-                        type="file" 
-                        accept="image/jpeg, image/png, image/webp"
-                        onChange={handleBrandLogoUpload}
-                        className="hidden" 
-                      />
-                    </label>
-                  </div>
-                </div>
-                <div className="flex gap-3">
-                  <button
-                    type="submit"
-                    className="flex-1 py-2.5 bg-blue-600 hover:bg-blue-750 text-white font-bold rounded-xl transition"
-                  >
-                    {editingBrandId ? 'Update Brand' : 'Save Brand'}
-                  </button>
-                  {editingBrandId && (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setBrandForm({ name: '', slug: '', description: '', logo_url: '' });
-                        setEditingBrandId(null);
-                      }}
-                      className="px-4 py-2.5 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold rounded-xl transition"
-                    >
-                      Cancel
-                    </button>
-                  )}
-                </div>
-              </form>
-            </div>
+          <div className="flex gap-4 mb-4">
+            <button
+              onClick={() => {
+                setEditingBrandId(null);
+                setBrandForm({ name: '', slug: '', description: '', logo_url: '' });
+                setShowBrandModal(true);
+              }}
+              className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl font-bold transition"
+            >
+              <Package className="h-4 w-4" /> Add New Brand
+            </button>
+            <button
+              onClick={() => {
+                setEditingCategoryId(null);
+                setCategoryForm({ name: '', slug: '', description: '', icon: 'Layers', image_url: '' });
+                setShowCategoryModal(true);
+              }}
+              className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl font-bold transition"
+            >
+              <Layers className="h-4 w-4" /> Add New Category
+            </button>
+          </div>
 
-            {/* Add Category Card */}
-            <div className="bg-white dark:bg-slate-900 border rounded-3xl p-6 shadow-sm space-y-4">
-              <h3 className="text-base font-bold font-display border-b pb-3 flex items-center gap-1.5">
-                <Layers className="h-5 w-5 text-indigo-600" /> {editingCategoryId ? 'Edit Category' : 'Add New Product Category'}
-              </h3>
-              <form onSubmit={handleCategorySubmit} className="space-y-4 text-xs">
-                <div className="space-y-1">
-                  <label className="font-bold text-slate-400 uppercase tracking-wider block">Category Name *</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="e.g. Epoxy Resins, Double-Sided Tapes"
-                    value={categoryForm.name}
-                    onChange={(e) => setCategoryForm(prev => ({ ...prev, name: e.target.value }))}
-                    className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
-                  />
-                </div>
-                <div className="space-y-1">
-                  <label className="font-bold text-slate-400 uppercase tracking-wider block">URL Slug (Optional)</label>
-                  <input
-                    type="text"
-                    placeholder="e.g. epoxy-resins"
-                    value={categoryForm.slug}
-                    onChange={(e) => setCategoryForm(prev => ({ ...prev, slug: e.target.value }))}
-                    className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
-                  />
-                </div>
-                <div className="space-y-1">
-                  <label className="font-bold text-slate-400 uppercase tracking-wider block">Description</label>
-                  <textarea
-                    rows="2"
-                    placeholder="Brief description of category..."
-                    value={categoryForm.description}
-                    onChange={(e) => setCategoryForm(prev => ({ ...prev, description: e.target.value }))}
-                    className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
-                  />
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-1">
-                    <label className="font-bold text-slate-400 uppercase tracking-wider block">Lucide Icon Name</label>
-                    <input
-                      type="text"
-                      placeholder="e.g. Layers, Wrench, Droplets"
-                      value={categoryForm.icon}
-                      onChange={(e) => setCategoryForm(prev => ({ ...prev, icon: e.target.value }))}
-                      className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
-                    />
-                  </div>
-                  <div className="space-y-1">
-                    <label className="font-bold text-slate-400 uppercase tracking-wider block">Banner Image URL</label>
-                    <div className="flex gap-2">
+          {/* Section 1: Modals */}
+          {showBrandModal && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+              <div className="bg-white dark:bg-slate-900 rounded-3xl w-full max-w-lg shadow-2xl overflow-hidden relative animate-in fade-in zoom-in duration-300">
+                <div className="p-6">
+                  <h3 className="text-xl font-bold font-display border-b pb-4 mb-4 flex items-center gap-2 text-slate-900 dark:text-white">
+                    <Package className="h-6 w-6 text-blue-600" /> {editingBrandId ? 'Edit Brand' : 'Add New Brand'}
+                  </h3>
+                  <form onSubmit={handleBrandSubmit} className="space-y-4 text-xs">
+                    <div className="space-y-1">
+                      <label className="font-bold text-slate-400 uppercase tracking-wider block">Brand Name *</label>
                       <input
                         type="text"
-                        placeholder="https://..."
-                        value={categoryForm.image_url}
-                        onChange={(e) => setCategoryForm(prev => ({ ...prev, image_url: e.target.value }))}
-                        className="flex-1 px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
+                        required
+                        placeholder="e.g. Fevicol, 3M"
+                        value={brandForm.name}
+                        onChange={(e) => setBrandForm(prev => ({ ...prev, name: e.target.value }))}
+                        className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
                       />
-                      <label className="px-3 py-2 bg-slate-100 dark:bg-slate-850 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-xl cursor-pointer font-bold border border-slate-200 dark:border-slate-700 flex items-center justify-center shrink-0">
-                        {uploadingCategoryImg ? '...' : 'Upload'}
-                        <input 
-                          type="file" 
-                          accept="image/jpeg, image/png, image/webp"
-                          onChange={handleCategoryBannerUpload}
-                          className="hidden" 
-                        />
-                      </label>
                     </div>
-                  </div>
+                    <div className="space-y-1">
+                      <label className="font-bold text-slate-400 uppercase tracking-wider block">URL Slug (Optional)</label>
+                      <input
+                        type="text"
+                        placeholder="e.g. fevicol, 3m"
+                        value={brandForm.slug}
+                        onChange={(e) => setBrandForm(prev => ({ ...prev, slug: e.target.value }))}
+                        className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label className="font-bold text-slate-400 uppercase tracking-wider block">Description</label>
+                      <textarea
+                        rows="3"
+                        placeholder="Brief description of the manufacturer..."
+                        value={brandForm.description}
+                        onChange={(e) => setBrandForm(prev => ({ ...prev, description: e.target.value }))}
+                        className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label className="font-bold text-slate-400 uppercase tracking-wider block">Logo Image URL</label>
+                      <div className="flex gap-2">
+                        <input
+                          type="text"
+                          placeholder="https://..."
+                          value={brandForm.logo_url}
+                          onChange={(e) => setBrandForm(prev => ({ ...prev, logo_url: e.target.value }))}
+                          className="flex-1 px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
+                        />
+                        <label className="px-3 py-2 bg-slate-100 dark:bg-slate-850 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-xl cursor-pointer font-bold border border-slate-200 dark:border-slate-700 flex items-center justify-center shrink-0">
+                          {uploadingBrandImg ? '...' : 'Upload'}
+                          <input 
+                            type="file" 
+                            accept="image/jpeg, image/png, image/webp"
+                            onChange={handleBrandLogoUpload}
+                            className="hidden" 
+                          />
+                        </label>
+                      </div>
+                    </div>
+                    <div className="flex gap-3 pt-4 border-t">
+                      <button
+                        type="submit"
+                        className="flex-1 py-3 bg-blue-600 hover:bg-blue-750 text-white font-bold rounded-xl transition"
+                      >
+                        {editingBrandId ? 'Update Brand' : 'Save Brand'}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setShowBrandModal(false)}
+                        className="px-6 py-3 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold rounded-xl transition"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </form>
                 </div>
-                <div className="flex gap-3">
-                  <button
-                    type="submit"
-                    className="flex-1 py-2.5 bg-indigo-600 hover:bg-indigo-750 text-white font-bold rounded-xl transition"
-                  >
-                    {editingCategoryId ? 'Update Category' : 'Save Category'}
-                  </button>
-                  {editingCategoryId && (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setCategoryForm({ name: '', slug: '', description: '', icon: 'Layers', image_url: '' });
-                        setEditingCategoryId(null);
-                      }}
-                      className="px-4 py-2.5 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold rounded-xl transition"
-                    >
-                      Cancel
-                    </button>
-                  )}
-                </div>
-              </form>
+              </div>
             </div>
+          )}
 
-          </div>
+          {showCategoryModal && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+              <div className="bg-white dark:bg-slate-900 rounded-3xl w-full max-w-lg shadow-2xl overflow-hidden relative animate-in fade-in zoom-in duration-300">
+                <div className="p-6">
+                  <h3 className="text-xl font-bold font-display border-b pb-4 mb-4 flex items-center gap-2 text-slate-900 dark:text-white">
+                    <Layers className="h-6 w-6 text-indigo-600" /> {editingCategoryId ? 'Edit Category' : 'Add New Category'}
+                  </h3>
+                  <form onSubmit={handleCategorySubmit} className="space-y-4 text-xs">
+                    <div className="space-y-1">
+                      <label className="font-bold text-slate-400 uppercase tracking-wider block">Category Name *</label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. Epoxy Resins"
+                        value={categoryForm.name}
+                        onChange={(e) => setCategoryForm(prev => ({ ...prev, name: e.target.value }))}
+                        className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label className="font-bold text-slate-400 uppercase tracking-wider block">URL Slug (Optional)</label>
+                      <input
+                        type="text"
+                        placeholder="e.g. epoxy-resins"
+                        value={categoryForm.slug}
+                        onChange={(e) => setCategoryForm(prev => ({ ...prev, slug: e.target.value }))}
+                        className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label className="font-bold text-slate-400 uppercase tracking-wider block">Description</label>
+                      <textarea
+                        rows="2"
+                        placeholder="Brief description of category..."
+                        value={categoryForm.description}
+                        onChange={(e) => setCategoryForm(prev => ({ ...prev, description: e.target.value }))}
+                        className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
+                      />
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-1">
+                        <label className="font-bold text-slate-400 uppercase tracking-wider block">Lucide Icon</label>
+                        <input
+                          type="text"
+                          placeholder="e.g. Layers"
+                          value={categoryForm.icon}
+                          onChange={(e) => setCategoryForm(prev => ({ ...prev, icon: e.target.value }))}
+                          className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
+                        />
+                      </div>
+                      <div className="space-y-1">
+                        <label className="font-bold text-slate-400 uppercase tracking-wider block">Banner URL</label>
+                        <div className="flex gap-2">
+                          <input
+                            type="text"
+                            placeholder="https://..."
+                            value={categoryForm.image_url}
+                            onChange={(e) => setCategoryForm(prev => ({ ...prev, image_url: e.target.value }))}
+                            className="flex-1 px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
+                          />
+                          <label className="px-3 py-2 bg-slate-100 dark:bg-slate-850 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-xl cursor-pointer font-bold border border-slate-200 dark:border-slate-700 flex items-center justify-center shrink-0">
+                            {uploadingCategoryImg ? '...' : 'Upload'}
+                            <input 
+                              type="file" 
+                              accept="image/jpeg, image/png, image/webp"
+                              onChange={handleCategoryBannerUpload}
+                              className="hidden" 
+                            />
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex gap-3 pt-4 border-t">
+                      <button
+                        type="submit"
+                        className="flex-1 py-3 bg-indigo-600 hover:bg-indigo-750 text-white font-bold rounded-xl transition"
+                      >
+                        {editingCategoryId ? 'Update Category' : 'Save Category'}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setShowCategoryModal(false)}
+                        className="px-6 py-3 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold rounded-xl transition"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Section 2: Grid lists of current brands & categories */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-xs">
@@ -2027,59 +2056,75 @@ export default function AdminDashboard() {
       {/* TAB I: Catalogues Manager */}
       {activeTab === 'catalogues' && (
         <div className="space-y-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
-              <h3 className="text-lg font-bold mb-4 font-display flex items-center gap-2">
-                <FileText className="h-5 w-5 text-blue-600 dark:text-cyan-400" />
-                {editingCatalogueId ? 'Edit Catalogue' : 'Add New Catalogue (PDF)'}
-              </h3>
-              <form onSubmit={handleCatalogueSubmit} className="space-y-4 text-xs">
-                <div>
-                  <label className="block text-slate-500 font-bold mb-1">Title *</label>
-                  <input required type="text" value={catalogueForm.title} onChange={e => setCatalogueForm({...catalogueForm, title: e.target.value})} className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl" placeholder="e.g. 2024 Product Catalog" />
+          <div className="flex gap-4 mb-4">
+            <button
+              onClick={() => {
+                setEditingCatalogueId(null);
+                setCatalogueForm({ title: '', description: '', file_url: '', fileObj: null });
+                setShowCatalogueModal(true);
+              }}
+              className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl font-bold transition"
+            >
+              <FileText className="h-4 w-4" /> Add New Catalogue
+            </button>
+            <label className="flex items-center gap-2 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 px-4 py-2 rounded-xl font-bold transition cursor-pointer">
+              {uploadingCatalogue ? 'Uploading...' : 'Bulk Upload PDFs'}
+              <input type="file" multiple accept=".pdf" className="hidden" onChange={handleBulkCatalogueUpload} disabled={uploadingCatalogue} />
+            </label>
+          </div>
+
+          {showCatalogueModal && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+              <div className="bg-white dark:bg-slate-900 rounded-3xl w-full max-w-lg shadow-2xl overflow-hidden relative animate-in fade-in zoom-in duration-300">
+                <div className="p-6">
+                  <h3 className="text-xl font-bold font-display border-b pb-4 mb-4 flex items-center gap-2 text-slate-900 dark:text-white">
+                    <FileText className="h-6 w-6 text-blue-600 dark:text-cyan-400" />
+                    {editingCatalogueId ? 'Edit Catalogue' : 'Add New Catalogue (PDF)'}
+                  </h3>
+                  <form onSubmit={handleCatalogueSubmit} className="space-y-4 text-xs">
+                    <div>
+                      <label className="block text-slate-500 font-bold mb-1">Title *</label>
+                      <input required type="text" value={catalogueForm.title} onChange={e => setCatalogueForm({...catalogueForm, title: e.target.value})} className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl" placeholder="e.g. 2024 Product Catalog" />
+                    </div>
+                    <div>
+                      <label className="block text-slate-500 font-bold mb-1">Description</label>
+                      <textarea rows="3" value={catalogueForm.description} onChange={e => setCatalogueForm({...catalogueForm, description: e.target.value})} className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl" placeholder="Details about this catalogue" />
+                    </div>
+                    <div>
+                      <label className="block text-slate-500 font-bold mb-1">PDF File *</label>
+                      <div className="flex items-center gap-3">
+                        <label className="flex-1 px-4 py-2 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-700 transition flex items-center justify-center gap-2">
+                          <span className="text-slate-600 dark:text-slate-300 font-semibold">Choose PDF File</span>
+                          <input type="file" accept=".pdf" className="hidden" onChange={handleCatalogueFileChange} />
+                        </label>
+                      </div>
+                      {catalogueForm.fileObj && !uploadingCatalogue && (
+                        <p className="text-blue-500 mt-2 text-xs font-semibold truncate">
+                          Selected: {catalogueForm.fileObj.name}
+                        </p>
+                      )}
+                      {uploadingCatalogue && <p className="text-blue-500 mt-2 text-xs font-semibold">Uploading to Supabase...</p>}
+                      {catalogueForm.file_url && !catalogueForm.fileObj && !uploadingCatalogue && (
+                        <p className="text-green-500 mt-2 text-xs font-semibold truncate">
+                          Current File: {catalogueForm.file_url}
+                        </p>
+                      )}
+                      <div className="flex gap-3 pt-4 border-t mt-4">
+                        <button disabled={uploadingCatalogue} type="submit" className="flex-1 py-3 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed">
+                          {editingCatalogueId ? 'Update Catalogue' : 'Save Catalogue'}
+                        </button>
+                        <button type="button" onClick={() => setShowCatalogueModal(false)} className="px-6 py-3 bg-slate-200 text-slate-800 font-bold rounded-xl hover:bg-slate-300 transition">
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  </form>
                 </div>
-                <div>
-                  <label className="block text-slate-500 font-bold mb-1">Description</label>
-                  <textarea rows="3" value={catalogueForm.description} onChange={e => setCatalogueForm({...catalogueForm, description: e.target.value})} className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl" placeholder="Details about this catalogue" />
-                </div>
-                <div>
-                  <label className="block text-slate-500 font-bold mb-1">PDF File *</label>
-                  <div className="flex items-center gap-3">
-                    <label className="flex-1 px-4 py-2 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-700 transition flex items-center justify-center gap-2">
-                      <span className="text-slate-600 dark:text-slate-300 font-semibold">Choose PDF File</span>
-                      <input type="file" accept=".pdf" className="hidden" onChange={handleCatalogueFileChange} />
-                    </label>
-                  </div>
-                  {catalogueForm.fileObj && !uploadingCatalogue && (
-                    <p className="text-blue-500 mt-2 text-xs font-semibold truncate">
-                      Selected: {catalogueForm.fileObj.name}
-                    </p>
-                  )}
-                  {uploadingCatalogue && <p className="text-blue-500 mt-2 text-xs font-semibold">Uploading to Supabase...</p>}
-                  {catalogueForm.file_url && !catalogueForm.fileObj && !uploadingCatalogue && (
-                    <p className="text-green-500 mt-2 text-xs font-semibold truncate">
-                      Current File: {catalogueForm.file_url}
-                    </p>
-                  )}
-                  <div className="flex gap-3 pt-2">
-                    <button disabled={uploadingCatalogue} type="submit" className="flex-1 py-2.5 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed">
-                      {editingCatalogueId ? 'Update Catalogue' : 'Save Catalogue'}
-                    </button>
-                    {!editingCatalogueId && (
-                      <label className="flex-1 py-2.5 bg-slate-200 text-slate-800 font-bold rounded-xl hover:bg-slate-300 transition flex items-center justify-center cursor-pointer">
-                        {uploadingCatalogue ? 'Uploading...' : 'Bulk Upload PDFs'}
-                        <input type="file" multiple accept=".pdf" className="hidden" onChange={handleBulkCatalogueUpload} disabled={uploadingCatalogue} />
-                      </label>
-                    )}
-                    {editingCatalogueId && (
-                      <button type="button" onClick={() => { setEditingCatalogueId(null); setCatalogueForm({ title: '', description: '', file_url: '', fileObj: null }); }} className="flex-1 py-2.5 bg-slate-200 text-slate-800 font-bold rounded-xl hover:bg-slate-300 transition">
-                        Cancel Edit
-                      </button>
-                    )}
-                  </div>
-                </div>
-              </form>
+              </div>
             </div>
+          )}
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             
             <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col h-full max-h-[600px]">
               <h3 className="text-sm font-bold text-slate-800 dark:text-white mb-4">
