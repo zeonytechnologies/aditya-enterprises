@@ -37,6 +37,14 @@ export const CartProvider = ({ children }) => {
     // Basic Price from DB
     let basePrice = parseFloat(target.price) || 0;
     
+    // Check if user is dealer/distributor
+    const isB2B = user && (user.role === 'dealer' || user.role === 'distributor');
+    
+    // Apply 2% markup for retail customers (non B2B)
+    if (!isB2B) {
+      basePrice = basePrice * 1.02;
+    }
+    
     // Apply discount if applicable
     if (product.discount_percent > 0) {
       const discount = basePrice * (product.discount_percent / 100);
