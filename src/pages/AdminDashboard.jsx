@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   BarChart3, ShieldCheck, ShoppingBag, FileSpreadsheet, 
-  Layers, Package, AlertCircle, FileText, CheckCircle2, XCircle, Plus, Edit, Trash2, Printer, Tag, Search, ChevronLeft, ChevronRight, MessageCircle, Users, ShoppingCart, X, Settings, Eye, EyeOff, TrendingUp
+  Layers, Package, AlertCircle, FileText, CheckCircle2, XCircle, Plus, Edit, Trash2, Printer, Tag, Search, ChevronLeft, ChevronRight, MessageCircle, Users, ShoppingCart, X, Settings, Eye, EyeOff, TrendingUp, SlidersHorizontal, RotateCcw
 } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
 import { api } from '../services/supabase';
@@ -159,8 +159,44 @@ export default function AdminDashboard() {
     }
   };
 
+  // --- Product Filters State ---
+  const [filterCategory, setFilterCategory] = useState('');
+  const [filterBrand, setFilterBrand] = useState('');
+  const [filterMinPrice, setFilterMinPrice] = useState('');
+  const [filterMaxPrice, setFilterMaxPrice] = useState('');
+  const [filterGst, setFilterGst] = useState('');
+  const [filterInStock, setFilterInStock] = useState(false);
+
+  const filteredProductsForCatalog = useMemo(() => {
+    return products.filter(p => {
+      // Category
+      if (filterCategory && p.category_id !== filterCategory && p.category?.slug !== filterCategory) return false;
+      // Brand
+      if (filterBrand && p.brand_id !== filterBrand && p.brand?.slug !== filterBrand) return false;
+      // Price Min
+      if (filterMinPrice && parseFloat(p.price) < parseFloat(filterMinPrice)) return false;
+      // Price Max
+      if (filterMaxPrice && parseFloat(p.price) > parseFloat(filterMaxPrice)) return false;
+      // GST
+      if (filterGst && parseFloat(p.gst_percent) !== parseFloat(filterGst)) return false;
+      // In Stock
+      if (filterInStock && p.stock <= 0) return false;
+      return true;
+    });
+  }, [products, filterCategory, filterBrand, filterMinPrice, filterMaxPrice, filterGst, filterInStock]);
+
+  const resetCatalogFilters = () => {
+    setFilterCategory('');
+    setFilterBrand('');
+    setFilterMinPrice('');
+    setFilterMaxPrice('');
+    setFilterGst('');
+    setFilterInStock(false);
+    productsPagination.setSearchTerm('');
+  };
+
   // --- Pagination Hooks ---
-  const productsPagination = useTablePagination(products, ['name', 'sku', 'hsn_code']);
+  const productsPagination = useTablePagination(filteredProductsForCatalog, ['name', 'sku', 'hsn_code']);
   const filteredOrders = useMemo(() => {
     if (orderStatusFilter === 'All') return orders;
     return orders.filter(o => o.status === orderStatusFilter);
@@ -1574,7 +1610,103 @@ export default function AdminDashboard() {
             </button>
           </div>
 
-          <TableControls pagination={productsPagination} placeholder="Search catalog by Name, SKU, HSN..." />
+          <div className="flex flex-col lg:flex-row gap-6">
+            {/* Sidebar Filters */}
+            <div className="w-full lg:w-72 shrink-0 space-y-6 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl p-5 shadow-sm h-fit">
+              <div className="flex items-center justify-between border-b pb-4">
+                <span className="text-base font-bold flex items-center gap-2">
+                  <SlidersHorizontal className="h-4.5 w-4.5" /> Filters
+                </span>
+                <button onClick={resetCatalogFilters} className="text-xs font-bold text-slate-400 hover:text-slate-600 flex items-center gap-1">
+                  <RotateCcw className="h-3.5 w-3.5" /> Reset
+                </button>
+              </div>
+
+              {/* Keyword Search is handled by TableControls but we can mirror it here if we want or just keep TableControls above the table */}
+
+              <div className="space-y-2">
+                <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Category</label>
+                <select
+                  value={filterCategory}
+                  onChange={(e) => setFilterCategory(e.target.value)}
+                  className="w-full px-3 py-2 border rounded-xl text-xs bg-slate-50 dark:bg-slate-950 dark:border-slate-800"
+                >
+                  <option value="">All Categories</option>
+                  {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+                </select>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Brand Partner</label>
+                <select
+                  value={filterBrand}
+                  onChange={(e) => setFilterBrand(e.target.value)}
+                  className="w-full px-3 py-2 border rounded-xl text-xs bg-slate-50 dark:bg-slate-950 dark:border-slate-800"
+                >
+                  <option value="">All Brands</option>
+                  {brands.map(b => <option key={b.id} value={b.id}>{b.name}</option>)}
+                </select>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Price (₹)</label>
+                <div className="flex gap-2">
+                  <input
+                    type="number"
+                    placeholder="Min"
+                    value={filterMinPrice}
+                    onChange={(e) => setFilterMinPrice(e.target.value)}
+                    className="w-1/2 px-3 py-2 border rounded-xl text-xs bg-slate-50 dark:bg-slate-950 dark:border-slate-800"
+                  />
+                  <input
+                    type="number"
+                    placeholder="Max"
+                    value={filterMaxPrice}
+                    onChange={(e) => setFilterMaxPrice(e.target.value)}
+                    className="w-1/2 px-3 py-2 border rounded-xl text-xs bg-slate-50 dark:bg-slate-950 dark:border-slate-800"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                <label className="text-xs font-bold uppercase tracking-wider text-slate-400">GST Slab Rate</label>
+                <div className="space-y-2">
+                  {[5, 12, 18, 28].map(slab => (
+                    <label key={slab} className="flex items-center gap-2 cursor-pointer group">
+                      <input 
+                        type="radio" 
+                        name="gstSlab" 
+                        value={slab}
+                        checked={parseFloat(filterGst) === slab}
+                        onChange={(e) => setFilterGst(e.target.value)}
+                        className="accent-blue-600" 
+                      />
+                      <span className="text-sm text-slate-600 dark:text-slate-400 font-semibold group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                        {slab}% GST Products
+                      </span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div className="pt-4 border-t">
+                <label className="flex items-center gap-2 cursor-pointer group">
+                  <input
+                    type="checkbox"
+                    checked={filterInStock}
+                    onChange={(e) => setFilterInStock(e.target.checked)}
+                    className="rounded border-slate-300 text-blue-600 focus:ring-blue-500 w-4 h-4"
+                  />
+                  <span className="text-sm font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                    Only Show In Stock
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            {/* Main Content Area */}
+            <div className="flex-1 space-y-6 min-w-0">
+              <TableControls pagination={productsPagination} placeholder="Search catalog by Name, SKU, HSN..." />
 
           {/* Mobile Card Layout for Products */}
           <div className="block md:hidden space-y-3">
@@ -1666,7 +1798,9 @@ export default function AdminDashboard() {
                 ))}
               </tbody>
             </table>
+            </div>
           </div>
+        </div>
         </div>
       )}
 
