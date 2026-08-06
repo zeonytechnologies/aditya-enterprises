@@ -5,7 +5,7 @@
 
 import { api } from './supabase';
 
-async function createProductPriceCardImage(product, unitPrice, imageUrl) {
+async function createProductPriceCardImage(product, unitPrice, imageUrl, selectedVariant = null) {
   let settings = null;
   try {
     settings = await api.settings.get();
@@ -45,7 +45,8 @@ async function createProductPriceCardImage(product, unitPrice, imageUrl) {
       ctx.font = 'bold 34px sans-serif';
       ctx.textAlign = 'center';
       
-      const words = (product.name || 'Product').split(' ');
+      const productName = selectedVariant ? `${product.name} (${selectedVariant.pack_size || selectedVariant.name})` : product.name;
+      const words = (productName || 'Product').split(' ');
       let line = '';
       let yPos = 640;
       for (let n = 0; n < words.length; n++) {
@@ -66,7 +67,8 @@ async function createProductPriceCardImage(product, unitPrice, imageUrl) {
       ctx.font = '22px sans-serif';
       ctx.fillStyle = '#64748b';
       const brandText = product.brand?.name ? `Brand: ${product.brand.name.toUpperCase()}  |  ` : '';
-      ctx.fillText(`${brandText}SKU: ${product.sku || '-'}`, width / 2, yPos);
+      const displaySku = selectedVariant?.sku || product.sku || '-';
+      ctx.fillText(`${brandText}SKU: ${displaySku}`, width / 2, yPos);
 
       // Price Badge Box
       yPos += 30;
@@ -158,12 +160,15 @@ async function createProductPriceCardImage(product, unitPrice, imageUrl) {
   });
 }
 
-export async function shareProductWithImage(product, unitPrice) {
+export async function shareProductWithImage(product, unitPrice, selectedVariant = null) {
   const netPrice = unitPrice * (1 + (product.gst_percent || 0) / 100);
   const origin = window.location.origin;
   const productUrl = `${origin}/product/${product.slug}`;
   
-  const shareText = `Check out this product from Aditya Enterprises!\n\n*${product.name}*\nSKU: ${product.sku || '-'}\nBasic Price: ₹${unitPrice.toLocaleString('en-IN', { minimumFractionDigits: 2 })}\nGST (${product.gst_percent || 0}%): +₹${(unitPrice * ((product.gst_percent || 0) / 100)).toLocaleString('en-IN', { minimumFractionDigits: 2 })}\nNet Price: ₹${netPrice.toLocaleString('en-IN', { minimumFractionDigits: 2 })} per unit\n\nProduct Link: ${productUrl}`;
+  const productName = selectedVariant ? `${product.name} (${selectedVariant.pack_size || selectedVariant.name})` : product.name;
+  const displaySku = selectedVariant?.sku || product.sku || '-';
+  
+  const shareText = `Check out this product from Aditya Enterprises!\n\n*${productName}*\nSKU: ${displaySku}\nBasic Price: ₹${unitPrice.toLocaleString('en-IN', { minimumFractionDigits: 2 })}\nGST (${product.gst_percent || 0}%): +₹${(unitPrice * ((product.gst_percent || 0) / 100)).toLocaleString('en-IN', { minimumFractionDigits: 2 })}\nNet Price: ₹${netPrice.toLocaleString('en-IN', { minimumFractionDigits: 2 })} per unit\n\nProduct Link: ${productUrl}`;
 
   const imageUrl = product.images?.[0] || product.image_url;
   
@@ -186,7 +191,7 @@ export async function shareProductWithImage(product, unitPrice) {
     }
 
     // Generate single combined price card image (details + image in same image!)
-    const cardBlob = await createProductPriceCardImage(product, unitPrice, imgSourceToDraw);
+    const cardBlob = await createProductPriceCardImage(product, unitPrice, imgSourceToDraw, selectedVariant);
     if (tempBlobUrl) URL.revokeObjectURL(tempBlobUrl);
 
     const fileName = `${product.slug || 'product'}-price-card.jpg`;

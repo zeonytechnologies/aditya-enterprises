@@ -321,7 +321,7 @@ export default function ProductDetails() {
               <div className="flex items-center gap-2">
                 <span>SKU: {selectedVariant?.sku || product.sku}</span>
                 <button 
-                  onClick={() => shareProductWithImage(product, unitPrice)}
+                  onClick={() => shareProductWithImage(product, unitPrice, selectedVariant)}
                   className="p-1.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full transition-colors flex items-center justify-center shadow-sm"
                   title="Share on WhatsApp with Price & Image"
                 >
@@ -520,7 +520,7 @@ export default function ProductDetails() {
           </div>
 
           <button
-            onClick={() => shareProductWithImage(product, unitPrice)}
+            onClick={() => shareProductWithImage(product, unitPrice, selectedVariant)}
             className="w-full py-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 dark:bg-emerald-950/40 dark:hover:bg-emerald-900/60 dark:text-emerald-300 font-bold rounded-xl transition flex items-center justify-center gap-2 border border-emerald-200 dark:border-emerald-800/60 text-xs shadow-sm"
           >
             <MessageCircle className="h-4 w-4 fill-current text-emerald-600 dark:text-emerald-400" />
