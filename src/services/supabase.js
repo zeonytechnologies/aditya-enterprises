@@ -205,6 +205,7 @@ export const api = {
               dealer_price: v.dealer_price ? parseFloat(v.dealer_price) : null,
               stock: parseInt(v.stock || 0),
               moq: parseInt(v.moq || 1),
+                retail_moq: parseInt(v.retail_moq || 1),
               weight: parseFloat(v.weight || 0)
             }));
             const { error: varError } = await supabase.from('product_variants').insert(variantsToInsert);

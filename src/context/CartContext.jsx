@@ -62,7 +62,7 @@ export const CartProvider = ({ children }) => {
       );
       
       const target = variant || product;
-      const minQty = (user && (user.role === 'dealer' || user.role === 'distributor')) ? (target.moq || 1) : 1;
+      const minQty = (user && (user.role === 'dealer' || user.role === 'distributor')) ? (target.moq || 1) : (target.retail_moq || 1);
       const qtyToAdd = Math.max(quantity, minQty);
 
       if (existingIdx > -1) {
@@ -87,7 +87,7 @@ export const CartProvider = ({ children }) => {
       prev.map(item => {
         if (item.product.id === productId && (variantId ? item.variant?.id === variantId : !item.variant)) {
           const target = item.variant || item.product;
-          const minQty = (user && (user.role === 'dealer' || user.role === 'distributor')) ? (target.moq || 1) : 1;
+          const minQty = (user && (user.role === 'dealer' || user.role === 'distributor')) ? (target.moq || 1) : (target.retail_moq || 1);
           const finalQty = Math.max(quantity, minQty);
           return { ...item, quantity: finalQty };
         }

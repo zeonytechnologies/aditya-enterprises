@@ -250,7 +250,7 @@ export default function AdminDashboard() {
   const [localOffers, setLocalOffers] = useState({}); // Stores temporary offer % inputs
   const [editingProduct, setEditingProduct] = useState(null);
   const [productForm, setProductForm] = useState({
-    name: '', price: 0, mrp: 0, dealer_price: 0, moq: 1, stock: 10,
+    name: '', price: 0, mrp: 0, dealer_price: 0, moq: 1, retail_moq: 1, stock: 10,
     sku: '', hsn_code: '', gst_percent: 18, pack_size: '', weight: 1,
     shelf_life: '', application: '', brand_id: '', category_id: '',
     description: '', is_featured: false, is_flash_sale: false, discount_percent: 0
@@ -620,7 +620,7 @@ export default function AdminDashboard() {
   const handleOpenAddProduct = () => {
     setEditingProduct(null);
     setProductForm({
-      name: '', price: 0, mrp: 0, dealer_price: 0, moq: 1, stock: 10,
+      name: '', price: 0, mrp: 0, dealer_price: 0, moq: 1, retail_moq: 1, stock: 10,
       sku: 'SKU-' + Math.floor(1000 + Math.random()*9000), hsn_code: '35069190', gst_percent: 18, 
       pack_size: '1 Kg Tub', weight: 1, shelf_life: '12 Months', application: 'Furniture, Woodworking',
       brand_id: brands[0]?.id || '', category_id: categories[0]?.id || '',
@@ -637,7 +637,7 @@ export default function AdminDashboard() {
     setEditingProduct(prod);
     setProductForm({
       name: prod.name, price: prod.price, mrp: prod.mrp, dealer_price: prod.dealer_price || 0,
-      moq: prod.moq || 1, stock: prod.stock, sku: prod.sku, hsn_code: prod.hsn_code,
+      moq: prod.moq || 1, retail_moq: prod.retail_moq || 1, stock: prod.stock, sku: prod.sku, hsn_code: prod.hsn_code,
       gst_percent: prod.gst_percent, pack_size: prod.pack_size || '', weight: prod.weight || 1,
       shelf_life: prod.shelf_life || '', application: prod.application || '',
       brand_id: prod.brand_id || '', category_id: prod.category_id || '',
@@ -670,7 +670,8 @@ export default function AdminDashboard() {
         mrp: product.mrp,
         dealer_price: product.dealer_price,
         moq: product.moq,
-        stock: product.stock,
+          retail_moq: product.retail_moq,
+          stock: product.stock,
         sku: product.sku,
         hsn_code: product.hsn_code,
         gst_percent: product.gst_percent,
@@ -726,6 +727,7 @@ export default function AdminDashboard() {
       let dealer_price = productForm.dealer_price ? parseFloat(productForm.dealer_price) : null;
       let stock = parseInt(productForm.stock);
       let moq = parseInt(productForm.moq);
+        let retail_moq = parseInt(productForm.retail_moq || 1);
       let sku = productForm.sku;
       let pack_size = productForm.pack_size;
       let weight = parseFloat(productForm.weight);
@@ -737,6 +739,7 @@ export default function AdminDashboard() {
         dealer_price = firstVar.dealer_price ? parseFloat(firstVar.dealer_price) : dealer_price;
         stock = firstVar.stock !== undefined && firstVar.stock !== '' ? parseInt(firstVar.stock) : stock;
         moq = firstVar.moq !== undefined && firstVar.moq !== '' ? parseInt(firstVar.moq) : moq;
+          retail_moq = firstVar.retail_moq !== undefined && firstVar.retail_moq !== '' ? parseInt(firstVar.retail_moq) : retail_moq;
         sku = firstVar.sku || sku;
         pack_size = firstVar.pack_size || pack_size;
         weight = firstVar.weight !== undefined && firstVar.weight !== '' ? parseFloat(firstVar.weight) : weight;
@@ -749,8 +752,9 @@ export default function AdminDashboard() {
         mrp,
         dealer_price,
         moq,
-        stock,
-        sku,
+          retail_moq,
+          stock,
+          sku,
         hsn_code: productForm.hsn_code,
         gst_percent: parseFloat(productForm.gst_percent),
         pack_size,
@@ -2498,7 +2502,7 @@ export default function AdminDashboard() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-5 gap-4">
                 <div className="space-y-1">
                   <label className="font-bold text-slate-400 uppercase tracking-wider block">Basic Price (₹) *</label>
                   <input
@@ -2545,7 +2549,7 @@ export default function AdminDashboard() {
                 </p>
               )}
 
-              <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-5 gap-4">
                 <div className="space-y-1">
                   <label className="font-bold text-slate-400 uppercase tracking-wider block">Stock Level *</label>
                   <input
@@ -2566,6 +2570,16 @@ export default function AdminDashboard() {
                     className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950"
                   />
                 </div>
+                  <div className="space-y-1">
+                    <label className="font-bold text-slate-400 uppercase tracking-wider block">Retail MOQ *</label>
+                    <input
+                      type="number"
+                      required
+                      value={productForm.retail_moq || 1}
+                      onChange={(e) => setProductForm(prev => ({ ...prev, retail_moq: e.target.value }))}
+                      className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950"
+                    />
+                  </div>
                 <div className="space-y-1">
                   <label className="font-bold text-slate-400 uppercase tracking-wider block">HSN Code *</label>
                   <input
@@ -2842,8 +2856,9 @@ export default function AdminDashboard() {
                       dealer_price: 0,
                       stock: 10,
                       moq: 1,
-                      weight: 1
-                    }])}
+                        retail_moq: 1,
+                        weight: 1
+                      }])}
                     className="text-blue-600 dark:text-cyan-400 font-bold hover:underline flex items-center gap-1 text-[10px]"
                   >
                     + Add Variant
@@ -2983,6 +2998,20 @@ export default function AdminDashboard() {
                               className="w-full px-2 py-1.5 border rounded-lg bg-white dark:bg-slate-900"
                             />
                           </div>
+                            <div>
+                              <label className="block text-[9px] font-bold text-slate-400 uppercase">Retail MOQ (Units) *</label>
+                              <input
+                                type="number"
+                                required
+                                value={variant.retail_moq || 1}
+                                onChange={(e) => {
+                                  const updated = [...variantItems];
+                                  updated[idx].retail_moq = parseInt(e.target.value) || 0;
+                                  setVariantItems(updated);
+                                }}
+                                className="w-full px-2 py-1.5 border rounded-lg bg-white dark:bg-slate-900"
+                              />
+                            </div>
                         </div>
                       </div>
                     ))}
@@ -3178,6 +3207,20 @@ export default function AdminDashboard() {
                               className="w-full px-2 py-1.5 border rounded-lg bg-white dark:bg-slate-900"
                             />
                           </div>
+                            <div>
+                              <label className="block text-[9px] font-bold text-slate-400 uppercase">Retail MOQ (Units) *</label>
+                              <input
+                                type="number"
+                                required
+                                value={variant.retail_moq || 1}
+                                onChange={(e) => {
+                                  const updated = [...variantItems];
+                                  updated[idx].retail_moq = parseInt(e.target.value) || 0;
+                                  setVariantItems(updated);
+                                }}
+                                className="w-full px-2 py-1.5 border rounded-lg bg-white dark:bg-slate-900"
+                              />
+                            </div>
                         </div>
                       </div>
                     ))}

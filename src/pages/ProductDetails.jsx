@@ -60,11 +60,11 @@ export default function ProductDetails() {
         if (data.variants && data.variants.length > 0) {
           const sorted = [...data.variants].sort((a,b) => parseFloat(a.price) - parseFloat(b.price));
           setSelectedVariant(sorted[0]);
-          setQuantity(isB2B ? (sorted[0].moq || 1) : 1);
+          setQuantity(isB2B ? (sorted[0].moq || 1) : (sorted[0].retail_moq || 1));
           setRfqQty((sorted[0].moq || 1) * 10);
         } else {
           setSelectedVariant(null);
-          setQuantity(isB2B ? (data.moq || 1) : 1);
+          setQuantity(isB2B ? (data.moq || 1) : (data.retail_moq || 1));
           setRfqQty((data.moq || 1) * 10);
         }
 
@@ -138,7 +138,7 @@ export default function ProductDetails() {
   const unitPrice = getProductUnitPrice(product, selectedVariant);
   const showDiscount = selectedVariant ? selectedVariant.mrp > selectedVariant.price : product.discount_percent > 0;
   const isB2B = user && (user.role === 'dealer' || user.role === 'distributor');
-  const minQty = isB2B ? ((selectedVariant || product).moq || 1) : 1;
+  const minQty = isB2B ? ((selectedVariant || product).moq || 1) : ((selectedVariant || product).retail_moq || 1);
 
   // 360° Drag Rotation Simulation handlers
   const handleMouseDown = (e) => {
@@ -405,7 +405,7 @@ export default function ProductDetails() {
                     onClick={() => {
                       setSelectedVariant(v);
                       // Enforce MOQ on select
-                      setQuantity(isB2B ? (v.moq || 1) : 1);
+                      setQuantity(isB2B ? (v.moq || 1) : (v.retail_moq || 1));
                     }}
                     className={`px-4 py-2 text-xs font-bold rounded-xl border transition-all ${
                       selectedVariant?.sku === v.sku
