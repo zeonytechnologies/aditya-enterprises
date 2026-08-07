@@ -627,60 +627,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 8. Technical Blogs Section */}
-      {blogs.length > 0 && (
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-slate-150 dark:border-slate-850">
-          <div className="mb-10 flex flex-col sm:flex-row sm:items-end justify-between">
-            <div>
-              <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white font-display">
-                Latest Technical Insights
-              </h2>
-              <p className="text-sm text-slate-500 mt-1">
-                Adhesive engineering manuals and architectural installation guidelines
-              </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {blogs.map((post) => (
-              <div 
-                key={post.id}
-                className="group flex flex-col md:flex-row bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
-              >
-                <div className="md:w-2/5 h-48 md:h-full relative overflow-hidden">
-                  <img 
-                    src={post.image_url} 
-                    alt={post.title} 
-                    className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500" 
-                  />
-                </div>
-                <div className="md:w-3/5 p-6 flex flex-col justify-between">
-                  <div className="space-y-2">
-                    <div className="flex gap-2 flex-wrap">
-                      {post.tags.map((tag, i) => (
-                        <span key={i} className="px-2 py-0.5 text-[9px] font-bold text-blue-600 bg-blue-50 dark:bg-slate-950 dark:text-cyan-400 rounded">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <h3 className="text-base font-bold text-slate-900 dark:text-white leading-snug line-clamp-2">
-                      {post.title}
-                    </h3>
-                    <p className="text-xs text-slate-450 line-clamp-3">
-                      {post.summary}
-                    </p>
-                  </div>
-                  <div className="text-[10px] text-slate-400 mt-4 flex justify-between items-center">
-                    <span>By {post.author}</span>
-                    <span>{new Date(post.created_at).toLocaleDateString('en-IN', { day:'numeric', month:'short' })}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-
       {/* 9. Newsletter Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 mt-10">
         <div className="bg-slate-900 dark:bg-slate-900/60 border border-slate-850 rounded-3xl px-8 py-10 sm:px-12 flex flex-col lg:flex-row items-center justify-between gap-8">

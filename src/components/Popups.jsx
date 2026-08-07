@@ -164,8 +164,15 @@ export default function PopupsManager() {
                       <input 
                         type="tel" 
                         required
+                        minLength={10}
+                        maxLength={10}
+                        pattern="[0-9]{10}"
+                        title="Please enter exactly 10 digits"
                         value={leadData.mobile}
-                        onChange={e => setLeadData({...leadData, mobile: e.target.value})}
+                        onChange={e => {
+                          const val = e.target.value.replace(/\D/g, '').slice(0, 10);
+                          setLeadData({...leadData, mobile: val});
+                        }}
                         className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 focus:ring-2 focus:ring-blue-500 outline-none"
                         placeholder="e.g. 9876543210"
                       />

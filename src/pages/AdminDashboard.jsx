@@ -1952,181 +1952,6 @@ export default function AdminDashboard() {
             </button>
           </div>
 
-          {/* Section 1: Modals */}
-          {showBrandModal && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
-              <div className="bg-white dark:bg-slate-900 rounded-3xl w-full max-w-lg shadow-2xl overflow-hidden relative animate-in fade-in zoom-in duration-300">
-                <div className="p-6">
-                  <h3 className="text-xl font-bold font-display border-b pb-4 mb-4 flex items-center gap-2 text-slate-900 dark:text-white">
-                    <Package className="h-6 w-6 text-blue-600" /> {editingBrandId ? 'Edit Brand' : 'Add New Brand'}
-                  </h3>
-                  <form onSubmit={handleBrandSubmit} className="space-y-4 text-xs">
-                    <div className="space-y-1">
-                      <label className="font-bold text-slate-400 uppercase tracking-wider block">Brand Name *</label>
-                      <input
-                        type="text"
-                        required
-                        placeholder="e.g. Fevicol, 3M"
-                        value={brandForm.name}
-                        onChange={(e) => setBrandForm(prev => ({ ...prev, name: e.target.value }))}
-                        className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
-                      />
-                    </div>
-                    <div className="space-y-1">
-                      <label className="font-bold text-slate-400 uppercase tracking-wider block">URL Slug (Optional)</label>
-                      <input
-                        type="text"
-                        placeholder="e.g. fevicol, 3m"
-                        value={brandForm.slug}
-                        onChange={(e) => setBrandForm(prev => ({ ...prev, slug: e.target.value }))}
-                        className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
-                      />
-                    </div>
-                    <div className="space-y-1">
-                      <label className="font-bold text-slate-400 uppercase tracking-wider block">Description</label>
-                      <textarea
-                        rows="3"
-                        placeholder="Brief description of the manufacturer..."
-                        value={brandForm.description}
-                        onChange={(e) => setBrandForm(prev => ({ ...prev, description: e.target.value }))}
-                        className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
-                      />
-                    </div>
-                    <div className="space-y-1">
-                      <label className="font-bold text-slate-400 uppercase tracking-wider block">Logo Image URL</label>
-                      <div className="flex gap-2">
-                        <input
-                          type="text"
-                          placeholder="https://..."
-                          value={brandForm.logo_url}
-                          onChange={(e) => setBrandForm(prev => ({ ...prev, logo_url: e.target.value }))}
-                          className="flex-1 px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
-                        />
-                        <label className="px-3 py-2 bg-slate-100 dark:bg-slate-850 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-xl cursor-pointer font-bold border border-slate-200 dark:border-slate-700 flex items-center justify-center shrink-0">
-                          {uploadingBrandImg ? '...' : 'Upload'}
-                          <input 
-                            type="file" 
-                            accept="image/jpeg, image/png, image/webp"
-                            onChange={handleBrandLogoUpload}
-                            className="hidden" 
-                          />
-                        </label>
-                      </div>
-                    </div>
-                    <div className="flex gap-3 pt-4 border-t">
-                      <button
-                        type="submit"
-                        className="flex-1 py-3 bg-blue-600 hover:bg-blue-750 text-white font-bold rounded-xl transition"
-                      >
-                        {editingBrandId ? 'Update Brand' : 'Save Brand'}
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setShowBrandModal(false)}
-                        className="px-6 py-3 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold rounded-xl transition"
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {showCategoryModal && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
-              <div className="bg-white dark:bg-slate-900 rounded-3xl w-full max-w-lg shadow-2xl overflow-hidden relative animate-in fade-in zoom-in duration-300">
-                <div className="p-6">
-                  <h3 className="text-xl font-bold font-display border-b pb-4 mb-4 flex items-center gap-2 text-slate-900 dark:text-white">
-                    <Layers className="h-6 w-6 text-indigo-600" /> {editingCategoryId ? 'Edit Category' : 'Add New Category'}
-                  </h3>
-                  <form onSubmit={handleCategorySubmit} className="space-y-4 text-xs">
-                    <div className="space-y-1">
-                      <label className="font-bold text-slate-400 uppercase tracking-wider block">Category Name *</label>
-                      <input
-                        type="text"
-                        required
-                        placeholder="e.g. Epoxy Resins"
-                        value={categoryForm.name}
-                        onChange={(e) => setCategoryForm(prev => ({ ...prev, name: e.target.value }))}
-                        className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
-                      />
-                    </div>
-                    <div className="space-y-1">
-                      <label className="font-bold text-slate-400 uppercase tracking-wider block">URL Slug (Optional)</label>
-                      <input
-                        type="text"
-                        placeholder="e.g. epoxy-resins"
-                        value={categoryForm.slug}
-                        onChange={(e) => setCategoryForm(prev => ({ ...prev, slug: e.target.value }))}
-                        className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
-                      />
-                    </div>
-                    <div className="space-y-1">
-                      <label className="font-bold text-slate-400 uppercase tracking-wider block">Description</label>
-                      <textarea
-                        rows="2"
-                        placeholder="Brief description of category..."
-                        value={categoryForm.description}
-                        onChange={(e) => setCategoryForm(prev => ({ ...prev, description: e.target.value }))}
-                        className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
-                      />
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="space-y-1">
-                        <label className="font-bold text-slate-400 uppercase tracking-wider block">Lucide Icon</label>
-                        <input
-                          type="text"
-                          placeholder="e.g. Layers"
-                          value={categoryForm.icon}
-                          onChange={(e) => setCategoryForm(prev => ({ ...prev, icon: e.target.value }))}
-                          className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
-                        />
-                      </div>
-                      <div className="space-y-1">
-                        <label className="font-bold text-slate-400 uppercase tracking-wider block">Banner URL</label>
-                        <div className="flex gap-2">
-                          <input
-                            type="text"
-                            placeholder="https://..."
-                            value={categoryForm.image_url}
-                            onChange={(e) => setCategoryForm(prev => ({ ...prev, image_url: e.target.value }))}
-                            className="flex-1 px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
-                          />
-                          <label className="px-3 py-2 bg-slate-100 dark:bg-slate-850 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-xl cursor-pointer font-bold border border-slate-200 dark:border-slate-700 flex items-center justify-center shrink-0">
-                            {uploadingCategoryImg ? '...' : 'Upload'}
-                            <input 
-                              type="file" 
-                              accept="image/jpeg, image/png, image/webp"
-                              onChange={handleCategoryBannerUpload}
-                              className="hidden" 
-                            />
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex gap-3 pt-4 border-t">
-                      <button
-                        type="submit"
-                        className="flex-1 py-3 bg-indigo-600 hover:bg-indigo-750 text-white font-bold rounded-xl transition"
-                      >
-                        {editingCategoryId ? 'Update Category' : 'Save Category'}
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setShowCategoryModal(false)}
-                        className="px-6 py-3 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold rounded-xl transition"
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          )}
-
           {/* Section 2: Grid lists of current brands & categories */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-xs">
             
@@ -2756,7 +2581,44 @@ export default function AdminDashboard() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <label className="font-bold text-slate-400 uppercase tracking-wider block">Brand Association *</label>
+                  <label className="font-bold text-slate-400 uppercase tracking-wider block">Shelf Life</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. 12 Months"
+                    value={productForm.shelf_life || ''}
+                    onChange={(e) => setProductForm(prev => ({ ...prev, shelf_life: e.target.value }))}
+                    className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label className="font-bold text-slate-400 uppercase tracking-wider block">Application</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Woodworking, Construction"
+                    value={productForm.application || ''}
+                    onChange={(e) => setProductForm(prev => ({ ...prev, application: e.target.value }))}
+                    className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <div className="flex justify-between items-center">
+                    <label className="font-bold text-slate-400 uppercase tracking-wider block">Brand Association *</label>
+                    <button 
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setEditingBrandId(null);
+                        setBrandForm({ name: '', slug: '', description: '', logo_url: '' });
+                        setShowBrandModal(true);
+                      }}
+                      className="text-xs text-blue-600 hover:text-blue-700 dark:text-blue-400 font-bold flex items-center gap-1"
+                    >
+                      <Plus className="h-3 w-3" /> Add New
+                    </button>
+                  </div>
                   <select
                     value={productForm.brand_id}
                     onChange={(e) => setProductForm(prev => ({ ...prev, brand_id: e.target.value }))}
@@ -2766,7 +2628,21 @@ export default function AdminDashboard() {
                   </select>
                 </div>
                 <div className="space-y-1">
-                  <label className="font-bold text-slate-400 uppercase tracking-wider block">Category Association *</label>
+                  <div className="flex justify-between items-center">
+                    <label className="font-bold text-slate-400 uppercase tracking-wider block">Category Association *</label>
+                    <button 
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setEditingCategoryId(null);
+                        setCategoryForm({ name: '', slug: '', description: '', icon: 'Layers', image_url: '' });
+                        setShowCategoryModal(true);
+                      }}
+                      className="text-xs text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 font-bold flex items-center gap-1"
+                    >
+                      <Plus className="h-3 w-3" /> Add New
+                    </button>
+                  </div>
                   <select
                     value={productForm.category_id}
                     onChange={(e) => setProductForm(prev => ({ ...prev, category_id: e.target.value }))}
@@ -3433,6 +3309,182 @@ export default function AdminDashboard() {
           </div>
         </div>
       )}
+
+
+          {/* Section 1: Modals */}
+          {showBrandModal && (
+            <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+              <div className="bg-white dark:bg-slate-900 rounded-3xl w-full max-w-lg shadow-2xl overflow-hidden relative animate-in fade-in zoom-in duration-300">
+                <div className="p-6">
+                  <h3 className="text-xl font-bold font-display border-b pb-4 mb-4 flex items-center gap-2 text-slate-900 dark:text-white">
+                    <Package className="h-6 w-6 text-blue-600" /> {editingBrandId ? 'Edit Brand' : 'Add New Brand'}
+                  </h3>
+                  <form onSubmit={handleBrandSubmit} className="space-y-4 text-xs">
+                    <div className="space-y-1">
+                      <label className="font-bold text-slate-400 uppercase tracking-wider block">Brand Name *</label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. Fevicol, 3M"
+                        value={brandForm.name}
+                        onChange={(e) => setBrandForm(prev => ({ ...prev, name: e.target.value }))}
+                        className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label className="font-bold text-slate-400 uppercase tracking-wider block">URL Slug (Optional)</label>
+                      <input
+                        type="text"
+                        placeholder="e.g. fevicol, 3m"
+                        value={brandForm.slug}
+                        onChange={(e) => setBrandForm(prev => ({ ...prev, slug: e.target.value }))}
+                        className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label className="font-bold text-slate-400 uppercase tracking-wider block">Description</label>
+                      <textarea
+                        rows="3"
+                        placeholder="Brief description of the manufacturer..."
+                        value={brandForm.description}
+                        onChange={(e) => setBrandForm(prev => ({ ...prev, description: e.target.value }))}
+                        className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label className="font-bold text-slate-400 uppercase tracking-wider block">Logo Image URL</label>
+                      <div className="flex gap-2">
+                        <input
+                          type="text"
+                          placeholder="https://..."
+                          value={brandForm.logo_url}
+                          onChange={(e) => setBrandForm(prev => ({ ...prev, logo_url: e.target.value }))}
+                          className="flex-1 px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
+                        />
+                        <label className="px-3 py-2 bg-slate-100 dark:bg-slate-850 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-xl cursor-pointer font-bold border border-slate-200 dark:border-slate-700 flex items-center justify-center shrink-0">
+                          {uploadingBrandImg ? '...' : 'Upload'}
+                          <input 
+                            type="file" 
+                            accept="image/jpeg, image/png, image/webp"
+                            onChange={handleBrandLogoUpload}
+                            className="hidden" 
+                          />
+                        </label>
+                      </div>
+                    </div>
+                    <div className="flex gap-3 pt-4 border-t">
+                      <button
+                        type="submit"
+                        className="flex-1 py-3 bg-blue-600 hover:bg-blue-750 text-white font-bold rounded-xl transition"
+                      >
+                        {editingBrandId ? 'Update Brand' : 'Save Brand'}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setShowBrandModal(false)}
+                        className="px-6 py-3 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold rounded-xl transition"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {showCategoryModal && (
+            <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+              <div className="bg-white dark:bg-slate-900 rounded-3xl w-full max-w-lg shadow-2xl overflow-hidden relative animate-in fade-in zoom-in duration-300">
+                <div className="p-6">
+                  <h3 className="text-xl font-bold font-display border-b pb-4 mb-4 flex items-center gap-2 text-slate-900 dark:text-white">
+                    <Layers className="h-6 w-6 text-indigo-600" /> {editingCategoryId ? 'Edit Category' : 'Add New Category'}
+                  </h3>
+                  <form onSubmit={handleCategorySubmit} className="space-y-4 text-xs">
+                    <div className="space-y-1">
+                      <label className="font-bold text-slate-400 uppercase tracking-wider block">Category Name *</label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. Epoxy Resins"
+                        value={categoryForm.name}
+                        onChange={(e) => setCategoryForm(prev => ({ ...prev, name: e.target.value }))}
+                        className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label className="font-bold text-slate-400 uppercase tracking-wider block">URL Slug (Optional)</label>
+                      <input
+                        type="text"
+                        placeholder="e.g. epoxy-resins"
+                        value={categoryForm.slug}
+                        onChange={(e) => setCategoryForm(prev => ({ ...prev, slug: e.target.value }))}
+                        className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label className="font-bold text-slate-400 uppercase tracking-wider block">Description</label>
+                      <textarea
+                        rows="2"
+                        placeholder="Brief description of category..."
+                        value={categoryForm.description}
+                        onChange={(e) => setCategoryForm(prev => ({ ...prev, description: e.target.value }))}
+                        className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
+                      />
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-1">
+                        <label className="font-bold text-slate-400 uppercase tracking-wider block">Lucide Icon</label>
+                        <input
+                          type="text"
+                          placeholder="e.g. Layers"
+                          value={categoryForm.icon}
+                          onChange={(e) => setCategoryForm(prev => ({ ...prev, icon: e.target.value }))}
+                          className="w-full px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
+                        />
+                      </div>
+                      <div className="space-y-1">
+                        <label className="font-bold text-slate-400 uppercase tracking-wider block">Banner URL</label>
+                        <div className="flex gap-2">
+                          <input
+                            type="text"
+                            placeholder="https://..."
+                            value={categoryForm.image_url}
+                            onChange={(e) => setCategoryForm(prev => ({ ...prev, image_url: e.target.value }))}
+                            className="flex-1 px-3 py-2 border rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-white"
+                          />
+                          <label className="px-3 py-2 bg-slate-100 dark:bg-slate-850 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-xl cursor-pointer font-bold border border-slate-200 dark:border-slate-700 flex items-center justify-center shrink-0">
+                            {uploadingCategoryImg ? '...' : 'Upload'}
+                            <input 
+                              type="file" 
+                              accept="image/jpeg, image/png, image/webp"
+                              onChange={handleCategoryBannerUpload}
+                              className="hidden" 
+                            />
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex gap-3 pt-4 border-t">
+                      <button
+                        type="submit"
+                        className="flex-1 py-3 bg-indigo-600 hover:bg-indigo-750 text-white font-bold rounded-xl transition"
+                      >
+                        {editingCategoryId ? 'Update Category' : 'Save Category'}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setShowCategoryModal(false)}
+                        className="px-6 py-3 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold rounded-xl transition"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          )}
 
     </div>
   );

@@ -66,7 +66,7 @@ export default function Footer() {
           <div className="space-y-4">
             <img src={adityaLogo} alt="Aditya Enterprises Logo" className="h-14 w-auto drop-shadow-lg mb-4 bg-white" />
             <p className="text-sm text-slate-500 leading-relaxed">
-              Premier industrial adhesive and architectural hardware distributors. Serving structural engineering, manufacturing, packaging, and commercial interior industries since 2012.
+              Premier industrial adhesive and architectural hardware distributors. Serving structural engineering, manufacturing, packaging, and commercial interior industries since 2007.
             </p>
             <div className="flex space-x-3 pt-2">
               <span className="px-2.5 py-1 text-[10px] bg-slate-800 text-slate-300 font-bold rounded uppercase">ISO 9001:2015</span>
