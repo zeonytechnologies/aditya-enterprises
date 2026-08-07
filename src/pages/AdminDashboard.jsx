@@ -166,6 +166,7 @@ export default function AdminDashboard() {
   const [filterMaxPrice, setFilterMaxPrice] = useState('');
   const [filterGst, setFilterGst] = useState('');
   const [filterInStock, setFilterInStock] = useState(false);
+  const [filterLowStock, setFilterLowStock] = useState(false);
 
   const filteredProductsForCatalog = useMemo(() => {
     return products.filter(p => {
@@ -181,9 +182,10 @@ export default function AdminDashboard() {
       if (filterGst && parseFloat(p.gst_percent) !== parseFloat(filterGst)) return false;
       // In Stock
       if (filterInStock && p.stock <= 0) return false;
-      return true;
+        if (filterLowStock && p.stock >= 15) return false;
+        return true;
     });
-  }, [products, filterCategory, filterBrand, filterMinPrice, filterMaxPrice, filterGst, filterInStock]);
+  }, [products, filterCategory, filterBrand, filterMinPrice, filterMaxPrice, filterGst, filterInStock, filterLowStock]);
 
   const resetCatalogFilters = () => {
     setFilterCategory('');
@@ -855,10 +857,17 @@ export default function AdminDashboard() {
           <span className="text-slate-400 font-semibold block uppercase text-[9px]">Verified B2B Accounts</span>
           <span className="text-lg font-extrabold font-display text-slate-900 dark:text-white">{stats?.dealersCount || 0} Dealers</span>
         </div>
-        <div className="bg-white dark:bg-slate-900 border p-4.5 rounded-2xl shadow-sm space-y-1.5">
-          <span className="text-slate-400 font-semibold block uppercase text-[9px]">Low Stock warnings</span>
-          <span className={`text-lg font-extrabold font-display ${(stats?.lowStockCount || 0) > 0 ? 'text-red-500 font-black animate-pulse' : 'text-slate-900'}`}>{stats?.lowStockCount || 0} Items</span>
-        </div>
+        <div 
+            className="bg-white dark:bg-slate-900 border p-4.5 rounded-2xl shadow-sm space-y-1.5 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+            onClick={() => {
+              setActiveTab('products');
+              setFilterLowStock(true);
+              document.getElementById('products-tab-panel')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
+            <span className="text-slate-400 font-semibold block uppercase text-[9px]">Low Stock warnings</span>
+            <span className={`text-lg font-extrabold font-display ${(stats?.lowStockCount || 0) > 0 ? 'text-red-500 font-black animate-pulse' : 'text-slate-900'}`}>{stats?.lowStockCount || 0} Items</span>
+          </div>
         <div className="bg-white dark:bg-slate-900 border p-4.5 rounded-2xl shadow-sm space-y-1.5">
           <span className="text-slate-400 font-semibold block uppercase text-[9px]">Total Visitors</span>
           <span className="text-lg font-extrabold font-display text-blue-600">{stats?.totalVisitors || 0}</span>
