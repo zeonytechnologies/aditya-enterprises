@@ -1770,8 +1770,8 @@ export default function AdminDashboard() {
                   <th className="py-3">SKU</th>
                   <th className="py-3">Product Name</th>
                   <th className="py-3 text-center">Stock</th>
-                  <th className="py-3 text-right">Standard Price</th>
-                  <th className="py-3 text-right">Dealer Price</th>
+                  <th className="py-3 text-right">Basic Price</th>
+                  <th className="py-3 text-right">Dealer Landing Price</th>
                   <th className="py-3 text-center">GST</th>
                   <th className="py-3 text-right">Actions</th>
                 </tr>
@@ -2524,7 +2524,7 @@ export default function AdminDashboard() {
                   />
                 </div>
                 <div className="space-y-1">
-                  <label className="font-bold text-slate-400 uppercase tracking-wider block">Dealer B2B Price (₹)</label>
+                  <label className="font-bold text-slate-400 uppercase tracking-wider block">Dealer Landing Price (₹)</label>
                   <input
                     type="number"
                     value={productForm.dealer_price}
@@ -2957,7 +2957,7 @@ export default function AdminDashboard() {
                             />
                           </div>
                           <div>
-                            <label className="block text-[9px] font-bold text-slate-400 uppercase">Retail Price *</label>
+                            <label className="block text-[9px] font-bold text-slate-400 uppercase">Basic Price *</label>
                             <input
                               type="number"
                               required
@@ -2971,7 +2971,7 @@ export default function AdminDashboard() {
                             />
                           </div>
                           <div>
-                            <label className="block text-[9px] font-bold text-slate-400 uppercase">Dealer Price *</label>
+                            <label className="block text-[9px] font-bold text-slate-400 uppercase">Dealer Landing Price *</label>
                             <input
                               type="number"
                               required
@@ -3166,7 +3166,7 @@ export default function AdminDashboard() {
                             />
                           </div>
                           <div>
-                            <label className="block text-[9px] font-bold text-slate-400 uppercase">Retail Price *</label>
+                            <label className="block text-[9px] font-bold text-slate-400 uppercase">Basic Price *</label>
                             <input
                               type="number"
                               required
@@ -3180,7 +3180,7 @@ export default function AdminDashboard() {
                             />
                           </div>
                           <div>
-                            <label className="block text-[9px] font-bold text-slate-400 uppercase">Dealer Price *</label>
+                            <label className="block text-[9px] font-bold text-slate-400 uppercase">Dealer Landing Price *</label>
                             <input
                               type="number"
                               required
