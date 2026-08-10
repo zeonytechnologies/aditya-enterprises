@@ -27,7 +27,7 @@ const HERO_SLIDES = [
     subtitle: "Supplying double-sided VHB tapes, epoxy resins, and construction sealants for infrastructure, aerospace, and defense applications.",
     bgImage: hero2,
     primaryBtn: "View Epoxy & Tapes",
-    secondaryBtn: "Get Dealer Price"
+    secondaryBtn: "Get Dealer Landing Price"
   }
 ];
 

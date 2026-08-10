@@ -1,0 +1,37 @@
+-- Auto-generated price updates from PDF
+
+UPDATE public.product_variants SET price = 282.44, dealer_price = 333.28, mrp = 440 WHERE id = '55cc0cd7-3de5-428e-bd30-33d8f50b5c87';
+UPDATE public.product_variants SET price = 174.72, dealer_price = 206.17, mrp = 420 WHERE id = '50b116ea-1ca0-460b-80a4-c90a14db0710';
+UPDATE public.product_variants SET price = 44.42, dealer_price = 52.42, mrp = 85 WHERE id = 'ae923c5c-d381-461f-8c24-76e9344f8e14';
+UPDATE public.products SET price = 26.92, dealer_price = 31.77, mrp = 60 WHERE id = '686d5fa6-e28f-429f-aa4a-8fd6c0e546f0';
+UPDATE public.products SET price = 44.42, dealer_price = 52.42, mrp = 85 WHERE id = 'bc872108-2e12-49fb-a64a-0192fa95f65c';
+UPDATE public.products SET price = 14.69, dealer_price = 17.33, mrp = 30 WHERE id = '74c18272-d939-4865-b44d-bd8e5e0a89ea';
+UPDATE public.products SET price = 174.72, dealer_price = 206.17, mrp = 420 WHERE id = '3327c8cf-c33f-46df-9bc8-ad5a1eb739a5';
+UPDATE public.products SET price = 282.44, dealer_price = 333.28, mrp = 440 WHERE id = '42cca6c6-6efb-4a8a-a3e7-287df331559d';
+UPDATE public.products SET price = 181.53, dealer_price = 214.21, mrp = 300 WHERE id = 'bd5aa7f7-1357-457f-8ceb-357c09c1f25c';
+UPDATE public.products SET price = 118.64, dealer_price = 140, mrp = 200 WHERE id = 'b6266319-9391-4af1-a14a-119ad0baec62';
+UPDATE public.products SET price = 22.07, dealer_price = 26.04, mrp = 35 WHERE id = '6faeb07c-cf18-45c9-86f2-23399c000779';
+UPDATE public.products SET price = 25.22, dealer_price = 29.76, mrp = 40 WHERE id = '3e14dc55-c75c-414e-b6bb-331a79badbe0';
+UPDATE public.products SET price = 39.72, dealer_price = 46.87, mrp = 75 WHERE id = '9755d17a-b32f-41fd-812f-81be9ac29d94';
+UPDATE public.products SET price = 44.42, dealer_price = 52.42, mrp = 85 WHERE id = '0964aba9-97c7-46d7-bffe-f36d713865b6';
+UPDATE public.products SET price = 45.46, dealer_price = 47.73, mrp = 70 WHERE id = 'd90a3fc5-9095-4587-8c2b-fffa1f74cec4';
+UPDATE public.products SET price = 21.2, dealer_price = 25.02, mrp = 30 WHERE id = 'c27970b2-aaca-48f5-8612-6b3a62007a2d';
+UPDATE public.products SET price = 25.22, dealer_price = 29.76, mrp = 40 WHERE id = '8d93d131-a7d8-4068-9fe0-4b545c8188c2';
+UPDATE public.products SET price = 89.71, dealer_price = 105.86, mrp = 170 WHERE id = '0afef4e9-df14-4061-8d9e-14a831d33aad';
+UPDATE public.products SET price = 44.42, dealer_price = 52.42, mrp = 85 WHERE id = 'f8308994-26ac-4f8f-b49c-3beb59b28ab9';
+UPDATE public.products SET price = 359.32, dealer_price = 424, mrp = 830 WHERE id = 'c5f19f31-90de-40d2-9a03-aa72b24f708e';
+UPDATE public.products SET price = 174.72, dealer_price = 206.17, mrp = 420 WHERE id = '05c471d9-ba7a-49e7-bb75-2a2aae8e3af0';
+UPDATE public.products SET price = 45.4, dealer_price = 53.57, mrp = 75 WHERE id = '8a960ea1-e1d2-4e4f-9db3-8cb2dedffe06';
+UPDATE public.products SET price = 20.25, dealer_price = 23.9, mrp = 25 WHERE id = 'd7a20815-2c4d-4570-a838-35b02f0afa10';
+UPDATE public.products SET price = 38.93, dealer_price = 45.94, mrp = 60 WHERE id = '5c33a15a-b3a6-40e9-b692-1798bbd39807';
+UPDATE public.products SET price = 37.85, dealer_price = 44.66, mrp = 70 WHERE id = '8963b442-855e-461e-9103-e494aacbd442';
+UPDATE public.products SET price = 62.92, dealer_price = 74.25, mrp = 99 WHERE id = 'a074a82c-8194-4c19-ac33-a0c3033b5952';
+UPDATE public.products SET price = 25.42, dealer_price = 30, mrp = 60 WHERE id = '71a3c588-d969-4b21-9804-016c032769ab';
+UPDATE public.products SET price = 13.5, dealer_price = 15.93, mrp = 30 WHERE id = 'b6340a02-375d-4ff5-802b-eb23bb1cae63';
+UPDATE public.products SET price = 21.55, dealer_price = 25.43, mrp = 30 WHERE id = 'bdd0f7a8-5d5e-4717-9d5f-cb44595dcc57';
+UPDATE public.products SET price = 170.63, dealer_price = 201.34, mrp = 300 WHERE id = 'fb0d57e2-f837-47b3-b8c8-0216283f095d';
+UPDATE public.products SET price = 13.08, dealer_price = 15.43, mrp = 30 WHERE id = '680bf04f-b903-4bc1-89af-da2ca2b5f488';
+UPDATE public.products SET price = 13.5, dealer_price = 15.93, mrp = 30 WHERE id = 'cee66501-d93f-4e30-8763-c473433513df';
+UPDATE public.products SET price = 117, dealer_price = 138.06, mrp = 187 WHERE id = 'f496bf5e-4c85-4d32-a37a-b179fad135b8';
+UPDATE public.products SET price = 324.96, dealer_price = 383.45, mrp = 510 WHERE id = '7565c68d-0f98-40ed-8dc7-189b0f1ab8b3';
+UPDATE public.products SET price = 92.7, dealer_price = 109.39, mrp = 140 WHERE id = '40e32e30-b2a5-4bd1-b79e-ed2a1e41e18a';

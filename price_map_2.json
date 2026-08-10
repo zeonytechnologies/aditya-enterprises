@@ -1,0 +1,2562 @@
+{
+  "BRITE-O METAL POLISH 25GM": {
+    "1*90*25 GM": {
+      "basic": 36.06,
+      "dlp": 42.55,
+      "mrp": 60.0
+    }
+  },
+  "BRITE - O SUPER 25GM": {
+    "1*90*25 GM": {
+      "basic": 39.72,
+      "dlp": 46.87,
+      "mrp": 75.0
+    }
+  },
+  "D KLOG JAR 40GM": {
+    "1*360*40 GM": {
+      "basic": 13.24,
+      "dlp": 15.62,
+      "mrp": 25.0
+    }
+  },
+  "D KLOG KIRANA PCK 40G 6X2": {
+    "1*240*40 GM": {
+      "basic": 13.24,
+      "dlp": 15.62,
+      "mrp": 25.0
+    }
+  },
+  "HAND CLEANER 500ML BOTTLE": {
+    "1*20*500 ML": {
+      "basic": 118.64,
+      "dlp": 140.0,
+      "mrp": 200.0
+    }
+  },
+  "HAND CLEANER 100ML BOTTLE": {
+    "1*72*100 ML": {
+      "basic": 29.66,
+      "dlp": 35.0,
+      "mrp": 50.0
+    }
+  },
+  "STEELGRIP DUCT TAPE 25M": {
+    "1*32*25 MTR": {
+      "basic": 211.86,
+      "dlp": 222.45,
+      "mrp": 305.0
+    }
+  },
+  "ELEPHANT TAPE 48 MM X 5M": {
+    "1*96*48MMX5 M": {
+      "basic": 45.46,
+      "dlp": 47.73,
+      "mrp": 70.0
+    }
+  },
+  "DUCT TAPE 50M": {
+    "1*16*50 MTR": {
+      "basic": 325.95,
+      "dlp": 342.25,
+      "mrp": 469.0
+    }
+  },
+  "FEVIBOND TUBE 25ML": {
+    "1*300*25 ML": {
+      "basic": 21.2,
+      "dlp": 25.02,
+      "mrp": 30.0
+    }
+  },
+  "FEVIBOND TUBE 50ML": {
+    "1*200*50 ML": {
+      "basic": 35.3,
+      "dlp": 41.65,
+      "mrp": 50.0
+    }
+  },
+  "FEVIBOND TUBE 10ML": {
+    "1*300*10 ML": {
+      "basic": 14.1,
+      "dlp": 16.64,
+      "mrp": 20.0
+    }
+  },
+  "FEVIBOND TUBE 90ML": {
+    "1*100*90ML": {
+      "basic": 49.4,
+      "dlp": 58.29,
+      "mrp": 70.0
+    }
+  },
+  "FEVICOL ALL FIX + MR": {
+    "1*144*20 ML": {
+      "basic": 22.07,
+      "dlp": 26.04,
+      "mrp": 35.0
+    }
+  },
+  "ALL FIX-SM 20ML": {
+    "1*144*20 ML": {
+      "basic": 31.53,
+      "dlp": 37.21,
+      "mrp": 50.0
+    }
+  },
+  "FEVICOL HOMEFIX 50 GM": {
+    "1*100*50 GM": {
+      "basic": 89.0,
+      "dlp": 105.02,
+      "mrp": 175.0
+    }
+  },
+  "FV HOME FIX 15GM MT IH": {
+    "1*144*15 GM": {
+      "basic": 51.67,
+      "dlp": 60.97,
+      "mrp": 75.0
+    }
+  },
+  "FEVICOL HOMEFIX 25GM - MT": {
+    "1*120*25 GM": {
+      "basic": 60.0,
+      "dlp": 70.8,
+      "mrp": 100.0
+    }
+  },
+  "HOMEFIX15GM 4TUBES CARDIH": {
+    "1*160*15 GM": {
+      "basic": 51.67,
+      "dlp": 60.97,
+      "mrp": 75.0
+    }
+  },
+  "SHOE FIX SHOESHINER 20ML": {
+    "1*144*20 ML": {
+      "basic": 31.63,
+      "dlp": 37.32,
+      "mrp": 50.0
+    }
+  },
+  "FEVICOL SHOE FIX SM[20ML]": {
+    "1*144*20 ML": {
+      "basic": 25.22,
+      "dlp": 29.76,
+      "mrp": 40.0
+    }
+  },
+  "SHOEFIX 2 GM - 6 S INNER": {
+    "1*48*2 GM": {
+      "basic": 36.32,
+      "dlp": 42.86,
+      "mrp": 60.0
+    }
+  },
+  "FEVIKWIK 101 10G": {
+    "1*120*10 GM": {
+      "basic": 14.69,
+      "dlp": 17.33,
+      "mrp": 30.0
+    }
+  },
+  "FEVIKWI 102 20 GM": {
+    "1*100*20 GM": {
+      "basic": 44.42,
+      "dlp": 52.42,
+      "mrp": 85.0
+    }
+  },
+  "FEVIKWIK 102 50 GM": {
+    "1*80*50 GM": {
+      "basic": 89.71,
+      "dlp": 105.86,
+      "mrp": 170.0
+    }
+  },
+  "fevikwik 203 20 gm": {
+    "1*100*20 GM": {
+      "basic": 44.42,
+      "dlp": 52.42,
+      "mrp": 85.0
+    }
+  },
+  "FEVIKWIK 243 20GM": {
+    "1*60*20 GM": {
+      "basic": 44.42,
+      "dlp": 52.42,
+      "mrp": 85.0
+    }
+  },
+  "FEVIKWIK 463 125GM": {
+    "1*60*125 GM": {
+      "basic": 174.72,
+      "dlp": 206.17,
+      "mrp": 420.0
+    }
+  },
+  "FEVIKWIK 463 250GM": {
+    "1*40*250 GM": {
+      "basic": 336.57,
+      "dlp": 397.15,
+      "mrp": 800.0
+    }
+  },
+  "FEVIKWIK 463 20 GM": {
+    "1*100*20 GM": {
+      "basic": 44.41,
+      "dlp": 52.4,
+      "mrp": 85.0
+    }
+  },
+  "FEVIKWIK 463 FS 250 GM": {
+    "1*40*250 GM": {
+      "basic": 359.32,
+      "dlp": 424.0,
+      "mrp": 830.0
+    }
+  },
+  "FEVIKWIK 463 FS 125 GM": {
+    "1*60*125 GM": {
+      "basic": 186.44,
+      "dlp": 220.0,
+      "mrp": 450.0
+    }
+  },
+  "FK ADVANCED 3GM BLISTER": {
+    "1*48*3 GM": {
+      "basic": 45.4,
+      "dlp": 53.57,
+      "mrp": 75.0
+    }
+  },
+  "FK ACTIVATR AEROSOL 200GM": {
+    "1*12*200 GM": {
+      "basic": 175.34,
+      "dlp": 206.9,
+      "mrp": 300.0
+    }
+  },
+  "FEVIKWIK 203 50 GM": {
+    "1*80*50 GM": {
+      "basic": 89.71,
+      "dlp": 105.86,
+      "mrp": 170.0
+    }
+  },
+  "FEVIKWIK CRAFT 6GM": {
+    "1*120*6 GM": {
+      "basic": 45.4,
+      "dlp": 53.57,
+      "mrp": 75.0
+    }
+  },
+  "FK CRAFT 20GM": {
+    "1*36*20 GM": {
+      "basic": 88.56,
+      "dlp": 104.5,
+      "mrp": 175.0
+    }
+  },
+  "FK GEL 15 PCS BLISTER 1GM": {
+    "1*600*1 GM": {
+      "basic": 8.47,
+      "dlp": 9.99,
+      "mrp": 15.0
+    }
+  },
+  "FK GEL 3G SM PCK 3GM": {
+    "1*288*3 GM": {
+      "basic": 20.25,
+      "dlp": 23.9,
+      "mrp": 30.0
+    }
+  },
+  "FEVIKWIK GEL": {
+    "1*180*3 GM": {
+      "basic": 20.25,
+      "dlp": 23.9,
+      "mrp": 25.0
+    }
+  },
+  "FK GEL 1GM POUCH PACK": {
+    "1*144*1 GM": {
+      "basic": 12.55,
+      "dlp": 14.81,
+      "mrp": 20.0
+    }
+  },
+  "FK GEL BLISTER NEW 3GM": {
+    "1*48*3 GM": {
+      "basic": 30.3,
+      "dlp": 35.75,
+      "mrp": 50.0
+    }
+  },
+  "FK GEL 500MG POUCH PACK": {
+    "1*240*500 MG": {
+      "basic": 6.78,
+      "dlp": 8.0,
+      "mrp": 10.0
+    }
+  },
+  "FK SM 3GM": {
+    "1*288*3 GM": {
+      "basic": 20.25,
+      "dlp": 23.9,
+      "mrp": 30.0
+    }
+  },
+  "FK GP 3GM": {
+    "1*180*3 GM": {
+      "basic": 21.54,
+      "dlp": 25.42,
+      "mrp": 30.0
+    }
+  },
+  "FK GP2GM": {
+    "1*240*2 GM": {
+      "basic": 14.37,
+      "dlp": 16.96,
+      "mrp": 20.0
+    }
+  },
+  "FK Org Assorted Pack": {
+    "1*96*1 GM": {
+      "basic": 26.2,
+      "dlp": 30.92,
+      "mrp": 45.0
+    }
+  },
+  "FK GP 15PCS BLISTER 1GM": {
+    "1*600*1 GM": {
+      "basic": 7.18,
+      "dlp": 8.47,
+      "mrp": 10.0
+    }
+  },
+  "FEVIKWIK PRECISION [3 GM]": {
+    "1*48*3 GM": {
+      "basic": 26.9,
+      "dlp": 31.74,
+      "mrp": 40.0
+    }
+  },
+  "FK GP [1 GM] 12 PCS NESA": {
+    "1*600*1 GM": {
+      "basic": 7.18,
+      "dlp": 8.47,
+      "mrp": 10.0
+    }
+  },
+  "3gm Precision": {
+    "1*48*3 GM": {
+      "basic": 26.9,
+      "dlp": 31.74,
+      "mrp": 40.0
+    }
+  },
+  "FK ACTIVATOR LIQUID 50ML": {
+    "1*24*50 ML": {
+      "basic": 148.9,
+      "dlp": 175.7,
+      "mrp": 390.0
+    }
+  },
+  "FK PRECISION PRO 20GM": {
+    "1*36*20 GM": {
+      "basic": 101.19,
+      "dlp": 119.4,
+      "mrp": 200.0
+    }
+  },
+  "FK PRECISION PRO 8GM": {
+    "1*120*8 GM": {
+      "basic": 48.4,
+      "dlp": 57.11,
+      "mrp": 80.0
+    }
+  },
+  "FK GP AL TUBE AUT 450GM": {
+    "1*1200*450 MG": {
+      "basic": 3.19,
+      "dlp": 3.76,
+      "mrp": 5.0
+    }
+  },
+  "FK IMS 450MG 20X84 ROI": {
+    "1*1680*450 MG": {
+      "basic": 3.46,
+      "dlp": 4.08,
+      "mrp": 5.0
+    }
+  },
+  "FK WELD 15G+2G": {
+    "1*100*17 GM": {
+      "basic": 19.67,
+      "dlp": 23.21,
+      "mrp": 50.0
+    }
+  },
+  "FVT RAPID AND CLEAR 180GM": {
+    "1*20*180 GM": {
+      "basic": 300.85,
+      "dlp": 355.0,
+      "mrp": 470.0
+    }
+  },
+  "FEVITITE RAPID [90 GM]": {
+    "1*40*180 GM": {
+      "basic": 121.71,
+      "dlp": 143.62,
+      "mrp": 190.0
+    }
+  },
+  "FEVITITERC 13G(19+1)": {
+    "1*280*13 GM": {
+      "basic": 38.93,
+      "dlp": 45.94,
+      "mrp": 60.0
+    }
+  },
+  "FVT RAPID AND CLEAR 450GM": {
+    "1*20*450 GM": {
+      "basic": 610.17,
+      "dlp": 720.0,
+      "mrp": 900.0
+    }
+  },
+  "FVT RAPID AND CLEAR 90GM": {
+    "1*60*90 GM": {
+      "basic": 186.44,
+      "dlp": 220.0,
+      "mrp": 300.0
+    }
+  },
+  "RAPID AND CLEAR 7GM 20EA": {
+    "1*200*7 GM": {
+      "basic": 27.12,
+      "dlp": 32.0,
+      "mrp": 40.0
+    }
+  },
+  "FEVITITE RAP 7GM": {
+    "1*192*7 GM": {
+      "basic": 19.56,
+      "dlp": 23.08,
+      "mrp": 30.0
+    }
+  },
+  "RAPID AND CLEAR 3GM": {
+    "1*200*3 GM": {
+      "basic": 15.93,
+      "dlp": 18.8,
+      "mrp": 25.0
+    }
+  },
+  "FEVITITERC 7G(19+1)": {
+    "1*280*7 GM": {
+      "basic": 27.12,
+      "dlp": 32.0,
+      "mrp": 40.0
+    }
+  },
+  "FVT RAPID AND CLEAR 6GM": {
+    "1*200*6 GM": {
+      "basic": 27.12,
+      "dlp": 32.0,
+      "mrp": 40.0
+    }
+  },
+  "FEVITITE RAPID [180 GM]": {
+    "1*20*90 GM": {
+      "basic": 211.45,
+      "dlp": 249.51,
+      "mrp": 330.0
+    }
+  },
+  "FVT RAPID AND CLEAR 13GM": {
+    "1*200*13 GM": {
+      "basic": 38.93,
+      "dlp": 45.94,
+      "mrp": 60.0
+    }
+  },
+  "FVT RAPID AND CLEAR 12GM": {
+    "1*200*12 GM": {
+      "basic": 43.67,
+      "dlp": 51.53,
+      "mrp": 65.0
+    }
+  },
+  "FVT RAPID AND CLEAR 36GM": {
+    "1*40*36 GM": {
+      "basic": 89.83,
+      "dlp": 106.0,
+      "mrp": 140.0
+    }
+  },
+  "FEVITITE SF 13GM": {
+    "1*200*13 GM": {
+      "basic": 17.16,
+      "dlp": 20.25,
+      "mrp": 30.0
+    }
+  },
+  "FEVITITE SUPER STRONG EPX ADH[ 3 G ]": {
+    "1*192*3 GM": {
+      "basic": 10.17,
+      "dlp": 12.0,
+      "mrp": 15.0
+    }
+  },
+  "FEVITITE SS 90GM": {
+    "1*60*90 GM": {
+      "basic": 118.64,
+      "dlp": 140.0,
+      "mrp": 200.0
+    }
+  },
+  "FEVITITE EPX 36GM": {
+    "1*40*36 GM": {
+      "basic": 45.2,
+      "dlp": 53.34,
+      "mrp": 80.0
+    }
+  },
+  "FEVITITE SS 180GM": {
+    "1*20*180 GM": {
+      "basic": 190.68,
+      "dlp": 225.0,
+      "mrp": 350.0
+    }
+  },
+  "FEVITITE SS 3GM 20EA": {
+    "1*200*3 GM": {
+      "basic": 10.17,
+      "dlp": 12.0,
+      "mrp": 15.0
+    }
+  },
+  "FEVITITE SS 1.8KG JOINT": {
+    "1*3*1.8 KG": {
+      "basic": 762.71,
+      "dlp": 900.0,
+      "mrp": 1500.0
+    }
+  },
+  "FEVITITE EPX 90GM": {
+    "1*60*90 GM": {
+      "basic": 68.76,
+      "dlp": 81.14,
+      "mrp": 120.0
+    }
+  },
+  "FEVITITE SS 450GM": {
+    "1*20*450 GM": {
+      "basic": 317.8,
+      "dlp": 375.0,
+      "mrp": 500.0
+    }
+  },
+  "FEVITITE SS 900GM SET": {
+    "1*6*900 GM": {
+      "basic": 491.53,
+      "dlp": 580.01,
+      "mrp": 750.0
+    }
+  },
+  "FEVITITE SF 36GM": {
+    "1*40*36 GM": {
+      "basic": 45.56,
+      "dlp": 53.76,
+      "mrp": 80.0
+    }
+  },
+  "FEVITITE SS 13G": {
+    "1*200*13 GM": {
+      "basic": 27.19,
+      "dlp": 32.08,
+      "mrp": 45.0
+    }
+  },
+  "FEVITITE SS 36GM": {
+    "1*40*36 GM": {
+      "basic": 55.08,
+      "dlp": 64.99,
+      "mrp": 110.0
+    }
+  },
+  "STD EPOXYAdh 450 GM SET": {
+    "1*20*450 GM": {
+      "basic": 181.34,
+      "dlp": 213.98,
+      "mrp": 300.0
+    }
+  },
+  "FEVITITESS 13G(19+1)": {
+    "1*280*13 GM": {
+      "basic": 27.19,
+      "dlp": 32.08,
+      "mrp": 45.0
+    }
+  },
+  "FEVITITE SUPER FAST-225 GM-180GM+25%FRE": {
+    "1*20*225 GM": {
+      "basic": 120.0,
+      "dlp": 141.6,
+      "mrp": 210.0
+    }
+  },
+  "FEVITITE EPX 180GM": {
+    "1*20*180 GM": {
+      "basic": 111.88,
+      "dlp": 132.02,
+      "mrp": 200.0
+    }
+  },
+  "FEVITITE SUPER FAST 180GM": {
+    "1*20*180 GM": {
+      "basic": 128.62,
+      "dlp": 151.77,
+      "mrp": 200.0
+    }
+  },
+  "SUPER STRONG 13GM": {
+    "1*200*13 GM": {
+      "basic": 29.66,
+      "dlp": 35.0,
+      "mrp": 50.0
+    }
+  },
+  "FEVITITE SS HARD 800G": {
+    "1*6*800 GM": {
+      "basic": 385.93,
+      "dlp": 455.4,
+      "mrp": 483.7
+    }
+  },
+  "FEVITITE SS RESIN 1KG": {
+    "1*6*1 KG": {
+      "basic": 421.18,
+      "dlp": 496.99,
+      "mrp": 516.3
+    }
+  },
+  "TWIST OPEN CAP 10GM": {
+    "1*120*10 GM": {
+      "basic": 18.5,
+      "dlp": 21.83,
+      "mrp": 35.0
+    }
+  },
+  "TWIST OPEN CAP 15GM": {
+    "1*120*15 GM": {
+      "basic": 28.73,
+      "dlp": 33.9,
+      "mrp": 50.0
+    }
+  },
+  "FLEXKWIK 20GM 120 SHIPPER": {
+    "1*120*20 GM": {
+      "basic": 37.85,
+      "dlp": 44.66,
+      "mrp": 70.0
+    }
+  },
+  "FLEXKWIK TWIST OPEN 50GM": {
+    "1*60*50 GM": {
+      "basic": 82.51,
+      "dlp": 97.36,
+      "mrp": 150.0
+    }
+  },
+  "FLEXKWIK 20GM+HOMEFIX15GM": {
+    "1*120*20 GM": {
+      "basic": 37.85,
+      "dlp": 44.66,
+      "mrp": 70.0
+    }
+  },
+  "FAST SETTING 20GM 120 SH": {
+    "1*120*20 GM": {
+      "basic": 37.85,
+      "dlp": 44.66,
+      "mrp": 75.0
+    }
+  },
+  "HT LQ SL BLK 200GM RND": {
+    "1*50*200 GM": {
+      "basic": 52.97,
+      "dlp": 62.5,
+      "mrp": 85.0
+    }
+  },
+  "HT LQ SL BLK 50GM RND": {
+    "1*200*50 GM": {
+      "basic": 18.7,
+      "dlp": 22.07,
+      "mrp": 30.0
+    }
+  },
+  "HT LQ SL BLK 100GM RND": {
+    "1*100*100 GM": {
+      "basic": 31.17,
+      "dlp": 36.78,
+      "mrp": 50.0
+    }
+  },
+  "HT LQ SL BLK 500GM RND": {
+    "1*30*500 GM": {
+      "basic": 113.92,
+      "dlp": 134.43,
+      "mrp": 200.0
+    }
+  },
+  "HT LQ SL BLK 1KG RND": {
+    "1*15*1 KG": {
+      "basic": 202.9,
+      "dlp": 239.42,
+      "mrp": 365.0
+    }
+  },
+  "HT TEFLON TAPE 12M": {
+    "1*1000*12 METER": {
+      "basic": 13.42,
+      "dlp": 15.84,
+      "mrp": 30.0
+    }
+  },
+  "*HOLDTITE PTFE (POUCH) (12MM X 4M)": {
+    "1*500*12 MM X 4 METER": {
+      "basic": 5.77,
+      "dlp": 6.81,
+      "mrp": 10.0
+    }
+  },
+  "SEALTAPE PP 12MMX4M": {
+    "1*480*12 MM X 4 METER": {
+      "basic": 6.62,
+      "dlp": 7.81,
+      "mrp": 12.0
+    }
+  },
+  "HT SEALTAPE 12MMX10M": {
+    "1*500*12MMX 10M": {
+      "basic": 13.99,
+      "dlp": 16.51,
+      "mrp": 30.0
+    }
+  },
+  "HT TEFLON 8M": {
+    "1*1000*12 MM X 8 METER": {
+      "basic": 11.3,
+      "dlp": 13.33,
+      "mrp": 25.0
+    }
+  },
+  "HT SEALANT WHITE 200GM": {
+    "1*50*200 GM": {
+      "basic": 58.68,
+      "dlp": 69.24,
+      "mrp": 90.0
+    }
+  },
+  "HT SEALANT WHITE 100GM": {
+    "1*100*100 GM": {
+      "basic": 39.11,
+      "dlp": 46.15,
+      "mrp": 60.0
+    }
+  },
+  "HT SEALANT WHITE 40GM": {
+    "1*200*40 GM": {
+      "basic": 16.3,
+      "dlp": 19.23,
+      "mrp": 25.0
+    }
+  },
+  "HT SEALANT WHITE 20GM": {
+    "1*300*20 GM": {
+      "basic": 7.81,
+      "dlp": 9.22,
+      "mrp": 15.0
+    }
+  },
+  "HT SEALANT WHITE 500GM": {
+    "1*30*500 GM": {
+      "basic": 123.81,
+      "dlp": 146.1,
+      "mrp": 190.0
+    }
+  },
+  "HOME KIT BLISTER RS.99": {
+    "1*36*1 NO": {
+      "basic": 62.92,
+      "dlp": 74.25,
+      "mrp": 99.0
+    }
+  },
+  "KWIK KWIK 101": {
+    "1*120*18 GM": {
+      "basic": 25.42,
+      "dlp": 30.0,
+      "mrp": 60.0
+    }
+  },
+  "LG CPVC 20ML INNER": {
+    "1*200*20 ML": {
+      "basic": 20.51,
+      "dlp": 24.2,
+      "mrp": 40.0
+    }
+  },
+  "LG CPVC SOL 500ML CX": {
+    "1*12*500 ML": {
+      "basic": 300.32,
+      "dlp": 354.38,
+      "mrp": 675.0
+    }
+  },
+  "LG CPVC 250ML TIN": {
+    "1*36*250 ML": {
+      "basic": 167.4,
+      "dlp": 197.53,
+      "mrp": 410.0
+    }
+  },
+  "LG CPVC SOL 1 LTR CX": {
+    "1*6*1 LT": {
+      "basic": 555.46,
+      "dlp": 655.44,
+      "mrp": 1180.0
+    }
+  },
+  "LG CPVC 50ML TUBE": {
+    "1*144*50 ML": {
+      "basic": 43.64,
+      "dlp": 51.5,
+      "mrp": 85.0
+    }
+  },
+  "LG CPVC 15ML TUBE": {
+    "1*200*15 ML": {
+      "basic": 14.95,
+      "dlp": 17.64,
+      "mrp": 30.0
+    }
+  },
+  "LKG CPVC 30 ML TUBE": {
+    "1*300*30 ML": {
+      "basic": 29.08,
+      "dlp": 34.31,
+      "mrp": 60.0
+    }
+  },
+  "LG CPVC 50ML TIN": {
+    "1*100*50 ML": {
+      "basic": 57.63,
+      "dlp": 68.0,
+      "mrp": 125.0
+    }
+  },
+  "LG CPVC 100ML TIN": {
+    "1*48*100 ML": {
+      "basic": 90.49,
+      "dlp": 106.78,
+      "mrp": 215.0
+    }
+  },
+  "LG PVCHB SOL 500MLCX": {
+    "1*12*500 ML": {
+      "basic": 178.77,
+      "dlp": 210.95,
+      "mrp": 330.0
+    }
+  },
+  "LG PVC HB 100ML TUBE": {
+    "1*100*100 ML": {
+      "basic": 33.24,
+      "dlp": 39.22,
+      "mrp": 60.0
+    }
+  },
+  "LEAKGRD HVY BODYPVC SOL.CEMENT[1 LT]-TIN": {
+    "1*6*1 LT": {
+      "basic": 175.34,
+      "dlp": 206.9,
+      "mrp": 300.0
+    }
+  },
+  "LG PVC HB 250ML TIN": {
+    "1*36*250 ML": {
+      "basic": 69.02,
+      "dlp": 81.44,
+      "mrp": 150.0
+    }
+  },
+  "LG PVC HB 20ML TUBE": {
+    "1*200*20 ML": {
+      "basic": 8.26,
+      "dlp": 9.75,
+      "mrp": 15.0
+    }
+  },
+  "LG PVC HB 50ML TUBE": {
+    "1*200*50 ML": {
+      "basic": 18.7,
+      "dlp": 22.07,
+      "mrp": 35.0
+    }
+  },
+  "LG PVCHB SOL 50ML CX": {
+    "1*96*50 ML": {
+      "basic": 29.77,
+      "dlp": 35.13,
+      "mrp": 85.0
+    }
+  },
+  "LG PVC HB 100ML TIN": {
+    "1*48*100 ML": {
+      "basic": 34.96,
+      "dlp": 41.25,
+      "mrp": 75.0
+    }
+  },
+  "LG RB SOL 500 ML CX": {
+    "1*12*500 ML": {
+      "basic": 134.79,
+      "dlp": 159.05,
+      "mrp": 310.0
+    }
+  },
+  "LG PVC RB 1LT TIN": {
+    "1*6*1 LT": {
+      "basic": 182.46,
+      "dlp": 215.3,
+      "mrp": 420.0
+    }
+  },
+  "LG PVC RB 250ML TIN": {
+    "1*36*250 ML": {
+      "basic": 61.42,
+      "dlp": 72.48,
+      "mrp": 150.0
+    }
+  },
+  "LG PVC RB 100ML BTL": {
+    "1*120*100 ML": {
+      "basic": 32.25,
+      "dlp": 38.06,
+      "mrp": 80.0
+    }
+  },
+  "LG PVC RB 100ML AUTOCART": {
+    "1*100*100 ML": {
+      "basic": 24.92,
+      "dlp": 29.41,
+      "mrp": 50.0
+    }
+  },
+  "LG PVC RB 500ML BTL": {
+    "1*30*500 ML": {
+      "basic": 116.77,
+      "dlp": 137.79,
+      "mrp": 275.0
+    }
+  },
+  "HT LeakGuard PVC RB": {
+    "1*100*50 ML": {
+      "basic": 26.44,
+      "dlp": 31.2,
+      "mrp": 50.0
+    }
+  },
+  "LG PVC RB 5LT CAN": {
+    "1*4*5 LT": {
+      "basic": 1079.39,
+      "dlp": 1273.68,
+      "mrp": 2420.0
+    }
+  },
+  "LG PVC RB 100ML TIN": {
+    "1*48*100 ML": {
+      "basic": 38.23,
+      "dlp": 45.11,
+      "mrp": 90.0
+    }
+  },
+  "LG PVC RB 1LT BTL": {
+    "1*15*1 LT": {
+      "basic": 228.58,
+      "dlp": 269.72,
+      "mrp": 540.0
+    }
+  },
+  "LG PVC RB SOL 50ML CX": {
+    "1*96*50 ML": {
+      "basic": 29.05,
+      "dlp": 34.28,
+      "mrp": 80.0
+    }
+  },
+  "LG PVC RB 200ML BTL": {
+    "1*40*200 ML": {
+      "basic": 63.69,
+      "dlp": 75.15,
+      "mrp": 150.0
+    }
+  },
+  "LG PVC RB 20ML AUTOCART": {
+    "1*200*20 ML": {
+      "basic": 7.48,
+      "dlp": 8.83,
+      "mrp": 15.0
+    }
+  },
+  "LG PVC RB 50ML TUBE": {
+    "1*200*50 ML": {
+      "basic": 15.61,
+      "dlp": 18.42,
+      "mrp": 35.0
+    }
+  },
+  "LG UPVC CLEAR 100ML TI": {
+    "1*48*100 ML": {
+      "basic": 61.5,
+      "dlp": 72.57,
+      "mrp": 150.0
+    }
+  },
+  "LG UPVC CLEAR 50ML": {
+    "1*100*50 ML": {
+      "basic": 47.08,
+      "dlp": 55.55,
+      "mrp": 100.0
+    }
+  },
+  "LG UPVC RES CLEAR 7ML TU": {
+    "1*192*7 ML": {
+      "basic": 6.05,
+      "dlp": 7.14,
+      "mrp": 10.0
+    }
+  },
+  "LG UPVC RES CLEAR 50ML T": {
+    "1*300*50 ML": {
+      "basic": 30.85,
+      "dlp": 36.4,
+      "mrp": 50.0
+    }
+  },
+  "LG UPVC RES CLEAR 30ML TU": {
+    "1*300*30 ML": {
+      "basic": 25.51,
+      "dlp": 30.1,
+      "mrp": 45.0
+    }
+  },
+  "LG UPVC CLEAR 250ML TI": {
+    "1*36*250 ML": {
+      "basic": 122.9,
+      "dlp": 145.02,
+      "mrp": 290.0
+    }
+  },
+  "LG UPVC 20ML INNER": {
+    "1*200*20 ML": {
+      "basic": 12.12,
+      "dlp": 14.3,
+      "mrp": 20.0
+    }
+  },
+  "LG UPVC 500ML TIN": {
+    "1*12*500 ML": {
+      "basic": 289.35,
+      "dlp": 341.43,
+      "mrp": 530.0
+    }
+  },
+  "LG UPVC 100ML TIN": {
+    "1*48*100 ML": {
+      "basic": 65.97,
+      "dlp": 77.84,
+      "mrp": 150.0
+    }
+  },
+  "LKG UPVC 30 ML TUBE": {
+    "1*300*30 ML": {
+      "basic": 25.51,
+      "dlp": 30.1,
+      "mrp": 45.0
+    }
+  },
+  "LG UPVC 50ML TIN": {
+    "1*100*50 ML": {
+      "basic": 49.43,
+      "dlp": 58.33,
+      "mrp": 105.0
+    }
+  },
+  "LG UPVC 250ML TIN": {
+    "1*36*250 ML": {
+      "basic": 125.42,
+      "dlp": 148.0,
+      "mrp": 270.0
+    }
+  },
+  "LG UPVC BLU 500ML CX": {
+    "1*12*500 ML": {
+      "basic": 289.32,
+      "dlp": 341.4,
+      "mrp": 530.0
+    }
+  },
+  "CLEANER 400GM": {
+    "1*20*400 GM": {
+      "basic": 204.75,
+      "dlp": 241.61,
+      "mrp": 360.0
+    }
+  },
+  "MOTOMAX2K RUBCOMPOUND200G": {
+    "1*50*200 GM": {
+      "basic": 78.1,
+      "dlp": 92.16,
+      "mrp": 170.0
+    }
+  },
+  "MOTOMAX2K RUBCOMPOUND100G": {
+    "1*100*100 GM": {
+      "basic": 45.94,
+      "dlp": 54.21,
+      "mrp": 100.0
+    }
+  },
+  "MOTOMAX AC VENT DIS CLNR": {
+    "1*12*1 NO": {
+      "basic": 336.58,
+      "dlp": 397.16,
+      "mrp": 630.0
+    }
+  },
+  "LIQUID POLISH 50ML": {
+    "1*100*50 ML": {
+      "basic": 23.59,
+      "dlp": 27.84,
+      "mrp": 50.0
+    }
+  },
+  "MM BIKE POLISH 20 ML": {
+    "1*180*20 ML (SPOUT PACK)": {
+      "basic": 12.11,
+      "dlp": 14.29,
+      "mrp": 20.0
+    }
+  },
+  "LIQUID POLISH 100ML": {
+    "1*50*100 ML": {
+      "basic": 41.34,
+      "dlp": 48.78,
+      "mrp": 90.0
+    }
+  },
+  "MM BRAKE PARTS CLEANER": {
+    "1*12*1 NO": {
+      "basic": 294.36,
+      "dlp": 347.34,
+      "mrp": 600.0
+    }
+  },
+  "MM CAR BK SHAMP 10 ML-PCH": {
+    "1*400*10 ML": {
+      "basic": 4.62,
+      "dlp": 5.45,
+      "mrp": 10.0
+    }
+  },
+  "SHAMPOO 500ML": {
+    "1*10*500 ML": {
+      "basic": 183.76,
+      "dlp": 216.84,
+      "mrp": 400.0
+    }
+  },
+  "SHAMPOO 100ML 1X50": {
+    "1*50*100 ML": {
+      "basic": 45.94,
+      "dlp": 54.21,
+      "mrp": 100.0
+    }
+  },
+  "MX SHAMPOO POUCH": {
+    "1*400*10 ML": {
+      "basic": 3.08,
+      "dlp": 3.63,
+      "mrp": 5.0
+    }
+  },
+  "CHAIN LUBE 100ML": {
+    "1*50*100 ML": {
+      "basic": 82.52,
+      "dlp": 97.37,
+      "mrp": 170.0
+    }
+  },
+  "CHAIN LUBE 200ML": {
+    "1*25*200 ML": {
+      "basic": 147.19,
+      "dlp": 173.68,
+      "mrp": 300.0
+    }
+  },
+  "CHAIN LUBE 400ML": {
+    "1*24*400 ML": {
+      "basic": 231.93,
+      "dlp": 273.68,
+      "mrp": 475.0
+    }
+  },
+  "CREAM POLISH I 230GM": {
+    "1*12*230 GM": {
+      "basic": 192.49,
+      "dlp": 227.14,
+      "mrp": 430.0
+    }
+  },
+  "CREAM POLISH R 60GM": {
+    "1*48*60 GM": {
+      "basic": 67.15,
+      "dlp": 79.24,
+      "mrp": 150.0
+    }
+  },
+  "MOTOMAX DASH POLISH 400ML": {
+    "1*20*400 ML": {
+      "basic": 349.17,
+      "dlp": 412.02,
+      "mrp": 600.0
+    }
+  },
+  "DASHBOARD POLISH 100ML": {
+    "1*50*100 ML": {
+      "basic": 112.13,
+      "dlp": 132.31,
+      "mrp": 200.0
+    }
+  },
+  "DASHBOARD POLISH 50ML": {
+    "1*50*50 ML": {
+      "basic": 62.29,
+      "dlp": 73.5,
+      "mrp": 120.0
+    }
+  },
+  "DASHBOARD-VNYL POLISH10ML": {
+    "1*400*10 ML": {
+      "basic": 6.72,
+      "dlp": 7.93,
+      "mrp": 20.0
+    }
+  },
+  "GLASS CLEANER 200ML": {
+    "1*48*200 ML": {
+      "basic": 137.06,
+      "dlp": 161.73,
+      "mrp": 250.0
+    }
+  },
+  "MX GLASS CLEAN": {
+    "1*50*100 GM": {
+      "basic": 60.76,
+      "dlp": 71.7,
+      "mrp": 100.0
+    }
+  },
+  "GLOVE": {
+    "1*96*KIT": {
+      "basic": 170.63,
+      "dlp": 201.34,
+      "mrp": 300.0
+    }
+  },
+  "HELMET CLEANER 200ML": {
+    "1*48*200 ML": {
+      "basic": 142.06,
+      "dlp": 167.63,
+      "mrp": 260.0
+    }
+  },
+  "ADVANCED MOTOMAX INSTASHINE POUCH": {
+    "1*80*1 NO": {
+      "basic": 13.08,
+      "dlp": 15.43,
+      "mrp": 30.0
+    }
+  },
+  "PROTECTANT SPRAY 200ML": {
+    "1*24*200 ML": {
+      "basic": 118.59,
+      "dlp": 139.94,
+      "mrp": 250.0
+    }
+  },
+  "PROTECTANT SPRAY 100ML": {
+    "1*48*100 ML": {
+      "basic": 71.16,
+      "dlp": 83.97,
+      "mrp": 150.0
+    }
+  },
+  "MM RAT REPELLENT COATING": {
+    "1*24*100 ML": {
+      "basic": 111.86,
+      "dlp": 131.99,
+      "mrp": 300.0
+    }
+  },
+  "SHINER POLISH 100ML": {
+    "1*48*100 GM": {
+      "basic": 77.59,
+      "dlp": 91.56,
+      "mrp": 160.0
+    }
+  },
+  "DOUBLE SIDED SPONGE 30GM": {
+    "1*72*KIT": {
+      "basic": 102.38,
+      "dlp": 120.81,
+      "mrp": 180.0
+    }
+  },
+  "MM THROTTLE BDY CARB CLNR": {
+    "1*50*1 NO": {
+      "basic": 72.3,
+      "dlp": 85.31,
+      "mrp": 160.0
+    }
+  },
+  "INSTASHINE 4IN1 ZIPPERPCK": {
+    "1*16*1 NO": {
+      "basic": 44.26,
+      "dlp": 52.23,
+      "mrp": 75.0
+    }
+  },
+  "INSTASHINE POLISH 1U": {
+    "1*80*1 NO": {
+      "basic": 12.32,
+      "dlp": 14.54,
+      "mrp": 20.0
+    }
+  },
+  "UPHOLSTER CLEANER 200ML": {
+    "1*48*200 ML": {
+      "basic": 142.91,
+      "dlp": 168.63,
+      "mrp": 270.0
+    }
+  },
+  "M-SEAL BLACK RTV [25 G]": {
+    "1*200*25 GM": {
+      "basic": 26.9,
+      "dlp": 31.74,
+      "mrp": 60.0
+    }
+  },
+  "M-SEAL BLACK RTV [85 GM]": {
+    "1*144*85 GM": {
+      "basic": 74.0,
+      "dlp": 87.32,
+      "mrp": 165.0
+    }
+  },
+  "M-SEAL CLR RTV25G WITH TK": {
+    "1*200*25 GM": {
+      "basic": 26.92,
+      "dlp": 31.77,
+      "mrp": 60.0
+    }
+  },
+  "CLR RTV SIL 15GM": {
+    "1*200*15 GM": {
+      "basic": 17.95,
+      "dlp": 21.18,
+      "mrp": 40.0
+    }
+  },
+  "CLR RTV AUTOINHOUSE 15GM": {
+    "1*200*15 GM": {
+      "basic": 17.95,
+      "dlp": 21.18,
+      "mrp": 40.0
+    }
+  },
+  "CLR RTV SIL 25GM": {
+    "1*200*25 GM": {
+      "basic": 26.92,
+      "dlp": 31.77,
+      "mrp": 60.0
+    }
+  },
+  "M-SEAL CLEAR RTV [10 GM]": {
+    "1*200*10 GM": {
+      "basic": 13.5,
+      "dlp": 15.93,
+      "mrp": 30.0
+    }
+  },
+  "CLR RTV AUTOINHOUSE 4GM": {
+    "1*360*4 GM": {
+      "basic": 7.38,
+      "dlp": 8.71,
+      "mrp": 15.0
+    }
+  },
+  "CLR RTV AUTOINHOUSE 25GM": {
+    "1*200*25 GM": {
+      "basic": 26.92,
+      "dlp": 31.77,
+      "mrp": 60.0
+    }
+  },
+  "CLR RTV AUTOINHOUSE 85GM": {
+    "1*144*85 GM": {
+      "basic": 73.97,
+      "dlp": 87.28,
+      "mrp": 165.0
+    }
+  },
+  "EZYSEAL 40GM": {
+    "1*120*40 GM": {
+      "basic": 29.23,
+      "dlp": 34.49,
+      "mrp": 40.0
+    }
+  },
+  "EZYSEAL 50GM": {
+    "1*72*85 GM": {
+      "basic": 51.07,
+      "dlp": 60.26,
+      "mrp": 70.0
+    }
+  },
+  "B&K WHITE 100 C": {
+    "1*100*100 GM": {
+      "basic": 36.0,
+      "dlp": 42.48,
+      "mrp": 60.0
+    }
+  },
+  "B&K WHITE 420 C": {
+    "1*24*420 GM": {
+      "basic": 85.0,
+      "dlp": 100.3,
+      "mrp": 250.0
+    }
+  },
+  "M-SEAL GREY RTV 25 GM - INNER PACK": {
+    "1*200*25 GM": {
+      "basic": 26.92,
+      "dlp": 31.77,
+      "mrp": 60.0
+    }
+  },
+  "M-SEAL GREY RTV [10 GM]": {
+    "1*200*10 GM": {
+      "basic": 13.5,
+      "dlp": 15.93,
+      "mrp": 30.0
+    }
+  },
+  "GREY RTV 85GM INHOUSE": {
+    "1*72*85 GM": {
+      "basic": 74.0,
+      "dlp": 87.32,
+      "mrp": 165.0
+    }
+  },
+  "GREY RTV 25GM DANGLR PCK": {
+    "1*200*25 GM": {
+      "basic": 26.9,
+      "dlp": 31.74,
+      "mrp": 60.0
+    }
+  },
+  "M-SEAL GREY RTV [25 GM]": {
+    "1*100*25 GM": {
+      "basic": 20.91,
+      "dlp": 24.67,
+      "mrp": 50.0
+    }
+  },
+  "M-SEAL MARINE": {
+    "1*150*1 NO": {
+      "basic": 21.55,
+      "dlp": 25.43,
+      "mrp": 30.0
+    }
+  },
+  "MSEAL PP 25GM 42PCS SQJAR": {
+    "1*336*25 GM": {
+      "basic": 6.89,
+      "dlp": 8.13,
+      "mrp": 10.0
+    }
+  },
+  "PHATAPHAT NP 90 GM": {
+    "1*150*90 GM": {
+      "basic": 20.28,
+      "dlp": 23.93,
+      "mrp": 30.0
+    }
+  },
+  "PHATAPHAT25GM JAR63+2XTRA": {
+    "1*390*25 GM": {
+      "basic": 6.89,
+      "dlp": 8.13,
+      "mrp": 10.0
+    }
+  },
+  "PHATAPHAT 1KG": {
+    "1*20*1 KG": {
+      "basic": 213.59,
+      "dlp": 252.04,
+      "mrp": 300.0
+    }
+  },
+  "PHATAPHAT90GM-31PCS JARPA": {
+    "1*186*90 GM": {
+      "basic": 20.28,
+      "dlp": 23.93,
+      "mrp": 30.0
+    }
+  },
+  "PHATAPHAT 25GM": {
+    "1*400*25 GM": {
+      "basic": 6.89,
+      "dlp": 8.13,
+      "mrp": 10.0
+    }
+  },
+  "PHATAPHAT 12GM 65 NOS JAR": {
+    "1*520*12 GM": {
+      "basic": 3.52,
+      "dlp": 4.15,
+      "mrp": 5.0
+    }
+  },
+  "PHATAPHAT 25GM JAR 40NOS": {
+    "1*320*25 GM": {
+      "basic": 6.89,
+      "dlp": 8.13,
+      "mrp": 10.0
+    }
+  },
+  "PHATAPHAT 10GM P": {
+    "1*400*10 GM (P)": {
+      "basic": 3.45,
+      "dlp": 4.07,
+      "mrp": 5.0
+    }
+  },
+  "PHATAPHAT 60GM JAR 41 PCS": {
+    "1*246*60 GM": {
+      "basic": 14.07,
+      "dlp": 16.6,
+      "mrp": 20.0
+    }
+  },
+  "PIPE PUTTY 25GMX12NOS": {
+    "1*384*25 GM": {
+      "basic": 10.34,
+      "dlp": 12.2,
+      "mrp": 15.0
+    }
+  },
+  "PIPE SEALANT WHITE 40GM": {
+    "1*200*40 GM": {
+      "basic": 16.3,
+      "dlp": 19.23,
+      "mrp": 25.0
+    }
+  },
+  "PIPE SEALANT WHITE 500GM": {
+    "1*30*500 GM": {
+      "basic": 123.82,
+      "dlp": 146.11,
+      "mrp": 190.0
+    }
+  },
+  "PIPE SEALANT WHITE 20GM": {
+    "1*300*20 GM": {
+      "basic": 7.81,
+      "dlp": 9.22,
+      "mrp": 15.0
+    }
+  },
+  "PIPE SEALANT WHITE 200GM": {
+    "1*50*200 GM": {
+      "basic": 58.68,
+      "dlp": 69.24,
+      "mrp": 90.0
+    }
+  },
+  "PIPE SEALANT WHITE 100GM": {
+    "1*100*100 GM": {
+      "basic": 39.11,
+      "dlp": 46.15,
+      "mrp": 60.0
+    }
+  },
+  "PTFE TAPE YELLOW 12MMX10M": {
+    "1*1000*12 MM X 10 METER": {
+      "basic": 14.0,
+      "dlp": 16.52,
+      "mrp": 30.0
+    }
+  },
+  "PTFE 5M POUCH": {
+    "1*500*12 MM X 5 METER (PP)": {
+      "basic": 6.5,
+      "dlp": 7.67,
+      "mrp": 10.0
+    }
+  },
+  "PTFE TAPE WHT12MMX12M 1NO": {
+    "1*1000*12 MM X 12 METER": {
+      "basic": 12.06,
+      "dlp": 14.23,
+      "mrp": 30.0
+    }
+  },
+  "PTFE 8 M": {
+    "1*1000*12 MM X 8 METER": {
+      "basic": 11.71,
+      "dlp": 13.82,
+      "mrp": 20.0
+    }
+  },
+  "PTFE TAPE WHITE 12MMX8M": {
+    "1*1000*12 MM X 8 METER": {
+      "basic": 10.17,
+      "dlp": 12.0,
+      "mrp": 25.0
+    }
+  },
+  "M-SEAL PTFE THRD SEL TAP-19MMx10M-1NO": {
+    "1*600*19 MM X 10 METER": {
+      "basic": 21.85,
+      "dlp": 25.78,
+      "mrp": 35.0
+    }
+  },
+  "PTFE 10M": {
+    "1*1000*12 MM X 10 METER": {
+      "basic": 11.71,
+      "dlp": 13.82,
+      "mrp": 20.0
+    }
+  },
+  "PTFE TAPE 12MMX4M": {
+    "1*480*12 MM X 4 METER": {
+      "basic": 5.94,
+      "dlp": 7.01,
+      "mrp": 12.0
+    }
+  },
+  "PTFE TAPE WHITE12MMX8M EI": {
+    "1*400*12 MM X 8 METER": {
+      "basic": 10.17,
+      "dlp": 12.0,
+      "mrp": 25.0
+    }
+  },
+  "CPVC 100ML AW TUFKLN4ML": {
+    "1*48*100 ML": {
+      "basic": 101.7,
+      "dlp": 120.01,
+      "mrp": 210.0
+    }
+  },
+  "CPVC 50ML": {
+    "1*200*50 ML": {
+      "basic": 43.64,
+      "dlp": 51.5,
+      "mrp": 85.0
+    }
+  },
+  "CPVC 500ML NP": {
+    "1*12*500 ML": {
+      "basic": 374.14,
+      "dlp": 441.49,
+      "mrp": 750.0
+    }
+  },
+  "CPVC 10ML": {
+    "1*300*10 ML": {
+      "basic": 10.27,
+      "dlp": 12.12,
+      "mrp": 20.0
+    }
+  },
+  "CPVC 50ML COEX": {
+    "1*96*50 ML": {
+      "basic": 70.14,
+      "dlp": 82.77,
+      "mrp": 145.0
+    }
+  },
+  "CPVC 500ML AW TUFKLN4ML": {
+    "1*12*500 ML": {
+      "basic": 349.2,
+      "dlp": 412.06,
+      "mrp": 700.0
+    }
+  },
+  "CPVC 100ML NP": {
+    "1*48*100 ML": {
+      "basic": 108.96,
+      "dlp": 128.57,
+      "mrp": 225.0
+    }
+  },
+  "CPVC 250ML AW TUFKLN4ML": {
+    "1*36*250 ML": {
+      "basic": 209.3,
+      "dlp": 246.97,
+      "mrp": 420.0
+    }
+  },
+  "CPVC 20ML": {
+    "1*200*20 ML": {
+      "basic": 20.54,
+      "dlp": 24.24,
+      "mrp": 40.0
+    }
+  },
+  "CPVC 250ML NP": {
+    "1*36*250 ML": {
+      "basic": 224.25,
+      "dlp": 264.62,
+      "mrp": 450.0
+    }
+  },
+  "PVC HEAVYBODY 50ML": {
+    "1*200*50 ML": {
+      "basic": 17.34,
+      "dlp": 20.46,
+      "mrp": 35.0
+    }
+  },
+  "PVC HEAVYBODY 15ML": {
+    "1*200*15 ML": {
+      "basic": 9.39,
+      "dlp": 11.08,
+      "mrp": 20.0
+    }
+  },
+  "HEAVY BODY 100 ML TIN": {
+    "1*48*200 ML": {
+      "basic": 43.83,
+      "dlp": 51.72,
+      "mrp": 75.0
+    }
+  },
+  "HEAVY BODY 200 ML TIN": {
+    "1*50*200 ML": {
+      "basic": 76.28,
+      "dlp": 90.01,
+      "mrp": 150.0
+    }
+  },
+  "HEAVY BODY 500 ML TIN": {
+    "1*12*500 ML": {
+      "basic": 116.85,
+      "dlp": 137.88,
+      "mrp": 250.0
+    }
+  },
+  "HEAVY BODY 1 LT TIN": {
+    "1*6*1 LT": {
+      "basic": 195.73,
+      "dlp": 230.96,
+      "mrp": 380.0
+    }
+  },
+  "PVC HEAVYBODY 250ML C": {
+    "1*36*250 ML": {
+      "basic": 93.45,
+      "dlp": 110.27,
+      "mrp": 200.0
+    }
+  },
+  "PVC HEAVYBODY 1LT CX": {
+    "1*6*1 LT": {
+      "basic": 307.94,
+      "dlp": 363.37,
+      "mrp": 600.0
+    }
+  },
+  "PVC HEAVYBODY 500ML C": {
+    "1*12*500 ML": {
+      "basic": 183.77,
+      "dlp": 216.85,
+      "mrp": 335.0
+    }
+  },
+  "PVC HEAVYBODY 100ML": {
+    "1*100*100 ML": {
+      "basic": 29.91,
+      "dlp": 35.29,
+      "mrp": 60.0
+    }
+  },
+  "PVC REGULARBODY 200ML TIN": {
+    "1*50*200 ML": {
+      "basic": 65.59,
+      "dlp": 77.4,
+      "mrp": 150.0
+    }
+  },
+  "PVC REGULARBODY 1LT CX": {
+    "1*6*1 LT": {
+      "basic": 261.23,
+      "dlp": 308.25,
+      "mrp": 585.0
+    }
+  },
+  "PVC REGULARBODY 250ML C": {
+    "1*36*250 ML": {
+      "basic": 83.6,
+      "dlp": 98.65,
+      "mrp": 190.0
+    }
+  },
+  "PVC REGULARBODY 500ML C": {
+    "1*12*500 ML": {
+      "basic": 152.55,
+      "dlp": 180.01,
+      "mrp": 315.0
+    }
+  },
+  "SOLVENT CEMENT 100 ML": {
+    "1*100*100 ML": {
+      "basic": 19.73,
+      "dlp": 23.28,
+      "mrp": 35.0
+    }
+  },
+  "REGULAR BODY 100 ML TIN": {
+    "1*48*100 ML": {
+      "basic": 34.9,
+      "dlp": 41.18,
+      "mrp": 70.0
+    }
+  },
+  "PVC REGULARBODY 1LT": {
+    "1*12*1 LT": {
+      "basic": 241.87,
+      "dlp": 285.41,
+      "mrp": 550.0
+    }
+  },
+  "PVC REGULARBODY 100ML C": {
+    "1*48*100 ML": {
+      "basic": 47.82,
+      "dlp": 56.43,
+      "mrp": 110.0
+    }
+  },
+  "PVC REGULARBODY 100ML": {
+    "1*50*100 ML": {
+      "basic": 37.26,
+      "dlp": 43.97,
+      "mrp": 90.0
+    }
+  },
+  "PVC REGULARBODY 1LT TIN": {
+    "1*6*1 LT": {
+      "basic": 227.97,
+      "dlp": 269.0,
+      "mrp": 470.0
+    }
+  },
+  "REGULAR BODY 50 ML TIN": {
+    "1*100*50 ML": {
+      "basic": 26.44,
+      "dlp": 31.2,
+      "mrp": 50.0
+    }
+  },
+  "PVC REGULARBODY 50ML NP": {
+    "1*200*50 ML": {
+      "basic": 16.48,
+      "dlp": 19.45,
+      "mrp": 35.0
+    }
+  },
+  "PVC REGULARBODY 200ML": {
+    "1*25*200 ML": {
+      "basic": 66.1,
+      "dlp": 78.0,
+      "mrp": 170.0
+    }
+  },
+  "PVC REGULARBODY 500ML": {
+    "1*12*500 ML": {
+      "basic": 118.31,
+      "dlp": 139.61,
+      "mrp": 300.0
+    }
+  },
+  "PVC REGULARBODY 5LT": {
+    "1*2*5 LT": {
+      "basic": 1074.16,
+      "dlp": 1267.51,
+      "mrp": 2480.0
+    }
+  },
+  "PVC REGULARBODY 20ML NP": {
+    "1*200*20 ML": {
+      "basic": 7.48,
+      "dlp": 8.83,
+      "mrp": 15.0
+    }
+  },
+  "PVC REGULARBODY 50ML CX": {
+    "1*96*50 ML": {
+      "basic": 35.75,
+      "dlp": 42.19,
+      "mrp": 85.0
+    }
+  },
+  "SOLVENT CEMENT 500 ML": {
+    "1*12*500 ML": {
+      "basic": 72.86,
+      "dlp": 85.97,
+      "mrp": 125.0
+    }
+  },
+  "UPVC CLEAR 250ML": {
+    "1*36*250 ML": {
+      "basic": 151.96,
+      "dlp": 179.31,
+      "mrp": 310.0
+    }
+  },
+  "UPVC MB CLEAR 50ML CX": {
+    "1*96*50 ML": {
+      "basic": 55.69,
+      "dlp": 65.71,
+      "mrp": 115.0
+    }
+  },
+  "UPVC CLEAR 500ML": {
+    "1*12*500 ML": {
+      "basic": 321.99,
+      "dlp": 379.95,
+      "mrp": 570.0
+    }
+  },
+  "UPVC MB CLEAR 500ML CX": {
+    "1*12*500 ML": {
+      "basic": 324.82,
+      "dlp": 383.29,
+      "mrp": 575.0
+    }
+  },
+  "UPVC CLEAR 100ML": {
+    "1*48*100 ML": {
+      "basic": 83.53,
+      "dlp": 98.57,
+      "mrp": 170.0
+    }
+  },
+  "UPVC MB CLEAR 250ML CX": {
+    "1*36*250 ML": {
+      "basic": 156.86,
+      "dlp": 185.09,
+      "mrp": 320.0
+    }
+  },
+  "UPVC CLEAR 50ML": {
+    "1*96*50 ML": {
+      "basic": 53.13,
+      "dlp": 62.69,
+      "mrp": 110.0
+    }
+  },
+  "UPVC CLEAR 7ML": {
+    "1*192*7 ML": {
+      "basic": 6.05,
+      "dlp": 7.14,
+      "mrp": 10.0
+    }
+  },
+  "UPVC MB CLEAR 100ML CX": {
+    "1*48*100 ML": {
+      "basic": 85.98,
+      "dlp": 101.46,
+      "mrp": 175.0
+    }
+  },
+  "UPVC BLUE 250ML": {
+    "1*36*250 ML": {
+      "basic": 161.76,
+      "dlp": 190.88,
+      "mrp": 330.0
+    }
+  },
+  "UPVC BLUE 50ML": {
+    "1*100*50 ML": {
+      "basic": 33.84,
+      "dlp": 39.93,
+      "mrp": 60.0
+    },
+    "1*96*50 ML": {
+      "basic": 57.96,
+      "dlp": 68.39,
+      "mrp": 120.0
+    }
+  },
+  "UPVC BLUE 20ML": {
+    "1*200*20 ML": {
+      "basic": 12.12,
+      "dlp": 14.3,
+      "mrp": 20.0
+    }
+  },
+  "UPVC BLUE 100ML": {
+    "1*48*100 ML": {
+      "basic": 90.9,
+      "dlp": 107.26,
+      "mrp": 185.0
+    }
+  },
+  "UPVC BLUE 500ML": {
+    "1*12*500 ML": {
+      "basic": 333.29,
+      "dlp": 393.28,
+      "mrp": 590.0
+    }
+  },
+  "RED RTV GASKET MAKER 25GM": {
+    "1*200*25 GM": {
+      "basic": 26.92,
+      "dlp": 31.77,
+      "mrp": 60.0
+    }
+  },
+  "RED RTV 15GM DANGLER PACK": {
+    "1*200*15 GM": {
+      "basic": 17.9,
+      "dlp": 21.12,
+      "mrp": 40.0
+    }
+  },
+  "RED RTV GASKET 25GM": {
+    "1*120*25 GM": {
+      "basic": 21.36,
+      "dlp": 25.2,
+      "mrp": 45.0
+    }
+  },
+  "RED RTV GASKET MAKER 15GM": {
+    "1*200*15 GM": {
+      "basic": 17.95,
+      "dlp": 21.18,
+      "mrp": 40.0
+    }
+  },
+  "M-SEAL RTV RED25 GM DNGLR": {
+    "1*200*25 GM": {
+      "basic": 26.9,
+      "dlp": 31.74,
+      "mrp": 60.0
+    }
+  },
+  "M-SEAL PIDIBOND RED RTV SEALANT[32GM]": {
+    "1*120*32 GM": {
+      "basic": 30.86,
+      "dlp": 36.41,
+      "mrp": 65.0
+    }
+  },
+  "M-SEAL RED RTV [10 GM]": {
+    "1*200*10 GM": {
+      "basic": 13.5,
+      "dlp": 15.93,
+      "mrp": 30.0
+    }
+  },
+  "M-SEAL RED RTV 85GM NEW F": {
+    "1*144*85 GM": {
+      "basic": 74.0,
+      "dlp": 87.32,
+      "mrp": 165.0
+    }
+  },
+  "MSEAL REG EPX COMPD 75GM": {
+    "1*144*75 GM": {
+      "basic": 17.76,
+      "dlp": 20.96,
+      "mrp": 25.0
+    }
+  },
+  "MSEAL REG EPX COMPD 40GM": {
+    "1*400*40 GM": {
+      "basic": 10.66,
+      "dlp": 12.58,
+      "mrp": 15.0
+    }
+  },
+  "M-SEAL REG EPX COMPD. [75GM] (IN PC JAR)": {
+    "1*144*75 GM": {
+      "basic": 16.58,
+      "dlp": 19.56,
+      "mrp": 25.0
+    }
+  },
+  "M-seal GP Jar 41 pcs": {
+    "1*246*60 GM": {
+      "basic": 14.2,
+      "dlp": 16.76,
+      "mrp": 20.0
+    }
+  },
+  "GP 90GM JAR 31 PCS": {
+    "1*186*90 GM": {
+      "basic": 21.3,
+      "dlp": 25.13,
+      "mrp": 30.0
+    }
+  },
+  "MSEAL REG EPX COMPD 60GM": {
+    "1*320*60 GM": {
+      "basic": 14.2,
+      "dlp": 16.76,
+      "mrp": 20.0
+    }
+  },
+  "GP 90GM SMALL PACK": {
+    "1*150*90 GM": {
+      "basic": 21.3,
+      "dlp": 25.13,
+      "mrp": 30.0
+    }
+  },
+  "REG EPX COMPD 4KG": {
+    "1*4*4 KG": {
+      "basic": 817.52,
+      "dlp": 964.67,
+      "mrp": 1150.0
+    }
+  },
+  "REG EPX COMPD 250GM": {
+    "1*80*250 GM": {
+      "basic": 64.1,
+      "dlp": 75.64,
+      "mrp": 90.0
+    }
+  },
+  "REG EPX COMPD 1KG": {
+    "1*20*1 KG": {
+      "basic": 220.71,
+      "dlp": 260.44,
+      "mrp": 310.0
+    }
+  },
+  "SANITARY WHITE 200GM": {
+    "1*40*200 GM": {
+      "basic": 53.28,
+      "dlp": 62.87,
+      "mrp": 75.0
+    }
+  },
+  "SANITARY WHITE 50GM DANGL": {
+    "1*400*50 GM (DP)": {
+      "basic": 14.2,
+      "dlp": 16.76,
+      "mrp": 20.0
+    }
+  },
+  "ACETOXY-280ML-BLK-HTP": {
+    "1*24*280 ML": {
+      "basic": 115.0,
+      "dlp": 135.7,
+      "mrp": 325.0
+    }
+  },
+  "ACETOXY -280ML-CLR-HTP": {
+    "1*24*280 ML": {
+      "basic": 115.0,
+      "dlp": 135.7,
+      "mrp": 325.0
+    }
+  },
+  "ACETOXY -280ML-WHT-HTP": {
+    "1*24*280 ML": {
+      "basic": 115.0,
+      "dlp": 135.7,
+      "mrp": 275.0
+    }
+  },
+  "SUPER EPX PUTTY 10 GM": {
+    "1*540*10 GM": {
+      "basic": 3.55,
+      "dlp": 4.19,
+      "mrp": 5.0
+    }
+  },
+  "MSEAL SUPER 40GM": {
+    "1*200*40 GM": {
+      "basic": 12.82,
+      "dlp": 15.13,
+      "mrp": 20.0
+    }
+  },
+  "SUPER EPX PUTTY 20 GM": {
+    "1*288*20 GM": {
+      "basic": 7.11,
+      "dlp": 8.39,
+      "mrp": 10.0
+    }
+  },
+  "M SEAL SUPER PP": {
+    "1*320*20 GM": {
+      "basic": 6.89,
+      "dlp": 8.13,
+      "mrp": 10.0
+    }
+  },
+  "M-SEAL ADVANCED SOL CEM 500 ML COEX": {
+    "1*12*500 ML": {
+      "basic": 490.9,
+      "dlp": 579.26,
+      "mrp": 950.0
+    }
+  },
+  "WHITE EPX COMPOUND 500GM": {
+    "1*36*500 GM": {
+      "basic": 101.83,
+      "dlp": 120.16,
+      "mrp": 155.0
+    }
+  },
+  "RUSTOLENE 500ML": {
+    "1*20*500 ML": {
+      "basic": 117.0,
+      "dlp": 138.06,
+      "mrp": 187.0
+    }
+  },
+  "RUSTOLENE 5LT HRCT": {
+    "1*4*5 LT": {
+      "basic": 1015.0,
+      "dlp": 1197.7,
+      "mrp": 1540.0
+    }
+  },
+  "RUSTOLENE 1LT": {
+    "1*10*1 LT": {
+      "basic": 207.0,
+      "dlp": 244.26,
+      "mrp": 330.0
+    }
+  },
+  "STEELGRIP 6M YEL": {
+    "1*480*1.70 CM X 6.00 M X0.125MM": {
+      "basic": 7.41,
+      "dlp": 8.74,
+      "mrp": 15.0
+    }
+  },
+  "STEELGRIP 20M RED": {
+    "1*240*1.80CM X20MX0.0.125 MM": {
+      "basic": 23.73,
+      "dlp": 28.0,
+      "mrp": 35.0
+    }
+  },
+  "STEELGRIP 20M BLU": {
+    "1*240*1.80CM X20MX0.0.125 MM": {
+      "basic": 23.73,
+      "dlp": 28.0,
+      "mrp": 35.0
+    }
+  },
+  "STEELGRIP 6M BLU": {
+    "1*480*1.70 CM X 6.00 M X0.125MM": {
+      "basic": 7.41,
+      "dlp": 8.74,
+      "mrp": 15.0
+    }
+  },
+  "STEELGRIP+SAUSGE 6M BLU": {
+    "1*500*17MMX 6M": {
+      "basic": 7.41,
+      "dlp": 8.74,
+      "mrp": 15.0
+    }
+  },
+  "STEELGRIP SUPER 18MM X 7M X 0.125-YELL": {
+    "1*480*18MM X 7M X 0.125": {
+      "basic": 7.08,
+      "dlp": 8.35,
+      "mrp": 15.0
+    }
+  },
+  "STEELGRIP 6M WHITE": {
+    "1*480*1 NO": {
+      "basic": 7.41,
+      "dlp": 8.74,
+      "mrp": 15.0
+    }
+  },
+  "STEELGRIP 2.5M RED": {
+    "1*480*1.7CMX 2.5MX0.125M M": {
+      "basic": 4.13,
+      "dlp": 4.87,
+      "mrp": 6.0
+    }
+  },
+  "STEELGRIP 20M GRN": {
+    "1*240*1.80CM X20MX0.0.125 MM": {
+      "basic": 23.73,
+      "dlp": 28.0,
+      "mrp": 35.0
+    }
+  },
+  "STEELGRIP+SAUSGE 6M RED": {
+    "1*500*17MMX 6M": {
+      "basic": 7.41,
+      "dlp": 8.74,
+      "mrp": 15.0
+    }
+  },
+  "STEELGRIP+SAUSGE 6M BLACK": {
+    "1*500*17MMX 6M": {
+      "basic": 7.41,
+      "dlp": 8.74,
+      "mrp": 15.0
+    }
+  },
+  "STEELGRIP+SAUSGE 6M YEL": {
+    "1*500*17MMX 6M": {
+      "basic": 7.41,
+      "dlp": 8.74,
+      "mrp": 15.0
+    }
+  },
+  "STEELGRIP 2.5M BLK": {
+    "1*480*1.7CMX 2.5MX0.125M M": {
+      "basic": 4.13,
+      "dlp": 4.87,
+      "mrp": 6.0
+    }
+  },
+  "STEELGRIP+SAUSGE 6M GRN": {
+    "1*500*17MMX 6M": {
+      "basic": 7.41,
+      "dlp": 8.74,
+      "mrp": 15.0
+    }
+  },
+  "STEELGRIP WHITE 6.5M": {
+    "1*480*1 NO": {
+      "basic": 6.78,
+      "dlp": 8.0,
+      "mrp": 12.0
+    }
+  },
+  "M-SEAL ADVANCED SOL CEM 100 ML COEX": {
+    "1*48*100 ML": {
+      "basic": 136.5,
+      "dlp": 161.07,
+      "mrp": 290.0
+    }
+  },
+  "M-SEAL ADVANCED SOL CEM 50 ML COEX": {
+    "1*96*50 ML": {
+      "basic": 84.7,
+      "dlp": 99.95,
+      "mrp": 180.0
+    }
+  },
+  "M-SEAL ADVANCED SOL CEM 250 ML COEX": {
+    "1*36*250 ML": {
+      "basic": 289.1,
+      "dlp": 341.14,
+      "mrp": 580.0
+    }
+  },
+  "STEELGRIP 20M BLK": {
+    "1*240*1.80CM X20MX0.0.125 MM": {
+      "basic": 23.73,
+      "dlp": 28.0,
+      "mrp": 35.0
+    }
+  },
+  "STEELGRIP 20M YLW": {
+    "1*240*1.80CM X20MX0.0.125 MM": {
+      "basic": 23.73,
+      "dlp": 28.0,
+      "mrp": 35.0
+    }
+  },
+  "STEELGRIP 6M BLK": {
+    "1*480*1.70 CM X 6.00 M X0.125MM": {
+      "basic": 7.41,
+      "dlp": 8.74,
+      "mrp": 15.0
+    }
+  },
+  "STEELGRIP 6M GRN": {
+    "1*480*1.70 CM X 6.00 M X0.125MM": {
+      "basic": 7.41,
+      "dlp": 8.74,
+      "mrp": 15.0
+    }
+  },
+  "STEELGRIP 6M RED": {
+    "1*480*1.70 CM X 6.00 M X0.125MM": {
+      "basic": 7.41,
+      "dlp": 8.74,
+      "mrp": 15.0
+    }
+  },
+  "STEELGRIP SUPER 18MM X 7M X 0.125-GREE": {
+    "1*480*18MM X 7M X 0.125": {
+      "basic": 7.08,
+      "dlp": 8.35,
+      "mrp": 15.0
+    }
+  },
+  "STEELGRIP 8M BLK": {
+    "1*500*1.25X8X 0.125": {
+      "basic": 6.53,
+      "dlp": 7.71,
+      "mrp": 10.0
+    }
+  },
+  "LEAKSEAL BUTYL 4\"*5M": {
+    "1*12*1 NO": {
+      "basic": 254.1,
+      "dlp": 299.84,
+      "mrp": 800.0
+    }
+  },
+  "LEAKSEAL BUTYL 2\"*5M": {
+    "1*24*1 NO": {
+      "basic": 127.05,
+      "dlp": 149.92,
+      "mrp": 400.0
+    }
+  },
+  "WD40 63.8GM BLISTER PACK": {
+    "1*48*63.8 GM": {
+      "basic": 92.7,
+      "dlp": 109.39,
+      "mrp": 140.0
+    }
+  },
+  "WD40 CHAIN LUBE 200ML": {
+    "1*12*170 GM": {
+      "basic": 308.3,
+      "dlp": 363.79,
+      "mrp": 485.0
+    }
+  },
+  "WD40 63.8GM": {
+    "1*96*63.8GM": {
+      "basic": 92.7,
+      "dlp": 109.39,
+      "mrp": 140.0
+    }
+  },
+  "WD40 420ML": {
+    "1*24*420 ML": {
+      "basic": 282.44,
+      "dlp": 333.28,
+      "mrp": 440.0
+    }
+  },
+  "WD 40 [400 ML]": {
+    "1*24*400 ML": {
+      "basic": 272.8,
+      "dlp": 321.9,
+      "mrp": 425.0
+    }
+  },
+  "WD40 32GM": {
+    "1*96*32 GM": {
+      "basic": 56.1,
+      "dlp": 66.2,
+      "mrp": 85.0
+    }
+  },
+  "WD40 170GM": {
+    "1*24*170 GM": {
+      "basic": 172.1,
+      "dlp": 203.08,
+      "mrp": 260.0
+    }
+  },
+  "WD40 5LT": {
+    "1*4*5 LT": {
+      "basic": 2527.5,
+      "dlp": 2982.45,
+      "mrp": 3400.0
+    }
+  },
+  "WD40 CLEANER 400ML": {
+    "1*12*400 ML": {
+      "basic": 337.03,
+      "dlp": 397.7,
+      "mrp": 525.0
+    }
+  },
+  "WD40 SMART STRAW 300ML": {
+    "1*12*300 ML": {
+      "basic": 324.96,
+      "dlp": 383.45,
+      "mrp": 510.0
+    }
+  },
+  "WD40 SMART STRAW 500ML": {
+    "1*12*500 ML": {
+      "basic": 432.97,
+      "dlp": 510.9,
+      "mrp": 700.0
+    }
+  },
+  "ZORRIK 311GM": {
+    "1*12*311 GM": {
+      "basic": 181.53,
+      "dlp": 214.21,
+      "mrp": 300.0
+    }
+  },
+  "ZORRIK 32GM": {
+    "1*50*32 GM": {
+      "basic": 48.4,
+      "dlp": 57.11,
+      "mrp": 80.0
+    }
+  },
+  "ZORRIK 60GM": {
+    "1*100*60 GM": {
+      "basic": 69.5,
+      "dlp": 82.01,
+      "mrp": 115.0
+    }
+  },
+  "ZORRIK 170GM": {
+    "1*30*170 GM": {
+      "basic": 130.11,
+      "dlp": 153.53,
+      "mrp": 215.0
+    }
+  }
+}

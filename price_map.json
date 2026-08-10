@@ -1,0 +1,226 @@
+{
+  "FEVICOL SH": {
+    "60 KG": { "basic": 11287.80, "dlp": 13319.60, "mrp": 16695 },
+    "50 KG": { "basic": 9756, "dlp": 11512.08, "mrp": 14780 },
+    "30 KG": { "basic": 5998.20, "dlp": 7077.88, "mrp": 9090 },
+    "20 KG": { "basic": 4131, "dlp": 4874.58, "mrp": 6240 },
+    "10 KG": { "basic": 2173.60, "dlp": 2564.85, "mrp": 3280 },
+    "5 KG": { "basic": 1132.30, "dlp": 1336.11, "mrp": 1705 },
+    "2 KG": { "basic": 471.26, "dlp": 556.09, "mrp": 725 },
+    "1 KG": { "basic": 246.69, "dlp": 291.09, "mrp": 395 },
+    "500 GM": { "basic": 132.61, "dlp": 156.48, "mrp": 215 },
+    "250 GM": { "basic": 74.09, "dlp": 87.43, "mrp": 120 },
+    "125 GM": { "basic": 39.53, "dlp": 46.65, "mrp": 70 },
+    "50 GM": { "basic": 20.74, "dlp": 24.47, "mrp": 40 }
+  },
+  "FEVICOL MARINE": {
+    "60 KG": { "basic": 14883.60, "dlp": 17562.65, "mrp": 21550 },
+    "50 KG": { "basic": 12553.50, "dlp": 14813.13, "mrp": 18265 },
+    "30 KG": { "basic": 7697.40, "dlp": 9082.93, "mrp": 11190 },
+    "20 KG": { "basic": 5222.40, "dlp": 6162.43, "mrp": 7615 },
+    "10 KG": { "basic": 2716.30, "dlp": 3205.23, "mrp": 3950 },
+    "5 KG": { "basic": 1404.00, "dlp": 1656.66, "mrp": 2060 },
+    "2 KG": { "basic": 588.02, "dlp": 693.86, "mrp": 865 },
+    "1 KG": { "basic": 306.08, "dlp": 361.17, "mrp": 465 },
+    "500 GM": { "basic": 163.63, "dlp": 193.08, "mrp": 255 }
+  },
+  "FEVICOL HI-PER": {
+    "60 KG": { "basic": 17454, "dlp": 20595.72, "mrp": 25350 },
+    "50 KG": { "basic": 14545, "dlp": 17163.10, "mrp": 21130 },
+    "30 KG": { "basic": 8817, "dlp": 10404.06, "mrp": 12810 },
+    "20 KG": { "basic": 5988, "dlp": 7065.84, "mrp": 8690 },
+    "10 KG": { "basic": 3094, "dlp": 3650.92, "mrp": 4495 },
+    "5 KG": { "basic": 1609.5, "dlp": 1899.21, "mrp": 2365 },
+    "2 KG": { "basic": 688.80, "dlp": 789.18, "mrp": 1010 },
+    "1 KG": { "basic": 347.9, "dlp": 410.52, "mrp": 525 },
+    "500 GM": { "basic": 188.2, "dlp": 222.08, "mrp": 295 }
+  },
+  "FEVICOL HI-PER STAR": {
+    "50 KG": { "basic": 16105, "dlp": 19003.90, "mrp": 23390 },
+    "20 KG": { "basic": 6632, "dlp": 7825.76, "mrp": 9630 },
+    "10 KG": { "basic": 3426, "dlp": 4042.68, "mrp": 4980 },
+    "5 KG": { "basic": 1783, "dlp": 2103.94, "mrp": 2605 },
+    "2 KG": { "basic": 740.2, "dlp": 873.44, "mrp": 1105 },
+    "1 KG": { "basic": 385.10, "dlp": 454.42, "mrp": 580 }
+  },
+  "FEVICOL PROBOND": {
+    "20 KG": { "basic": 6650.00, "dlp": 7847.00, "mrp": 9625 },
+    "10 KG": { "basic": 3351.00, "dlp": 3954.18, "mrp": 4890 },
+    "5 KG": { "basic": 1745.00, "dlp": 2059.10, "mrp": 2600 },
+    "1 KG": { "basic": 362.00, "dlp": 427.16, "mrp": 565 },
+    "500 GM": { "basic": 201.00, "dlp": 237.18, "mrp": 320 }
+  },
+  "FEVICOL HEATX": {
+    "5 LT": { "basic": 2130.00, "dlp": 2513.99, "mrp": 3095 },
+    "2 LT": { "basic": 880.20, "dlp": 1038.64, "mrp": 1305 },
+    "1 LT": { "basic": 453.60, "dlp": 535.25, "mrp": 680 },
+    "500 ML": { "basic": 233.30, "dlp": 275.29, "mrp": 365 },
+    "200 ML": { "basic": 108.82, "dlp": 128.41, "mrp": 185 },
+    "100 ML": { "basic": 59.76, "dlp": 70.52, "mrp": 105 }
+  },
+  "FEVICOL SR 998": {
+    "25 LT": { "basic": 8667.50, "dlp": 10227.65, "mrp": 12270 },
+    "5 LT": { "basic": 1799.10, "dlp": 2122.94, "mrp": 2560 },
+    "2 LT": { "basic": 749.44, "dlp": 884.34, "mrp": 1070 },
+    "1 LT": { "basic": 384.10, "dlp": 453.24, "mrp": 585 },
+    "500 ML": { "basic": 206.93, "dlp": 244.18, "mrp": 315 },
+    "200 ML": { "basic": 95.00, "dlp": 112.07, "mrp": 165 },
+    "100 ML": { "basic": 53.31, "dlp": 62.93, "mrp": 100 }
+  },
+  "MASTERLOK": {
+    "50 KG": { "basic": 5200, "dlp": 6136.00, "mrp": 9910 },
+    "20 KG": { "basic": 2410, "dlp": 2843.00, "mrp": 4050 },
+    "10 KG": { "basic": 1090, "dlp": 1286.20, "mrp": 2090 },
+    "5 KG": { "basic": 555, "dlp": 654.90, "mrp": 1070 },
+    "2 KG": { "basic": 226, "dlp": 266.68, "mrp": 500 },
+    "1 KGPP": { "basic": 105, "dlp": 123.90, "mrp": 230 },
+    "1 KG": { "basic": 115, "dlp": 135.70, "mrp": 245 },
+    "500 GM": { "basic": 62, "dlp": 73.16, "mrp": 130 },
+    "250 GM": { "basic": 34.50, "dlp": 40.71, "mrp": 80 },
+    "125 GM": { "basic": 18.50, "dlp": 21.83, "mrp": 60 }
+  },
+  "BULBOND": {
+    "50 KG": { "basic": 5807, "dlp": 6852.26, "mrp": 10945 },
+    "20 KG": { "basic": 2381.6, "dlp": 2810.29, "mrp": 4455 },
+    "5 KG": { "basic": 609.6, "dlp": 719.33, "mrp": 1150 },
+    "1 KGPP": { "basic": 116.51, "dlp": 137.48, "mrp": 255 },
+    "1 KG": { "basic": 134.59, "dlp": 158.82, "mrp": 270 },
+    "500 PP": { "basic": 65, "dlp": 76.53, "mrp": 140 },
+    "500 GM": { "basic": 78.16, "dlp": 92.41, "mrp": 160 }
+  },
+  "GRIPPO": {
+    "50 KG": { "basic": 4250, "dlp": 5015.00, "mrp": 7690 },
+    "20 KG": { "basic": 1864.6, "dlp": 2200.23, "mrp": 3295 },
+    "10 KG": { "basic": 933, "dlp": 1100.11, "mrp": 1690 },
+    "5 KG": { "basic": 475, "dlp": 560.50, "mrp": 870 },
+    "1 KGPP": { "basic": 88, "dlp": 103.84, "mrp": 170 },
+    "1 KG": { "basic": 97, "dlp": 114.46, "mrp": 180 }
+  },
+  "MARINEKOAT": {
+    "5 LT": { "basic": 2733.75, "dlp": 3225.83, "mrp": 4205 },
+    "1 LT": { "basic": 562.06, "dlp": 663.23, "mrp": 865 },
+    "500 ML": { "basic": 299, "dlp": 353, "mrp": 465 },
+    "250 ML": { "basic": 147, "dlp": 173.46, "mrp": 288 }
+  },
+  "TERMINATOR STRUCTURE PRESERVATIVE": {
+    "5 LTR": { "basic": 1533.55, "dlp": 1809.59, "mrp": 2295 },
+    "1 LTR": { "basic": 325.58, "dlp": 384.18, "mrp": 490 },
+    "500 ML": { "basic": 174.62, "dlp": 206.05, "mrp": 265 }
+  },
+  "TERMINATOR WOOD PRESERVATIVE": {
+    "5 LTR": { "basic": 1357.15, "dlp": 1601.44, "mrp": 2030 },
+    "3 LTR": { "basic": 746.76, "dlp": 994.46, "mrp": 1270 },
+    "1 LTR": { "basic": 282.79, "dlp": 333.69, "mrp": 435 },
+    "500 ML": { "basic": 154.12, "dlp": 181.86, "mrp": 235 },
+    "320 ML": { "basic": 157.00, "dlp": 185.26, "mrp": 250 },
+    "250 ML": { "basic": 81.54, "dlp": 96.22, "mrp": 130 },
+    "100 ML": { "basic": 41.44, "dlp": 48.90, "mrp": 70 }
+  },
+  "FEVISEAL GP": {
+    "W-B-C": { "basic": 102, "dlp": 120.00, "mrp": 315 }
+  },
+  "FEVISEAL GP-PRO": {
+    "W-B-C": { "basic": 117, "dlp": 138.00, "mrp": 325 }
+  },
+  "FEVISEAL NEUTRAL PRO": {
+    "W-B-C": { "basic": 132, "dlp": 156, "mrp": 400 },
+    "GREY": { "basic": 134, "dlp": 158.0, "mrp": 400 },
+    "BROWN": { "basic": 144, "dlp": 170.0, "mrp": 400 }
+  },
+  "FEVISEAL WEATHER PROOF": {
+    "W-B-C": { "basic": 179, "dlp": 211.00, "mrp": 425 },
+    "GREY": { "basic": 189, "dlp": 223.0, "mrp": 450 },
+    "BROWN": { "basic": 204, "dlp": 241, "mrp": 450 }
+  },
+  "FEVISEAL MULTI PURPOSE": {
+    "W-B-C": { "basic": 80.00, "dlp": 95, "mrp": 250 }
+  },
+  "FEVISEAL B&K": {
+    "WHITE": { "basic": 85, "dlp": 100.30, "mrp": 140 }
+  },
+  "FEVICOL WUDFILL": {
+    "50 GM": { "basic": 84.80, "dlp": 101.52, "mrp": 160 },
+    "20 GM": { "basic": 42.40, "dlp": 51, "mrp": 80 }
+  },
+  "FEVIKWIK 463": {
+    "250 GM": { "basic": 332.80, "dlp": 392.70, "mrp": 800 },
+    "125 GM": { "basic": 172.88, "dlp": 206, "mrp": 420 },
+    "20 GM": { "basic": 43.91, "dlp": 52.41, "mrp": 85 }
+  },
+  "FEVIKWIK 203": {
+    "50 GM": { "basic": 88.87, "dlp": 106.00, "mrp": 170 },
+    "20 GM": { "basic": 43.91, "dlp": 53.00, "mrp": 85 }
+  },
+  "FEVICOL SR 505": {
+    "25 LT": { "basic": 7018.75, "dlp": 8282, "mrp": 10835 },
+    "5 LT": { "basic": 1682, "dlp": 1681.5, "mrp": 2215 },
+    "2 LT": { "basic": 707, "dlp": 706.82, "mrp": 945 },
+    "1 LT": { "basic": 355, "dlp": 355.48, "mrp": 490 },
+    "500 ML": { "basic": 190.00, "dlp": 189.98, "mrp": 265 }
+  },
+  "EZEESPRAY": {
+    "500 ML": { "basic": 440.6, "dlp": 520, "mrp": 870 }
+  },
+  "EDEGLOK": {
+    "140 GM": { "basic": 75, "dlp": 88, "mrp": 125 }
+  },
+  "1K PUR": {
+    "500 GM": { "basic": 336, "dlp": 397, "mrp": 595 }
+  },
+  "PU FOAM": {
+    "720 GM": { "basic": 290, "dlp": 342.2, "mrp": 1000 }
+  },
+  "POWERLOK": {
+    "430 GM": { "basic": 125, "dlp": 147, "mrp": 330 }
+  },
+  "NAIL FREE ULTRA": {
+    "435 GM": { "basic": 280, "dlp": 330.4, "mrp": 549 }
+  },
+  "RELAM": {
+    "430 GM": { "basic": 295, "dlp": 348, "mrp": 470 }
+  },
+  "PLAATILOK": {
+    "430 GM": { "basic": 295, "dlp": 348, "mrp": 470 }
+  },
+  "XPRESS": {
+    "500 GM": { "basic": 476.46, "dlp": 562.22, "mrp": 850 }
+  },
+  "FEVICOL X-PER": {
+    "800 GM": { "basic": 444.8, "dlp": 524.8, "mrp": 670 }
+  },
+  "FEVICOL MULTILOCK": {
+    "800": { "basic": 521.6, "dlp": 615.4, "mrp": 785 }
+  },
+  "FEVICOL FASTRAK": {
+    "25 LT": { "basic": 5050, "dlp": 5959, "mrp": 8655 }
+  },
+  "FEVICOL BEJOD": {
+    "4.5 LT": { "basic": 1050.8, "dlp": 1239, "mrp": 2110 },
+    "25 LT": { "basic": 5744.00, "dlp": 6777.00, "mrp": 10695 }
+  },
+  "FEVICOL FLOORFIX VT": {
+    "5 KG": { "basic": 1186.25, "dlp": 1399.78, "mrp": 2195 },
+    "20 KG": { "basic": 4575, "dlp": 5398.5, "mrp": 8100 }
+  },
+  "FEVICOL FLOORFIX CP": {
+    "5 KG": { "basic": 1241.25, "dlp": 1464.68, "mrp": 2315 },
+    "10 KG": { "basic": 2407.5, "dlp": 2840.85, "mrp": 4570 },
+    "20 KG": { "basic": 4660, "dlp": 5498.8, "mrp": 8890 }
+  },
+  "WOODLOK PRO": {
+    "60 KG": { "basic": 7680, "dlp": 9062.4, "mrp": 10160 }
+  },
+  "FEVICOL 707 FW": {
+    "25 LT": { "basic": 6375, "dlp": 7523, "mrp": 10810 },
+    "5 LT": { "basic": 1290, "dlp": 1522.00, "mrp": 2395 },
+    "2 LT": { "basic": 533, "dlp": 629.00, "mrp": 950 },
+    "1 LT": { "basic": 271.00, "dlp": 320, "mrp": 505 },
+    "500 ML": { "basic": 140, "dlp": 165.00, "mrp": 265 }
+  },
+  "FEVICOL FOAMFIX": {
+    "25 LTR": { "basic": 6368.75, "dlp": 7515.13, "mrp": 10950 },
+    "5LTR": { "basic": 1292.5, "dlp": 1525.15, "mrp": 2230 },
+    "2 LTR": { "basic": 535, "dlp": 631.3, "mrp": 925 },
+    "1 LTR": { "basic": 271.75, "dlp": 320.67, "mrp": 485 }
+  }
+}
