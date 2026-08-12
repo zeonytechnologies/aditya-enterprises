@@ -85,11 +85,11 @@ async function createProductPriceCardImage(product, unitPrice, imageUrl, selecte
       const netPrice = unitPrice * (1 + (product.gst_percent || 0) / 100);
       ctx.fillStyle = '#ffffff';
       ctx.font = 'bold 40px sans-serif';
-      ctx.fillText(`Net Price: ₹${netPrice.toLocaleString('en-IN', { minimumFractionDigits: 2 })} / unit`, width / 2, boxY + 54);
+      ctx.fillText(`Net Price: ₹${Math.round(netPrice).toLocaleString('en-IN')} / unit`, width / 2, boxY + 54);
 
       ctx.font = '20px sans-serif';
       ctx.fillStyle = '#d1fae5'; // Emerald 100
-      ctx.fillText(`(Basic Rate: ₹${unitPrice.toLocaleString('en-IN', { minimumFractionDigits: 2 })} + ${product.gst_percent || 0}% GST)`, width / 2, boxY + 95);
+      ctx.fillText(`(Basic Rate: ₹${Math.round(unitPrice).toLocaleString('en-IN')} + ${product.gst_percent || 0}% GST)`, width / 2, boxY + 95);
 
       // Footer
       ctx.fillStyle = '#0f172a'; // Dark slate for better contrast
@@ -168,7 +168,7 @@ export async function shareProductWithImage(product, unitPrice, selectedVariant 
   const productName = selectedVariant ? `${product.name} (${selectedVariant.pack_size || selectedVariant.name})` : product.name;
   const displaySku = selectedVariant?.sku || product.sku || '-';
   
-  const shareText = `Check out this product from Aditya Enterprises!\n\n*${productName}*\nSKU: ${displaySku}\nBasic Price: ₹${unitPrice.toLocaleString('en-IN', { minimumFractionDigits: 2 })}\nGST (${product.gst_percent || 0}%): +₹${(unitPrice * ((product.gst_percent || 0) / 100)).toLocaleString('en-IN', { minimumFractionDigits: 2 })}\nNet Price: ₹${netPrice.toLocaleString('en-IN', { minimumFractionDigits: 2 })} per unit\n\nProduct Link: ${productUrl}`;
+  const shareText = `Check out this product from Aditya Enterprises!\n\n*${productName}*\nSKU: ${displaySku}\nBasic Price: ₹${Math.round(unitPrice).toLocaleString('en-IN')}\nGST (${product.gst_percent || 0}%): +₹${Math.round(unitPrice * ((product.gst_percent || 0) / 100)).toLocaleString('en-IN')}\nNet Price: ₹${Math.round(netPrice).toLocaleString('en-IN')} per unit\n\nProduct Link: ${productUrl}`;
 
   const imageUrl = product.images?.[0] || product.image_url;
   

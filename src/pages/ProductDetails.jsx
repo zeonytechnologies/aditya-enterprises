@@ -424,11 +424,11 @@ export default function ProductDetails() {
             <div className="space-y-2">
               <div className="flex justify-between items-center text-sm font-semibold text-slate-500">
                 <span>Basic Price</span>
-                <span>₹{unitPrice.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
+                <span>₹{Math.round(unitPrice).toLocaleString('en-IN')}</span>
               </div>
               <div className="flex justify-between items-center text-sm font-semibold text-slate-500">
                 <span>GST ({product.gst_percent}%)</span>
-                <span>+₹{(unitPrice * (product.gst_percent / 100)).toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
+                <span>+₹{Math.round(unitPrice * (product.gst_percent / 100)).toLocaleString('en-IN')}</span>
               </div>
               
               <div className="pt-3 border-t border-dashed border-slate-200 dark:border-slate-700 flex justify-between items-end">
@@ -440,7 +440,7 @@ export default function ProductDetails() {
                     </div>
                   )}
                   <span className="text-3xl font-extrabold font-display text-blue-600 dark:text-cyan-400">
-                    ₹{(unitPrice + (unitPrice * (product.gst_percent / 100))).toLocaleString('en-IN', { minimumFractionDigits: 2 })}
+                    ₹{Math.round(unitPrice * (1 + product.gst_percent / 100)).toLocaleString('en-IN')}
                   </span>
                 </div>
               </div>

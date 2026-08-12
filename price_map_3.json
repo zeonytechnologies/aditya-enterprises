@@ -1,0 +1,975 @@
+{
+  "ARALDITE STANDARD /IN (24X20X5G)PCK I1": {
+    "5 GM": {
+      "basic": 13.98,
+      "dlp": 16.5,
+      "mrp": 20.0
+    }
+  },
+  "ARALDITE STANDARD /IN (8X20X9G)PCK I1": {
+    "9 GM": {
+      "basic": 27.96,
+      "dlp": 33.0,
+      "mrp": 50.0
+    }
+  },
+  "ARALDITE STANDARD /IN (6X20X13G)PCK I1": {
+    "13 GM": {
+      "basic": 40.08,
+      "dlp": 47.3,
+      "mrp": 70.0
+    }
+  },
+  "ARALDITE STD 2X17ML BLISTR PCK [12X4X34": {
+    "34 ML": {
+      "basic": 81.1,
+      "dlp": 95.7,
+      "mrp": 130.0
+    }
+  },
+  "ARALDITE STANDARD /IN (6X12X36G)COMBI I1": {
+    "36 GM": {
+      "basic": 83.9,
+      "dlp": 99.0,
+      "mrp": 130.0
+    }
+  },
+  "ARALDITE STANDARD IN [4 X 8 X 90 G] PCK": {
+    "90 GM": {
+      "basic": 165.94,
+      "dlp": 195.8,
+      "mrp": 250.0
+    }
+  },
+  "ARALDITE STANDARD IN [4 X 6 X 180 G] PCK": {
+    "180 GM": {
+      "basic": 287.12,
+      "dlp": 338.8,
+      "mrp": 450.0
+    }
+  },
+  "ARALDITE STANDARD IN [4 X 4 X 270 G] PCK": {
+    "270 GM": {
+      "basic": 450.25,
+      "dlp": 531.3,
+      "mrp": 750.0
+    }
+  },
+  "ARALDITE STANDARD IN [12 X 450 G] LOYALT": {
+    "450 GM": {
+      "basic": 644.68,
+      "dlp": 760.72,
+      "mrp": 1100.0
+    }
+  },
+  "ARALDITE STANDARD IN [8 X 700 G] PCK I1": {
+    "700 GM": {
+      "basic": 764.41,
+      "dlp": 902.01,
+      "mrp": 1350.0
+    }
+  },
+  "ARALDITE STD AW106IN- HV953IN (4X1.08kg)": {
+    "1.08 KG": {
+      "basic": 962.04,
+      "dlp": 1135.2,
+      "mrp": 1650.0
+    }
+  },
+  "ARALDITE STD AW106IN- HV953IN (3X1.8kg)": {
+    "1.8 KG": {
+      "basic": 1283.65,
+      "dlp": 1514.7,
+      "mrp": 2200.0
+    }
+  },
+  "ARALDITE AW 106 - HV 953U [3X1.8 KG]": {
+    "1.8 KG": {
+      "basic": 1465.33,
+      "dlp": 1729.09,
+      "mrp": 2500.0
+    }
+  },
+  "Araldite Standard 3.6 kg": {
+    "3.6 KG": {
+      "basic": 2227.92,
+      "dlp": 2628.95,
+      "mrp": 3950.0
+    }
+  },
+  "Araldite Standard 5.4 kg": {
+    "5.4 KG": {
+      "basic": 3360.79,
+      "dlp": 3965.73,
+      "mrp": 5950.0
+    }
+  },
+  "HARDENER HV 998 IN 20X400G I1": {
+    "4 KG Industr": {
+      "basic": 576.27,
+      "dlp": 680.0,
+      "mrp": 850.0
+    }
+  },
+  "ARALDITE AV 138 IN 20X1KG I1": {
+    "4 KG Industr": {
+      "basic": 1525.42,
+      "dlp": 1800.0,
+      "mrp": 2300.0
+    }
+  },
+  "HARDENER HV 998 IN 4X2KG I1": {
+    "KG Industri": {
+      "basic": 2754.25,
+      "dlp": 3250.02,
+      "mrp": 4100.0
+    }
+  },
+  "ARALDITE AV 138 IN 4X5KG I1": {
+    "KG Industri": {
+      "basic": 6757.37,
+      "dlp": 7973.7,
+      "mrp": 9500.0
+    }
+  },
+  "ARALDITE AW 106 IN 4X5KG I1": {
+    "9 kg": {
+      "basic": 2810.62,
+      "dlp": 3316.54,
+      "mrp": 4980.0
+    }
+  },
+  "HARDENER HV 953 IN 4X4KG I1": {
+    "9 kg": {
+      "basic": 2297.35,
+      "dlp": 2710.88,
+      "mrp": 4070.0
+    }
+  },
+  "HARDENER HV 953 U IN 4X4KG I1": {
+    "9 kg": {
+      "basic": 2302.45,
+      "dlp": 2716.89,
+      "mrp": 4100.0
+    }
+  },
+  "ARALDITE XIN IN (40X450G) I1": {
+    "450 GM": {
+      "basic": 399.34,
+      "dlp": 471.22,
+      "mrp": 700.0
+    }
+  },
+  "ARALDITE XIN R-100 - H-900 3X1.8KG.": {
+    "1.8 KG": {
+      "basic": 924.41,
+      "dlp": 1090.8,
+      "mrp": 1680.0
+    }
+  },
+  "ARALDITE KLEAR 5 IN (8X20X5G) PCK I1": {
+    "5 GM": {
+      "basic": 29.9,
+      "dlp": 35.28,
+      "mrp": 50.0
+    }
+  },
+  "ARALDITE KLEAR 5 IN (6X20X10G)PCK I1": {
+    "10 GM": {
+      "basic": 37.72,
+      "dlp": 44.51,
+      "mrp": 65.0
+    }
+  },
+  "ARALDITE KLEAR 5 IN (6X12X26G) PCK I1": {
+    "26 GM": {
+      "basic": 76.89,
+      "dlp": 90.72,
+      "mrp": 135.0
+    }
+  },
+  "ARALDITE  KLEAR 5 (12X4X34Ml)": {
+    "34 ML": {
+      "basic": 111.51,
+      "dlp": 131.58,
+      "mrp": 190.0
+    }
+  },
+  "ARALDITE KLEAR 5 IN [4X8X90GM] LOYALTY": {
+    "90 GM": {
+      "basic": 211.78,
+      "dlp": 249.9,
+      "mrp": 350.0
+    }
+  },
+  "ARALDITE KLEAR 5 IN [3X6X180 GM] LOYALTY": {
+    "180 GM": {
+      "basic": 333.66,
+      "dlp": 393.72,
+      "mrp": 550.0
+    }
+  },
+  "ARALDITE KLEAR 5 [4X4X270GM]": {
+    "270 GM": {
+      "basic": 476.51,
+      "dlp": 562.28,
+      "mrp": 750.0
+    }
+  },
+  "ARALDITE KLEAR 5 IN [8X450G] LOYALTY": {
+    "450 GM": {
+      "basic": 765.35,
+      "dlp": 903.12,
+      "mrp": 1200.0
+    }
+  },
+  "ARALDITE KLEAR 5 RH [4X1.08 KG]": {
+    "1.08 KG": {
+      "basic": 1362.95,
+      "dlp": 1608.28,
+      "mrp": 2150.0
+    }
+  },
+  "ARALDITE KLEAR 20 IN  [4 X 8 X 90 G] PCK": {
+    "90 GM": {
+      "basic": 218.14,
+      "dlp": 257.4,
+      "mrp": 370.0
+    }
+  },
+  "ARALDITE KLEAR 20 IN [4X4X250 GM]": {
+    "250 GM": {
+      "basic": 432.7,
+      "dlp": 510.59,
+      "mrp": 730.0
+    }
+  },
+  "ARALDITE KLEAR 20 IN [8X450 GM] LOYALTY": {
+    "450 GM": {
+      "basic": 758.56,
+      "dlp": 895.11,
+      "mrp": 1200.0
+    }
+  },
+  "ARALDITE KLEAR 20 RH [4X1 KG]": {
+    "1 KG": {
+      "basic": 1233.74,
+      "dlp": 1455.81,
+      "mrp": 2000.0
+    }
+  },
+  "ARALDITE KLEAR 20 RH [3X2 KG]": {
+    "2 KG": {
+      "basic": 2034.34,
+      "dlp": 2400.52,
+      "mrp": 3200.0
+    }
+  },
+  "ARALDITE KLEAR 120 [4X6X180 GM]": {
+    "180 GM": {
+      "basic": 330.56,
+      "dlp": 390.06,
+      "mrp": 540.0
+    }
+  },
+  "ARALDITE KLEAR 120 [8 X 450 GM]": {
+    "450 GM": {
+      "basic": 678.93,
+      "dlp": 801.14,
+      "mrp": 1090.0
+    }
+  },
+  "ARALDITE KLEAR 120 RH [3X1.8 KG]": {
+    "1.8 KG": {
+      "basic": 1425.71,
+      "dlp": 1682.34,
+      "mrp": 2100.0
+    }
+  },
+  "ARALDITE KLAD-X [16 X 300 GM]": {
+    "300 GM": {
+      "basic": 341.23,
+      "dlp": 402.65,
+      "mrp": 550.0
+    }
+  },
+  "ARALDITE KLAD-X [6 X 1.5KG]": {
+    "1.5 KG": {
+      "basic": 1270.59,
+      "dlp": 1499.3,
+      "mrp": 1900.0
+    }
+  },
+  "ARALDITE XIN MULTIPRO [3X1.8 KG]": {
+    "1.8 KG": {
+      "basic": 796.07,
+      "dlp": 939.37,
+      "mrp": 1200.0
+    }
+  },
+  "ARALDITE XIN MULTIPRO [1X9 KG]": {
+    "9 kg": {
+      "basic": 3681.81,
+      "dlp": 4344.54,
+      "mrp": 5200.0
+    }
+  },
+  "ARALDITE KLAD PRO NF[4 KG] 4X4 - NEW SEP": {
+    "4 KG": {
+      "basic": 1248.56,
+      "dlp": 1473.3,
+      "mrp": 3250.0
+    }
+  },
+  "ARALDITE KLAD PRO NF [8.0 KG] NEW SEPARA": {
+    "8 KG": {
+      "basic": 2314.62,
+      "dlp": 2731.25,
+      "mrp": 5500.0
+    }
+  },
+  "FEVITITE RAPID AND CLEAR [3 GM]": {
+    "3 GM": {
+      "basic": 12.22,
+      "dlp": 14.42,
+      "mrp": 25.0
+    }
+  },
+  "FEVITITE RAPID AND CLEAR [6 GM]": {
+    "6 GM": {
+      "basic": 21.83,
+      "dlp": 25.76,
+      "mrp": 40.0
+    }
+  },
+  "FEVITITE RAPID AND CLEAR [12GM]": {
+    "12 GM": {
+      "basic": 44.98,
+      "dlp": 53.08,
+      "mrp": 70.0
+    }
+  },
+  "FEVITITE RAPID AND CLEAR[ 36 G\u00a0 ]": {
+    "36 GM": {
+      "basic": 92.52,
+      "dlp": 109.17,
+      "mrp": 140.0
+    }
+  },
+  "FEVITITE RAPID AND CLEAR[90 GM]": {
+    "90 GM": {
+      "basic": 192.03,
+      "dlp": 226.6,
+      "mrp": 310.0
+    }
+  },
+  "FEVITITE RAPID AND CLEAR[180 GM]": {
+    "180 GM": {
+      "basic": 309.88,
+      "dlp": 365.66,
+      "mrp": 480.0
+    }
+  },
+  "FEVITITE RAPID AND CLEAR [450 GM]": {
+    "450 GM": {
+      "basic": 628.48,
+      "dlp": 741.61,
+      "mrp": 1050.0
+    }
+  },
+  "FEVITITE SUPER STRONG [3 GM\u00a0 20 EA]": {
+    "3 GM": {
+      "basic": 10.98,
+      "dlp": 12.96,
+      "mrp": 15.0
+    }
+  },
+  "FEVITITE SUPER STRONG EPX ADH[ 13 G ]": {
+    "13 GM": {
+      "basic": 32.03,
+      "dlp": 37.8,
+      "mrp": 60.0
+    }
+  },
+  "FEVITITE SUPER STRONG EPX ADH[ 36 G ]": {
+    "36 GM": {
+      "basic": 59.49,
+      "dlp": 70.2,
+      "mrp": 120.0
+    }
+  },
+  "FEVITITE SUPER STRONG EPX ADH[ 90 G ]": {
+    "90 GM": {
+      "basic": 128.13,
+      "dlp": 151.19,
+      "mrp": 210.0
+    }
+  },
+  "FEVITITE SUPER STRONG EPX ADH[ 180 G ]": {
+    "180 GM": {
+      "basic": 205.93,
+      "dlp": 243.0,
+      "mrp": 380.0
+    }
+  },
+  "FEVITITE SUPER STRONG[450GM]": {
+    "450 GM": {
+      "basic": 350.08,
+      "dlp": 413.1,
+      "mrp": 620.0
+    }
+  },
+  "FEVITITE SUPER STRONG [900 GM SET ]": {
+    "900 GM": {
+      "basic": 541.47,
+      "dlp": 638.93,
+      "mrp": 840.0
+    }
+  },
+  "FEVITITE SUPER STRONG[1.8KG JOINT PACKIN": {
+    "1.8 KG": {
+      "basic": 840.2,
+      "dlp": 991.44,
+      "mrp": 1500.0
+    }
+  },
+  "ROF CERA CLEAN (NJC) [500ML]": {
+    "500 ML": {
+      "basic": 78.0,
+      "dlp": 92.04,
+      "mrp": 159.0
+    }
+  },
+  "ROF CERA CLEAN (NJC) [1LT]": {
+    "1 LT": {
+      "basic": 119.0,
+      "dlp": 140.42,
+      "mrp": 249.0
+    }
+  },
+  "ROFF CERA CLEAN [5 LT]": {
+    "5 LT": {
+      "basic": 530.0,
+      "dlp": 625.4,
+      "mrp": 1099.0
+    }
+  },
+  "TUFF KLEEN EPOXY GROUT CLEANER [500 ML]": {
+    "500 ML": {
+      "basic": 297.0,
+      "dlp": 350.46,
+      "mrp": 750.0
+    }
+  },
+  "TUFF KLEEN MARBLE AND STONE CLEANER [1 L": {
+    "1 LT": {
+      "basic": 161.25,
+      "dlp": 190.28,
+      "mrp": 400.0
+    }
+  },
+  "FEVIKWIK 102 [20 GM] 100 NOS SHIPPER": {
+    "20 GM": {
+      "basic": 44.42,
+      "dlp": 52.42,
+      "mrp": 85.0
+    }
+  },
+  "FEVIKWIK 102 [50 GM] 80 NOS SHIPPER": {
+    "50 GM": {
+      "basic": 89.71,
+      "dlp": 105.86,
+      "mrp": 170.0
+    }
+  },
+  "FEVIKWIK 463 [20 GM]": {
+    "20 GM": {
+      "basic": 44.41,
+      "dlp": 52.4,
+      "mrp": 80.0
+    }
+  },
+  "FEVIKWIK 463 [125 GM]": {
+    "125 GM": {
+      "basic": 174.72,
+      "dlp": 206.17,
+      "mrp": 420.0
+    }
+  },
+  "FEVIKWIK 463 [250 GM]": {
+    "250 GM": {
+      "basic": 336.57,
+      "dlp": 397.15,
+      "mrp": 800.0
+    }
+  },
+  "FEVISEAL PU CONSTRUCTION FOAM [750 ML]": {
+    "750 ML": {
+      "basic": 290.0,
+      "dlp": 342.2,
+      "mrp": 1000.0
+    }
+  },
+  "FEVICOL NAIL FREE ULTRA  [435 GM]": {
+    "435 GM": {
+      "basic": 280.0,
+      "dlp": 330.4,
+      "mrp": 549.0
+    }
+  },
+  "FEVICOL POWERLOCCK [320 GM]": {
+    "320 GM": {
+      "basic": 125.0,
+      "dlp": 147.5,
+      "mrp": 330.0
+    }
+  },
+  "FEVISEAL GP [BLACK 260 ML IHC]": {
+    "60 ML - BLAC": {
+      "basic": 102.0,
+      "dlp": 120.36,
+      "mrp": 315.0
+    }
+  },
+  "FEVISEAL GP [CLEAR 260 ML IHC]": {
+    "60 ML - CLEA": {
+      "basic": 102.0,
+      "dlp": 120.36,
+      "mrp": 315.0
+    }
+  },
+  "FEVISEAL GP [WHITE 260 ML IHC]": {
+    "60 ML - WHI": {
+      "basic": 102.0,
+      "dlp": 120.36,
+      "mrp": 315.0
+    }
+  },
+  "FEVISEAL GP PRO [CLEAR 280 ML IHC]": {
+    "80 ML - CLEA": {
+      "basic": 117.0,
+      "dlp": 138.06,
+      "mrp": 325.0
+    }
+  },
+  "FEVISEAL GP PRO BLACK [280 ML] P2P": {
+    "80 ML - BLAC": {
+      "basic": 117.0,
+      "dlp": 138.06,
+      "mrp": 325.0
+    }
+  },
+  "FEVISEAL GP PRO WHITE [280 ML] P2P": {
+    "80 ML - WHI": {
+      "basic": 117.0,
+      "dlp": 138.06,
+      "mrp": 325.0
+    }
+  },
+  "FEVISEAL MULTIPURPOSE[CLEAR 280ML]": {
+    "80 ML - CLEA": {
+      "basic": 80.5,
+      "dlp": 94.99,
+      "mrp": 250.0
+    }
+  },
+  "FEVISEAL MULTIPURPOSE [BLACK 280 ML IHC]": {
+    "80 ML - BLAC": {
+      "basic": 80.5,
+      "dlp": 94.99,
+      "mrp": 145.0
+    }
+  },
+  "FEVISEAL MULTIPURPOSE[WHITE 280ML]": {
+    "80 ML - WHI": {
+      "basic": 80.5,
+      "dlp": 94.99,
+      "mrp": 250.0
+    }
+  },
+  "FEVISEAL NEUTRAL PRO[CLEAR  280ML ]": {
+    "80 ML - CLEA": {
+      "basic": 132.0,
+      "dlp": 155.76,
+      "mrp": 375.0
+    }
+  },
+  "FEVISEAL NEUTRAL PRO BLACK [280 ML]  IHC": {
+    "80 ML - BLAC": {
+      "basic": 132.0,
+      "dlp": 155.76,
+      "mrp": 375.0
+    }
+  },
+  "FEVISEAL NEUTRAL PRO[WHITE  280ML ]": {
+    "80 ML - WHI": {
+      "basic": 132.0,
+      "dlp": 155.76,
+      "mrp": 375.0
+    }
+  },
+  "FEVISEAL NEUTRAL PRO[GREY  280ML ]": {
+    "80 ML - GRE": {
+      "basic": 134.0,
+      "dlp": 158.12,
+      "mrp": 400.0
+    }
+  },
+  "FEVISEAL NEUTRAL PRO[BROWN  280ML ]": {
+    "0 ML - BROW": {
+      "basic": 144.0,
+      "dlp": 169.92,
+      "mrp": 400.0
+    }
+  },
+  "FEVISEAL WEATHERPROOF PRO[CLEAR  280ML ]": {
+    "80 ML - CLEA": {
+      "basic": 179.0,
+      "dlp": 211.22,
+      "mrp": 425.0
+    }
+  },
+  "FEVISEAL WEATHERPROOF PRO[WHITE  280ML ]": {
+    "80 ML - WHI": {
+      "basic": 179.0,
+      "dlp": 211.22,
+      "mrp": 425.0
+    }
+  },
+  "FEVISEAL WEATHERPROOF PRO[BLACK  280ML ]": {
+    "80 ML - BLAC": {
+      "basic": 179.0,
+      "dlp": 211.22,
+      "mrp": 425.0
+    }
+  },
+  "FEVISEAL WEATHERPROOF PRO GREY [280 ML]": {
+    "80 ML - GRE": {
+      "basic": 189.0,
+      "dlp": 223.02,
+      "mrp": 450.0
+    }
+  },
+  "FEVISEAL WEATHERPROOF PRO BROWN [280 ML]": {
+    "0 ML - BROW": {
+      "basic": 204.0,
+      "dlp": 240.72,
+      "mrp": 450.0
+    }
+  },
+  "SANDX IN 180 ( 2x25 M)  I1": {
+    "P 180": {
+      "basic": 736.76,
+      "dlp": 869.38,
+      "mrp": 1300.0
+    }
+  },
+  "SANDX IN 220 ( 2x25 M)  I1": {
+    "P 220": {
+      "basic": 736.76,
+      "dlp": 869.38,
+      "mrp": 1300.0
+    }
+  },
+  "SANDX IN 320 ( 2x25 M)  I1": {
+    "P 320": {
+      "basic": 736.76,
+      "dlp": 869.38,
+      "mrp": 1300.0
+    }
+  },
+  "SANDX IN 120 ( 2x50 M)  I1": {
+    "P 120": {
+      "basic": 1331.83,
+      "dlp": 1571.56,
+      "mrp": 2350.0
+    }
+  },
+  "SANDX IN 100 (2X50M) I1": {
+    "P 100": {
+      "basic": 1331.83,
+      "dlp": 1571.56,
+      "mrp": 2350.0
+    }
+  },
+  "SANDX IN 80 (2X50M) I1": {
+    "P 80": {
+      "basic": 1331.83,
+      "dlp": 1571.56,
+      "mrp": 2350.0
+    }
+  },
+  "SANDX IN 60 ( 2x50 M)  I1": {
+    "P 60": {
+      "basic": 1482.78,
+      "dlp": 1749.68,
+      "mrp": 2600.0
+    }
+  },
+  "SANDX 75MM 180(2X25 M)I1": {
+    "180 - 75 M": {
+      "basic": 570.3,
+      "dlp": 672.95,
+      "mrp": 1000.0
+    }
+  },
+  "SANDX 75MM 220(2X25 M)I1": {
+    "220 - 75 M": {
+      "basic": 570.3,
+      "dlp": 672.95,
+      "mrp": 1000.0
+    }
+  },
+  "SANDX 75MM 320(2X25 M)I1": {
+    "320 - 75 M": {
+      "basic": 570.3,
+      "dlp": 672.95,
+      "mrp": 1000.0
+    }
+  },
+  "SANDX 75MM 100(2X50M)I1": {
+    "100 - 75 M": {
+      "basic": 1046.29,
+      "dlp": 1234.62,
+      "mrp": 2100.0
+    }
+  },
+  "SANDX 75MM 120(2X50M)I1": {
+    "120 - 75 M": {
+      "basic": 1046.29,
+      "dlp": 1234.62,
+      "mrp": 2100.0
+    }
+  },
+  "SANDX 75MM 60(2X50M)I1": {
+    "P 60 - 75 MM": {
+      "basic": 1111.68,
+      "dlp": 1311.78,
+      "mrp": 2550.0
+    }
+  },
+  "SANDX 75MM 80(2X50M)I1": {
+    "P 80 - 75 MM": {
+      "basic": 1111.68,
+      "dlp": 1311.78,
+      "mrp": 2550.0
+    }
+  },
+  "SANDX WET P1500(50SHEETSX10) I1": {
+    "P 1500": {
+      "basic": 731.42,
+      "dlp": 863.08,
+      "mrp": 1250.0
+    }
+  },
+  "SANDX WET P1200(50SHEETSX10) I1": {
+    "P 1200": {
+      "basic": 731.42,
+      "dlp": 863.08,
+      "mrp": 1250.0
+    }
+  },
+  "SANDX WET P600(50SHEETSX10) I1": {
+    "P 600": {
+      "basic": 545.78,
+      "dlp": 644.02,
+      "mrp": 1250.0
+    }
+  },
+  "SANDX WET P800(50SHEETSX10) I1": {
+    "P 800": {
+      "basic": 674.1,
+      "dlp": 795.44,
+      "mrp": 1250.0
+    }
+  },
+  "SANDX WET P1000(50SHEETSX10) I1": {
+    "P 1000": {
+      "basic": 731.42,
+      "dlp": 863.08,
+      "mrp": 1250.0
+    }
+  },
+  "SANDX WET P400(50SHEETSX10) I1": {
+    "P 400": {
+      "basic": 545.78,
+      "dlp": 644.02,
+      "mrp": 1250.0
+    }
+  },
+  "SANDX WET P320(50SHEETSX10) I1": {
+    "P 320": {
+      "basic": 545.78,
+      "dlp": 644.02,
+      "mrp": 1250.0
+    }
+  },
+  "SANDX WET P220(50SHEETSX10) I1": {
+    "P 220": {
+      "basic": 642.1,
+      "dlp": 757.68,
+      "mrp": 1250.0
+    }
+  },
+  "SANDX WET P180(50SHEETSX10) I1": {
+    "P 180": {
+      "basic": 642.1,
+      "dlp": 757.68,
+      "mrp": 1250.0
+    }
+  },
+  "SANDX WET P150(50SHEETSX10) I1": {
+    "P 150": {
+      "basic": 642.1,
+      "dlp": 757.68,
+      "mrp": 1250.0
+    }
+  },
+  "SANDX WET P120(50SHEETSX10) I1": {
+    "P 120": {
+      "basic": 642.1,
+      "dlp": 757.68,
+      "mrp": 1250.0
+    }
+  },
+  "SANDX WET P80(50SHEETSX10) I1": {
+    "P 80": {
+      "basic": 642.1,
+      "dlp": 757.68,
+      "mrp": 1250.0
+    }
+  },
+  "SANDX GP WATERPROOF SHEET P320(50SHEETSX": {
+    "P 320": {
+      "basic": 501.27,
+      "dlp": 591.5,
+      "mrp": 1250.0
+    }
+  },
+  "SANDX GP WATERPROOF SHEET P220(50SHEETSX": {
+    "P 220": {
+      "basic": 501.27,
+      "dlp": 591.5,
+      "mrp": 1250.0
+    }
+  },
+  "SANDX GP WATERPROOF SHEET P180(50SHEETSX": {
+    "P 180": {
+      "basic": 501.27,
+      "dlp": 591.5,
+      "mrp": 1250.0
+    }
+  },
+  "SANDX GP WATERPROOF SHEET P150(50SHEETSX": {
+    "P 150": {
+      "basic": 501.27,
+      "dlp": 591.5,
+      "mrp": 1250.0
+    }
+  },
+  "SANDX GP WATERPROOF SHEET P120(50SHEETSX": {
+    "P 120": {
+      "basic": 501.27,
+      "dlp": 591.5,
+      "mrp": 1250.0
+    }
+  },
+  "SANDX GP WATERPROOF SHEET P100(50SHEETSX": {
+    "P 100": {
+      "basic": 531.3,
+      "dlp": 626.93,
+      "mrp": 1250.0
+    }
+  },
+  "SANDX GP WATERPROOF SHEET P80(50SHEETSX": {
+    "P 80": {
+      "basic": 531.3,
+      "dlp": 626.93,
+      "mrp": 1250.0
+    }
+  },
+  "SANDX GP WATERPROOF SHEET P60(50SHEETSX": {
+    "P 60": {
+      "basic": 531.3,
+      "dlp": 626.93,
+      "mrp": 1250.0
+    }
+  },
+  "SANDX WOOD SANDING  DISC GRIT100 ( 10 DI": {
+    "GRIT 100": {
+      "basic": 19.94,
+      "dlp": 23.53,
+      "mrp": 400.0
+    }
+  },
+  "SANDX WOOD SANDING  DISC GRIT120 ( 10 DI": {
+    "GRIT 120": {
+      "basic": 19.94,
+      "dlp": 23.53,
+      "mrp": 400.0
+    }
+  },
+  "SANDX WOOD SANDING  DISC GRIT50 ( 10 DIS": {
+    "GRIT 50": {
+      "basic": 19.94,
+      "dlp": 23.53,
+      "mrp": 400.0
+    }
+  },
+  "SANDX WOOD SANDING  DISC GRIT60 ( 10 DIS": {
+    "GRIT 60": {
+      "basic": 19.94,
+      "dlp": 23.53,
+      "mrp": 400.0
+    }
+  },
+  "SANDX WOOD SANDING  DISC GRIT80 ( 10 DIS": {
+    "GRIT 80": {
+      "basic": 19.94,
+      "dlp": 23.53,
+      "mrp": 400.0
+    }
+  },
+  "SANDX WOOD SANDING DISC GRIT36 ( 10 DISC": {
+    "GRIT 36": {
+      "basic": 20.5,
+      "dlp": 24.19,
+      "mrp": 400.0
+    }
+  },
+  "ARALDITE SANDX - FOAM BLOCK G150 10PCS": {
+    "G 150": {
+      "basic": 24.72,
+      "dlp": 29.17,
+      "mrp": 50.0
+    }
+  },
+  "ARALDITE SANDX - FOAM BLOCK G220 10PCS": {
+    "G 220": {
+      "basic": 24.72,
+      "dlp": 29.17,
+      "mrp": 50.0
+    }
+  },
+  "SANDX CLOTH ROLL 100MM Grit 80 (2x50m)": {
+    "G 80": {
+      "basic": 1370.67,
+      "dlp": 1617.3906,
+      "mrp": 3000.0
+    }
+  },
+  "SANDX CLOTH ROLL 100MM Grit 60 (2x50m)": {
+    "G 60": {
+      "basic": 1404.38,
+      "dlp": 1657.1684,
+      "mrp": 3250.0
+    }
+  },
+  "SANDX CLOTH ROLL 100MM Grit 100 (2x50m)": {
+    "G 100": {
+      "basic": 1370.67,
+      "dlp": 1617.3906,
+      "mrp": 3000.0
+    }
+  }
+}

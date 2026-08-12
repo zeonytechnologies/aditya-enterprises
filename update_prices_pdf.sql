@@ -30,7 +30,7 @@ UPDATE public.products SET price = 25.42, dealer_price = 30, mrp = 60 WHERE id =
 UPDATE public.products SET price = 13.5, dealer_price = 15.93, mrp = 30 WHERE id = 'b6340a02-375d-4ff5-802b-eb23bb1cae63';
 UPDATE public.products SET price = 21.55, dealer_price = 25.43, mrp = 30 WHERE id = 'bdd0f7a8-5d5e-4717-9d5f-cb44595dcc57';
 UPDATE public.products SET price = 170.63, dealer_price = 201.34, mrp = 300 WHERE id = 'fb0d57e2-f837-47b3-b8c8-0216283f095d';
-UPDATE public.products SET price = 13.08, dealer_price = 15.43, mrp = 30 WHERE id = '680bf04f-b903-4bc1-89af-da2ca2b5f488';
+UPDATE public.products SET price = 13.08, dealer_price      = 15.43, mrp = 30 WHERE id = '680bf04f-b903-4bc1-89af-da2ca2b5f488';
 UPDATE public.products SET price = 13.5, dealer_price = 15.93, mrp = 30 WHERE id = 'cee66501-d93f-4e30-8763-c473433513df';
 UPDATE public.products SET price = 117, dealer_price = 138.06, mrp = 187 WHERE id = 'f496bf5e-4c85-4d32-a37a-b179fad135b8';
 UPDATE public.products SET price = 324.96, dealer_price = 383.45, mrp = 510 WHERE id = '7565c68d-0f98-40ed-8dc7-189b0f1ab8b3';

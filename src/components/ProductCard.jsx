@@ -96,13 +96,13 @@ export default function ProductCard({ product }) {
             <div className="flex justify-between items-center text-[10px] sm:text-xs">
               <span className="text-slate-500">Base Price</span>
               <span className="font-semibold text-slate-700 dark:text-slate-300">
-                ₹{unitPrice.toLocaleString('en-IN', { minimumFractionDigits: 2 })}
+                  ₹{Math.round(unitPrice).toLocaleString('en-IN')}
               </span>
             </div>
             <div className="flex justify-between items-center text-[10px] sm:text-xs">
               <span className="text-slate-500">GST ({product.gst_percent}%)</span>
               <span className="font-semibold text-slate-700 dark:text-slate-300">
-                +₹{(unitPrice * (product.gst_percent / 100)).toLocaleString('en-IN', { minimumFractionDigits: 2 })}
+                  +₹{Math.round(unitPrice * (product.gst_percent / 100)).toLocaleString('en-IN')}
               </span>
             </div>
           </div>
@@ -112,7 +112,7 @@ export default function ProductCard({ product }) {
               <span className="text-[10px] text-slate-500 font-medium">Final Price</span>
               <div className="flex items-center gap-1.5 sm:gap-2">
                 <span className="text-sm sm:text-lg font-extrabold font-display text-slate-900 dark:text-white">
-                  ₹{(unitPrice * (1 + product.gst_percent / 100)).toLocaleString('en-IN', { minimumFractionDigits: 2 })}
+                    ₹{Math.round(unitPrice * (1 + product.gst_percent / 100)).toLocaleString('en-IN')}
                 </span>
                 {showDiscount && isB2B && (
                   <span className="text-[10px] sm:text-xs text-slate-400 line-through">
