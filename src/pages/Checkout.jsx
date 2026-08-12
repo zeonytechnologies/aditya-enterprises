@@ -431,7 +431,7 @@ export default function Checkout() {
 
               <div className="flex justify-between text-base font-extrabold text-slate-900 dark:text-white pt-3 border-t">
                 <span>Grand Total:</span>
-                <span>₹{parseFloat(totals.grandTotal).toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
+                <span>₹{Math.round(totals.grandTotal).toLocaleString('en-IN')}</span>
               </div>
             </div>
 

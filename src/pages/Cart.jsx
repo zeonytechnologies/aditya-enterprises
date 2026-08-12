@@ -145,16 +145,16 @@ export default function Cart() {
                     <div className="text-xs font-semibold text-slate-400 flex flex-col items-end gap-0.5">
                       {product.mrp && (
                         <span className="text-[10px] line-through text-slate-300 dark:text-slate-500">
-                          MRP: ₹{parseFloat(product.mrp).toFixed(2)}
+                          MRP: ₹{Math.round(product.mrp).toLocaleString('en-IN')}
                         </span>
                       )}
-                      <span className="text-emerald-600 dark:text-emerald-400 font-bold">₹{unitPrice.toFixed(2)}/unit</span>
+                      <span className="text-emerald-600 dark:text-emerald-400 font-bold">₹{Math.round(unitPrice).toLocaleString('en-IN')}/unit</span>
                     </div>
                     <div className="text-sm font-extrabold font-display">
-                      ₹{(totalTaxable + gstAmount).toLocaleString('en-IN', { minimumFractionDigits: 2 })}
+                      ₹{Math.round(totalTaxable + gstAmount).toLocaleString('en-IN')}
                     </div>
                     <div className="text-[9px] text-slate-400 font-semibold leading-none">
-                      (Taxable: ₹{totalTaxable.toFixed(2)} + GST: ₹{gstAmount.toFixed(2)})
+                      (Taxable: ₹{Math.round(totalTaxable).toLocaleString('en-IN')} + GST: ₹{Math.round(gstAmount).toLocaleString('en-IN')})
                     </div>
                   </div>
 
@@ -175,7 +175,7 @@ export default function Cart() {
             
             {appliedCoupon ? (
               <div className="p-3 bg-blue-50 dark:bg-slate-950 text-blue-800 dark:text-cyan-400 rounded-xl flex items-center justify-between text-xs font-bold border">
-                <span>Code Applied: {appliedCoupon.code} (-₹{parseFloat(totals.discount).toFixed(2)})</span>
+                <span>Code Applied: {appliedCoupon.code} (-₹{Math.round(totals.discount).toLocaleString('en-IN')})</span>
                 <button onClick={removeCoupon} className="p-1 hover:bg-blue-100 rounded">
                   <X className="h-4 w-4" />
                 </button>
@@ -209,13 +209,13 @@ export default function Cart() {
             <div className="space-y-3 text-xs">
               <div className="flex justify-between text-slate-500 font-semibold">
                 <span>Taxable Amount (Subtotal):</span>
-                <span className="font-bold text-slate-800 dark:text-white">₹{parseFloat(totals.subtotal).toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
+                <span className="font-bold text-slate-800 dark:text-white">₹{Math.round(totals.subtotal).toLocaleString('en-IN')}</span>
               </div>
               
               {appliedCoupon && (
                 <div className="flex justify-between text-cyan-600 font-bold">
                   <span>Coupon Discount:</span>
-                  <span>-₹{parseFloat(totals.discount).toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
+                  <span>-₹{Math.round(totals.discount).toLocaleString('en-IN')}</span>
                 </div>
               )}
 
@@ -223,15 +223,15 @@ export default function Cart() {
               <div className="border-t border-dashed py-3 space-y-2 text-slate-500 font-semibold">
                 <div className="flex justify-between text-[11px]">
                   <span>CGST (Central Tax Share):</span>
-                  <span>₹{parseFloat(totals.cgst).toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
+                  <span>₹{Math.round(totals.cgst).toLocaleString('en-IN')}</span>
                 </div>
                 <div className="flex justify-between text-[11px]">
                   <span>SGST (State Tax Share):</span>
-                  <span>₹{parseFloat(totals.sgst).toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
+                  <span>₹{Math.round(totals.sgst).toLocaleString('en-IN')}</span>
                 </div>
                 <div className="flex justify-between font-bold text-slate-850 dark:text-slate-200">
                   <span>Combined GST Total:</span>
-                  <span>₹{parseFloat(totals.gst).toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
+                  <span>₹{Math.round(totals.gst).toLocaleString('en-IN')}</span>
                 </div>
               </div>
 
@@ -239,7 +239,7 @@ export default function Cart() {
 
               <div className="flex justify-between text-base font-extrabold pt-4 border-t text-slate-950 dark:text-white">
                 <span>Grand Total:</span>
-                <span>₹{parseFloat(totals.grandTotal).toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
+                <span>₹{Math.round(totals.grandTotal).toLocaleString('en-IN')}</span>
               </div>
             </div>
 

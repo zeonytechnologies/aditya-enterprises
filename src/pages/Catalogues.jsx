@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Download, FileText, Loader2, Search, Eye } from 'lucide-react';
+import { Download, FileText, Loader2, Search, Eye, MessageCircle } from 'lucide-react';
 import { api } from '../services/supabase';
 
 export default function Catalogues() {
@@ -7,6 +7,7 @@ export default function Catalogues() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [sharingId, setSharingId] = useState(null);
 
   useEffect(() => {
     const fetchCatalogues = async () => {
@@ -37,6 +38,38 @@ export default function Catalogues() {
     (cat.title || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
     (cat.description || '').toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const handleShareCatalogue = async (cat) => {
+    setSharingId(cat.id);
+    try {
+      // 1. Check if native file sharing is supported (Mobile/Modern browsers)
+      if (navigator.share && navigator.canShare) {
+        const response = await fetch(cat.file_url);
+        const blob = await response.blob();
+        const file = new File([blob], `${cat.title || 'Catalogue'}.pdf`, {
+          type: 'application/pdf',
+        });
+
+        if (navigator.canShare({ files: [file] })) {
+          await navigator.share({
+            title: cat.title,
+            text: `Check out this catalogue from Aditya Enterprises!\n\n*${cat.title}*\n${cat.description || ''}`,
+            files: [file]
+          });
+          setSharingId(null);
+          return; // Success, stop here
+        }
+      }
+    } catch (err) {
+      console.warn("Native file sharing failed, falling back to link sharing", err);
+    }
+    
+    // 2. Fallback to URL sharing if file sharing fails or is unsupported
+    const text = `Check out this catalogue from Aditya Enterprises!\n\n*${cat.title}*\n${cat.description || ''}\n\nView/Download: ${cat.file_url}`;
+    const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+    window.open(url, '_blank');
+    setSharingId(null);
+  };
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-16">
@@ -102,12 +135,12 @@ export default function Catalogues() {
                   {cat.description}
                 </p>
 
-                <div className="flex gap-3 mt-auto">
+                <div className="flex gap-2 mt-auto">
                   <a
                     href={cat.file_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl flex items-center justify-center gap-2 transition shadow-sm"
+                    className="flex-1 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl flex items-center justify-center gap-1.5 transition shadow-sm text-sm"
                   >
                     <Eye className="h-4 w-4" /> View
                   </a>
@@ -116,10 +149,23 @@ export default function Catalogues() {
                     download
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 py-3 bg-blue-50 hover:bg-blue-100 dark:bg-slate-800 dark:hover:bg-slate-700 text-blue-700 dark:text-cyan-400 font-bold rounded-xl flex items-center justify-center gap-2 transition"
+                    className="flex-1 py-2.5 bg-blue-50 hover:bg-blue-100 dark:bg-slate-800 dark:hover:bg-slate-700 text-blue-700 dark:text-cyan-400 font-bold rounded-xl flex items-center justify-center gap-1.5 transition text-sm"
                   >
-                    <Download className="h-4 w-4" /> Download
+                    <Download className="h-4 w-4" /> Save
                   </a>
+                  <button
+                    onClick={() => handleShareCatalogue(cat)}
+                    disabled={sharingId === cat.id}
+                    className="flex-1 py-2.5 bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/40 dark:hover:bg-emerald-900/60 text-emerald-700 dark:text-emerald-400 font-bold rounded-xl flex items-center justify-center gap-1.5 transition shadow-sm text-sm disabled:opacity-70 disabled:cursor-not-allowed"
+                    title="Share on WhatsApp"
+                  >
+                    {sharingId === cat.id ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      <MessageCircle className="h-4 w-4 fill-current" />
+                    )}
+                    {sharingId === cat.id ? 'Loading...' : 'Share'}
+                  </button>
                 </div>
               </div>
             ))}
