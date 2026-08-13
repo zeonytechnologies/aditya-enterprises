@@ -65,7 +65,7 @@ export default function Catalogues() {
     }
     
     // 2. Fallback to URL sharing if file sharing fails or is unsupported
-    const text = `Check out this catalogue from Aditya Enterprises!\n\n*${cat.title}*\n${cat.description || ''}\n\nView/Download: ${cat.file_url}`;
+    const text = `Check out this catalogue from Aditya Enterprises! 🌐 ${window.location.origin}\n\n*${cat.title}*\n${cat.description || ''}\n\nDirect PDF Link: ${cat.file_url}`;
     const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
     window.open(url, '_blank');
     setSharingId(null);
