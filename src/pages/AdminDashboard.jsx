@@ -1341,7 +1341,7 @@ export default function AdminDashboard() {
             <div className="p-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50 dark:bg-slate-950">
               <div>
                 <h3 className="text-xl font-bold font-display text-slate-900 dark:text-white">{selectedUserForDetails.name || selectedUserForDetails.full_name}</h3>
-                <p className="text-sm text-slate-500">{selectedUserForDetails.company_name} | {selectedUserForDetails.email} | {selectedUserForDetails.mobile}</p>
+                <p className="text-sm text-slate-500">{selectedUserForDetails.company_name} | {selectedUserForDetails.email} | {selectedUserForDetails.phone}</p>
               </div>
               <button onClick={() => setSelectedUserForDetails(null)} className="p-2 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-full transition-colors">
                 <X className="h-5 w-5" />
@@ -2388,6 +2388,7 @@ export default function AdminDashboard() {
                 <tr className="border-b text-slate-400 font-bold uppercase text-[10px] pb-2">
                   <th className="py-2.5">Name</th>
                   <th className="py-2.5">Email</th>
+                  <th className="py-2.5">Phone Number</th>
                   <th className="py-2.5">Company Name</th>
                   <th className="py-2.5">GSTIN</th>
                   <th className="py-2.5">Role</th>
@@ -2406,7 +2407,8 @@ export default function AdminDashboard() {
                         {usr.email}
                       </a>
                     </td>
-                    <td className="py-4 font-semibold text-slate-800 dark:text-slate-200">{usr.company_name || 'N/A'}</td>
+                    <td className="py-4 font-mono text-slate-450">{usr.phone || 'N/A'}</td>
+                      <td className="py-4 font-semibold text-slate-800 dark:text-slate-200">{usr.company_name || 'N/A'}</td>
                     <td className="py-4 font-mono text-slate-450 uppercase">{usr.gst_number || 'N/A'}</td>
                     <td className="py-4 font-bold">
                       <span className={`px-2 py-0.5 rounded text-[9px] uppercase tracking-wide ${

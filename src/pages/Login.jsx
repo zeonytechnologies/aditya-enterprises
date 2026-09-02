@@ -62,8 +62,13 @@ export default function Login() {
       return;
     }
 
-    if (regRole === 'dealer' && (!regCompany || !regPhone)) {
-      setError('Please enter your Company Name and Phone Number for dealer verification.');
+    if (regRole === 'dealer' && (!regCompany)) {
+      setError('Please enter your Company Name for dealer verification.');
+      return;
+    }
+
+    if (!regPhone || regPhone.length !== 10) {
+      setError('Please enter a valid 10-digit phone number.');
       return;
     }
 
@@ -350,23 +355,25 @@ export default function Login() {
                       </div>
                     </div>
 
-                    <div className="space-y-1.5">
-                      <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Phone Number *</label>
-                      <div className="relative">
-                        <input
-                          type="tel"
-                          required
-                          placeholder="e.g. +91 98765 43210"
-                          value={regPhone}
-                          onChange={(e) => setRegPhone(e.target.value)}
-                          className="w-full pl-9 pr-4 py-2 border border-slate-200 dark:border-slate-800 rounded-xl text-xs bg-white dark:bg-slate-900 focus:ring-2 focus:ring-blue-500"
-                        />
-                        <Phone className="absolute left-3 top-2.5 h-3.5 w-3.5 text-slate-400" />
-                      </div>
-                    </div>
-
                   </div>
                 )}
+                
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">10-Digit Phone Number *</label>
+                  <div className="relative">
+                    <input
+                      type="tel"
+                      required
+                      pattern="[0-9]{10}"
+                      maxLength={10}
+                      placeholder="e.g. 9876543210"
+                      value={regPhone}
+                      onChange={(e) => setRegPhone(e.target.value.replace(/\D/g, ''))}
+                      className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-xs focus:ring-2 focus:ring-blue-500"
+                    />
+                    <Phone className="absolute left-3 top-3.5 h-3.5 w-3.5 text-slate-400" />
+                  </div>
+                </div>
                 
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Password *</label>
