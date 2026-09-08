@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ShoppingBag, Trash2, ArrowRight, ShieldCheck, Tag, X } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
+import { getCdnUrl } from '../utils/cdn';
 
 export default function Cart() {
   const { 
@@ -93,7 +94,7 @@ export default function Cart() {
                   {/* Thumbnail & Title */}
                   <div className="flex items-center gap-4 flex-1">
                     <img 
-                      src={product.images[0]} 
+                      src={getCdnUrl(product.images[0])} 
                       alt={product.name} 
                       className="w-16 h-16 rounded-xl object-cover bg-slate-50 border p-1" 
                     />

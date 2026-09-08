@@ -8,8 +8,10 @@ import {
 import { FaInstagram, FaLinkedin, FaYoutube, FaWhatsapp } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import { api } from '../services/supabase';
+import { getCdnUrl } from '../utils/cdn';
 import BrandSlider from '../components/BrandSlider';
 import ProductCard from '../components/ProductCard';
+import OfferPosterManager from '../components/OfferPosterManager';
 
 import hero1 from '../assets/hero1.png';
 import hero2 from '../assets/hero2.png';
@@ -196,7 +198,7 @@ export default function Home() {
       {banners.length > 0 && (
         <div className="relative w-full overflow-hidden bg-slate-100 dark:bg-slate-950 mb-1 group">
           {/* Invisible spacer image to dynamically set container height based on the first banner */}
-          <img src={banners[0].image_url} className="w-full h-auto opacity-0 pointer-events-none" alt="spacer" />
+          <img src={getCdnUrl(banners[0].image_url)} className="w-full h-auto opacity-0 pointer-events-none" alt="spacer" />
           
           {banners.map((slide, idx) => (
             <div
@@ -204,7 +206,7 @@ export default function Home() {
               className={`absolute inset-0 w-full h-full transition-all duration-700 ease-in-out ${idx === activeBannerSlide ? 'opacity-100 scale-100 z-10' : 'opacity-0 scale-105 z-0'}`}
             >
               <img 
-                src={slide.image_url} 
+                src={getCdnUrl(slide.image_url)} 
                 alt="Banner"
                 className="w-full h-full object-contain cursor-pointer"
                 onClick={() => slide.link_url ? window.open(slide.link_url, '_blank') : null}

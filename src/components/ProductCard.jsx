@@ -4,6 +4,7 @@ import { Star, ShoppingCart, Percent, ShieldCheck, MessageCircle } from 'lucide-
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { shareProductWithImage } from '../services/shareUtils';
+import { getCdnUrl } from '../utils/cdn';
 
 export default function ProductCard({ product }) {
   const { addToCart, getProductUnitPrice } = useCart();
@@ -47,7 +48,7 @@ export default function ProductCard({ product }) {
       {/* Product Image */}
       <div className="relative aspect-square w-full bg-slate-50 dark:bg-slate-950 overflow-hidden img-zoom-container flex items-center justify-center">
         <img 
-          src={product.images[0] || 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=600&auto=format&fit=crop&q=80'} 
+          src={getCdnUrl(product.images[0]) || 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=600&auto=format&fit=crop&q=80'} 
           alt={product.name}
           className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
           loading="lazy"

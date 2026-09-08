@@ -9,6 +9,7 @@ import { shareProductWithImage } from '../services/shareUtils';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import canvasConfetti from 'canvas-confetti';
+import { getCdnUrl } from '../utils/cdn';
 
 export default function ProductDetails() {
   const { slug } = useParams();
@@ -268,7 +269,7 @@ export default function ProductDetails() {
                 <div className="relative w-72 h-72 flex items-center justify-center">
                   {/* Simulate rotation by changing the rotation transformation angle dynamically based on mouse drag */}
                   <img
-                    src={product.images[0]}
+                    src={getCdnUrl(product.images[0])}
                     alt={product.name}
                     style={{ transform: `rotate(${spinIndex * 30}deg)` }}
                     className="max-h-full max-w-full object-contain pointer-events-none transition-transform duration-100"
@@ -280,7 +281,7 @@ export default function ProductDetails() {
               </div>
             ) : (
               <img 
-                src={product.images[activeImage]} 
+                src={getCdnUrl(product.images[activeImage])} 
                 alt={product.name}
                 className="max-h-full max-w-full object-contain p-6"
               />
@@ -306,7 +307,7 @@ export default function ProductDetails() {
                     idx === activeImage ? 'border-blue-600 ring-2 ring-blue-100' : 'border-slate-200'
                   }`}
                 >
-                  <img src={img} alt="" className="max-h-full max-w-full object-contain" />
+                  <img src={getCdnUrl(img)} alt="" className="max-h-full max-w-full object-contain" />
                 </button>
               ))}
             </div>
