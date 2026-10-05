@@ -11,5 +11,5 @@ export const getCdnUrl = (url) => {
   
   // Replace the https:// or http:// and pass it to wsrv.nl
   const cleanUrl = url.replace(/^https?:\/\//, '');
-  return `https://wsrv.nl/?url=${encodeURIComponent(cleanUrl)}`;
+  return `https://wsrv.nl/?url=${cleanUrl}`;
 };

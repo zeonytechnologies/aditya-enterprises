@@ -321,7 +321,7 @@ export default function About() {
                   {user?.role === 'admin' && (
                     <button 
                       onClick={() => setIsEditingReviews(true)}
-                      className="ml-2 text-xs text-blue-600 dark:text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded font-semibold"
+                      className="ml-2 text-xs text-blue-600 dark:text-blue-400 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded font-semibold"
                       title="Edit Review Count"
                     >
                       Edit

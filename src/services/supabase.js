@@ -27,26 +27,32 @@ export async function hashPassword(password) {
 // Unified API Service Layer (Repository Pattern)
 export const api = {
   settings: {
-    get: async () => {
+        get: async () => {
       if (isSupabaseConfigured) {
-        const { data, error } = await supabase.from('website_settings').select('*').eq('id', 1).maybeSingle();
-        if (error) {
-          console.error('Error fetching settings:', error);
-          return await db.getSettings(); // fallback
-        }
-        return data || await db.getSettings();
+        let dbData = null;
+        try {
+          const { data, error } = await supabase.from('website_settings').select('*').eq('id', 1).maybeSingle();
+          if (!error && data) dbData = data;
+        } catch(e) {}
+        
+        const localSettings = await db.getSettings() || {};
+        return { ...localSettings, ...(dbData || {}) };
       } else {
         return await db.getSettings();
       }
     },
     update: async (settingsData) => {
+      let savedData = settingsData;
       if (isSupabaseConfigured) {
-        const { data, error } = await supabase.from('website_settings').upsert({ id: 1, ...settingsData }).select().single();
-        if (error) throw error;
-        return data;
-      } else {
-        return await db.saveSettings(settingsData);
+        try {
+          const { data, error } = await supabase.from('website_settings').upsert({ id: 1, ...settingsData }).select().single();
+          if (error) throw error;
+          savedData = data;
+        } catch (err) {
+          console.warn('Supabase settings update failed, falling back to local DB', err);
+        }
       }
+      return await db.saveSettings(settingsData);
     }
   },
   
@@ -113,6 +119,24 @@ export const api = {
         });
       }
     },
+
+    updatePasswordByEmail: async (email, newPassword) => {
+      const hashedPassword = await hashPassword(newPassword);
+      if (isSupabaseConfigured) {
+        const { data, error } = await supabase
+          .from('profiles')
+          .update({ password: hashedPassword })
+          .eq('email', email)
+          .select();
+        if (error) throw error;
+        if (!data || data.length === 0) throw new Error("Account with this email not found");
+        return true;
+      } else {
+        return await db.updatePasswordByEmail(email, hashedPassword);
+      }
+    },
+
+    updatePasswordByEmail: async (email, newPassword) => { const hashedPassword = await hashPassword(newPassword); if (isSupabaseConfigured) { const { data, error } = await supabase.from('profiles').update({ password: hashedPassword }).eq('email', email).select(); if (error) throw error; if (!data || data.length === 0) throw new Error('Account with this email not found'); return true; } else { return await db.updatePasswordByEmail(email, hashedPassword); } },
 
     getCurrentUser: () => {
       const stored = localStorage.getItem('aditya_current_user');

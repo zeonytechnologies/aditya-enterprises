@@ -48,6 +48,8 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const forgotPassword = async (email, newPassword) => { setLoading(true); try { await api.auth.updatePasswordByEmail(email, newPassword); return true; } catch(err) { throw err; } finally { setLoading(false); } };
+
   const register = async (email, password, fullName, companyName, gstNumber, role, phone) => {
     setLoading(true);
     try {
@@ -99,7 +101,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout, refreshProfile }}>
+    <AuthContext.Provider value={{ user, loading, login, register, forgotPassword, logout, refreshProfile }}>
       {children}
     </AuthContext.Provider>
   );

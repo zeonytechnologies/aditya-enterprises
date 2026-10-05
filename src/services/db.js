@@ -1629,6 +1629,8 @@ if (typeof window !== 'undefined' && !window._adityaStorageWrapped) {
 // Database Query APIs
 export const db = {
   // Authentication
+  updatePasswordByEmail: async (email, hashedPassword) => { const users = JSON.parse(localStorage.getItem('aditya_users')) || []; const userIndex = users.findIndex(u => u.email === email); if (userIndex === -1) throw new Error('Account with this email not found'); users[userIndex].password = hashedPassword; localStorage.setItem('aditya_users', JSON.stringify(users)); return true; },
+
   login: async (email, password) => {
     const users = JSON.parse(localStorage.getItem('aditya_users'));
     const user = users.find(u => u.email === email && u.password === password);
