@@ -874,7 +874,7 @@ export default function AdminDashboard() {
           </div>
         <div className="bg-white dark:bg-slate-900 border p-4.5 rounded-2xl shadow-sm space-y-1.5">
           <span className="text-slate-400 font-semibold block uppercase text-[9px]">Total Visitors</span>
-          <span className="text-lg font-extrabold font-display text-blue-600">{stats?.totalVisitors || 0}</span>
+          <span className="text-lg font-extrabold font-display text-blue-600">{(stats?.totalVisitors ?? 0).toLocaleString('en-IN')}</span>
         </div>
       </section>
 

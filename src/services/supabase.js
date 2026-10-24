@@ -136,7 +136,6 @@ export const api = {
       }
     },
 
-    updatePasswordByEmail: async (email, newPassword) => { const hashedPassword = await hashPassword(newPassword); if (isSupabaseConfigured) { const { data, error } = await supabase.from('profiles').update({ password: hashedPassword }).eq('email', email).select(); if (error) throw error; if (!data || data.length === 0) throw new Error('Account with this email not found'); return true; } else { return await db.updatePasswordByEmail(email, hashedPassword); } },
 
     getCurrentUser: () => {
       const stored = localStorage.getItem('aditya_current_user');
@@ -671,12 +670,21 @@ export const api = {
     getStats: async () => {
       if (isSupabaseConfigured) {
         try {
-          const { data: orders } = await supabase.from('orders').select('*');
-          const { data: products } = await supabase.from('products').select('stock');
-          const { data: rfqs } = await supabase.from('rfqs').select('status');
-          const { data: payments } = await supabase.from('payments').select('status');
-          const { data: profiles } = await supabase.from('profiles').select('role, is_approved');
-          const { data: visitors } = await supabase.from('visitors').select('created_at');
+          const [
+            { data: orders },
+            { data: products },
+            { data: rfqs },
+            { data: payments },
+            { data: profiles },
+            { count: visitorCount }
+          ] = await Promise.all([
+            supabase.from('orders').select('*').limit(10000),
+            supabase.from('products').select('stock').limit(10000),
+            supabase.from('rfqs').select('status').limit(10000),
+            supabase.from('payments').select('status').limit(10000),
+            supabase.from('profiles').select('role, is_approved').limit(10000),
+            supabase.from('visitors').select('*', { count: 'exact', head: true })
+          ]);
           
           const totalRevenue = orders?.filter(o => o.status === 'Delivered').reduce((acc, curr) => acc + parseFloat(curr.grand_total || 0), 0) || 0;
           const gstCollected = orders?.filter(o => o.status === 'Delivered').reduce((acc, curr) => acc + parseFloat(curr.gst_amount || 0), 0) || 0;
@@ -684,7 +692,7 @@ export const api = {
           const pendingRfqs = rfqs?.filter(r => r.status === 'Pending').length || 0;
           const dealersCount = profiles?.filter(p => (p.role === 'dealer' || p.role === 'distributor') && p.is_approved).length || 0;
           const lowStockCount = products?.filter(p => p.stock < 15).length || 0;
-          const totalVisitors = visitors?.length || 0;
+          const totalVisitors = typeof visitorCount === 'number' ? visitorCount : 0;
           
           return {
             revenue: totalRevenue,

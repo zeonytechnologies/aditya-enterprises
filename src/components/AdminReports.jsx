@@ -301,7 +301,7 @@ export default function AdminReports({ orders = [], products = [] }) {
                 <LineChart data={revenueByDate}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
                   <XAxis dataKey="date" tick={{fontSize: 12, fill: '#64748b'}} tickMargin={10} />
-                  <YAxis tick={{fontSize: 12, fill: '#64748b'}} tickFormatter={val => `₹${val/1000}k`} />
+                  <YAxis tick={{fontSize: 12, fill: '#64748b'}} tickFormatter={val => `₹${val.toLocaleString('en-IN')}`} />
                   <Tooltip 
                     formatter={(value) => `₹${value.toLocaleString('en-IN')}`}
                     contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
