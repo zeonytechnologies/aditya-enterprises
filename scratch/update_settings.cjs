@@ -34,3 +34,4 @@ code = code.replace(/get: async \(\) => \{[\s\S]*?\},[\s\n]*update: async \(sett
 
 fs.writeFileSync('src/services/supabase.js', code);
 console.log('Settings API updated');
+ 
